@@ -12,7 +12,9 @@ web-client repo.
 
 ## What you need
 
-In addition to the web-client-e2e, you'll need other repos. To set up the project from the first clone:
+In addition to the web-client-e2e, you'll need other repos.
+
+To set up the project from the first clone:
 
 1. Clone api-server and web-client
 
@@ -24,13 +26,13 @@ In addition to the web-client-e2e, you'll need other repos. To set up the projec
 
 5. Run `cp .env.sample .env`
 
-To set to up the client:
+To set up the client:
 
-1. Navigate to the web-client directory and run `./bin/edvisor build -s client`.
+1. Navigate to the web-client repo and run `./bin/edvisor build -s client`.
 
 To set up the server:
 
-1. Navigate to the api-server directory and run `npm install -g gulp`
+1. Navigate to the api-server repo and run `npm install -g gulp`
 
 2. Symlink client directory to the /client folder in api-server
 
@@ -50,4 +52,4 @@ Almost ready to run tests. To get the test tools. You'll need to:
 
 When there's new code:
 
-1. Navigate to the web-client directory and run `./bin/edvisor build -s client`.
+1. Navigate to the web-client repo and run `./bin/edvisor build -s client`.
