@@ -1,12 +1,12 @@
 import Widgets from '../../shared/widgets'
-import constants from '../../shared/constants'
 
-var btn = element(by.id(constants.ADD_STUDENT_BTN_ID))
-var buttonSearch = element(by.id(constants.SEARCH_STUDENT_BTN_ID))
+var buttonAddStudent = element(by.id('add-student-button'))
+var buttonSearch = element(by.id('ext02-search-student-btn'))
 
 export default class StudentListingPage {
   constructor() {
     this.nopeAlert = element(by.css('.alert-box-message'))
+
     this.searchResultName = element(by.css('div[ng-bind-html="student | name | highlight: $select.search"]'))
     this.searchResultEmail = element(by.css('div[ng-bind-html="student.email | highlight: $select.search"]'))
     this.searchResultOffice = element(by.css('div[ng-bind-html="student.agency.name | highlight: $select.search"]'))
@@ -14,15 +14,11 @@ export default class StudentListingPage {
   }
 
   static openAddStudentModal() {
-    btn.click()
+    buttonAddStudent.click()
   }
 
   static openSearchModal() {
     buttonSearch.click()
-  }
-
-  static openDropdown() {
-    searchCriteriaDropdown.click()
   }
 
   static chooseBySecondaryContact() {
@@ -37,7 +33,7 @@ export default class StudentListingPage {
 
   static waitForOverlay() {
     var expected = protractor.ExpectedConditions
-    browser.wait(expected.elementToBeClickable(btn), 5000)
+    browser.wait(expected.elementToBeClickable(buttonAddStudent), 5000)
   }
 
   static addStudent(assignedTo, firstname, lastname, email, nationality) {
@@ -59,10 +55,6 @@ export default class StudentListingPage {
 
   static inputSearchTerm(searchTerm) {
     var searchField = element(by.css('input[type="search"]'))
-    // var expected = protractor.ExpectedConditions
-    // browser.wait(expected.visibilityOf(searchField), 5000)
-
-    // browser.driver.sleep(60000)
     searchField.sendKeys(searchTerm)
   }
 }

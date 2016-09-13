@@ -38,3 +38,10 @@ describe('login page', function() {
     expect(browser.getCurrentUrl()).to.eventually.match(/\/auth\/en\/login/)
   })
 })
+
+describe('auth redirects', () => {
+  it('should redirect to auth app login page if not signed in', () => {
+    browser.get('/agency/en/504/student/listing/504')
+    expect(browser.getCurrentUrl()).to.eventually.match(/\/auth\/en\/login/)
+  })
+})

@@ -8,6 +8,13 @@ export default {
   SALES_REP_EMAIL: '',
   SALES_REP_PASS: '',
 
-  ADD_STUDENT_BTN_ID: 'add-student-button',
-  SEARCH_STUDENT_BTN_ID: 'ext02-search-student-btn'
+  STUDENT_NAME: 'Zaphod',
+  SECONDARY_CONTACT: 'Prefect',
+
+  AT_EMAIL_DOMAIN: '@betelgeuse.com',
+
+  FIRST_NAME: 'Trisha',
+  LAST_NAME: 'McMillan',
+  ASSIGNED_TO: 'Shelley Chen',
+  NATIONALITY: 'United Kingdom'
 }
