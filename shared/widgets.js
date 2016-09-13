@@ -1,5 +1,12 @@
 export default class Widgets {
 
+  static clickUiSelect(element) {
+    let expected = protractor.ExpectedConditions
+    browser.wait(expected.elementToBeClickable(element), 5000)
+
+    element.click()
+  }
+
   static getChosenContainer(selectElement) {
     var chosenContainer = selectElement.element(by.xpath('following-sibling::div[1]'))
     return chosenContainer

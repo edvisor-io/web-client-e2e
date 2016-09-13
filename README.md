@@ -14,7 +14,7 @@ web-client repo.
 
 In addition to the web-client-e2e, you'll need other repos.
 
-To set up the project from the first clone:
+### To set up the project from the first clone:
 
 1. Clone api-server and web-client
 
@@ -26,11 +26,11 @@ To set up the project from the first clone:
 
 5. Run `cp .env.sample .env`
 
-To set up the client:
+#### To set up the client:
 
 1. Navigate to the web-client repo and run `./bin/edvisor build -s client`.
 
-To set up the server:
+#### To set up the server:
 
 1. Navigate to the api-server repo and run `npm install -g gulp`
 
@@ -42,7 +42,7 @@ To set up the server:
 
 5. Run `gulp`
 
-Almost ready to run tests. To get the test tools. You'll need to:
+### Almost ready to run tests. To get the test tools. You'll need to:
 
 1. Install Protractor globally with `npm install -g protractor`
 
@@ -50,6 +50,20 @@ Almost ready to run tests. To get the test tools. You'll need to:
 
 3. Navigate to the directory containing the conf.js of your desired test. Run test with `protractor conf.js`.
 
-When there's new code:
+## These need to be running when doing tests:
+
+1. Selenium: Run `webdriver-manager start`. Doesn’t matter where from.
+
+2. MariaDB: Run `mysql.server start`
+
+3. Gulp: Run `gulp` from api-server repo.
+
+## When there's new code:
 
 1. Navigate to the web-client repo and run `./bin/edvisor build -s client`.
+
+## Useful Docs
+
+> Protractor styleguide: https://github.com/CarmenPopoviciu/protractor-styleguide
+
+> Protractor debugging: https://github.com/angular/protractor/blob/master/docs/debugging.md

@@ -8,5 +8,6 @@ export default {
   SALES_REP_EMAIL: '',
   SALES_REP_PASS: '',
 
-  ADD_STUDENT_BTN_ID: 'add-student-button'
+  ADD_STUDENT_BTN_ID: 'add-student-button',
+  SEARCH_STUDENT_BTN_ID: 'ext02-search-student-btn'
 }

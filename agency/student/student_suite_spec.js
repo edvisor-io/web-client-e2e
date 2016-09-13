@@ -49,33 +49,86 @@ describe('student suite', () => {
   //   expect(studentProfile.emailField.getAttribute('value')).to.eventually.equal(email)
   //   expect(Widgets.getChosenValue(studentProfile.nationalityField)).to.eventually.equal(nationality)
   // })
+  //
+  // it('should not be able to create a student with the same email', () => {
+  //   var assignedTo = 'Shelley Chen'
+  //   var firstname = 'Zaphod'
+  //   var lastname = 'Beeblebrox'
+  //   var email = uuid.v4() + '@betelgeuse.com'
+  //   var nationality = 'United Kingdom'
+  //
+  //   var loginPage = new LoginPage()
+  //   loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
+  //   LoginPage.waitForLoader()
+  //
+  //   var agencyNav = new AgencyNav()
+  //   agencyNav.goToStudents()
+  //
+  //   StudentListingPage.openAddStudentModal()
+  //   StudentListingPage.addStudent(assignedTo, firstname, lastname, email, nationality)
+  //
+  //   agencyNav.goToStudents()
+  //   StudentListingPage.openAddStudentModal()
+  //   StudentListingPage.addStudent(assignedTo, firstname, lastname, email, nationality)
+  //   var studentListing = new StudentListingPage()
+  //   expect(studentListing.nopeAlert.getText()).to.eventually.equal('A student with this email already exists in your company.  ')
+  // })
+//
+  // it('should show not show a name, email and office without a search term', () => {
+  //   let loginPage = new LoginPage()
+  //   loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
+  //   LoginPage.waitForLoader()
+  //
+  //   let agencyNav = new AgencyNav()
+  //   agencyNav.goToStudents()
+  //
+  //   StudentListingPage.openSearchModal()
+  //
+  //   let studentListing = new StudentListingPage()
+  //   expect(studentListing.searchResultName.isPresent()).to.eventually.equal(false)
+  //   expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(false)
+  //   expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(false)
+  // })
+  //
+  // it('should show a name, email and office on search by student name', () => {
+  //   let searchTerm = 'Zaphod'
+  //
+  //   let loginPage = new LoginPage()
+  //   loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
+  //   LoginPage.waitForLoader()
+  //
+  //   let agencyNav = new AgencyNav()
+  //   agencyNav.goToStudents()
+  //
+  //   StudentListingPage.openSearchModal()
+  //   StudentListingPage.inputSearchTerm(searchTerm)
+  //
+  //   let studentListing = new StudentListingPage()
+  //   expect(studentListing.searchResultName.isPresent()).to.eventually.equal(true)
+  //   expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
+  //   expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
+  // })
 
-  it('should not be able to create a student with the same email', () => {
-    var assignedTo = 'Shelley Chen'
-    var firstname = 'Zaphod'
-    var lastname = 'Beeblebrox'
-    var email = uuid.v4() + '@betelgeuse.com'
-    var nationality = 'United Kingdom'
+  it('should show a name, email and office on search by secondary contact', () => {
+    let searchTerm = 'Prefect'
 
-    var loginPage = new LoginPage()
+    let loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     LoginPage.waitForLoader()
 
-    var agencyNav = new AgencyNav()
+    let agencyNav = new AgencyNav()
     agencyNav.goToStudents()
 
-    StudentListingPage.openAddStudentModal()
-    StudentListingPage.addStudent(assignedTo, firstname, lastname, email, nationality)
+    StudentListingPage.openSearchModal()
+    StudentListingPage.chooseBySecondaryContact()
+    let studentListing = new StudentListingPage()
+    Widgets.clickUiSelect(studentListing.uiSelectContainer)
+    StudentListingPage.inputSearchTerm(searchTerm)
 
-    agencyNav.goToStudents()
-    StudentListingPage.openAddStudentModal()
-    StudentListingPage.addStudent(assignedTo, firstname, lastname, email, nationality)
-    var studentListing = new StudentListingPage()
-    expect(studentListing.nopeAlert.getText()).to.eventually.equal('A student with this email already exists in your company.  ')
-  })
-
-  it('should show a name, email and office on search', () => {
-
+    // let studentListing = new StudentListingPage()
+    expect(studentListing.searchResultName.isPresent()).to.eventually.equal(true)
+    expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
+    expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
   })
 
   // it('should login successfully', function() {

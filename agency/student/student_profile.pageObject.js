@@ -11,6 +11,5 @@ export default class StudentProfilePage {
     this.lastnameField = this.informationContainer.element(by.name('lastname'))
     this.emailField = this.informationContainer.element(by.name('email'))
     this.nationalityField = this.informationContainer.element(by.name('nationality'))
-    // this.submitBtn = this.informationContainer.element(by.name('firstname'))
   }
 }
