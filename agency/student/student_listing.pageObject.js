@@ -17,7 +17,7 @@ export default class StudentListingPage {
     buttonAddStudent.click()
   }
 
-  static openSearchModal() {
+  static openSearchBar() {
     buttonSearch.click()
   }
 

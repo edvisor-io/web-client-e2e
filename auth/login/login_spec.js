@@ -1,4 +1,4 @@
-import LoginPage from './login.pageObject.js'
+import LoginPage from '../../shared/pages/login.pageObject'
 import constants from '../../shared/constants'
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
@@ -6,7 +6,8 @@ import chaiAsPromised from 'chai-as-promised'
 chai.use(chaiAsPromised)
 var expect = chai.expect
 
-describe('login page', function() {
+describe('the login page', function() {
+
   beforeEach(function() {
     browser.get('/auth/en/login')
     LoginPage.waitForLoader()
@@ -16,7 +17,7 @@ describe('login page', function() {
     browser.driver.manage().deleteAllCookies()
   })
 
-  it('should load the login page', () => {
+  it('should load the required page elements', () => {
     var loginPage = new LoginPage()
 
     expect(loginPage.emailField.isPresent()).to.eventually.equal(true)
@@ -31,16 +32,14 @@ describe('login page', function() {
     expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\//)
   })
 
-  it('should not login with wrong credentials', function() {
+  it('should not allow login with wrong credentials', function() {
     var loginPage = new LoginPage()
 
     loginPage.login(constants.ADMIN_EMAIL, 'wrong-password')
     expect(browser.getCurrentUrl()).to.eventually.match(/\/auth\/en\/login/)
   })
-})
 
-describe('auth redirects', () => {
-  it('should redirect to auth app login page if not signed in', () => {
+  it('should be redirected to, if not signed in', () => {
     browser.get('/agency/en/504/student/listing/504')
     expect(browser.getCurrentUrl()).to.eventually.match(/\/auth\/en\/login/)
   })
