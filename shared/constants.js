@@ -6,5 +6,7 @@ export default {
   MANAGER_PASS: '',
 
   SALES_REP_EMAIL: '',
-  SALES_REP_PASS: ''
+  SALES_REP_PASS: '',
+
+  TIMEOUT: 5000
 }

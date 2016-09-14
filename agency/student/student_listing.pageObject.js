@@ -1,4 +1,5 @@
 import Widgets from '../../shared/widgets'
+import constants from '../../shared/constants'
 
 var buttonAddStudent = element(by.id('add-student-button'))
 var buttonSearch = element(by.id('ext02-search-student-btn'))
@@ -26,14 +27,14 @@ export default class StudentListingPage {
     var bySecondaryContactElement = element(by.css('.select-menu ul.menu > li:nth-child(2)'))
 
     var expected = protractor.ExpectedConditions
-    browser.wait(expected.visibilityOf(bySecondaryContactElement), 1000)
+    browser.wait(expected.visibilityOf(bySecondaryContactElement), constants.TIMEOUT)
 
     bySecondaryContactElement.click()
   }
 
   static waitForOverlay() {
     var expected = protractor.ExpectedConditions
-    browser.wait(expected.elementToBeClickable(buttonAddStudent), 5000)
+    browser.wait(expected.elementToBeClickable(buttonAddStudent), constants.TIMEOUT)
   }
 
   static addStudent(assignedTo, firstname, lastname, email, nationality) {
