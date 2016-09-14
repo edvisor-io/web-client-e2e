@@ -1,6 +1,5 @@
-import Widgets from '../../shared/widgets'
+import {ChosenWidget} from '../../shared/widgets'
 import constants from '../../shared/constants'
-
 
 export default class StudentListingPage {
 
@@ -11,9 +10,10 @@ export default class StudentListingPage {
     this.buttonSearch = element(by.id('ext02-search-student-btn'))
 
     this.dropdownSearchStudent = element(by.id('ext02-search-student-select'))
-    this.optionBySecondaryContact = element(by.css('.select-menu ul.menu > li:nth-child(2)'))
+    this.optionBySecondaryContact = $('.select-menu ul.menu > li:nth-child(2)')
 
-    this.searchContainer = element(by.css('.ui-select-container'))
+    this.searchContainer = $('.ui-select-container')
+    this.searchField = this.searchContainer.element(by.css('input[type="search"]'))
     this.searchResultName = this.searchContainer.element(by.binding('student | name | highlight: $select.search'))
     this.searchResultEmail = this.searchContainer.element(by.binding('student.email | highlight: $select.search'))
     this.searchResultOffice = this.searchContainer.element(by.binding('student.agency.name | highlight: $select.search'))
@@ -39,6 +39,13 @@ export default class StudentListingPage {
     this.dropdownSearchStudent.click()
   }
 
+  focusSearchContainer() {
+    let expected = protractor.ExpectedConditions
+    browser.wait(expected.elementToBeClickable(this.searchContainer), constants.TIMEOUT_TIME)
+
+    this.searchContainer.click()
+  }
+
   chooseBySecondaryContact() {
     var expected = protractor.ExpectedConditions
     browser.wait(expected.visibilityOf(this.optionBySecondaryContact), constants.TIMEOUT_TIME)
@@ -52,16 +59,15 @@ export default class StudentListingPage {
   // }
 
   addStudent(assignedTo, firstname, lastname, email, nationality) {
-    Widgets.setChosenValue(this.assignedToField, assignedTo)
+    ChosenWidget.setChosenValue(this.assignedToField, assignedTo)
     this.firstNameField.sendKeys(firstname)
     this.lastNameField.sendKeys(lastname)
     this.emailField.sendKeys(email)
-    Widgets.setChosenValue(this.nationalityField, nationality)
+    ChosenWidget.setChosenValue(this.nationalityField, nationality)
     this.submitButton.click()
   }
 
-  static inputSearchTerm(searchTerm) {
-    var searchField = element(by.css('input[type="search"]'))
-    searchField.sendKeys(searchTerm)
+  inputSearchTerm(searchTerm) {
+    this.searchField.sendKeys(searchTerm)
   }
 }

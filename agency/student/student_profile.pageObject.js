@@ -1,5 +1,3 @@
-// import Widgets from '../../../../shared/test_helpers/e2e/widgets'
-
 export default class StudentProfilePage {
   constructor() {
     this.container = element(by.css('section.student-profile'))
