@@ -1,21 +1,23 @@
 import Widgets from '../../shared/widgets'
 import constants from '../../shared/constants'
 
-var buttonAddStudent = element(by.id('add-student-button'))
+// var buttonAddStudent = element(by.id('add-student-button'))
 var buttonSearch = element(by.id('ext02-search-student-btn'))
 
 export default class StudentListingPage {
-  constructor() {
-    this.nopeAlert = element(by.css('.alert-box-message'))
 
-    this.searchResultName = element(by.css('div[ng-bind-html="student | name | highlight: $select.search"]'))
-    this.searchResultEmail = element(by.css('div[ng-bind-html="student.email | highlight: $select.search"]'))
-    this.searchResultOffice = element(by.css('div[ng-bind-html="student.agency.name | highlight: $select.search"]'))
-    this.uiSelectContainer = element(by.css('.ui-select-container'))
+  constructor() {
+    this.nopeAlert = $('.alert-box-message')
+    this.buttonAddStudent = element(by.id('add-student-button'))
+
+    this.searchContainer = element(by.css('.ui-select-container'))
+    this.searchResultName = this.searchContainer.element(by.binding('student | name | highlight: $select.search'))
+    this.searchResultEmail = this.searchContainer.element(by.binding('student.email | highlight: $select.search'))
+    this.searchResultOffice = this.searchContainer.element(by.binding('student.agency.name | highlight: $select.search'))
   }
 
-  static openAddStudentModal() {
-    buttonAddStudent.click()
+  openAddStudentModal() {
+    this.buttonAddStudent.click()
   }
 
   static openSearchBar() {
