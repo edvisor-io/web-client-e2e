@@ -8,5 +8,6 @@ export default {
   SALES_REP_EMAIL: '',
   SALES_REP_PASS: '',
 
-  TIMEOUT: 5000
+  TIMEOUT: 5000,
+  TIMEOUT_TIME: 10000
 }
