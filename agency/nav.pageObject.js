@@ -1,11 +1,10 @@
 export default class AgencyNav {
   constructor() {
-    this.header = element(by.css('header'))
-    this.navBar = element(by.css('.sidebar > ul'))
+    this.navSidebar = element(by.css('.sidebar > ul'))
+    this.studentsButton = this.navSidebar.element(by.id('ext28-students'))
   }
 
   goToStudents() {
-    let link = element(by.id('ext28-students'))
-    link.click()
+    this.studentsButton.click()
   }
 }

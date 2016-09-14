@@ -48,7 +48,7 @@ describe('the student listing page', () => {
 
     let studentListing = new StudentListingPage()
     studentListing.openAddStudentModal()
-    StudentListingPage.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
+    studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
     let studentProfile = new StudentProfilePage()
     expect(studentProfile.assignedToLabel.getText()).to.eventually.equal(ASSIGNED_TO)
@@ -57,33 +57,33 @@ describe('the student listing page', () => {
     expect(studentProfile.emailField.getAttribute('value')).to.eventually.equal(email)
     expect(Widgets.getChosenValue(studentProfile.nationalityField)).to.eventually.equal(NATIONALITY)
   })
-  //
+
   // it('should not be able to create a student with the same email', () => {
   //   let email = uuid.v4() + AT_EMAIL_DOMAIN
   //   let errorMsg = 'A student with this email already exists in your company.  '
   //
-  //   StudentListingPage.openAddStudentModal()
+  //   let studentListing = new StudentListingPage()
+  //   studentListing.openAddStudentModal()
   //   StudentListingPage.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
   //
   //   let agencyNav = new AgencyNav()
   //   agencyNav.goToStudents()
-  //   StudentListingPage.openAddStudentModal()
+  //   studentListing.openAddStudentModal()
   //   StudentListingPage.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
   //
-  //   let studentListing = new StudentListingPage()
-  //   expect(studentListing.nopeAlert.getText()).to.eventually.equal(errorMsg)
+  //   expect(studentListing.nopeAlert.isPresent()).to.eventually.equal(true)
   // })
   //
   // it('should not show a name, email and office without a search term', () => {
-  //   StudentListingPage.openSearchBar()
+  //   let studentListing = new StudentListingPage()
+  //   studentListing.openSearchBar()
   //   StudentListingPage.inputSearchTerm('')
   //
-  //   let studentListing = new StudentListingPage()
   //   expect(studentListing.searchResultName.isPresent()).to.eventually.equal(false)
   //   expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(false)
   //   expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(false)
   // })
-  //
+//
   // it('should show a name, email and office on search by student name', () => {
   //   StudentListingPage.openSearchBar()
   //   StudentListingPage.inputSearchTerm(STUDENT_NAME)
@@ -95,9 +95,10 @@ describe('the student listing page', () => {
   // })
 //
   // it('should show a name, email and office on search by secondary contact', () => {
-  //   StudentListingPage.openSearchBar()
-  //   StudentListingPage.chooseBySecondaryContact()
   //   let studentListing = new StudentListingPage()
+  //   studentListing.openSearchBar()
+  //   studentListing.openSearchDropdown()
+  //   studentListing.chooseBySecondaryContact()
   //   Widgets.clickUiSelect(studentListing.searchContainer)
   //   StudentListingPage.inputSearchTerm(SECONDARY_CONTACT)
   //
