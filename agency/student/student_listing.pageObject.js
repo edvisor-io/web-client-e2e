@@ -46,6 +46,13 @@ export default class StudentListingPage {
     this.searchContainer.click()
   }
 
+  clickSearchResult() {
+    let expected = protractor.ExpectedConditions
+    browser.wait(expected.elementToBeClickable(this.searchResultName), constants.TIMEOUT_TIME)
+    
+    this.searchResultName.click()
+  }
+
   chooseBySecondaryContact() {
     var expected = protractor.ExpectedConditions
     browser.wait(expected.visibilityOf(this.optionBySecondaryContact), constants.TIMEOUT_TIME)

@@ -46,8 +46,8 @@ describe('the student listing page', () => {
 
     let studentProfile = new StudentProfilePage()
     expect(studentProfile.assignedToLabel.getText()).to.eventually.equal(ASSIGNED_TO)
-    expect(studentProfile.firstnameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
-    expect(studentProfile.lastnameField.getAttribute('value')).to.eventually.equal(LAST_NAME)
+    expect(studentProfile.firstNameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
+    expect(studentProfile.lastNameField.getAttribute('value')).to.eventually.equal(LAST_NAME)
     expect(studentProfile.emailField.getAttribute('value')).to.eventually.equal(email)
     expect(ChosenWidget.getChosenValue(studentProfile.nationalityField)).to.eventually.equal(NATIONALITY)
   })

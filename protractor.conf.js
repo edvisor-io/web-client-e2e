@@ -26,7 +26,8 @@ exports.config = {
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: [
-    './**/*_spec.js'
+    // './**/*_spec.js'
+    './agency/student/student_profile_spec.js'
   ],
 
   mochaOpts: {
