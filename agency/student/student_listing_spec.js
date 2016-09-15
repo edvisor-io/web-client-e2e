@@ -103,12 +103,12 @@ describe('the student listing page', () => {
 
   it('should download a file of exported students', () => {
     let studentListing = new StudentListingPage()
-    studentListing.selectAllStudentsCheckbox()
-    browser.sleep(5000)
+    studentListing.clickSelectAllStudentsCheckbox()
     studentListing.clickExportButton()
 
-    // expect()
+    expect(studentListing.exportMessage.isPresent()).to.eventually.equal(true)
 
+    // browser.sleep(5000)
     // browser.pause()
   })
 })

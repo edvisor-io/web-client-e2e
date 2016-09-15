@@ -100,16 +100,16 @@ describe('the student profile page', () => {
   //   expect(studentProfile.firstHeader.getText()).to.eventually.equal("Two")
   //   expect(studentProfile.secondHeader.getText()).to.eventually.equal("Deciding")
   // })
-
-  it('should assign a student to the next pipeline status when all checklist items are clicked', () => {
-    let studentListing = new StudentListingPage()
-    studentListing.openSearchBar()
-    studentListing.inputSearchTerm(STUDENT_NAME)
-    studentListing.clickSearchResult()
-
-    let studentProfile = new StudentProfilePage()
-    studentProfile.clickStudentStatusThreeCheckboxes()
-
-    expect(studentProfile.secondHeader.getText()).to.eventually.equal("Client")
-  })
+  //
+  // it('should assign a student to the next pipeline status when all checklist items are clicked', () => {
+  //   let studentListing = new StudentListingPage()
+  //   studentListing.openSearchBar()
+  //   studentListing.inputSearchTerm(STUDENT_NAME)
+  //   studentListing.clickSearchResult()
+  //
+  //   let studentProfile = new StudentProfilePage()
+  //   studentProfile.clickStudentStatusThreeCheckboxes()
+  //
+  //   expect(studentProfile.secondHeader.getText()).to.eventually.equal("Client")
+  // })
 })

@@ -5,6 +5,8 @@ export default class StudentListingPage {
 
   constructor() {
     this.selectAllStudentsCheckbox = $('.select-box')
+    this.exportButton = $('.action-bar #ext02-export-data')
+    this.exportMessage = $('.e-alert_inner-container')
 
     this.nopeAlert = $('.alert-box-message')
 
@@ -82,5 +84,9 @@ export default class StudentListingPage {
 
   clickSelectAllStudentsCheckbox() {
     this.selectAllStudentsCheckbox.click()
+  }
+
+  clickExportButton() {
+    this.exportButton.click()
   }
 }
