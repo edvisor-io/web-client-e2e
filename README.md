@@ -1,35 +1,37 @@
 # web-client-e2e
 
-## What is this repo?
+## What is this repo? ⚙
 
 End-to-end test suites for the Edvisor.io web-client
 
-## Making sense of this repo
+## Quickly making sense of this repo ⚡️
 
 The directory structure models that of the web client. Each directory contains
 tests for one application, and corresponds to the same named directory in the
 web-client repo.
 
-#### Naming
+#### Naming (✨ magical conventions to keep your sanity)
 
 Here you'll find naming patterns for the variables and prototypal methods we're
 using.
 
-We use prototypal methods to do actions on the page. Method names begins with
-a verb, followed by the element on the page, and lastly extra detail about the
-element. For example, a method for clicking on a button called 'Change' will be
-called 'clickButtonChange'. When there are more buttons called 'Change' on the
-same page, we'll add contextual detail to the end. If the button changes a
-student's pipeline, we'll call it 'clickButtonChangePipeline'.
+We use prototypal methods to do actions on the page. Method names are:
+verb + detail about the element + element type. For example, a method for
+clicking on a button called 'Change' will be called 'clickChangeButton'. When
+there are more buttons called 'Change' on the same page, we'll add contextual
+details. If the button changes a student's pipeline, we'll call the method that
+clicks it 'clickChangePipelineButton()'.
 
 Initialized variables that correspond to elements on a page follow a similar
-pattern.
+pattern. They just omit the leading verb, because they don't "do" things. The
+button being clicked in the example above can be initialize as
+"changePipelineButton".
 
 The word 'relative' is used in a name when the element is only available in a
 given context. For example, 'changePipelineStatusRelativeOption' is an option
 that only appears when a dropdown is present.
 
-## What you need
+## What you need to get started 🐣
 
 In addition to the web-client-e2e, you'll need other repos.
 
@@ -81,7 +83,7 @@ In addition to the web-client-e2e, you'll need other repos.
 
 1. Navigate to the web-client repo and run `./bin/edvisor build -s client`.
 
-## Useful Docs
+## Useful Docs (🆓 stuff to put out and prevent pesky 🔥🔥🔥)
 
 > Protractor styleguide: https://github.com/CarmenPopoviciu/protractor-styleguide
 

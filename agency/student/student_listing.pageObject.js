@@ -4,6 +4,8 @@ import constants from '../../shared/constants'
 export default class StudentListingPage {
 
   constructor() {
+    this.selectAllStudentsCheckbox = $('.select-box')
+
     this.nopeAlert = $('.alert-box-message')
 
     this.buttonAddStudent = element(by.id('add-student-button'))
@@ -49,7 +51,7 @@ export default class StudentListingPage {
   clickSearchResult() {
     let expected = protractor.ExpectedConditions
     browser.wait(expected.elementToBeClickable(this.searchResultName), constants.TIMEOUT_TIME)
-    
+
     this.searchResultName.click()
   }
 
@@ -76,5 +78,9 @@ export default class StudentListingPage {
 
   inputSearchTerm(searchTerm) {
     this.searchField.sendKeys(searchTerm)
+  }
+
+  clickSelectAllStudentsCheckbox() {
+    this.selectAllStudentsCheckbox.click()
   }
 }

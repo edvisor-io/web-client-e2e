@@ -23,6 +23,10 @@ export default class StudentProfilePage {
     this.pipelineStatusSecondRelativeOption = this.pipelinesContainer.$('div.student-status_status button:nth-child(2)')
     this.firstHeader = this.pipelinesContainer.all(by.css('h5:nth-child(1)')).get(0)
     this.secondHeader = this.pipelinesContainer.all(by.css('h5:nth-child(1)')).get(1)
+    this.studentStatusSecondList = this.pipelinesContainer.all(by.css('.student-status_list')).get(1)
+    this.studentStatusFirstCheckbox = this.studentStatusSecondList.all(by.css('input[type="checkbox"]')).get(0)
+    this.studentStatusSecondCheckbox = this.studentStatusSecondList.all(by.css('input[type="checkbox"]')).get(1)
+    this.studentStatusThirdCheckbox = this.studentStatusSecondList.all(by.css('input[type="checkbox"]')).get(2)
 
     this.assignedToLabel = this.studentSidebarOwnerContainer.$('photo-initials + div > p')
     this.firstNameField = this.informationContainer.element(by.name('firstname'))
@@ -65,15 +69,13 @@ export default class StudentProfilePage {
     this.changePipelineStatusRelativeOption.click()
   }
 
-  clickChangePipelineStatusSecondOption() {
-
-  }
-
   clickPipelineStatusSecondRelativeOption() {
     this.pipelineStatusSecondRelativeOption.click()
   }
 
-  clickStatusTwo() {
-
+  clickStudentStatusThreeCheckboxes() {
+    this.studentStatusFirstCheckbox.click()
+    this.studentStatusSecondCheckbox.click()
+    this.studentStatusThirdCheckbox.click()
   }
 }

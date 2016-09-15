@@ -81,26 +81,35 @@ describe('the student profile page', () => {
   //
   //   expect(studentProfile.headerStatus.getText()).to.eventually.equal("Deciding")
   // })
+  //
+  // it('should assign a student to more than one pipeline', () => {
+  //   let studentListing = new StudentListingPage()
+  //   studentListing.openSearchBar()
+  //   studentListing.inputSearchTerm(STUDENT_NAME)
+  //   studentListing.clickSearchResult()
+  //
+  //   let studentProfile = new StudentProfilePage()
+  //   studentProfile.clickChangePipelineFirstButton()
+  //   studentProfile.clickChangePipelineStatusRelativeOption()
+  //   studentProfile.clickPipelineStatusSecondRelativeOption()
+  //
+  //   studentProfile.clickChangePipelineSecondButton()
+  //   studentProfile.clickChangePipelineStatusRelativeOption()
+  //   studentProfile.clickPipelineStatusSecondRelativeOption()
+  //
+  //   expect(studentProfile.firstHeader.getText()).to.eventually.equal("Two")
+  //   expect(studentProfile.secondHeader.getText()).to.eventually.equal("Deciding")
+  // })
 
-  it('should assign a student to more than one pipeline', () => {
+  it('should assign a student to the next pipeline status when all checklist items are clicked', () => {
     let studentListing = new StudentListingPage()
     studentListing.openSearchBar()
     studentListing.inputSearchTerm(STUDENT_NAME)
     studentListing.clickSearchResult()
 
     let studentProfile = new StudentProfilePage()
-    studentProfile.clickChangePipelineFirstButton()
-    studentProfile.clickChangePipelineStatusRelativeOption()
-    studentProfile.clickPipelineStatusSecondRelativeOption()
+    studentProfile.clickStudentStatusThreeCheckboxes()
 
-    studentProfile.clickChangePipelineSecondButton()
-    studentProfile.clickChangePipelineStatusRelativeOption()
-    studentProfile.clickPipelineStatusSecondRelativeOption()
-
-    expect(studentProfile.firstHeader.getText()).to.eventually.equal("Two")
-    expect(studentProfile.secondHeader.getText()).to.eventually.equal("Deciding")
-
-    // browser.sleep(5000)
-    // browser.pause()
+    expect(studentProfile.secondHeader.getText()).to.eventually.equal("Client")
   })
 })
