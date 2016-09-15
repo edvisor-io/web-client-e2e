@@ -10,6 +10,21 @@ The directory structure models that of the web client. Each directory contains
 tests for one application, and corresponds to the same named directory in the
 web-client repo.
 
+#### Naming
+
+Here you'll find naming patterns for the variables and prototypal methods we're
+using.
+
+We use prototypal methods to do actions on the page. Method names begins with
+a verb, followed by the element on the page, and lastly extra detail about the
+element. For example, a method for clicking on a button called 'Change' will be
+called 'clickButtonChange'. When there are more buttons called 'Change' on the
+same page, we'll add contextual detail to the end. If the button changes a
+student's pipeline, we'll call it 'clickButtonChangePipeline'.
+
+Initialize variables that correspond to elements on a page follow a similar
+pattern.
+
 ## What you need
 
 In addition to the web-client-e2e, you'll need other repos.

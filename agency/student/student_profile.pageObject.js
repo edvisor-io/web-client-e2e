@@ -16,6 +16,11 @@ export default class StudentProfilePage {
 
     this.changeOfficeExceptionModal = element(by.css('.e-alert_body'))
 
+    this.changePipelineButton = this.overviewContainer.$('.btn-group-dropdown > button[type="button"]')
+    this.changePipelineStatus = this.overviewContainer.$('button#this-pipeline-toggle')
+    this.pipelineOptionDeciding = this.overviewContainer.$('div.student-status_status button:nth-child(2)')
+    this.headerStatus = this.overviewContainer.$('h5:nth-child(1)')
+
     this.assignedToLabel = this.studentSidebarOwnerContainer.$('photo-initials + div > p')
     this.firstNameField = this.informationContainer.element(by.name('firstname'))
     this.lastNameField = this.informationContainer.element(by.name('lastname'))
@@ -44,4 +49,16 @@ export default class StudentProfilePage {
   //     moveStudentButton.click()
   //   }
   // }
+
+  clickChangePipelineButton() {
+    this.changePipelineButton.click()
+  }
+
+  clickChangePipelineStatus() {
+    this.changePipelineStatus.click()
+  }
+
+  clickStatusDeciding() {
+    this.pipelineOptionDeciding.click()
+  }
 }

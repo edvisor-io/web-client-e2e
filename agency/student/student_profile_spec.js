@@ -40,7 +40,7 @@ describe('the student profile page', () => {
   //   let studentProfile = new StudentProfilePage()
   //   expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
   // })
-
+//
   // it('should assign a student to another office from profile', () => {
   //   let studentListing = new StudentListingPage()
   //   studentListing.openSearchBar()
@@ -54,21 +54,34 @@ describe('the student profile page', () => {
   //
   //   expect(studentProfile.studentAgencyName.getText()).to.eventually.equal(NEW_OFFICE)
   // })
+  //
+  // it('should assign a student to another owner', () => {
+  //   let studentListing = new StudentListingPage()
+  //   studentListing.openSearchBar()
+  //   studentListing.inputSearchTerm(STUDENT_NAME)
+  //   studentListing.clickSearchResult()
+  //
+  //   let studentProfile = new StudentProfilePage()
+  //   studentProfile.clickOverviewChangeOwnerButton()
+  //   studentProfile.setAsNewOwner(NEW_OWNER)
+  //
+  //   expect(studentProfile.studentOwner.getText()).to.eventually.equal(NEW_OWNER)
+  // })
 
-  it('should assign a student to another owner', () => {
+  it('should assign a student to any status', () => {
     let studentListing = new StudentListingPage()
     studentListing.openSearchBar()
     studentListing.inputSearchTerm(STUDENT_NAME)
     studentListing.clickSearchResult()
 
     let studentProfile = new StudentProfilePage()
-    studentProfile.clickOverviewChangeOwnerButton()
-    studentProfile.setAsNewOwner(NEW_OWNER)
+    studentProfile.clickChangePipelineButton()
+    studentProfile.clickChangePipelineStatus()
+    studentProfile.clickStatusDeciding()
 
-    expect(studentProfile.studentOwner.getText()).to.eventually.equal(NEW_OWNER)
+    expect(studentProfile.headerStatus.getText()).to.eventually.equal("Deciding")
+
     browser.sleep(10000)
     // browser.pause()
   })
-
-  // it('should')
 })
