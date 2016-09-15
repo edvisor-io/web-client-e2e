@@ -89,17 +89,18 @@ describe('the student profile page', () => {
     studentListing.clickSearchResult()
 
     let studentProfile = new StudentProfilePage()
-    studentProfile.clickChangePipelineButton()
-    studentProfile.clickChangePipelineStatus()
-    studentProfile.clickStatusDeciding()
+    studentProfile.clickChangePipelineFirstButton()
+    studentProfile.clickChangePipelineStatusRelativeOption()
+    studentProfile.clickPipelineStatusSecondRelativeOption()
 
-    studentProfile.clickSecondChangePipelineButton()
-    studentProfile.clickSecondChangePipelineStatusOption()
-    studentProfile.clickStatusTwo()
+    studentProfile.clickChangePipelineSecondButton()
+    studentProfile.clickChangePipelineStatusRelativeOption()
+    studentProfile.clickPipelineStatusSecondRelativeOption()
 
-    // expect(studentProfile.headerStatus.getText()).to.eventually.equal("Deciding")
+    expect(studentProfile.firstHeader.getText()).to.eventually.equal("Two")
+    expect(studentProfile.secondHeader.getText()).to.eventually.equal("Deciding")
 
-    browser.sleep(10000)
+    // browser.sleep(5000)
     // browser.pause()
   })
 })

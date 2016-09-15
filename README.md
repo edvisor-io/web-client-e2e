@@ -22,8 +22,12 @@ called 'clickButtonChange'. When there are more buttons called 'Change' on the
 same page, we'll add contextual detail to the end. If the button changes a
 student's pipeline, we'll call it 'clickButtonChangePipeline'.
 
-Initialize variables that correspond to elements on a page follow a similar
+Initialized variables that correspond to elements on a page follow a similar
 pattern.
+
+The word 'relative' is used in a name when the element is only available in a
+given context. For example, 'changePipelineStatusRelativeOption' is an option
+that only appears when a dropdown is present.
 
 ## What you need
 

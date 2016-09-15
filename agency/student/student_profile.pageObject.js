@@ -6,6 +6,7 @@ export default class StudentProfilePage {
     this.informationContainer = this.container.element(by.css('student-edit-information'))
     this.studentSidebarOwnerContainer = this.container.element(by.css('student-sidebar-owner'))
     this.overviewContainer = this.container.$('.student-sidebar')
+    this.pipelinesContainer = this.overviewContainer.element(by.tagName('student-sidebar-pipelines'))
 
     this.changeOwnerButton = this.overviewContainer.element(by.id('ext02-change-owner-btn'))
     this.officeField = this.overviewContainer.element(by.name('agency'))
@@ -16,10 +17,12 @@ export default class StudentProfilePage {
 
     this.changeOfficeExceptionModal = element(by.css('.e-alert_body'))
 
-    this.changePipelineButton = this.overviewContainer.$('.btn-group-dropdown > button[type="button"]')
-    this.changePipelineStatus = this.overviewContainer.$('button#this-pipeline-toggle')
-    this.pipelineOptionDeciding = this.overviewContainer.$('div.student-status_status button:nth-child(2)')
-    this.headerStatus = this.overviewContainer.$('h5:nth-child(1)')
+    this.changePipelineFirstButton = this.pipelinesContainer.all(by.css('.btn-group-dropdown > button[type="button"]')).get(0)
+    this.changePipelineSecondButton = this.pipelinesContainer.all(by.css('div button')).get(1)
+    this.changePipelineStatusRelativeOption = this.pipelinesContainer.$('button#this-pipeline-toggle')
+    this.pipelineStatusSecondRelativeOption = this.pipelinesContainer.$('div.student-status_status button:nth-child(2)')
+    this.firstHeader = this.pipelinesContainer.all(by.css('h5:nth-child(1)')).get(0)
+    this.secondHeader = this.pipelinesContainer.all(by.css('h5:nth-child(1)')).get(1)
 
     this.assignedToLabel = this.studentSidebarOwnerContainer.$('photo-initials + div > p')
     this.firstNameField = this.informationContainer.element(by.name('firstname'))
@@ -50,27 +53,27 @@ export default class StudentProfilePage {
   //   }
   // }
 
-  clickChangePipelineButton() {
-    this.changePipelineButton.click()
+  clickChangePipelineFirstButton() {
+    this.changePipelineFirstButton.click()
   }
 
-  clickSecondChangePipelineButton() {
+  clickChangePipelineSecondButton() {
+    this.changePipelineSecondButton.click()
+  }
+
+  clickChangePipelineStatusRelativeOption() {
+    this.changePipelineStatusRelativeOption.click()
+  }
+
+  clickChangePipelineStatusSecondOption() {
 
   }
 
-  clickSecondChangePipelineStatusOption() {
-
+  clickPipelineStatusSecondRelativeOption() {
+    this.pipelineStatusSecondRelativeOption.click()
   }
 
   clickStatusTwo() {
 
-  }
-  
-  clickChangePipelineStatus() {
-    this.changePipelineStatus.click()
-  }
-
-  clickStatusDeciding() {
-    this.pipelineOptionDeciding.click()
   }
 }
