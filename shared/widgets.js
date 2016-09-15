@@ -32,3 +32,14 @@ export class ChosenWidget {
     return chosenSpan.getText()
   }
 }
+
+export class SweetAlertWidget {
+  static ok() {
+    var expected = protractor.ExpectedConditions
+    var sweetAlertContainer = element(by.css('.sweet-alert'))
+    browser.wait(expected.visibilityOf(sweetAlertContainer), constants.TIMEOUT_TIME)
+
+    var okBtn = sweetAlertContainer.element(by.css('button.confirm'))
+    okBtn.click()
+  }
+}
