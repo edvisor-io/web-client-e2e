@@ -68,7 +68,21 @@ describe('the student profile page', () => {
   //   expect(studentProfile.studentOwner.getText()).to.eventually.equal(NEW_OWNER)
   // })
 
-  it('should assign a student to any status', () => {
+  // it('should assign a student to any status', () => {
+  //   let studentListing = new StudentListingPage()
+  //   studentListing.openSearchBar()
+  //   studentListing.inputSearchTerm(STUDENT_NAME)
+  //   studentListing.clickSearchResult()
+  //
+  //   let studentProfile = new StudentProfilePage()
+  //   studentProfile.clickChangePipelineButton()
+  //   studentProfile.clickChangePipelineStatus()
+  //   studentProfile.clickStatusDeciding()
+  //
+  //   expect(studentProfile.headerStatus.getText()).to.eventually.equal("Deciding")
+  // })
+
+  it('should assign a student to more than one pipeline', () => {
     let studentListing = new StudentListingPage()
     studentListing.openSearchBar()
     studentListing.inputSearchTerm(STUDENT_NAME)
@@ -79,7 +93,11 @@ describe('the student profile page', () => {
     studentProfile.clickChangePipelineStatus()
     studentProfile.clickStatusDeciding()
 
-    expect(studentProfile.headerStatus.getText()).to.eventually.equal("Deciding")
+    studentProfile.clickSecondChangePipelineButton()
+    studentProfile.clickSecondChangePipelineStatusOption()
+    studentProfile.clickStatusTwo()
+
+    // expect(studentProfile.headerStatus.getText()).to.eventually.equal("Deciding")
 
     browser.sleep(10000)
     // browser.pause()

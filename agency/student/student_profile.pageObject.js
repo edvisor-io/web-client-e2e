@@ -54,6 +54,18 @@ export default class StudentProfilePage {
     this.changePipelineButton.click()
   }
 
+  clickSecondChangePipelineButton() {
+
+  }
+
+  clickSecondChangePipelineStatusOption() {
+
+  }
+
+  clickStatusTwo() {
+
+  }
+  
   clickChangePipelineStatus() {
     this.changePipelineStatus.click()
   }
