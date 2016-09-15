@@ -11,15 +11,12 @@ import uuid from 'node-uuid'
 chai.use(chaiAsPromised)
 var expect = chai.expect
 
-const ASSIGNED_TO = 'Shelley Chen'
-const FIRST_NAME = 'Tricia'
-const LAST_NAME = 'McMillan'
-const STUDENT_NAME = 'Zaphod'
-const SECONDARY_CONTACT = 'Prefect'
-const AT_EMAIL_DOMAIN = '@betelgeuse.com'
-const NATIONALITY = 'United Kingdom'
-
-describe('the student listing page', () => {
+describe('the student listing page', () => {  
+  const ASSIGNED_TO = 'Shelley Chen'
+  const FIRST_NAME = 'Tricia'
+  const LAST_NAME = 'McMillan'
+  const AT_EMAIL_DOMAIN = '@betelgeuse.com'
+  const NATIONALITY = 'United Kingdom'
 
   beforeEach(() => {
     browser.get('/')
@@ -38,7 +35,7 @@ describe('the student listing page', () => {
   })
 
   it('should create a new student successfully', () => {
-    let email = uuid.v4() + AT_EMAIL_DOMAIN
+    const email = uuid.v4() + AT_EMAIL_DOMAIN
 
     let studentListing = new StudentListingPage()
     studentListing.openAddStudentModal()
@@ -52,8 +49,8 @@ describe('the student listing page', () => {
     expect(ChosenWidget.getChosenValue(studentProfile.nationalityField)).to.eventually.equal(NATIONALITY)
   })
 
-  it('should not be able to create a student with the same email', () => {
-    let email = uuid.v4() + AT_EMAIL_DOMAIN
+  it('should not create a student with the same email', () => {
+    const email = uuid.v4() + AT_EMAIL_DOMAIN
 
     let studentListing = new StudentListingPage()
     studentListing.openAddStudentModal()
@@ -68,36 +65,59 @@ describe('the student listing page', () => {
     expect(studentListing.nopeAlert.isPresent()).to.eventually.equal(true)
   })
 
-  it('should not show a name, email and office without a search term', () => {
-    let studentListing = new StudentListingPage()
-    studentListing.openSearchBar()
-    studentListing.inputSearchTerm('')
+  describe('search function', () => {
+    const STUDENT_NAME = 'Zaphod'
+    const SECONDARY_CONTACT = 'Prefect'
 
-    expect(studentListing.searchResultName.isPresent()).to.eventually.equal(false)
-    expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(false)
-    expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(false)
+    beforeEach(() => {
+      let studentListing = new StudentListingPage()
+      studentListing.openSearchBar()
+    })
+
+    it('should not show a name, email and office without a search term', () => {
+      let studentListing = new StudentListingPage()
+      studentListing.inputSearchTerm('')
+
+      expect(studentListing.searchResultName.isPresent()).to.eventually.equal(false)
+      expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(false)
+      expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(false)
+    })
+
+    it('should show a name, email and office on search by student name', () => {
+      let studentListing = new StudentListingPage()
+      studentListing.inputSearchTerm(STUDENT_NAME)
+
+      expect(studentListing.searchResultName.isPresent()).to.eventually.equal(true)
+      expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
+      expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
+    })
+
+    it('should show a name, email and office on search by secondary contact', () => {
+      let studentListing = new StudentListingPage()
+      studentListing.openSearchDropdown()
+      studentListing.chooseBySecondaryContact()
+      studentListing.focusSearchContainer()
+      studentListing.inputSearchTerm(SECONDARY_CONTACT)
+
+      expect(studentListing.searchResultName.isPresent()).to.eventually.equal(true)
+      expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
+      expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
+    })
   })
 
-  it('should show a name, email and office on search by student name', () => {
+  it('should download a file of exported students', () => {
     let studentListing = new StudentListingPage()
-    studentListing.openSearchBar()
-    studentListing.inputSearchTerm(STUDENT_NAME)
+    studentListing.clickSelectAllStudentsCheckbox()
+    studentListing.clickExportButton()
 
-    expect(studentListing.searchResultName.isPresent()).to.eventually.equal(true)
-    expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
-    expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
+    expect(studentListing.exportMessage.isPresent()).to.eventually.equal(true)
   })
 
-  it('should show a name, email and office on search by secondary contact', () => {
+  it('should show a student profile from the students table', () => {
     let studentListing = new StudentListingPage()
-    studentListing.openSearchBar()
-    studentListing.openSearchDropdown()
-    studentListing.chooseBySecondaryContact()
-    studentListing.focusSearchContainer()
-    studentListing.inputSearchTerm(SECONDARY_CONTACT)
+    studentListing.clickFirstStudentInTable()
 
-    expect(studentListing.searchResultName.isPresent()).to.eventually.equal(true)
-    expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
-    expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
+    let studentProfile = new StudentProfilePage()
+    expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
   })
 })

@@ -9,11 +9,10 @@ import chaiAsPromised from 'chai-as-promised'
 chai.use(chaiAsPromised)
 var expect = chai.expect
 
-const STUDENT_NAME = "Slartibartfast"
-const NEW_OFFICE = "Bogotá Office"
-const NEW_OWNER = "Shelley Chen"
-
 describe('the student profile page', () => {
+  const STUDENT_NAME = "Slartibartfast"
+  const NEW_OFFICE = "Bogotá Office"
+  const NEW_OWNER = "Shelley Chen"
 
   beforeEach(() => {
     browser.get('/')
@@ -31,57 +30,92 @@ describe('the student profile page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  // it('should display a student profile on click of search result', () => {
-  //   let studentListing = new StudentListingPage()
-  //   studentListing.openSearchBar()
-  //   studentListing.inputSearchTerm(STUDENT_NAME)
-  //   studentListing.clickSearchResult()
-  //
-  //   let studentProfile = new StudentProfilePage()
-  //   expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
-  // })
-//
-  // it('should assign a student to another office from profile', () => {
-  //   let studentListing = new StudentListingPage()
-  //   studentListing.openSearchBar()
-  //   studentListing.inputSearchTerm(STUDENT_NAME)
-  //   studentListing.clickSearchResult()
-  //
-  //   let studentProfile = new StudentProfilePage()
-  //   studentProfile.clickOverviewChangeOwnerButton()
-  //   studentProfile.setAsNewOffice(NEW_OFFICE)
-  //   // studentProfile.resolveChangeOfficeExceptionModal()
-  //
-  //   expect(studentProfile.studentAgencyName.getText()).to.eventually.equal(NEW_OFFICE)
-  // })
-  //
-  // it('should assign a student to another owner', () => {
-  //   let studentListing = new StudentListingPage()
-  //   studentListing.openSearchBar()
-  //   studentListing.inputSearchTerm(STUDENT_NAME)
-  //   studentListing.clickSearchResult()
-  //
-  //   let studentProfile = new StudentProfilePage()
-  //   studentProfile.clickOverviewChangeOwnerButton()
-  //   studentProfile.setAsNewOwner(NEW_OWNER)
-  //
-  //   expect(studentProfile.studentOwner.getText()).to.eventually.equal(NEW_OWNER)
-  // })
-
-  it('should assign a student to any status', () => {
+  it('should display a student profile on click of search result', () => {
     let studentListing = new StudentListingPage()
     studentListing.openSearchBar()
     studentListing.inputSearchTerm(STUDENT_NAME)
     studentListing.clickSearchResult()
 
     let studentProfile = new StudentProfilePage()
-    studentProfile.clickChangePipelineButton()
-    studentProfile.clickChangePipelineStatus()
-    studentProfile.clickStatusDeciding()
+    expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
+  })
 
-    expect(studentProfile.headerStatus.getText()).to.eventually.equal("Deciding")
+  describe('office and owner assignment', () => {
+    beforeEach(() => {
+      let studentListing = new StudentListingPage()
+      studentListing.openSearchBar()
+      studentListing.inputSearchTerm(STUDENT_NAME)
+      studentListing.clickSearchResult()
+    })
 
-    browser.sleep(10000)
-    // browser.pause()
+    it('should assign a student to an office from profile', () => {
+      let studentProfile = new StudentProfilePage()
+      studentProfile.clickOverviewChangeOwnerButton()
+      studentProfile.setAsNewOffice(NEW_OFFICE)
+
+      expect(studentProfile.studentAgencyName.getText()).to.eventually.equal(NEW_OFFICE)
+    })
+
+    it('should assign a student to an owner', () => {
+      let studentProfile = new StudentProfilePage()
+      studentProfile.clickOverviewChangeOwnerButton()
+      studentProfile.setAsNewOwner(NEW_OWNER)
+
+      expect(studentProfile.studentOwner.getText()).to.eventually.equal(NEW_OWNER)
+    })
+  })
+
+  describe('pipeline assignment', () => {
+    beforeEach(() => {
+      let studentListing = new StudentListingPage()
+      studentListing.openSearchBar()
+      studentListing.inputSearchTerm(STUDENT_NAME)
+      studentListing.clickSearchResult()
+    })
+
+    it('should assign a student to a pipeline status', () => {
+      let studentProfile = new StudentProfilePage()
+      studentProfile.clickChangePipelineFirstButton()
+      studentProfile.clickChangePipelineStatusRelativeOption()
+      studentProfile.clickPipelineStatusSecondRelativeOption()
+
+      expect(studentProfile.firstHeader.getText()).to.eventually.equal("Two")
+    })
+
+    it('should assign a student to more than one pipeline', () => {
+      let studentProfile = new StudentProfilePage()
+      studentProfile.clickChangePipelineFirstButton()
+      studentProfile.clickChangePipelineStatusRelativeOption()
+      studentProfile.clickPipelineStatusSecondRelativeOption()
+
+      studentProfile.clickChangePipelineSecondButton()
+      studentProfile.clickChangePipelineStatusRelativeOption()
+      studentProfile.clickPipelineStatusSecondRelativeOption()
+
+      expect(studentProfile.firstHeader.getText()).to.eventually.equal("Two")
+      expect(studentProfile.secondHeader.getText()).to.eventually.equal("Deciding")
+    })
+
+    it('should assign a student to the next pipeline status when all checklist items are clicked', () => {
+      let studentProfile = new StudentProfilePage()
+      studentProfile.clickStudentStatusThreeCheckboxes()
+
+      expect(studentProfile.secondHeader.getText()).to.eventually.equal("Client")
+    })
+  })
+
+  it('should create a task', () => {
+    const TASK_TITLE = "Do a followup call"
+    const DUE_TIME = '11:00pm'
+
+    let studentListing = new StudentListingPage()
+    studentListing.openSearchBar()
+    studentListing.inputSearchTerm(STUDENT_NAME)
+    studentListing.clickSearchResult()
+
+    let studentProfile =  new StudentProfilePage()
+    studentProfile.addTask(TASK_TITLE, DUE_TIME)
+
+    expect(studentProfile.alertBoxMessage.getText()).to.eventually.equal('Saved  ')
   })
 })

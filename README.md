@@ -1,31 +1,46 @@
 # web-client-e2e
 
-## What is this repo?
+##### current status of this repo (for context)
+
+Currently in the process of transforming to ES6 syntax.
+
+## What is this repo? ⚙
 
 End-to-end test suites for the Edvisor.io web-client
 
-## Making sense of this repo
+## Quickly making sense of this repo ⚡️
 
 The directory structure models that of the web client. Each directory contains
 tests for one application, and corresponds to the same named directory in the
 web-client repo.
 
-#### Naming
+#### Naming (✨ magical conventions to keep your sanity)
 
 Here you'll find naming patterns for the variables and prototypal methods we're
 using.
 
-We use prototypal methods to do actions on the page. Method names begins with
-a verb, followed by the element on the page, and lastly extra detail about the
-element. For example, a method for clicking on a button called 'Change' will be
-called 'clickButtonChange'. When there are more buttons called 'Change' on the
-same page, we'll add contextual detail to the end. If the button changes a
-student's pipeline, we'll call it 'clickButtonChangePipeline'.
+##### verb + detail about the element + element type
 
-Initialize variables that correspond to elements on a page follow a similar
-pattern.
+We use prototypal methods to do actions on the page. Method names are:
+verb + detail about the element + element type. For example, a method for
+clicking on a button called 'Change' will be called `clickChangeButton`.
 
-## What you need
+When there are more buttons called 'Change' on the same page, we'll add
+contextual details. If the button changes a student's pipeline, we'll call the
+method that clicks it `clickChangePipelineButton()`. If there is more than one
+button that  fits this pattern, the order can be included. For example,
+`clickChangePipelineFirstButton()`
+
+Initialized variables that correspond to elements on a page follow a similar
+pattern. They just omit the leading verb, because they don't "do" things. The
+button being clicked in the example above can be initialized as
+"changePipelineButton".
+
+The word 'relative' is used in a name when the element is only available in a
+given context. For example, 'changePipelineStatusRelativeOption' is an option
+that only appears when a dropdown is present.
+
+## What you need to get started 🐣
 
 In addition to the web-client-e2e, you'll need other repos.
 
@@ -65,7 +80,7 @@ In addition to the web-client-e2e, you'll need other repos.
 
 3. Navigate to the directory containing the conf.js of your desired test. Run test with `protractor conf.js`.
 
-## These need to be running when doing tests:
+## "These need to be running when doing tests!" said the 🤖 happily:
 
 1. Selenium: Run `webdriver-manager start`. Doesn’t matter where from.
 
@@ -73,11 +88,11 @@ In addition to the web-client-e2e, you'll need other repos.
 
 3. Gulp: Run `gulp` from api-server repo.
 
-## When there's new code:
+## Do this, when there's new code in the web-client 🌱 😎 :
 
 1. Navigate to the web-client repo and run `./bin/edvisor build -s client`.
 
-## Useful Docs
+## Useful Docs (🆓 stuff to put out and prevent pesky 🔥🔥🔥)
 
 > Protractor styleguide: https://github.com/CarmenPopoviciu/protractor-styleguide
 

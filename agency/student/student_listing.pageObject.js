@@ -4,6 +4,10 @@ import constants from '../../shared/constants'
 export default class StudentListingPage {
 
   constructor() {
+    this.selectAllStudentsCheckbox = $('.select-box')
+    this.exportButton = $('.action-bar #ext02-export-data')
+    this.exportMessage = $('.e-alert_inner-container')
+
     this.nopeAlert = $('.alert-box-message')
 
     this.buttonAddStudent = element(by.id('add-student-button'))
@@ -11,6 +15,9 @@ export default class StudentListingPage {
 
     this.dropdownSearchStudent = element(by.id('ext02-search-student-select'))
     this.optionBySecondaryContact = $('.select-menu ul.menu > li:nth-child(2)')
+
+    this.studentsTableContainer = $('.students-table')
+    this.firstStudentInTable = this.studentsTableContainer.all(by.css('.table-student-name')).get(0)
 
     this.searchContainer = $('.ui-select-container')
     this.searchField = this.searchContainer.element(by.css('input[type="search"]'))
@@ -49,7 +56,7 @@ export default class StudentListingPage {
   clickSearchResult() {
     let expected = protractor.ExpectedConditions
     browser.wait(expected.elementToBeClickable(this.searchResultName), constants.TIMEOUT_TIME)
-    
+
     this.searchResultName.click()
   }
 
@@ -76,5 +83,17 @@ export default class StudentListingPage {
 
   inputSearchTerm(searchTerm) {
     this.searchField.sendKeys(searchTerm)
+  }
+
+  clickSelectAllStudentsCheckbox() {
+    this.selectAllStudentsCheckbox.click()
+  }
+
+  clickExportButton() {
+    this.exportButton.click()
+  }
+
+  clickFirstStudentInTable() {
+    this.firstStudentInTable.click()
   }
 }

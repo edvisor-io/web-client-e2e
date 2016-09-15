@@ -1,4 +1,5 @@
 import {ChosenWidget} from '../../shared/widgets'
+import constants from '../../shared/constants'
 
 export default class StudentProfilePage {
   constructor() {
@@ -6,6 +7,8 @@ export default class StudentProfilePage {
     this.informationContainer = this.container.element(by.css('student-edit-information'))
     this.studentSidebarOwnerContainer = this.container.element(by.css('student-sidebar-owner'))
     this.overviewContainer = this.container.$('.student-sidebar')
+    this.pipelinesContainer = this.overviewContainer.element(by.tagName('student-sidebar-pipelines'))
+    this.tasksContainer = this.container.$('.sidebar-tasks')
 
     this.changeOwnerButton = this.overviewContainer.element(by.id('ext02-change-owner-btn'))
     this.officeField = this.overviewContainer.element(by.name('agency'))
@@ -16,10 +19,23 @@ export default class StudentProfilePage {
 
     this.changeOfficeExceptionModal = element(by.css('.e-alert_body'))
 
-    this.changePipelineButton = this.overviewContainer.$('.btn-group-dropdown > button[type="button"]')
-    this.changePipelineStatus = this.overviewContainer.$('button#this-pipeline-toggle')
-    this.pipelineOptionDeciding = this.overviewContainer.$('div.student-status_status button:nth-child(2)')
-    this.headerStatus = this.overviewContainer.$('h5:nth-child(1)')
+    this.changePipelineFirstButton = this.pipelinesContainer.all(by.css('.btn-group-dropdown > button[type="button"]')).get(0)
+    this.changePipelineSecondButton = this.pipelinesContainer.all(by.css('div button')).get(1)
+    this.changePipelineStatusRelativeOption = this.pipelinesContainer.$('button#this-pipeline-toggle')
+    this.pipelineStatusSecondRelativeOption = this.pipelinesContainer.$('div.student-status_status button:nth-child(2)')
+    this.firstHeader = this.pipelinesContainer.all(by.css('h5:nth-child(1)')).get(0)
+    this.secondHeader = this.pipelinesContainer.all(by.css('h5:nth-child(1)')).get(1)
+    this.studentStatusSecondList = this.pipelinesContainer.all(by.css('.student-status_list')).get(1)
+    this.studentStatusFirstCheckbox = this.studentStatusSecondList.all(by.css('input[type="checkbox"]')).get(0)
+    this.studentStatusSecondCheckbox = this.studentStatusSecondList.all(by.css('input[type="checkbox"]')).get(1)
+    this.studentStatusThirdCheckbox = this.studentStatusSecondList.all(by.css('input[type="checkbox"]')).get(2)
+
+    this.taskTitleField = this.tasksContainer.element(by.model('addTask.data.details'))
+    this.taskDatePicker = this.tasksContainer.element(by.model('data.date'))
+    this.taskTimeDropdown = this.tasksContainer.element(by.model('data.time'))
+    this.assignToField = this.tasksContainer.element(by.css('select + div'))
+    this.submitTaskButton = this.tasksContainer.element(by.css('button[type="submit"]'))
+    this.alertBoxMessage = element(by.css('.alert-box-message'))
 
     this.assignedToLabel = this.studentSidebarOwnerContainer.$('photo-initials + div > p')
     this.firstNameField = this.informationContainer.element(by.name('firstname'))
@@ -42,23 +58,31 @@ export default class StudentProfilePage {
     this.submitButton.click()
   }
 
-  // resolveChangeOfficeExceptionModal() {
-  //   // browser.pause()
-  //   if (this.changeOfficeExceptionModal == true) {
-  //     let moveStudentButton = this.changeOfficeExceptionModal.element(by.css('button[ng-click="resolve()"]'))
-  //     moveStudentButton.click()
-  //   }
-  // }
-
-  clickChangePipelineButton() {
-    this.changePipelineButton.click()
+  clickChangePipelineFirstButton() {
+    this.changePipelineFirstButton.click()
   }
 
-  clickChangePipelineStatus() {
-    this.changePipelineStatus.click()
+  clickChangePipelineSecondButton() {
+    this.changePipelineSecondButton.click()
   }
 
-  clickStatusDeciding() {
-    this.pipelineOptionDeciding.click()
+  clickChangePipelineStatusRelativeOption() {
+    this.changePipelineStatusRelativeOption.click()
+  }
+
+  clickPipelineStatusSecondRelativeOption() {
+    this.pipelineStatusSecondRelativeOption.click()
+  }
+
+  clickStudentStatusThreeCheckboxes() {
+    this.studentStatusFirstCheckbox.click()
+    this.studentStatusSecondCheckbox.click()
+    this.studentStatusThirdCheckbox.click()
+  }
+
+  addTask(taskTitle, dueTime) {
+    this.taskTitleField.sendKeys(taskTitle)
+    this.taskTimeDropdown.sendKeys(dueTime)
+    this.submitTaskButton.click()
   }
 }
