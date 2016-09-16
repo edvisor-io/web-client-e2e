@@ -1,4 +1,5 @@
 import {ChosenWidget} from '../../shared/widgets'
+import constants from '../../shared/constants'
 
 export default class StudentProfilePage {
   constructor() {
@@ -7,6 +8,7 @@ export default class StudentProfilePage {
     this.studentSidebarOwnerContainer = this.container.element(by.css('student-sidebar-owner'))
     this.overviewContainer = this.container.$('.student-sidebar')
     this.pipelinesContainer = this.overviewContainer.element(by.tagName('student-sidebar-pipelines'))
+    this.tasksContainer = this.container.$('.sidebar-tasks')
 
     this.changeOwnerButton = this.overviewContainer.element(by.id('ext02-change-owner-btn'))
     this.officeField = this.overviewContainer.element(by.name('agency'))
@@ -27,6 +29,13 @@ export default class StudentProfilePage {
     this.studentStatusFirstCheckbox = this.studentStatusSecondList.all(by.css('input[type="checkbox"]')).get(0)
     this.studentStatusSecondCheckbox = this.studentStatusSecondList.all(by.css('input[type="checkbox"]')).get(1)
     this.studentStatusThirdCheckbox = this.studentStatusSecondList.all(by.css('input[type="checkbox"]')).get(2)
+
+    this.taskTitleField = this.tasksContainer.element(by.model('addTask.data.details'))
+    this.taskDatePicker = this.tasksContainer.element(by.model('data.date'))
+    this.taskTimeDropdown = this.tasksContainer.element(by.model('data.time'))
+    this.assignToField = this.tasksContainer.element(by.css('select + div'))
+    this.submitTaskButton = this.tasksContainer.element(by.css('button[type="submit"]'))
+    this.alertBoxMessage = element(by.css('.alert-box-message'))
 
     this.assignedToLabel = this.studentSidebarOwnerContainer.$('photo-initials + div > p')
     this.firstNameField = this.informationContainer.element(by.name('firstname'))
@@ -77,5 +86,12 @@ export default class StudentProfilePage {
     this.studentStatusFirstCheckbox.click()
     this.studentStatusSecondCheckbox.click()
     this.studentStatusThirdCheckbox.click()
+  }
+
+  addTask(taskTitle, dueDate, dueTime, assignTo) {
+    this.taskTitleField.sendKeys(taskTitle)
+    this.taskDatePicker.sendKeys(dueDate)
+    this.taskTimeDropdown.sendKeys(dueTime)
+    this.submitTaskButton.click()
   }
 }
