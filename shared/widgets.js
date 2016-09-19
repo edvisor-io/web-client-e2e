@@ -36,10 +36,19 @@ export class ChosenWidget {
 export class SweetAlertWidget {
   static ok() {
     var expected = protractor.ExpectedConditions
-    var sweetAlertContainer = element(by.css('.sweet-alert'))
-    browser.wait(expected.visibilityOf(sweetAlertContainer), constants.TIMEOUT_TIME)
+    var sweetAlertContainer = $('.sweet-alert')
+    browser.wait(expected.elementToBeClickable(sweetAlertContainer), constants.TIMEOUT_TIME)
 
-    var okBtn = sweetAlertContainer.element(by.css('button.confirm'))
+    var okBtn = sweetAlertContainer.$('button.confirm')
     okBtn.click()
+  }
+
+  static delete() {
+    let expected = protractor.ExpectedConditions
+    let sweetAlertContainer = $('.sweet-alert')
+
+    let deleteButton = sweetAlertContainer.$('button.confirm')
+    browser.wait(expected.elementToBeClickable(sweetAlertContainer), constants.TIMEOUT_TIME)
+    deleteButton.click()
   }
 }

@@ -40,6 +40,13 @@ The word 'relative' is used in a name when the element is only available in a
 given context. For example, 'changePipelineStatusRelativeOption' is an option
 that only appears when a dropdown is present.
 
+##### Shared files
+
+Static methods in `widgets.js` interact with the page. pageObject files provide
+a layer of abstraction and so spec files don't directly invoke static widget
+methods. Instead, spec files may invoke pageObject prototypal methods which
+in turn call static widget methods.
+
 ## What you need to get started 🐣
 
 In addition to the web-client-e2e, you'll need other repos.
