@@ -1,8 +1,4 @@
 machine:
-  services:
-    - docker
-  ruby:
-    version: 2.3.1
   node:
     version: 6.6.0
 
@@ -16,8 +12,3 @@ dependencies:
     - npm install -g mocha protractor
     - webdriver-manager update
 
-test:
-  pre:
-    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-    - aws s3 cp s3://edvisor-configs/ecs-deploy/reset-db.rb $HOME/ecs-deploy/reset-db.rb
-    - ruby $HOME/ecs-deploy/reset-db.rb e2e e2e
