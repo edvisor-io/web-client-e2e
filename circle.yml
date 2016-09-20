@@ -1,0 +1,23 @@
+machine:
+  services:
+    - docker
+  ruby:
+    version: 2.3.1
+  node:
+    version: 6.6.0
+
+general:
+  branches:
+    only:
+      - master
+
+dependencies:
+  post:
+    - npm install -g protractor
+    - webdriver-manager update
+
+test:
+  pre:
+    - echo "will reset database"
+  override:
+    - protractor protractor.conf.js
