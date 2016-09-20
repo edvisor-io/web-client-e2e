@@ -1,7 +1,9 @@
+var url = (process.env.CI === true) ? 'https://e2e.edvisor.io:2999' : 'http://localhost:3000/'
+
 exports.config = {
   directConnect: true,
   chromeOnly: true,
-  baseUrl: 'http://localhost:3000/',
+  baseUrl: url,
 
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
