@@ -37,9 +37,10 @@ export class SweetAlertWidget {
   static ok() {
     var expected = protractor.ExpectedConditions
     var sweetAlertContainer = $('.sweet-alert')
-    browser.wait(expected.elementToBeClickable(sweetAlertContainer), constants.TIMEOUT_TIME)
 
     var okBtn = sweetAlertContainer.$('button.confirm')
+    browser.wait(expected.elementToBeClickable(okBtn), constants.TIMEOUT_TIME)
+    browser.sleep(2000)
     okBtn.click()
   }
 

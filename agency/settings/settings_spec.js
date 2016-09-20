@@ -2,7 +2,7 @@ import SettingsPage from './settings.pageObject'
 import constants from '../../shared/constants'
 import LoginPage from '../../shared/pages/login.pageObject'
 import AgencyNav from '../nav.pageObject'
-// import uuid from 'node-uuid'
+import uuid from 'node-uuid'
 
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
@@ -20,7 +20,7 @@ describe('the settings page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  it('should add slots in TeamTab when slots are added in PaymentTab', () => {
+  it('should allow invites in TeamTab when slots are added in PaymentTab', () => {
     let loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     LoginPage.waitForLoader()
@@ -40,8 +40,8 @@ describe('the settings page', () => {
     paymentTab.clickChangeUsersAndSubscriptionButton()
     paymentTab.clickIncrementButton()
     paymentTab.clickChangeSubscriptionButton()
-    browser.sleep(5000)
     paymentTab.clickOkButton()
+    expect(settingsPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
 
   it('should manually add a currency exchange rate', () => {
@@ -130,14 +130,14 @@ describe('the settings page', () => {
       var settingsPage = new SettingsPage()
       settingsPage.goToTeamTab()
 
-      var teamTabPage = new settingsPage.TeamTab()
-      var teamTabInvitePage = new teamTabPage.Invite()
+      var teamTab = new settingsPage.TeamTab()
+      var inviteArea = new teamTab.InviteArea()
 
-      teamTabInvitePage.invite(firstname, lastname, email, role)
+      inviteArea.invite(firstname, lastname, email, role)
 
-      var teamTabManageMembersPage = new teamTabPage.ManageMembers()
+      var manageMembers = new teamTab.ManageMembers()
 
-      var teamMemberCard = new teamTabManageMembersPage.TeamMember(teamTabManageMembersPage.managers.last())
+      var teamMemberCard = new manageMembers.TeamMember(manageMembers.managers.last())
       expect(teamMemberCard.name.getText()).to.eventually.equal(`${firstname} ${lastname}`)
     })
   })

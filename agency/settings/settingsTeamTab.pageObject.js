@@ -49,13 +49,15 @@ class InviteArea {
     this.role = this.inviteForm.element(by.name('role'))
     this.office = this.inviteForm.element(by.name('office'))
     this.inviteBtn = this.inviteForm.element(by.css('button[type="submit"]'))
-    this.slotsText = element.all(by.css('div.subtext')).first()
+    this.slotsElement = element.all(by.css('div.subtext')).first()
   }
 
   getMaxSlots() {
-    var innerText = this.slotsText.getText()
-    // console.log(JSON.stringify(innerText))
-    var numbers = innerText.match(/\d+/g)
+    return this.slotsElement.getText()
+      .then((innerText) => {
+        var numbers = innerText.match(/\d+/g)
+        return numbers[1]
+      })
   }
 
   invite(firstname, lastname, email, role) {
