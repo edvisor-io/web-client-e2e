@@ -13,7 +13,7 @@ general:
 
 dependencies:
   post:
-    - npm install -g protractor
+    - npm install -g mocha protractor
     - webdriver-manager update
 
 test:
