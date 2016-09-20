@@ -18,4 +18,6 @@ dependencies:
 
 test:
   pre:
-    - echo "will reset database"
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+    - aws s3 cp s3://edvisor-configs/ecs-deploy/reset-db.rb $HOME/ecs-deploy/reset-db.rb
+    - ruby $HOME/ecs-deploy/reset-db.rb e2e e2e
