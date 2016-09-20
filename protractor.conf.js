@@ -1,4 +1,4 @@
-var url = (process.env.CI === true) ? 'https://e2e.edvisor.io:2999' : 'http://localhost:3000/'
+var url = (process.env.CI === 'true') ? 'https://e2e.edvisor.io:2999' : 'http://localhost:3000/'
 
 exports.config = {
   directConnect: true,
