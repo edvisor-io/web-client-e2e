@@ -11,5 +11,5 @@ export default {
   SALES_REP_EMAIL: 'steven+testing@edvisor.io',
   SALES_REP_PASS: 'password',
 
-  TIMEOUT_TIME: 15000
+  TIMEOUT_TIME: 60000
 }
