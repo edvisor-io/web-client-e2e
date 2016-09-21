@@ -7,8 +7,7 @@ chai.use(chaiAsPromised)
 var expect = chai.expect
 
 describe('the login page', function() {
-
-  beforeEach(function() {
+  beforeEach(() => {
     browser.get('/auth/en/login')
     LoginPage.waitForLoader()
   })

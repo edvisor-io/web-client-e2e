@@ -7,11 +7,12 @@ export default class AgencyNav {
 
     this.navHeader = element(by.css('header'))
     this.userDropdown = this.navHeader.element(by.css('.settings-dropdown'))
-
     this.settingsButton = this.userDropdown.element(by.id('ext27-settings'))
   }
 
   goToStudents() {
+    let expected = protractor.ExpectedConditions
+    browser.wait(expected.elementToBeClickable(this.studentsButton), constants.TIMEOUT_TIME)
     this.studentsButton.click()
   }
 

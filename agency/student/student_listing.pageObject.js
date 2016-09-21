@@ -69,7 +69,7 @@ export default class StudentListingPage {
 
   // static waitForOverlay() {
   //   var expected = protractor.ExpectedConditions
-  //   browser.wait(expected.elementToBeClickable(buttonAddStudent), constants.TIMEOUT)
+  //   browser.wait(expected.elementToBeClickable(buttonAddStudent), constants.TIMEOUT_TIME)
   // }
 
   addStudent(assignedTo, firstname, lastname, email, nationality) {
