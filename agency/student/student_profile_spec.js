@@ -68,20 +68,18 @@ describe('the student profile page', () => {
     const EXPECTED_STATUS_ONE = 'Deciding'
     const EXPECTED_STATUS_TWO = 'Deciding'
 
-    beforeEach(() => {
+    it('should assign a student to a pipeline status', () => {
       let studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
-    })
 
-    // it('should assign a student to a pipeline status', () => {
-    //   let studentProfile = new StudentProfilePage()
-    //   let pipelineArea = new studentProfile.PipelineArea()
-    //   pipelineArea.clickChangePipelineFirstButton()
-    //   pipelineArea.clickChangePipelineStatusOption()
-    //   pipelineArea.clickPipelineStatusSecondRelativeOption()
-    //
-    //   expect(pipelineArea.firstHeader.getText()).to.eventually.equal(EXPECTED_STATUS)
-    // })
+      let studentProfile = new StudentProfilePage()
+      let pipelineArea = new studentProfile.PipelineArea()
+      pipelineArea.clickChangePipelineFirstButton()
+      pipelineArea.clickChangePipelineStatusOption()
+      pipelineArea.clickPipelineStatusSecondRelativeOption()
+
+      expect(pipelineArea.firstHeader.getText()).to.eventually.equal(EXPECTED_STATUS_ONE)
+    })
 
     it('should assign a student to more than one pipeline', () => {
       let agencyNav = new AgencyNav()
@@ -109,15 +107,35 @@ describe('the student profile page', () => {
       pipelineArea.clickPipelineStatusesSecondOption()
 
       expect(pipelineArea.firstHeader.getText()).to.eventually.equal(EXPECTED_STATUS_ONE)
-      expect(pipelineArea.secondHeader.getText()).to.eventually.equal(EXPECTED_STATUS_TWO)
+      expect(pipelineArea.lastHeader.getText()).to.eventually.equal(EXPECTED_STATUS_TWO)
     })
-    //
-    // it('should assign a student to the next pipeline status when all checklist items are clicked', () => {
-    //   let studentProfile = new StudentProfilePage()
-    //   studentProfile.clickStudentStatusThreeCheckboxes()
-    //
-    //   expect(studentProfile.secondHeader.getText()).to.eventually.equal("Client")
-    // })
+
+    it('should change to the next status when all checklist items are clicked', () => {
+      const NEW_STATUS = 'Client'
+
+      let agencyNav = new AgencyNav()
+      agencyNav.goToSettings()
+
+      let settingsPage = new SettingsPage()
+      settingsPage.goToAgencyTab()
+
+      let agencyTab = new settingsPage.AgencyTab()
+      agencyTab.clickPipelineButton()
+      agencyTab.clickDuplicateButton()
+
+      agencyNav.goToStudents()
+      let studentListing = new StudentListingPage()
+      studentListing.clickFirstStudentInTable()
+
+      let studentProfile = new StudentProfilePage()
+      let pipelineArea = new studentProfile.PipelineArea()
+      pipelineArea.clickAddToAnotherPipelineButton()
+      pipelineArea.clickAddToAnotherPipelineFirstOption()
+      pipelineArea.clickPipelineStatusesSecondOption()
+      pipelineArea.clickDecidingStatusThreeCheckboxes()
+
+      expect(pipelineArea.lastHeader.getText()).to.eventually.equal(NEW_STATUS)
+    })
   })
 
   // it('should create a task', () => {
