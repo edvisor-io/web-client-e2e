@@ -7,7 +7,6 @@ chai.use(chaiAsPromised)
 var expect = chai.expect
 
 describe('the forgot page', function() {
-
   beforeEach(function() {
     browser.get('/auth/en/forgot')
     ForgotPage.waitForLoader()

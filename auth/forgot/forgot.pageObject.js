@@ -1,3 +1,5 @@
+import constants from '../../shared/constants'
+
 export default class ForgotPage {
   constructor() {
     this.emailField = element(by.css('input[name="email"]'))
@@ -18,6 +20,6 @@ export default class ForgotPage {
       return browser.isElementPresent(appLoader).then(function(presenceOfElement) {
         return !presenceOfElement
       })
-    }, 10000)
+    }, constants.TIMEOUT_TIME)
   }
 }

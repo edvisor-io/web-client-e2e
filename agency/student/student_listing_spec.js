@@ -11,7 +11,7 @@ import uuid from 'node-uuid'
 chai.use(chaiAsPromised)
 var expect = chai.expect
 
-describe('the student listing page', () => {  
+describe('the student listing page', () => {
   const ASSIGNED_TO = 'Shelley Chen'
   const FIRST_NAME = 'Tricia'
   const LAST_NAME = 'McMillan'
@@ -66,8 +66,7 @@ describe('the student listing page', () => {
   })
 
   describe('search function', () => {
-    const STUDENT_NAME = 'Zaphod'
-    const SECONDARY_CONTACT = 'Prefect'
+    const SECONDARY_CONTACT = 'Anna Faris'
 
     beforeEach(() => {
       let studentListing = new StudentListingPage()
@@ -85,7 +84,7 @@ describe('the student listing page', () => {
 
     it('should show a name, email and office on search by student name', () => {
       let studentListing = new StudentListingPage()
-      studentListing.inputSearchTerm(STUDENT_NAME)
+      studentListing.inputSearchTerm(FIRST_NAME)
 
       expect(studentListing.searchResultName.isPresent()).to.eventually.equal(true)
       expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)

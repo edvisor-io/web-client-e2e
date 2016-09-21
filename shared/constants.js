@@ -12,5 +12,5 @@ export default {
   SALES_REP_PASS: 'password',
 
   TIMEOUT: 5000,
-  TIMEOUT_TIME: 10000
+  TIMEOUT_TIME: 15000
 }

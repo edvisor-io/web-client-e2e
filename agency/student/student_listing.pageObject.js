@@ -13,8 +13,8 @@ export default class StudentListingPage {
     this.buttonAddStudent = element(by.id('add-student-button'))
     this.buttonSearch = element(by.id('ext02-search-student-btn'))
 
-    this.dropdownSearchStudent = element(by.id('ext02-search-student-select'))
-    this.optionBySecondaryContact = $('.select-menu ul.menu > li:nth-child(2)')
+    this.dropdownSearchStudent = element(by.id('ext02_search_student_select_chosen'))
+    this.bySecondaryContactOption = $('.chosen-results > li:nth-child(2)')
 
     this.studentsTableContainer = $('.students-table')
     this.firstStudentInTable = this.studentsTableContainer.all(by.css('.table-student-name')).get(0)
@@ -62,9 +62,9 @@ export default class StudentListingPage {
 
   chooseBySecondaryContact() {
     var expected = protractor.ExpectedConditions
-    browser.wait(expected.visibilityOf(this.optionBySecondaryContact), constants.TIMEOUT_TIME)
+    browser.wait(expected.visibilityOf(this.bySecondaryContactOption), constants.TIMEOUT_TIME)
 
-    this.optionBySecondaryContact.click()
+    this.bySecondaryContactOption.click()
   }
 
   // static waitForOverlay() {

@@ -1,4 +1,5 @@
 import {ChosenWidget, SweetAlertWidget} from '../../shared/widgets'
+import AgencyTab from './agency_tab.pageObject.js'
 
 class TeamMemberCard {
   constructor(cardElement) {
@@ -51,7 +52,7 @@ class SettingsPage {
     this.tabContainer = element(by.id('ext01-settings-tabs'))
     this.tabs = this.tabContainer.all(by.css('li'))
     this.TeamTab = TeamTab
-
+    this.AgencyTab = AgencyTab
   }
 
   goToPersonalTab() {
@@ -61,7 +62,7 @@ class SettingsPage {
   goToAgencyTab() {
     this.tabs.get(1).click()
   }
-  
+
   goToTeamTab() {
     this.tabs.get(2).click()
   }

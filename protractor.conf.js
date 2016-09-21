@@ -24,13 +24,14 @@ exports.config = {
 
     browser.addMockModule('disableNgAnimate', disableNgAnimate)
     browser.driver.manage().window().setSize(1280, 800)
+    browser.driver.manage().window().setPosition(-1280, 0)
   },
 
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: [
-    './**/*_spec.js'
-    // './agency/student/student_profile_spec.js'
+    // './**/*_spec.js'
+    './agency/student/student_profile_spec.js'
   ],
 
   suites: {
