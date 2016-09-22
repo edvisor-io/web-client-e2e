@@ -67,11 +67,6 @@ export default class StudentListingPage {
     this.bySecondaryContactOption.click()
   }
 
-  // static waitForOverlay() {
-  //   var expected = protractor.ExpectedConditions
-  //   browser.wait(expected.elementToBeClickable(buttonAddStudent), constants.TIMEOUT_TIME)
-  // }
-
   addStudent(assignedTo, firstname, lastname, email, nationality) {
     ChosenWidget.setChosenValue(this.assignedToField, assignedTo)
     this.firstNameField.sendKeys(firstname)

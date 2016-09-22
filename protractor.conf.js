@@ -1,7 +1,14 @@
-var url = (process.env.CI === 'true') ? 'https://e2e.edvisor.io:2999' : 'http://localhost:3000/'
+var environmentMultiplier = 1
+var url = 'http://localhost:3000/'
+var directConnectFlag = true
+if (process.env.CI === 'true') {
+  environmentMultiplier = 2.5
+  url = 'https://e2e.edvisor.io:2999'
+  directConnectFlag = false
+}
 
 exports.config = {
-  directConnect: true,
+  directConnect: directConnectFlag,
   chromeOnly: true,
   baseUrl: url,
 
@@ -30,9 +37,7 @@ exports.config = {
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: [
-    // './**/*_spec.js'
-    // './auth/**/*_spec.js',
-    './agency/student/*_spec.js'
+    './**/*_spec.js'
   ],
 
   suites: {
@@ -41,7 +46,7 @@ exports.config = {
 
   mochaOpts: {
     reporter: 'spec',
-    timeout: 80000,
-    slow: 8000
+    timeout: 80000 * environmentMultiplier,
+    slow: 10000 * environmentMultiplier
   }
 }
