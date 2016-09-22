@@ -1,14 +1,12 @@
 var environmentMultiplier = 1
 var url = 'http://localhost:3000/'
-var directConnectFlag = true
 if (process.env.CI === 'true') {
-  environmentMultiplier = 2.5
+  environmentMultiplier = 3
   url = 'https://e2e.edvisor.io:2999'
-  directConnectFlag = false
 }
 
 exports.config = {
-  allScriptsTimeout: 11000 * environmentMultiplier,
+  allScriptsTimeout: (11000 * environmentMultiplier),
   baseUrl: url,
   chromeOnly: true,
 
@@ -17,14 +15,14 @@ exports.config = {
     browserName: 'chrome'
   },
 
-  directConnect: directConnectFlag,
+  directConnect: false,
   framework: 'mocha',
-  getPageTimeout: 10000 * environmentMultiplier,
+  getPageTimeout: (10000 * environmentMultiplier),
 
   mochaOpts: {
     reporter: 'spec',
-    timeout: 80000 * environmentMultiplier,
-    slow: 10000 * environmentMultiplier
+    timeout: (80000 * environmentMultiplier),
+    slow: (10000 * environmentMultiplier)
   },
 
   onPrepare() {
