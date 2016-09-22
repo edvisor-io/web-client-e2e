@@ -8,7 +8,7 @@ if (process.env.CI === 'true') {
 }
 
 exports.config = {
-  allScriptsTimeout: 11 * environmentMultiplier,
+  allScriptsTimeout: 11000 * environmentMultiplier,
   baseUrl: url,
   chromeOnly: true,
 
@@ -19,7 +19,7 @@ exports.config = {
 
   directConnect: directConnectFlag,
   framework: 'mocha',
-  getPageTimeout: 10 * environmentMultiplier,
+  getPageTimeout: 10000 * environmentMultiplier,
 
   mochaOpts: {
     reporter: 'spec',
