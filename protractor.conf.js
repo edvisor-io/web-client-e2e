@@ -8,16 +8,24 @@ if (process.env.CI === 'true') {
 }
 
 exports.config = {
-  directConnect: directConnectFlag,
-  chromeOnly: true,
+  allScriptsTimeout: 11 * environmentMultiplier,
   baseUrl: url,
+  chromeOnly: true,
 
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
     browserName: 'chrome'
   },
 
+  directConnect: directConnectFlag,
   framework: 'mocha',
+  getPageTimeout: 10 * environmentMultiplier,
+
+  mochaOpts: {
+    reporter: 'spec',
+    timeout: 80000 * environmentMultiplier,
+    slow: 10000 * environmentMultiplier
+  },
 
   onPrepare() {
     require('babel-register')
@@ -42,11 +50,5 @@ exports.config = {
 
   suites: {
     settings: './agency/settings/*_spec.js'
-  },
-
-  mochaOpts: {
-    reporter: 'spec',
-    timeout: 80000 * environmentMultiplier,
-    slow: 10000 * environmentMultiplier
   }
 }

@@ -97,3 +97,5 @@ In addition to the web-client-e2e, you'll need other repos.
 > Protractor styleguide: https://github.com/CarmenPopoviciu/protractor-styleguide
 
 > Protractor debugging: https://github.com/angular/protractor/blob/master/docs/debugging.md
+
+> Protractor timeouts: https://github.com/angular/protractor/blob/master/docs/timeouts.md (many errors from here 💩)
