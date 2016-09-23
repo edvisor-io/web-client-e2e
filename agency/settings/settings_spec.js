@@ -28,6 +28,7 @@ describe('The settings page', () => {
 
       let agencyNav = new AgencyNav()
       agencyNav.goToSettings()
+      SettingsPage.waitForGhostTab()
     })
 
     it('can only see "Personal" tab under settings', () => {
@@ -49,13 +50,14 @@ describe('The settings page', () => {
 
       let agencyNav = new AgencyNav()
       agencyNav.goToSettings()
+      SettingsPage.waitForGhostTab()
     })
 
     it('can see all the tabs', () => {
       var settingsPage = new SettingsPage()
       var allTabCount = 5
 
-      expect(settingsPage.tabs.count()).to.eventually.equal(allTabCount)
+      expect(settingsPage.tabs.count()).to.eventually.be.at.least(allTabCount)
     })
 
     it('can invite a new team member', () => {

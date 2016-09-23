@@ -1,5 +1,6 @@
 import {ChosenWidget, SweetAlertWidget} from '../../shared/widgets'
 import AgencyTab from './agency_tab.pageObject.js'
+import constants from '../../shared/constants'
 
 class TeamMemberCard {
   constructor(cardElement) {
@@ -73,6 +74,17 @@ class SettingsPage {
 
   goToPaymentTab() {
     this.tabs.get(4).click()
+  }
+
+  static waitForGhostTab() {
+    var ghostTab = $('#ext01-settings-tabs > li#remove')
+
+    // wait until the ghostTab has disappeared
+    browser.wait(() => {
+      return browser.isElementPresent(ghostTab).then(function(presenceOfElement) {
+        return !presenceOfElement
+      })
+    }, constants.TIMEOUT_TIME)
   }
 }
 

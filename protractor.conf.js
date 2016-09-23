@@ -1,8 +1,15 @@
 var environmentMultiplier = 1
 var url = 'http://localhost:3000/'
+var xOffset = 0
+
 if (process.env.CI === 'true') {
   environmentMultiplier = 3
   url = 'https://e2e.edvisor.io:2999'
+}
+
+if (process.env.LM === 'true') {
+  // positions it to the top left corner of an external monitor to the left
+  xOffset = -1920
 }
 
 exports.config = {
@@ -12,7 +19,12 @@ exports.config = {
 
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
-    browserName: 'chrome'
+    browserName: 'chrome',
+    name: 'windows10-chrome53',
+    platform: 'Windows 10',
+    screenResolution: '1280x800',
+    version: '53.0',
+    webdriverRemoteQuietExceptions: 'false'
   },
 
   directConnect: false,
@@ -37,16 +49,16 @@ exports.config = {
 
     browser.addMockModule('disableNgAnimate', disableNgAnimate)
     browser.driver.manage().window().setSize(1280, 800)
-    browser.driver.manage().window().setPosition(-1280, 0)
+    browser.driver.manage().window().setPosition(xOffset, 0)
   },
 
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: [
-    './**/*_spec.js'
+    './**/**/*_spec.js'
   ],
 
   suites: {
-    settings: './agency/settings/*_spec.js'
+    settings: './agency/settings/*_spec.js',
   }
 }

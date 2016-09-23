@@ -48,7 +48,9 @@ In addition to the web-client-e2e, you'll need other repos.
 
 1. Clone api-server and web-client
 
-2. Run `npm install` in both repos.
+Then, in both repos:
+
+2. Run `npm install`
 
 3. Run `git submodule init`
 
@@ -72,25 +74,55 @@ In addition to the web-client-e2e, you'll need other repos.
 
 5. Run `gulp`
 
-### Almost ready to run tests. To get the test tools. You'll need to:
+Ok, setup is done!
+
+### Almost ready to run tests. To get the test tools. You'll need Protractor (and maybe Selenium if not using DirectConnect):
 
 1. Install Protractor globally with `npm install -g protractor`
 
-2. Webdriver-manager will be installed with the above. Now run `Webdriver-manager update`.
-
-3. Navigate to the directory containing the conf.js of your desired test. Run test with `protractor conf.js`.
+2. Webdriver-manager will be installed with the above. Now run `Webdriver-manager update`. This is for Selenium.
 
 ## "These need to be running when doing tests!" said the 🤖 happily:
 
-1. Selenium: Run `webdriver-manager start`. Doesn’t matter where from.
+1. Are you using DirectConnect or Selenium? If Selenium: Protractor may start a standalone Selenium server. Otherwise run `webdriver-manager start`. Check that conf.js points to this Selenium server. Doesn’t matter where from. Terminal will stay running. If DirectConnect, check that directConnect: 'true' in `conf.js`.
 
-2. MariaDB: Run `mysql.server start`
+2. Are you running it on localhost? You'll need a database. We use MariaDB. Run `mysql.server start`, one time. Will need to rerun when machine is restarted. FYI, `mysql.server stop` and `mysql.server restart`.
 
-3. Gulp: Run `gulp` from api-server repo.
+3. Are you running it against on the localhost? If so, run `gulp` from api-server repo. Will keep running in terminal.
+
+### Running the tests
+
+Navigate to the directory containing the conf.js of your desired test. Run test with `protractor protractor.conf.js`.
+
+#### Option A: Running all tests (long)
+- `protractor protractor.conf.js` will run all tests.
+
+#### Option B: Running a set/suite of tests (Medium!) (coming soon)
+- Options are: invoices, partners, quotes, settings, students - this runs all tests involving each suite
+- `protractor protractor.conf.js --suite agency` change 'agency' to whatever app you want to test
+
+#### Option C: Running one specific test (short) (coming soon)
+- `protractor protractor.conf.js --specs agency/student_profile_spec.js`
 
 ## Do this, when there's new code in the web-client 🌱 😎 :
 
-1. Navigate to the web-client repo and run `./bin/edvisor build -s client`.
+1. Navigate to the web-client repo and `git pull`.
+
+2. Run `./bin/edvisor build -s client`.
+
+## To interact with the database:
+
+1. `mysql -u root`
+
+2. Update with Stripe token to stop Stripe errors.
+
+## When you want to reset the database:
+
+1. Make sure the database is running. If not, `mysql.server start`.
+
+2. Then go into `.env` and make sure database is local.
+
+3. Then reset the database by running `./bin/edvisor full-reset`
 
 ## Useful Docs (🆓 stuff to put out and prevent pesky 🔥🔥🔥)
 
@@ -99,3 +131,7 @@ In addition to the web-client-e2e, you'll need other repos.
 > Protractor debugging: https://github.com/angular/protractor/blob/master/docs/debugging.md
 
 > Protractor timeouts: https://github.com/angular/protractor/blob/master/docs/timeouts.md (many errors from here 💩)
+
+> Did you know how many ways you'll need to run this for reliable results? Well, now you do 😁: http://stackoverflow.com/questions/30600738/difference-running-protractor-with-without-selenium
+
+> Using MariaDB: https://www.digitalocean.com/community/tutorials/how-to-create-and-manage-databases-in-mysql-and-mariadb-on-a-cloud-server

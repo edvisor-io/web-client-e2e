@@ -84,6 +84,7 @@ describe('the student profile page', () => {
     it('should assign a student to more than one pipeline', () => {
       let agencyNav = new AgencyNav()
       agencyNav.goToSettings()
+      SettingsPage.waitForGhostTab()
 
       let settingsPage = new SettingsPage()
       settingsPage.goToAgencyTab()
@@ -115,6 +116,7 @@ describe('the student profile page', () => {
 
       let agencyNav = new AgencyNav()
       agencyNav.goToSettings()
+      SettingsPage.waitForGhostTab()
 
       let settingsPage = new SettingsPage()
       settingsPage.goToAgencyTab()
