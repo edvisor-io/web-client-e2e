@@ -106,21 +106,6 @@ describe('the settings page', () => {
       expect(settingsPage.tabs.count()).to.eventually.be.at.least(allTabCount)
     })
 
-    it('can remove an existing team member', () => {
-      let settingsPage = new SettingsPage()
-      settingsPage.goToTeamTab()
-
-      let TeamTab = new settingsPage.TeamTab()
-      let TeamTabManageMembersPage = new TeamTab.ManageMembers()
-      TeamTabManageMembersPage.clickLastManagerEditButton()
-      TeamTabManageMembersPage.clickLastManagerDeleteButton()
-      var countBefore = TeamTabManageMembersPage.getManagersCount()
-      TeamTabManageMembersPage.clickDeleteButton()
-      var countAfter = TeamTabManageMembersPage.getManagersCount()
-      expect(countAfter).to.eventually.equal(countBefore)
-      browser.sleep(5000)
-    })
-
     it('can invite a new team member', () => {
       const firstname = 'NewTeamMember'
       const lastname = 'Lastname'
