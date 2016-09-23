@@ -1,6 +1,8 @@
 var environmentMultiplier = 1
 var url = 'http://localhost:3000/'
 var xOffset = 0
+var doWeShard = false
+var howManyInstancesAtMost = 1
 
 if (process.env.CI === 'true') {
   environmentMultiplier = 3
@@ -12,6 +14,11 @@ if (process.env.LM === 'true') {
   xOffset = -1920
 }
 
+if (process.env.FT === 'true') {
+  doWeShard = true
+  howManyInstancesAtMost = 5
+}
+
 exports.config = {
   allScriptsTimeout: (11000 * environmentMultiplier),
   baseUrl: url,
@@ -20,9 +27,11 @@ exports.config = {
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
     browserName: 'chrome',
+    maxInstances: howManyInstancesAtMost,
     name: 'windows10-chrome53',
     platform: 'Windows 10',
     screenResolution: '1280x800',
+    shardTestFiles: doWeShard,
     version: '53.0',
     webdriverRemoteQuietExceptions: 'false'
   },
@@ -48,6 +57,8 @@ exports.config = {
     }
 
     browser.addMockModule('disableNgAnimate', disableNgAnimate)
+
+    // ignored in linux test environments
     browser.driver.manage().window().setSize(1280, 800)
     browser.driver.manage().window().setPosition(xOffset, 0)
   },
@@ -55,10 +66,12 @@ exports.config = {
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: [
-    './**/settings/*_spec.js'
+    './**/**/*_spec.js'
   ],
 
   suites: {
     settings: './agency/settings/*_spec.js',
+    student: './agency/student/*_spec.js',
+    auth: './auth/**/*_spec.js'
   }
 }
