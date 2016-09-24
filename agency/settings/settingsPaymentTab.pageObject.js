@@ -15,11 +15,17 @@ class PaymentTab {
   }
 
   clickChangeUsersAndSubscriptionButton() {
+    let expected = protractor.ExpectedConditions
+    browser.wait(expected.elementToBeClickable(this.changeUsersAndSubscriptionButton), constants.TIMEOUT_TIME)
     this.changeUsersAndSubscriptionButton.click()
   }
 
   clickIncrementButton() {
     this.incrementButton.click()
+  }
+
+  clickDecrementButton() {
+    this.decrementButton.click()
   }
 
   clickChangeSubscriptionButton() {
@@ -35,11 +41,11 @@ class PaymentTab {
   changeValueInSlotsField(originalNumber, targetNumber) {
     if (originalNumber > targetNumber) {
       for (let i = originalNumber; i > targetNumber; i--) {
-        this.decrementButton.click()
+        this.clickDecrementButton()
       }
     } else if (originalNumber < targetNumber) {
       for (let i = originalNumber; i < targetNumber; i++) {
-        this.incrementButton.click()
+        this.clickIncrementButton()
       }
     }
   }
