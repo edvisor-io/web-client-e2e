@@ -8,7 +8,7 @@ class TeamMemberCard {
   }
 }
 
-class TeamTabManageMembersPage {
+class ManageMembersArea {
   constructor() {
     this.TeamMember = TeamMemberCard
     this.sectionManagers = element(by.id('ext01-team-managers'))
@@ -20,9 +20,9 @@ class TeamTabManageMembersPage {
     this.lastManagerDeleteButton = this.lastManagerCard.$('#ext01-team-member-form-delete')
   }
 
-  getManagersCount() {
-    return this.managers.count()
-  }
+  // getManagersCount() {
+  //   return this.managers.count()
+  // }
 
   clickLastManagerEditButton() {
     this.lastManagerEditButton.click()
@@ -36,7 +36,7 @@ class TeamTabManageMembersPage {
   }
 
   clickDeleteButton() {
-    SweetAlertWidget.delete()
+    SweetAlertWidget.ok()
   }
 }
 
@@ -48,16 +48,9 @@ class InviteArea {
     this.email = this.inviteForm.element(by.name('email'))
     this.role = this.inviteForm.element(by.name('role'))
     this.office = this.inviteForm.element(by.name('office'))
-    this.inviteBtn = this.inviteForm.element(by.css('button[type="submit"]'))
+    this.inviteBtn = this.inviteForm.$('button[type="submit"]')
     this.slotsElement = element.all(by.css('div.subtext')).first()
-  }
-
-  getMaxSlots() {
-    return this.slotsElement.getText()
-      .then((innerText) => {
-        var numbers = innerText.match(/\d+/g)
-        return numbers[1]
-      })
+    this.noSlotsAlert = $('.alert-danger')
   }
 
   invite(firstname, lastname, email, role) {
@@ -77,7 +70,7 @@ class InviteArea {
 class TeamTab {
   constructor() {
     this.InviteArea = InviteArea
-    this.ManageMembers = TeamTabManageMembersPage
+    this.ManageMembersArea = ManageMembersArea
   }
 }
 

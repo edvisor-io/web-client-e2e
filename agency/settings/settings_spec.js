@@ -21,7 +21,40 @@ describe('the settings page', () => {
   })
 
   describe('user slots maxed out', () => {
-    it('should not allow new TeamTab invites before adding in PaymentTab', () => {
+    // it('should not allow new TeamTab invites before adding in PaymentTab', () => {
+    //   const NO_SLOTS_ALERT_TEXT = 'You do not have any more slots available.'
+    //
+    //   let loginPage = new LoginPage()
+    //   loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
+    //   LoginPage.waitForLoader()
+    //
+    //   let agencyNav = new AgencyNav()
+    //   agencyNav.goToSettings()
+    //   let settingsPage = new SettingsPage()
+    //   settingsPage.goToTeamTab()
+    //
+    //   let teamTab = new settingsPage.TeamTab()
+    //   let inviteArea = new teamTab.InviteArea()
+    //   inviteArea.slotsElement.getText()
+    //     .then((originalText) => {
+    //       var originalUsedSlots = originalText.match(/\d+/g)[0]
+    //       var originalMaxSlots = originalText.match(/\d+/g)[1]
+    //
+    //       settingsPage.goToPaymentTab()
+    //       let paymentTab = new settingsPage.PaymentTab()
+    //       paymentTab.changeSubscription(originalMaxSlots, originalUsedSlots)
+    //
+    //       settingsPage.goToTeamTab()
+    //       expect(inviteArea.noSlotsAlert.getText()).to.eventually.equal(NO_SLOTS_ALERT_TEXT)
+    //
+    //       settingsPage.goToPaymentTab()
+    //       paymentTab.changeSubscription(originalUsedSlots, originalMaxSlots)
+    //     })
+    // })
+
+    it('should not allow new TeamTab invites before removing existing members', () => {
+      const NO_SLOTS_ALERT_TEXT = 'You do not have any more slots available.'
+
       let loginPage = new LoginPage()
       loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
       LoginPage.waitForLoader()
@@ -36,15 +69,25 @@ describe('the settings page', () => {
       inviteArea.slotsElement.getText()
         .then((originalText) => {
           var originalUsedSlots = originalText.match(/\d+/g)[0]
+          var originalMaxSlots = originalText.match(/\d+/g)[1]
 
           settingsPage.goToPaymentTab()
           let paymentTab = new settingsPage.PaymentTab()
-          paymentTab.clickChangeUsersAndSubscriptionButton()
+          paymentTab.changeSubscription(originalMaxSlots, originalUsedSlots)
+
+          settingsPage.goToTeamTab()
+          expect(inviteArea.noSlotsAlert.getText()).to.eventually.equal(NO_SLOTS_ALERT_TEXT)
+
+          let manageMembersArea = new teamTab.ManageMembersArea()
+          manageMembersArea.clickLastManagerEditButton()
+          manageMembersArea.clickLastManagerDeleteButton()
+          manageMembersArea.clickDeleteButton()
+
+          expect(inviteArea.noSlotsAlert.isPresent()).to.eventually.equal(false)
+
+          settingsPage.goToPaymentTab()
+          paymentTab.changeSubscription(originalUsedSlots, originalMaxSlots)
         })
-    })
-
-    it('should not allow new TeamTab invites before removing existing members', () => {
-
     })
   })
 

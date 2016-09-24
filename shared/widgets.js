@@ -43,13 +43,4 @@ export class SweetAlertWidget {
     browser.sleep(2000)
     okBtn.click()
   }
-
-  static delete() {
-    let expected = protractor.ExpectedConditions
-    let sweetAlertContainer = $('.sweet-alert')
-
-    let deleteButton = sweetAlertContainer.$('button.confirm')
-    browser.wait(expected.elementToBeClickable(sweetAlertContainer), constants.TIMEOUT_TIME)
-    deleteButton.click()
-  }
 }
