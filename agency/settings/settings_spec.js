@@ -1,6 +1,7 @@
 import SettingsPage from './settings.pageObject'
 import constants from '../../shared/constants'
 import LoginPage from '../../shared/pages/login.pageObject'
+import HomePage from '../../shared/pages/home.pageObject'
 import AgencyNav from '../nav.pageObject'
 import uuid from 'node-uuid'
 
@@ -190,24 +191,30 @@ describe('the settings page', () => {
     expect(settingsPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
 
-  describe('Sales reps', () => {
+  describe('sales reps', () => {
     beforeEach(() => {
       let loginPage = new LoginPage()
       loginPage.login(constants.SALES_REP_EMAIL, constants.SALES_REP_PASS)
       LoginPage.waitForLoader()
-
-      let agencyNav = new AgencyNav()
-      agencyNav.goToSettings()
     })
 
-    it('can only see "Personal" tab under settings', () => {
+    it('should only see "Personal" tab under settings', () => {
       var tabTitle = 'Personal'
       var tabCount = 1
       var settingsPage = new SettingsPage()
       var tabTitleElement = settingsPage.tabs.get(0).all(by.css('span')).get(0)
 
+      let agencyNav = new AgencyNav()
+      agencyNav.goToSettings()
+      SettingsPage.waitForGhostTab()
+
       expect(settingsPage.tabs.count()).to.eventually.equal(tabCount)
       expect(tabTitleElement.getText()).to.eventually.equal(tabTitle)
+    })
+
+    it('should not see the "Commissions" box on the home page', () => {
+      let homePage = new HomePage()
+      expect(homePage.totalCommissionBoxContent.isPresent()).to.eventually.equal(false)
     })
   })
 

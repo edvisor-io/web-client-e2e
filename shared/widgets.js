@@ -1,10 +1,60 @@
 import constants from './constants'
 
-// export class UISelectWidget {}
-// export class DatePickerWidget {}
+export class UISelectWidget {
+  static clickUiSelect(elem, option) {
+    let expected = protractor.ExpectedConditions
+    browser.wait(expected.elementToBeClickable(elem), 5000)
+    var chooseElem = elem.element(by.css('.ui-select-search'))
+
+    elem.click()
+    chooseElem.sendKeys(option)
+
+    // var choices = element.all(by.css('.ui-select-choices-row-inner span'))
+    var choices = elem.all(by.css('.ui-select-choices-row'))
+
+    browser.wait(function() {
+      // return browser.isElementPresent(choices).then(function(presenceOfElement) {
+      //   return presenceOfElement
+      // });
+      return choices.count().then(function(count) {
+        return count > 0
+      })
+    }, 10000)
+
+    var firstOption = choices.first().all(by.css('div')).first()
+    browser.wait(expected.elementToBeClickable(firstOption), 5000)
+    firstOption.click()
+
+    // element.all(by.css('.ui-select-choices-row-inner span')).first().click();
+  }
+}
+
+export class DatePickerWidget {
+  static setPikaDate(input, month, day, year) {
+    let expected = protractor.ExpectedConditions
+    browser.wait(expected.elementToBeClickable(input), constants.TIMEOUT_TIME)
+    input.click()
+
+    let datepicker = element(by.css('.pika-single.is-bound:not(.is-hidden)'))
+    browser.wait(expected.visibilityOf(datepicker), constants.TIMEOUT_TIME)
+
+    let monthContainer = datepicker.element(by.css('.pika-select-month'))
+    let yearContainer = datepicker.element(by.css('.pika-select-year'))
+    monthContainer.element(by.cssContainingText('option', month)).click()
+
+    input.click()
+    browser.wait(expected.visibilityOf(datepicker), constants.TIMEOUT_TIME)
+
+    yearContainer.element(by.cssContainingText('option', year)).click()
+
+    input.click()
+    browser.wait(expected.visibilityOf(datepicker), constants.TIMEOUT_TIME)
+
+    datepicker.element(by.css('[data-pika-day="' + day + '"]')).click()
+  }
+}
 
 export class ChosenWidget {
-
   static getChosenContainer(selectElement) {
     var chosenContainer = selectElement.element(by.xpath('following-sibling::div[1]'))
     return chosenContainer
@@ -23,6 +73,21 @@ export class ChosenWidget {
     chosenSearch.sendKeys(val)
 
     chosenResults.all(by.cssContainingText('li', val)).first().click()
+  }
+
+  static searchAndSetChosenValue(element, value) {
+    let expected = protractor.ExpectedConditions
+    let chosenContainer = ChosenWidget.getChosenContainer(element)
+    browser.wait(expected.visibilityOf(chosenContainer), constants.TIMEOUT_TIME)
+
+    let chosenSearch = chosenContainer.element(by.css('.search-field input'))
+    let chosenResults = chosenContainer.element(by.css('.chosen-results'))
+    chosenContainer.click()
+
+    browser.wait(expected.visibilityOf(chosenResults), constants.TIMEOUT_TIME)
+    chosenSearch.sendKeys(value)
+
+    chosenResults.all(by.cssContainingText('li', value)).first().click()
   }
 
   static getChosenValue(ele) {
