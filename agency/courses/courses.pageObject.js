@@ -1,6 +1,8 @@
 import {ChosenWidget, DatePickerWidget} from '../../shared/widgets'
 import constants from '../../shared/constants'
 
+import moment from 'moment'
+
 export class CoursesPage {
   constructor() {
     this.searchForm = $('div.card')
@@ -11,20 +13,28 @@ export class CoursesPage {
     this.durationField = this.searchForm.element(by.model('$ctrl.minDuration'))
     this.startDatePicker = this.searchForm.element(by.model('startDate'))
     this.findCoursesButton = this.searchForm.$('button[type="submit"]')
-    this.firstResultCheckbox = this.searchResults.all(by.css('input[type="checkbox"]')).get(0)
+
     this.startQuoteButton = this.actionBar.element(by.id('ext05-start-quote'))
+
+    this.firstResult = this.searchResults.element(by.repeater('result in resultsCtrl.pageData.results.items').row(0))
+    this.firstResultName = this.firstResult.$('h3 > a')
+    this.firstResultSchool = this.firstResult.$('div > a')
+    this.firstResultIntensity = this.firstResult.all(by.css('p.ng-binding')).get(0)
+    this.firstResultDuration = this.firstResult.all(by.css('p.ng-binding')).get(1)
+    this.firstResultPrice = this.firstResult.all(by.css('p.ng-binding')).get(2)
+    this.firstResultCheckbox = this.searchResults.all(by.css('input[type="checkbox"]')).get(0)
   }
 
-  inputLocation() {
-    ChosenWidget.searchAndSetChosenValue(this.locationField, 'Vancouver')
+  inputLocation(location) {
+    ChosenWidget.searchAndSetChosenValue(this.locationField, location)
   }
 
-  inputDuration() {
-    ChosenWidget.setChosenValue(this.durationField, '1')
+  inputDuration(duration) {
+    ChosenWidget.setChosenValue(this.durationField, duration)
   }
 
   setStartDate() {
-    DatePickerWidget.setPikaDate(this.startDatePicker, 'September', 26, 2016)
+    DatePickerWidget.setPikaDate(this.startDatePicker, 'September', 27, 2016)
   }
 
   clickFindCoursesButton() {

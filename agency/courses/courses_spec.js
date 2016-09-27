@@ -11,9 +11,19 @@ chai.use(chaiAsPromised)
 var expect = chai.expect
 
 describe('find courses page', () => {
+  const LOCATION = 'Vancouver'
+  const DURATION = 1
+
   beforeEach(() => {
     browser.get('/')
     LoginPage.waitForLoader()
+
+    let loginPage = new LoginPage()
+    loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
+    LoginPage.waitForLoader()
+
+    let agencyNav = new AgencyNav()
+    agencyNav.goToFindCourses()
   })
 
   afterEach(() => {
@@ -21,16 +31,9 @@ describe('find courses page', () => {
   })
 
   it('should create a new quote from a search result', () => {
-    let loginPage = new LoginPage()
-    loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
-    LoginPage.waitForLoader()
-
-    let agencyNav = new AgencyNav()
-    agencyNav.goToFindCourses()
-
     let coursesPage = new CoursesPage()
-    coursesPage.inputLocation()
-    coursesPage.inputDuration()
+    coursesPage.inputLocation(LOCATION)
+    coursesPage.inputDuration(DURATION)
     coursesPage.setStartDate()
     coursesPage.clickFindCoursesButton()
     coursesPage.selectFirstResultCheckbox()
@@ -41,5 +44,19 @@ describe('find courses page', () => {
     quotesPage.clickSaveButton()
 
     expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+  })
+
+  it('search result should have course name, school, intensity, duration, price', () => {
+    let coursesPage = new CoursesPage()
+    coursesPage.inputLocation(LOCATION)
+    coursesPage.inputDuration(DURATION)
+    coursesPage.setStartDate()
+    coursesPage.clickFindCoursesButton()
+
+    expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
+    expect(coursesPage.firstResultSchool.isPresent()).to.eventually.equal(true)
+    expect(coursesPage.firstResultIntensity.isPresent()).to.eventually.equal(true)
+    expect(coursesPage.firstResultDuration.isPresent()).to.eventually.equal(true)
+    expect(coursesPage.firstResultPrice.isPresent()).to.eventually.equal(true)
   })
 })
