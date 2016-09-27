@@ -250,9 +250,9 @@ describe('the settings page', () => {
 
       inviteArea.invite(firstname, lastname, email, role)
 
-      var manageMembers = new teamTab.ManageMembers()
+      var manageMembersArea = new teamTab.ManageMembersArea()
 
-      var teamMemberCard = new manageMembers.TeamMember(manageMembers.managers.last())
+      var teamMemberCard = new manageMembersArea.TeamMember(manageMembersArea.managers.last())
       expect(teamMemberCard.name.getText()).to.eventually.equal(`${firstname} ${lastname}`)
     })
   })
