@@ -41,6 +41,13 @@ export class CoursesPage {
     this.findCoursesButton.click()
   }
 
+  doBasicSearch(location, duration) {
+    this.inputLocation(location)
+    this.inputDuration(duration)
+    this.setStartDate()
+    this.clickFindCoursesButton()
+  }
+
   selectFirstResultCheckbox() {
     let expected = protractor.ExpectedConditions
     browser.wait(expected.elementToBeClickable(this.firstResultCheckbox), constants.TIMEOUT_TIME)

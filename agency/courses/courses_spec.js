@@ -31,16 +31,14 @@ describe('find courses page', () => {
   })
 
   it('should create a new quote from a search result', () => {
+    const SEARCH_TERM = 'Alex'
     let coursesPage = new CoursesPage()
-    coursesPage.inputLocation(LOCATION)
-    coursesPage.inputDuration(DURATION)
-    coursesPage.setStartDate()
-    coursesPage.clickFindCoursesButton()
+    coursesPage.doBasicSearch(LOCATION, DURATION)
     coursesPage.selectFirstResultCheckbox()
     coursesPage.clickStartQuoteButton()
 
     let quotesPage = new QuotesPage()
-    quotesPage.inputNameSearch('Alex')
+    quotesPage.inputNameSearch(SEARCH_TERM)
     quotesPage.clickSaveButton()
 
     expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
@@ -48,10 +46,7 @@ describe('find courses page', () => {
 
   it('search result should have course name, school, intensity, duration, price', () => {
     let coursesPage = new CoursesPage()
-    coursesPage.inputLocation(LOCATION)
-    coursesPage.inputDuration(DURATION)
-    coursesPage.setStartDate()
-    coursesPage.clickFindCoursesButton()
+    coursesPage.doBasicSearch(LOCATION, DURATION)
 
     expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
     expect(coursesPage.firstResultSchool.isPresent()).to.eventually.equal(true)
