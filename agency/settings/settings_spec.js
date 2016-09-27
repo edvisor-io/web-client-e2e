@@ -80,9 +80,10 @@ describe('the settings page', () => {
           expect(inviteArea.noSlotsAlert.getText()).to.eventually.equal(NO_SLOTS_ALERT_TEXT)
 
           let manageMembersArea = new teamTab.ManageMembersArea()
-          manageMembersArea.clickLastManagerEditButton()
-          manageMembersArea.clickLastManagerDeleteButton()
-          manageMembersArea.clickDeleteButton()
+          let lastAdminCard = new manageMembersArea.TeamMember(manageMembersArea.lastAdminCard)
+          lastAdminCard.clickEditButton()
+          lastAdminCard.clickDeleteButton()
+          manageMembersArea.clickConfirmDeleteButton()
 
           expect(inviteArea.noSlotsAlert.isPresent()).to.eventually.equal(false)
 
@@ -123,7 +124,7 @@ describe('the settings page', () => {
           let manageMembersArea = new teamTab.ManageMembersArea()
           manageMembersArea.clickLastManagerEditButton()
           manageMembersArea.clickLastManagerDeleteButton()
-          manageMembersArea.clickDeleteButton()
+          manageMembersArea.clickConfirmDeleteButton()
 
           settingsPage.goToPaymentTab()
           browser.driver.navigate().refresh()

@@ -3,26 +3,36 @@ import constants from '../../shared/constants'
 
 class TeamMemberCard {
   constructor(cardElement) {
-    this.name = cardElement.element(by.css('.card_title'))
+    this.cardElement = cardElement
+    this.name = cardElement.$('.card_title')
     this.editButton = cardElement.$('.card_edit')
+    this.deleteButton = cardElement.$('#ext01-team-member-form-delete')
+  }
+
+  clickEditButton() {
+    this.editButton.click()
+  }
+
+  clickDeleteButton() {
+    this.deleteButton.click()
   }
 }
 
 class ManageMembersArea {
   constructor() {
     this.TeamMember = TeamMemberCard
-    this.sectionManagers = element(by.id('ext01-team-managers'))
+    this.admins = element.all(by.css('#ext01-team-admins > div'))
     this.managers = element.all(by.css('#ext01-team-managers > div'))
+
+    this.lastAdminCard = this.admins.last()
+    this.lastAdminEditButton = this.lastAdminCard.$('.card_edit')
+    this.lastAdminDeleteButton = this.lastAdminCard.$('#ext01-team-member-form-delete')
 
     this.lastManagerCard = this.managers.last()
     this.lastManagerName = this.lastManagerCard.$('.card_title')
     this.lastManagerEditButton = this.lastManagerCard.$('.card_edit')
     this.lastManagerDeleteButton = this.lastManagerCard.$('#ext01-team-member-form-delete')
   }
-
-  // getManagersCount() {
-  //   return this.managers.count()
-  // }
 
   clickLastManagerEditButton() {
     this.lastManagerEditButton.click()
@@ -35,7 +45,7 @@ class ManageMembersArea {
     this.lastManagerDeleteButton.click()
   }
 
-  clickDeleteButton() {
+  clickConfirmDeleteButton() {
     SweetAlertWidget.ok()
   }
 }
