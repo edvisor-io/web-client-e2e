@@ -27,22 +27,22 @@ describe('the quotes page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  // it('should create a new quote', () => {
-  //   const SEARCH_TERM = 'Alex'
-  //
-  //   let quotesPage = new QuotesPage()
-  //   let quotesListPage = new quotesPage.QuotesListPage()
-  //   quotesListPage.clickNewButton()
-  //
-  //   let coursesPage = new CoursesPage()
-  //   coursesPage.doBasicSearch()
-  //   coursesPage.selectFirstResultCheckbox()
-  //   coursesPage.clickStartQuoteButton()
-  //   quotesPage.inputNameSearch(SEARCH_TERM)
-  //   quotesPage.clickSaveButton()
-  //
-  //   expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
-  // })
+  it('should create a new quote', () => {
+    const SEARCH_TERM = 'Alex'
+
+    let quotesPage = new QuotesPage()
+    let quotesListPage = new quotesPage.QuotesListPage()
+    quotesListPage.clickNewButton()
+
+    let coursesPage = new CoursesPage()
+    coursesPage.doBasicSearch()
+    coursesPage.selectFirstResultCheckbox()
+    coursesPage.clickStartQuoteButton()
+    quotesPage.inputNameSearch(SEARCH_TERM)
+    quotesPage.clickSaveButton()
+
+    expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+  })
 
   it('should add accommodation with start plus end dates to a quote', () => {
     const SEARCH_TERM = 'Alex'
