@@ -21,10 +21,6 @@ export class QuotesPage {
     UISelectWidget.clickUiSelect(this.nameSearch, input)
   }
 
-  // clickFirstResult() {
-  //   this.firstSearchResult.click()
-  // }
-
   clickSaveButton() {
     this.saveButton.click()
   }

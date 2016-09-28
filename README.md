@@ -2,10 +2,6 @@
 
 🤖 : *"My name is Trillian! I'll be your guide to Galaxy E2E Alpha!"*
 
-##### current status of this repo (for context)
-
-We're in the process of transforming to ES6.
-
 ## What is this repo? ⚙
 
 🤖 : *"This repo contains end-to-end test suites for the Edvisor.io web-client"*
@@ -60,6 +56,10 @@ Static methods in `widgets.js` interact with the page. pageObject files provide
 a layer of abstraction and so spec files don't directly invoke static widget
 methods. Instead, spec files may invoke pageObject prototypal methods which
 in turn call static widget methods.
+
+#### Filenames
+
+Filenames may make more sense in context of the complete filepath.
 
 ## What you need to get started 🐣
 

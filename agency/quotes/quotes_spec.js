@@ -84,4 +84,33 @@ describe('the quotes page', () => {
     emailQuoteModal.clickSendButton()
     expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
+
+  it('should add an insurance addon with start plus end dates to a quote', () => {
+    const SEARCH_TERM = 'Alex'
+
+    let quotesPage = new QuotesPage()
+    let quotesListingPage = new quotesPage.QuotesListingPage()
+    quotesListingPage.clickNewButton()
+
+    let coursesPage = new CoursesPage()
+    coursesPage.doBasicSearch()
+    coursesPage.selectFirstResultCheckbox()
+    coursesPage.clickStartQuoteButton()
+    quotesPage.inputNameSearch(SEARCH_TERM)
+    quotesPage.clickSaveButton()
+
+    // remove when 'back' bug is fixed
+    let agencyNav = new AgencyNav()
+    agencyNav.goToQuotes()
+
+    quotesListingPage.clickFirstQuote()
+    let quotesEditPage = new quotesPage.QuotesEditPage()
+    quotesEditPage.clickFirstOptionEditButton()
+    let quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
+    quotesOptionEditPage.clickAddAddonsButton()
+    quotesOptionEditPage.clickSecondCheckbox()
+    expect(quotesOptionEditPage.addonsStartDateField.isPresent()).to.eventually.equal(true)
+    quotesOptionEditPage.clickSaveButton()
+    expect(quotesOptionEditPage.durationFields.isPresent()).to.eventually.equal(true)
+  })
 })
