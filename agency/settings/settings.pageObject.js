@@ -1,4 +1,4 @@
-import AgencyTab from './agency_tab.pageObject.js'
+import AgencyTab from './settingsAgencyTab.pageObject.js'
 import TeamTab from './settingsTeamTab.pageObject'
 import CompanyTab from './settingsCompanyTab.pageObject'
 import PaymentTab from './settingsPaymentTab.pageObject'

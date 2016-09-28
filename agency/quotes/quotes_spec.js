@@ -31,8 +31,8 @@ describe('the quotes page', () => {
     const SEARCH_TERM = 'Alex'
 
     let quotesPage = new QuotesPage()
-    let quotesListPage = new quotesPage.QuotesListPage()
-    quotesListPage.clickNewButton()
+    let quotesListingPage = new quotesPage.QuotesListingPage()
+    quotesListingPage.clickNewButton()
 
     let coursesPage = new CoursesPage()
     coursesPage.doBasicSearch()
@@ -65,12 +65,23 @@ describe('the quotes page', () => {
     quotesListingPage.clickFirstQuote()
     let quotesEditPage = new quotesPage.QuotesEditPage()
     quotesEditPage.clickFirstOptionEditButton()
-    let quotesOptionEditPage = new quotesEditPage.QuotesOptionEditPage()
+    let quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
     quotesOptionEditPage.clickAccommodationCheckbox()
     quotesOptionEditPage.clickSchoolAccommodationButton()
     quotesOptionEditPage.clickFirstAccommodationRadioButton()
     expect(quotesOptionEditPage.accommodationStartDateField.isPresent()).to.eventually.equal(true)
     quotesOptionEditPage.clickSaveChangesButton()
+    expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+  })
+
+  it('should email a quote to a student', () => {
+    let quotesPage = new QuotesPage()
+    let quotesListingPage = new quotesPage.QuotesListingPage()
+    quotesListingPage.clickFirstQuote()
+    let quotesEditPage = new quotesPage.QuotesEditPage()
+    quotesEditPage.clickEmailToStudentButton()
+    let emailQuoteModal = new quotesEditPage.EmailQuoteModal()
+    emailQuoteModal.clickSendButton()
     expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
 })

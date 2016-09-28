@@ -1,11 +1,13 @@
 import QuotesListingPage from './quotesListingPage.pageObject'
 import QuotesEditPage from './quotesEditPage.pageObject'
+import QuotesOptionEditPage from './quotesOptionEditPage.pageObject'
 import {UISelectWidget} from '../../shared/widgets'
 
 export class QuotesPage {
   constructor() {
     this.QuotesListingPage = QuotesListingPage
     this.QuotesEditPage = QuotesEditPage
+    this.QuotesOptionEditPage = QuotesOptionEditPage
 
     this.quoteInfoContainer = element(by.id('ext06-new-ingo'))
 
@@ -19,9 +21,9 @@ export class QuotesPage {
     UISelectWidget.clickUiSelect(this.nameSearch, input)
   }
 
-  clickFirstResult() {
-    this.firstSearchResult.click()
-  }
+  // clickFirstResult() {
+  //   this.firstSearchResult.click()
+  // }
 
   clickSaveButton() {
     this.saveButton.click()
