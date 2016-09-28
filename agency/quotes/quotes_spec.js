@@ -11,8 +11,7 @@ var expect = chai.expect
 chai.use(chaiAsPromised)
 
 describe('the quotes page', () => {
-  it('should create a new quote', () => {
-    const SEARCH_TERM = 'Alex'
+  beforeEach(() => {
     browser.get('/')
     LoginPage.waitForLoader()
 
@@ -22,9 +21,35 @@ describe('the quotes page', () => {
 
     let agencyNav = new AgencyNav()
     agencyNav.goToQuotes()
+  })
+
+  afterEach(() => {
+    browser.driver.manage().deleteAllCookies()
+  })
+
+  // it('should create a new quote', () => {
+  //   const SEARCH_TERM = 'Alex'
+  //
+  //   let quotesPage = new QuotesPage()
+  //   let quotesListPage = new quotesPage.QuotesListPage()
+  //   quotesListPage.clickNewButton()
+  //
+  //   let coursesPage = new CoursesPage()
+  //   coursesPage.doBasicSearch()
+  //   coursesPage.selectFirstResultCheckbox()
+  //   coursesPage.clickStartQuoteButton()
+  //   quotesPage.inputNameSearch(SEARCH_TERM)
+  //   quotesPage.clickSaveButton()
+  //
+  //   expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+  // })
+
+  it('should add accommodation with start plus end dates to a quote', () => {
+    const SEARCH_TERM = 'Alex'
 
     let quotesPage = new QuotesPage()
-    quotesPage.clickNewButton()
+    let quotesListingPage = new quotesPage.QuotesListingPage()
+    quotesListingPage.clickNewButton()
 
     let coursesPage = new CoursesPage()
     coursesPage.doBasicSearch()
@@ -33,6 +58,19 @@ describe('the quotes page', () => {
     quotesPage.inputNameSearch(SEARCH_TERM)
     quotesPage.clickSaveButton()
 
-    expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+    // remove when 'back' bug is fixed
+    let agencyNav = new AgencyNav()
+    agencyNav.goToQuotes()
+
+    quotesListingPage.clickFirstQuote()
+    let quotesEditPage = new quotesPage.QuotesEditPage()
+    quotesEditPage.clickFirstOptionEditButton()
+    let quotesOptionEditPage = new quotesEditPage.QuotesOptionEditPage()
+    quotesOptionEditPage.clickAccommodationCheckbox()
+    quotesOptionEditPage.clickSchoolAccommodationButton()
+    quotesOptionEditPage.clickFirstAccommodationRadioButton()
+    expect(quotesOptionEditPage.accommodationStartDateField.isPresent()).to.eventually.equal(true)
+    quotesOptionEditPage.clickSaveChangesButton()
+    expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
 })
