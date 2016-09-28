@@ -1,4 +1,4 @@
-import constants from '../../shared/constants'
+import constants from '../../../shared/constants'
 
 export default class SecondaryContactsArea {
   constructor() {

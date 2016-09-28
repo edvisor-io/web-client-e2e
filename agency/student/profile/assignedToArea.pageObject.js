@@ -1,4 +1,4 @@
-import {ChosenWidget} from '../../shared/widgets'
+import {ChosenWidget} from '../../../shared/widgets'
 
 export default class AssignedToArea {
   constructor() {
