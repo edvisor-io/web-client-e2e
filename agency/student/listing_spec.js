@@ -77,32 +77,35 @@ describe('the student listing page', () => {
 
     it('should not show a name, email and office without a search term', () => {
       let studentListing = new StudentListingPage()
-      studentListing.inputSearchTerm('')
+      let searchBar = new studentListing.SearchBar()
+      searchBar.inputSearchTerm('')
 
-      expect(studentListing.searchResultName.isPresent()).to.eventually.equal(false)
-      expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(false)
-      expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(false)
+      expect(searchBar.searchResultName.isPresent()).to.eventually.equal(false)
+      expect(searchBar.searchResultEmail.isPresent()).to.eventually.equal(false)
+      expect(searchBar.searchResultEmail.isPresent()).to.eventually.equal(false)
     })
 
     it('should show a name, email and office on search by student name', () => {
       let studentListing = new StudentListingPage()
-      studentListing.inputSearchTerm(FIRST_NAME)
+      let searchBar = new studentListing.SearchBar()
+      searchBar.inputSearchTerm(FIRST_NAME)
 
-      expect(studentListing.searchResultName.isPresent()).to.eventually.equal(true)
-      expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
-      expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
+      expect(searchBar.searchResultName.isPresent()).to.eventually.equal(true)
+      expect(searchBar.searchResultEmail.isPresent()).to.eventually.equal(true)
+      expect(searchBar.searchResultEmail.isPresent()).to.eventually.equal(true)
     })
 
     it('should show a name, email and office on search by secondary contact', () => {
       let studentListing = new StudentListingPage()
-      studentListing.openSearchDropdown()
-      studentListing.chooseBySecondaryContact()
-      studentListing.focusSearchContainer()
-      studentListing.inputSearchTerm(SECONDARY_CONTACT)
+      let searchBar = new studentListing.SearchBar()
+      searchBar.openSearchDropdown()
+      searchBar.chooseBySecondaryContact()
+      searchBar.focusSearchContainer()
+      searchBar.inputSearchTerm(SECONDARY_CONTACT)
 
-      expect(studentListing.searchResultName.isPresent()).to.eventually.equal(true)
-      expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
-      expect(studentListing.searchResultEmail.isPresent()).to.eventually.equal(true)
+      expect(searchBar.searchResultName.isPresent()).to.eventually.equal(true)
+      expect(searchBar.searchResultEmail.isPresent()).to.eventually.equal(true)
+      expect(searchBar.searchResultEmail.isPresent()).to.eventually.equal(true)
     })
   })
 

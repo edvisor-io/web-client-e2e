@@ -1,12 +1,14 @@
 # web-client-e2e
 
+🤖 : *"My name is Trillian! I'll be your guide to Galaxy E2E Alpha!"*
+
 ##### current status of this repo (for context)
 
-Currently in the process of transforming to ES6 syntax.
+We're in the process of transforming to ES6.
 
 ## What is this repo? ⚙
 
-End-to-end test suites for the Edvisor.io web-client
+🤖 : *"This repo contains end-to-end test suites for the Edvisor.io web-client"*
 
 ## Quickly making sense of this repo ⚡️
 
@@ -14,10 +16,22 @@ The directory structure models that of the web client. Each directory contains
 tests for one application, and corresponds to the same named directory in the
 web-client repo.
 
-#### Naming (✨ magical conventions to keep your sanity)
+#### pageObject patterns 👚
+
+🤖 : *"Patterns are beautiful weaves of code 😍"*
+
+Each app or sub-app has a pageObject file of its very own. Only the root
+pageObject file `imports` from any other pageObject file that it may need. This
+is to minimize the chaos of pageObjects endlessly importing from others. You
+can see which pageObjects an app test suite is dependent on by looking at only
+the `imports` in the root pageObject file.
+
+#### Naming objects
 
 Here you'll find naming patterns for the variables and prototypal methods we're
 using.
+
+🤖 : *"✨ Magical conventions help keep your sanity."*
 
 ##### verb + detail about the element + element type
 
@@ -40,7 +54,7 @@ The word 'relative' is used in a name when the element is only available in a
 given context. For example, 'changePipelineStatusRelativeOption' is an option
 that only appears when a dropdown is present.
 
-##### Shared files
+#### Shared files
 
 Static methods in `widgets.js` interact with the page. pageObject files provide
 a layer of abstraction and so spec files don't directly invoke static widget
@@ -132,6 +146,9 @@ Navigate to the directory containing the conf.js of your desired test. Run test 
 3. Then reset the database by running `./bin/edvisor full-reset`
 
 ## Useful Docs (🆓 stuff to put out and prevent pesky 🔥🔥🔥)
+
+🤖 : *"I've found these pages very very helpful. Maybe you should check them
+out. ✨"*
 
 > Protractor styleguide: https://github.com/CarmenPopoviciu/protractor-styleguide
 
