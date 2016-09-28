@@ -39,7 +39,8 @@ describe('the student listing page', () => {
 
     let studentListing = new StudentListingPage()
     studentListing.openAddStudentModal()
-    studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
+    let addStudentModal = new studentListing.AddStudentModal()
+    addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
     let studentProfile = new StudentProfilePage()
     expect(studentProfile.assignedToLabel.getText()).to.eventually.equal(ASSIGNED_TO)
@@ -54,13 +55,14 @@ describe('the student listing page', () => {
 
     let studentListing = new StudentListingPage()
     studentListing.openAddStudentModal()
-    studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
+    let addStudentModal = new studentListing.AddStudentModal()
+    addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
     let agencyNav = new AgencyNav()
     agencyNav.goToStudents()
 
     studentListing.openAddStudentModal()
-    studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
+    addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
     expect(studentListing.nopeAlert.isPresent()).to.eventually.equal(true)
   })

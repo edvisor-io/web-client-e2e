@@ -1,9 +1,11 @@
+import AddStudentModal from './listing/addStudentModal.pageObject'
 import {ChosenWidget} from '../../shared/widgets'
 import constants from '../../shared/constants'
 
 export default class StudentListingPage {
-
   constructor() {
+    this.AddStudentModal = AddStudentModal
+
     this.selectAllStudentsCheckbox = $('.select-box')
     this.exportButton = $('.action-bar #ext02-export-data')
     this.exportMessage = $('.e-alert_inner-container')
@@ -25,13 +27,13 @@ export default class StudentListingPage {
     this.searchResultEmail = this.searchContainer.element(by.binding('student.email | highlight: $select.search'))
     this.searchResultOffice = this.searchContainer.element(by.binding('student.agency.name | highlight: $select.search'))
 
-    this.containerAddStudentModal = element(by.id('ext02-add-student-form'))
-    this.assignedToField = this.containerAddStudentModal.element(by.name('assignedTo'))
-    this.firstNameField = this.containerAddStudentModal.element(by.name('firstname'))
-    this.lastNameField = this.containerAddStudentModal.element(by.name('lastname'))
-    this.emailField = this.containerAddStudentModal.element(by.name('email'))
-    this.nationalityField = this.containerAddStudentModal.element(by.name('nationality'))
-    this.submitButton = this.containerAddStudentModal.element(by.css('button[type="submit"]'))
+    // this.containerAddStudentModal = element(by.id('ext02-add-student-form'))
+    // this.assignedToField = this.containerAddStudentModal.element(by.name('assignedTo'))
+    // this.firstNameField = this.containerAddStudentModal.element(by.name('firstname'))
+    // this.lastNameField = this.containerAddStudentModal.element(by.name('lastname'))
+    // this.emailField = this.containerAddStudentModal.element(by.name('email'))
+    // this.nationalityField = this.containerAddStudentModal.element(by.name('nationality'))
+    // this.submitButton = this.containerAddStudentModal.element(by.css('button[type="submit"]'))
   }
 
   openAddStudentModal() {
@@ -67,14 +69,14 @@ export default class StudentListingPage {
     this.bySecondaryContactOption.click()
   }
 
-  addStudent(assignedTo, firstname, lastname, email, nationality) {
-    ChosenWidget.setChosenValue(this.assignedToField, assignedTo)
-    this.firstNameField.sendKeys(firstname)
-    this.lastNameField.sendKeys(lastname)
-    this.emailField.sendKeys(email)
-    ChosenWidget.setChosenValue(this.nationalityField, nationality)
-    this.submitButton.click()
-  }
+  // addStudent(assignedTo, firstname, lastname, email, nationality) {
+  //   ChosenWidget.setChosenValue(this.assignedToField, assignedTo)
+  //   this.firstNameField.sendKeys(firstname)
+  //   this.lastNameField.sendKeys(lastname)
+  //   this.emailField.sendKeys(email)
+  //   ChosenWidget.setChosenValue(this.nationalityField, nationality)
+  //   this.submitButton.click()
+  // }
 
   inputSearchTerm(searchTerm) {
     this.searchField.sendKeys(searchTerm)
