@@ -16,13 +16,18 @@ export class CoursesPage {
 
     this.startQuoteButton = this.actionBar.element(by.id('ext05-start-quote'))
 
-    this.firstResult = this.searchResults.element(by.repeater('result in resultsCtrl.pageData.results.items').row(0))
+    this.firstResult = this.searchResults
+      .element(by.repeater('result in resultsCtrl.pageData.results.items')
+      .row(0))
     this.firstResultName = this.firstResult.$('h3 > a')
     this.firstResultSchool = this.firstResult.$('div > a')
-    this.firstResultIntensity = this.firstResult.all(by.css('p.ng-binding')).get(0)
-    this.firstResultDuration = this.firstResult.all(by.css('p.ng-binding')).get(1)
+    this.firstResultIntensity = this.firstResult
+      .all(by.css('p.ng-binding')).get(0)
+    this.firstResultDuration = this.firstResult
+      .all(by.css('p.ng-binding')).get(1)
     this.firstResultPrice = this.firstResult.all(by.css('p.ng-binding')).get(2)
-    this.firstResultCheckbox = this.searchResults.all(by.css('input[type="checkbox"]')).get(0)
+    this.firstResultCheckbox = this.searchResults
+      .all(by.css('input[type="checkbox"]')).get(0)
   }
 
   inputLocation(location) {
@@ -33,18 +38,21 @@ export class CoursesPage {
     ChosenWidget.setChosenValue(this.durationField, duration)
   }
 
-  setStartDate() {
-    DatePickerWidget.setPikaDate(this.startDatePicker, 'September', 27, 2016)
+  setStartDateAsToday() {
+    let month = moment().format('MMMM')
+    let date = moment().format('DD')
+    let year = moment().format('YYYY')
+    DatePickerWidget.setPikaDate(this.startDatePicker, month, date, year)
   }
 
   clickFindCoursesButton() {
     this.findCoursesButton.click()
   }
 
-  doBasicSearch(location, duration) {
+  doBasicSearch(location = 'Vancouver', duration = 1) {
     this.inputLocation(location)
     this.inputDuration(duration)
-    this.setStartDate()
+    this.setStartDateAsToday()
     this.clickFindCoursesButton()
   }
 

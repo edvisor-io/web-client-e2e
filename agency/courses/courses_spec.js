@@ -11,9 +11,6 @@ chai.use(chaiAsPromised)
 var expect = chai.expect
 
 describe('find courses page', () => {
-  const LOCATION = 'Vancouver'
-  const DURATION = 1
-
   beforeEach(() => {
     browser.get('/')
     LoginPage.waitForLoader()
@@ -32,8 +29,9 @@ describe('find courses page', () => {
 
   it('should create a new quote from a search result', () => {
     const SEARCH_TERM = 'Alex'
+
     let coursesPage = new CoursesPage()
-    coursesPage.doBasicSearch(LOCATION, DURATION)
+    coursesPage.doBasicSearch()
     coursesPage.selectFirstResultCheckbox()
     coursesPage.clickStartQuoteButton()
 
@@ -46,7 +44,7 @@ describe('find courses page', () => {
 
   it('search result should have course name, school, intensity, duration, price', () => {
     let coursesPage = new CoursesPage()
-    coursesPage.doBasicSearch(LOCATION, DURATION)
+    coursesPage.doBasicSearch()
 
     expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
     expect(coursesPage.firstResultSchool.isPresent()).to.eventually.equal(true)

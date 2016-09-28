@@ -1,9 +1,9 @@
-import constants from '../../shared/constants'
 import {UISelectWidget} from '../../shared/widgets'
 
 export class QuotesPage {
   constructor() {
     this.quoteInfoContainer = element(by.id('ext06-new-ingo'))
+    this.newButton = element(by.id('ext06-listing-search-btn'))
 
     this.nameSearch = this.quoteInfoContainer.element(by.model('n.selectedStudent'))
     this.firstSearchResult = $('.ui-select-choices-row-inner')
@@ -11,10 +11,11 @@ export class QuotesPage {
     this.alertBoxMessage = $('span.alert-box-message')
   }
 
-  inputNameSearch(input) {
-    // let expected = protractor.ExpectedConditions
-    // browser.wait(expected.elementToBeClickable(this.nameSearch), constants.TIMEOUT_TIME)
+  clickNewButton() {
+    this.newButton.click()
+  }
 
+  inputNameSearch(input) {
     UISelectWidget.clickUiSelect(this.nameSearch, input)
   }
 
