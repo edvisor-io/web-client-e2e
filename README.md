@@ -52,6 +52,9 @@ that only appears when a dropdown is present.
 
 #### Shared files
 
+`/shared/pages/` contains pageObject files belonging to pages that do not
+possess specs files of their own.
+
 Static methods in `widgets.js` interact with the page. pageObject files provide
 a layer of abstraction and so spec files don't directly invoke static widget
 methods. Instead, spec files may invoke pageObject prototypal methods which

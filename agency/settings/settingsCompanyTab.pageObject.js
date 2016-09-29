@@ -3,12 +3,20 @@ import constants from '../../shared/constants'
 class CurrencySettingsArea {
   constructor() {
     this.currencySettingsContainer = $('.currency-settings')
+    this.automaticallySetRadio = this.currencySettingsContainer.element(by.id('ext01-currency-auto'))
     this.manuallySetRatesRadio = this.currencySettingsContainer.element(by.id('ext01-currency-manual'))
     this.setRatesButton = this.currencySettingsContainer.element(by.id('ext01-set-exchange'))
+    this.saveButton = this.currencySettingsContainer.$('button[type="submit"]')
     this.setRatesModalContainer = $('.e-modal-container')
     this.firstRateField = this.setRatesModalContainer.all(by
       .model('setRates.companyRates[fromCompanyCurrency.currencyId][toCompanyCurrency.currencyId]')).get(0)
-    this.saveButton = this.setRatesModalContainer.$('button[type="submit"]')
+    this.fourthRateField = this.setRatesModalContainer.all(by
+      .model('setRates.companyRates[fromCompanyCurrency.currencyId][toCompanyCurrency.currencyId]')).get(3)
+    this.inModalSaveButton = this.setRatesModalContainer.$('button[type="submit"]')
+  }
+
+  clickAutomaticallySetRadio() {
+    this.automaticallySetRadio.click()
   }
 
   clickManuallySetRadio() {
@@ -22,9 +30,14 @@ class CurrencySettingsArea {
     this.setRatesButton.click()
   }
 
-  inputRate(rate) {
+  inputRateIntoFirstField(rate) {
     this.firstRateField.clear()
     this.firstRateField.sendKeys(rate)
+  }
+
+  inputRateIntoFourthField(rate) {
+    this.fourthRateField.clear()
+    this.fourthRateField.sendKeys(rate)
   }
 
   waitForModal() {
@@ -32,10 +45,14 @@ class CurrencySettingsArea {
 
     // wait for modal to appear
     browser.wait(function() {
-      return browser.isElementPresent(modal).then(function(presenceOfElement) {
+      return browser.isElementPresent(modal).then((presenceOfElement) => {
         return presenceOfElement
       })
     }, constants.TIMEOUT_TIME)
+  }
+
+  clickInModalSaveButton() {
+    this.inModalSaveButton.click()
   }
 
   clickSaveButton() {

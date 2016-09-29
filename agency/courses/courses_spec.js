@@ -36,7 +36,8 @@ describe('find courses page', () => {
     coursesPage.clickStartQuoteButton()
 
     let quotesPage = new QuotesPage()
-    quotesPage.inputNameSearch(SEARCH_TERM)
+    let quotesEditPage = new quotesPage.QuotesEditPage()
+    quotesEditPage.inputNameSearch(SEARCH_TERM)
     quotesPage.clickSaveButton()
 
     expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)

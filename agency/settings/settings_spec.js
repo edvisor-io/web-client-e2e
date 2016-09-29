@@ -1,12 +1,14 @@
 import SettingsPage from './settings.pageObject'
-import constants from '../../shared/constants'
+import QuotesPage from '../quotes/quotes.pageObject'
+import CoursesPage from '../courses/courses.pageObject'
 import LoginPage from '../../shared/pages/login.pageObject'
 import HomePage from '../../shared/pages/home.pageObject'
 import AgencyNav from '../nav.pageObject'
-import uuid from 'node-uuid'
+import constants from '../../shared/constants'
 
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
+import uuid from 'node-uuid'
 
 chai.use(chaiAsPromised)
 var expect = chai.expect
@@ -149,7 +151,7 @@ describe('the settings page', () => {
     let teamTab = new settingsPage.TeamTab()
     let inviteArea = new teamTab.InviteArea()
     inviteArea.slotsElement.getText()
-      .then(function(originalText) {
+      .then((originalText) => {
         var originalMaxSlots = originalText.match(/\d+/g)[1]
 
         settingsPage.goToPaymentTab()
@@ -161,35 +163,12 @@ describe('the settings page', () => {
 
         settingsPage.goToTeamTab()
         inviteArea.slotsElement.getText()
-          .then(function(newText) {
+          .then((newText) => {
             var newMaxSlots = newText.match(/\d+/g)[1]
 
             expect(+newMaxSlots).to.equal(+originalMaxSlots + 1)
           })
       })
-  })
-
-  it('should manually add a currency exchange rate', () => {
-    const RATE = 1
-
-    let loginPage = new LoginPage()
-    loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
-    LoginPage.waitForLoader()
-
-    let agencyNav = new AgencyNav()
-    agencyNav.goToSettings()
-
-    let settingsPage = new SettingsPage()
-    settingsPage.goToCompanyTab()
-
-    let companyTab = new settingsPage.CompanyTab()
-    let currencySettingsArea = new companyTab.CurrencySettingsArea()
-    currencySettingsArea.clickManuallySetRadio()
-    currencySettingsArea.clickSetRatesButton()
-    currencySettingsArea.inputRate(RATE)
-    currencySettingsArea.clickSaveButton()
-
-    expect(settingsPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
 
   describe('sales reps', () => {
@@ -256,5 +235,78 @@ describe('the settings page', () => {
       var teamMemberCard = new manageMembersArea.TeamMember(manageMembersArea.managers.last())
       expect(teamMemberCard.name.getText()).to.eventually.equal(`${firstname} ${lastname}`)
     })
+  })
+
+  it('should manually add a currency exchange rate', () => {
+    const RATE = 1
+
+    let loginPage = new LoginPage()
+    loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
+    LoginPage.waitForLoader()
+
+    let agencyNav = new AgencyNav()
+    agencyNav.goToSettings()
+
+    let settingsPage = new SettingsPage()
+    settingsPage.goToCompanyTab()
+
+    let companyTab = new settingsPage.CompanyTab()
+    let currencySettingsArea = new companyTab.CurrencySettingsArea()
+    currencySettingsArea.clickManuallySetRadio()
+    currencySettingsArea.clickSetRatesButton()
+    currencySettingsArea.inputRateIntoFirstField(RATE)
+    currencySettingsArea.clickInModalSaveButton()
+
+    expect(settingsPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+  })
+  
+  it('should change the quoted amount according to manually set rates', () => {
+    const EXCHANGE_RATE = 1000000.01
+    const EXPECTED_MAX = 10.01 // is sufficient unless multi million CAD quote
+    const SEARCH_TERM = 'Alex'
+
+    let loginPage = new LoginPage()
+    loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
+    LoginPage.waitForLoader()
+
+    let agencyNav = new AgencyNav()
+    agencyNav.goToSettings()
+
+    let settingsPage = new SettingsPage()
+    settingsPage.goToCompanyTab()
+
+    let companyTab = new settingsPage.CompanyTab()
+    let currencySettingsArea = new companyTab.CurrencySettingsArea()
+    currencySettingsArea.clickManuallySetRadio()
+    currencySettingsArea.clickSetRatesButton()
+    currencySettingsArea.inputRateIntoFourthField(EXCHANGE_RATE)
+    currencySettingsArea.clickInModalSaveButton()
+    currencySettingsArea.clickManuallySetRadio()
+    currencySettingsArea.clickSaveButton()
+
+    agencyNav.goToQuotes()
+    let quotesPage = new QuotesPage()
+    let quotesListingPage = new quotesPage.QuotesListingPage()
+    quotesListingPage.clickNewButton()
+
+    let coursesPage = new CoursesPage()
+    coursesPage.doBasicSearch()
+    coursesPage.selectFirstResultCheckbox()
+    coursesPage.clickStartQuoteButton()
+    let quotesEditPage = new quotesPage.QuotesEditPage()
+    quotesEditPage.inputNameSearch(SEARCH_TERM)
+    quotesEditPage.selectCurrencyFromDropdown()
+
+    quotesEditPage.totalInCustomCurrency.getText()
+      .then((text) => {
+        let amountText = text.replace(/[^0-9\.]/g, '')
+        expect(+amountText).to.be.at.most(EXPECTED_MAX)
+
+        browser.get('/agency/en/504/settings/company')
+        LoginPage.waitForLoader()
+        currencySettingsArea.clickAutomaticallySetRadio()
+        currencySettingsArea.clickSaveButton()
+        browser.sleep(5000)
+      })
   })
 })

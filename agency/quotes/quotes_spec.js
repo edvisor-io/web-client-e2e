@@ -38,7 +38,8 @@ describe('the quotes page', () => {
     coursesPage.doBasicSearch()
     coursesPage.selectFirstResultCheckbox()
     coursesPage.clickStartQuoteButton()
-    quotesPage.inputNameSearch(SEARCH_TERM)
+    let quotesEditPage = new quotesPage.QuotesEditPage()
+    quotesEditPage.inputNameSearch(SEARCH_TERM)
     quotesPage.clickSaveButton()
 
     expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
@@ -55,7 +56,8 @@ describe('the quotes page', () => {
     coursesPage.doBasicSearch()
     coursesPage.selectFirstResultCheckbox()
     coursesPage.clickStartQuoteButton()
-    quotesPage.inputNameSearch(SEARCH_TERM)
+    let quotesEditPage = new quotesPage.QuotesEditPage()
+    quotesEditPage.inputNameSearch(SEARCH_TERM)
     quotesPage.clickSaveButton()
 
     // remove when 'back' bug is fixed
@@ -63,7 +65,6 @@ describe('the quotes page', () => {
     agencyNav.goToQuotes()
 
     quotesListingPage.clickFirstQuote()
-    let quotesEditPage = new quotesPage.QuotesEditPage()
     quotesEditPage.clickFirstOptionEditButton()
     let quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
     quotesOptionEditPage.clickAccommodationCheckbox()
@@ -96,7 +97,8 @@ describe('the quotes page', () => {
     coursesPage.doBasicSearch()
     coursesPage.selectFirstResultCheckbox()
     coursesPage.clickStartQuoteButton()
-    quotesPage.inputNameSearch(SEARCH_TERM)
+    let quotesEditPage = new quotesPage.QuotesEditPage()
+    quotesEditPage.inputNameSearch(SEARCH_TERM)
     quotesPage.clickSaveButton()
 
     // remove when 'back' bug is fixed
@@ -104,7 +106,6 @@ describe('the quotes page', () => {
     agencyNav.goToQuotes()
 
     quotesListingPage.clickFirstQuote()
-    let quotesEditPage = new quotesPage.QuotesEditPage()
     quotesEditPage.clickFirstOptionEditButton()
     let quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
     quotesOptionEditPage.clickAddAddonsButton()

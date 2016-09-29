@@ -6,12 +6,14 @@ import constants from '../../shared/constants'
 
 class SettingsPage {
   constructor() {
-    this.tabContainer = element(by.id('ext01-settings-tabs'))
-    this.tabs = this.tabContainer.all(by.css('li'))
     this.TeamTab = TeamTab
     this.AgencyTab = AgencyTab
     this.CompanyTab = CompanyTab
     this.PaymentTab = PaymentTab
+
+    this.tabContainer = element(by.id('ext01-settings-tabs'))
+    this.tabs = this.tabContainer.all(by.css('li'))
+    this.companyTabButton = this.tabs.get(3)
 
     this.alertBoxMessage = $('.alert-box-message')
   }
@@ -29,7 +31,9 @@ class SettingsPage {
   }
 
   goToCompanyTab() {
-    this.tabs.get(3).click()
+    let expected = protractor.ExpectedConditions
+    browser.wait(expected.elementToBeClickable(this.companyTabButton), constants.TIMEOUT_TIME)
+    this.companyTabButton.click()
   }
 
   goToPaymentTab() {
