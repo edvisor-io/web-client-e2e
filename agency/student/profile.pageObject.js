@@ -10,7 +10,7 @@ export default class StudentProfilePage {
 
     this.backToStudentsButton = element(by.id('ext02-back'))
 
-    this.container = element(by.css('section.student-profile'))
+    this.container = $('section.student-profile')
     this.informationContainer = this.container.$('student-edit-information')
     this.studentSidebarOwnerContainer = this.container
       .$('student-sidebar-owner')
@@ -23,7 +23,7 @@ export default class StudentProfilePage {
     this.taskTimeDropdown = this.tasksContainer.element(by.model('data.time'))
     this.assignToField = this.tasksContainer.$('select + div')
     this.submitTaskButton = this.tasksContainer.$('button[type="submit"]')
-    this.alertBoxMessage = element(by.css('.alert-box-message'))
+    this.alertBoxMessage = $('.alert-box-message')
 
     this.assignedToLabel = this.studentSidebarOwnerContainer
       .$('photo-initials + div > p')
