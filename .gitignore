@@ -83,3 +83,6 @@ cache
 !.env.sample
 !.env.docker
 .happypack/
+
+### screenshots ###
+.png

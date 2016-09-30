@@ -150,7 +150,7 @@ Navigate to the directory containing the conf.js of your desired test. Run test 
 
 1. Make sure the database is running. If not, `mysql.server start`.
 
-2. Then go into `.env` and make sure database is local.
+2. Then go into `.env` in `api-server` repo and make sure database is local.
 
 3. Then reset the database by running `./bin/edvisor full-reset`
 
@@ -159,7 +159,7 @@ Navigate to the directory containing the conf.js of your desired test. Run test 
 🤖 : *"I've found these pages very very helpful. Maybe you should check them
 out. ✨"*
 
-> Protractor styleguide: https://github.com/CarmenPopoviciu/protractor-styleguide
+> Protractor styleguide: https://github.com/CarmenPopoviciu/protractor-styleguide 🤖 : *"This one has good links at the end of README.md"*
 
 > Protractor debugging: https://github.com/angular/protractor/blob/master/docs/debugging.md
 

@@ -5,8 +5,8 @@ export default {
   BACKUP_ADMIN_EMAIL: 'austin@edvisor.io',
   BACKUP_ADMIN_PASSWORD: 'password',
 
-  MANAGER_EMAIL: '',
-  MANAGER_PASS: '',
+  MANAGER_EMAIL: 'alison@edvisor.io',
+  MANAGER_PASS: 'password',
 
   SALES_REP_EMAIL: 'steven+testing@edvisor.io',
   SALES_REP_PASS: 'password',

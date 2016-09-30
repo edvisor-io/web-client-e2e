@@ -1,6 +1,5 @@
 import QuotesPage from './quotes.pageObject'
 import CoursesPage from '../courses/courses.pageObject'
-import ProductsPage from '../products/products.pageObject'
 import AgencyNav from '../nav.pageObject'
 import LoginPage from '../../shared/pages/login.pageObject'
 import constants from '../../shared/constants'
