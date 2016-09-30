@@ -1,9 +1,10 @@
-import LoginPage from '../../shared/pages/login.pageObject'
-import AgencyNav from '../nav.pageObject'
 import StudentListingPage from './listing.pageObject'
 import StudentProfilePage from './profile.pageObject'
-import constants from '../../shared/constants'
+import LoginPage from '../../auth/login/login.pageObject'
+import AgencyNav from '../nav.pageObject'
 import {ChosenWidget} from '../../shared/widgets'
+import constants from '../../shared/constants'
+
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import uuid from 'node-uuid'

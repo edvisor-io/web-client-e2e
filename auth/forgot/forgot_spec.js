@@ -17,18 +17,18 @@ describe('the forgot page', function() {
   })
 
   it('should load the required page elements', () => {
-    var forgotPage = new ForgotPage()
+    let forgotPage = new ForgotPage()
     expect(forgotPage.emailField.isPresent()).to.eventually.equal(true)
     expect(forgotPage.submitBtn.isPresent()).to.eventually.equal(true)
   })
 
   it('should not display a message initially', () => {
-    var forgotPage = new ForgotPage()
+    let forgotPage = new ForgotPage()
     expect(forgotPage.messageBox.isPresent()).to.eventually.equal(false)
   })
 
   it('should display message if email is accepted', () => {
-    var forgotPage = new ForgotPage()
+    let forgotPage = new ForgotPage()
     forgotPage.send(constants.ADMIN_EMAIL)
     expect(forgotPage.messageBox.isPresent()).to.eventually.equal(true)
   })

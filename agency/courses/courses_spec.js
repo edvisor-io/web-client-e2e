@@ -1,7 +1,7 @@
 import CoursesPage from './courses.pageObject'
 import QuotesPage from '../quotes/quotes.pageObject'
 import AgencyNav from '../nav.pageObject'
-import LoginPage from '../../shared/pages/login.pageObject'
+import LoginPage from '../../auth/login/login.pageObject'
 import constants from '../../shared/constants'
 
 import chai from 'chai'

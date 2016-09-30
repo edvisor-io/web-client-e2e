@@ -1,7 +1,7 @@
 import SettingsPage from './settings.pageObject'
 import QuotesPage from '../quotes/quotes.pageObject'
 import CoursesPage from '../courses/courses.pageObject'
-import LoginPage from '../../shared/pages/login.pageObject'
+import LoginPage from '../../auth/login/login.pageObject'
 import HomePage from '../../shared/pages/home.pageObject'
 import AgencyNav from '../nav.pageObject'
 import constants from '../../shared/constants'
@@ -259,7 +259,7 @@ describe('the settings page', () => {
 
     expect(settingsPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
-  
+
   it('should change the quoted amount according to manually set rates', () => {
     const EXCHANGE_RATE = 1000000.01
     const EXPECTED_MAX = 10.01 // is sufficient unless multi million CAD quote

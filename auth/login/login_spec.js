@@ -1,4 +1,4 @@
-import LoginPage from '../../shared/pages/login.pageObject'
+import LoginPage from './login.pageObject'
 import constants from '../../shared/constants'
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
@@ -17,23 +17,20 @@ describe('the login page', function() {
   })
 
   it('should load the required page elements', () => {
-    var loginPage = new LoginPage()
-
+    let loginPage = new LoginPage()
     expect(loginPage.emailField.isPresent()).to.eventually.equal(true)
     expect(loginPage.passwordField.isPresent()).to.eventually.equal(true)
     expect(loginPage.submitBtn.isPresent()).to.eventually.equal(true)
   })
 
   it('should login successfully', function() {
-    var loginPage = new LoginPage()
-
+    let loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\//)
   })
 
   it('should not allow login with wrong credentials', function() {
-    var loginPage = new LoginPage()
-
+    let loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, 'wrong-password')
     expect(browser.getCurrentUrl()).to.eventually.match(/\/auth\/en\/login/)
   })
