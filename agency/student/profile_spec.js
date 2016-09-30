@@ -28,42 +28,56 @@ describe('the student profile page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  it('should display a student profile on click of search result', () => {
-    let studentListing = new StudentListingPage()
-    studentListing.clickFirstStudentInTable()
 
-    let studentProfile = new StudentProfilePage()
-    expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
-  })
-
-  describe('office and owner assignment', () => {
-    const NEW_OFFICE = 'Bogotá Office'
-    const NEW_OWNER = 'Shelley Chen'
-
-    beforeEach(() => {
-      let studentListing = new StudentListingPage()
-      studentListing.clickFirstStudentInTable()
-    })
-
-    it('should assign a student to an office from profile', () => {
-      let studentProfile = new StudentProfilePage()
-      let assignedToArea = new studentProfile.AssignedToArea()
-      assignedToArea.clickChangeOwnerButton()
-      assignedToArea.setAsNewOffice(NEW_OFFICE)
-      assignedToArea.clickMoveStudentButton()
-
-      expect(assignedToArea.agencyName.getText()).to.eventually.equal(NEW_OFFICE)
-    })
-
-    it('should assign a student to an owner', () => {
-      let studentProfile = new StudentProfilePage()
-      let assignedToArea = new studentProfile.AssignedToArea()
-      assignedToArea.clickChangeOwnerButton()
-      assignedToArea.setAsNewOwner(NEW_OWNER)
-
-      expect(assignedToArea.ownerName.getText()).to.eventually.equal(NEW_OWNER)
-    })
-  })
+  // it('should create a task', () => {
+  //   const TASK_TITLE = 'Do a followup call'
+  //   const DUE_TIME = '11:00pm'
+  //
+  //   let studentListing = new StudentListingPage()
+  //   studentListing.clickFirstStudentInTable()
+  //
+  //   let studentProfile = new StudentProfilePage()
+  //   studentProfile.addTask(TASK_TITLE, DUE_TIME)
+  //
+  //   expect(studentProfile.alertBoxMessage.getText()).to.eventually.equal('Saved  ')
+  // })
+  //
+  // it('should display a student profile on click of search result', () => {
+  //   let studentListing = new StudentListingPage()
+  //   studentListing.clickFirstStudentInTable()
+  //
+  //   let studentProfile = new StudentProfilePage()
+  //   expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
+  // })
+  //
+  // describe('office and owner assignment', () => {
+  //   const NEW_OFFICE = 'Bogotá Office'
+  //   const NEW_OWNER = 'Shelley Chen'
+  //
+  //   beforeEach(() => {
+  //     let studentListing = new StudentListingPage()
+  //     studentListing.clickFirstStudentInTable()
+  //   })
+  //
+  //   it('should assign a student to an office from profile', () => {
+  //     let studentProfile = new StudentProfilePage()
+  //     let assignedToArea = new studentProfile.AssignedToArea()
+  //     assignedToArea.clickChangeOwnerButton()
+  //     assignedToArea.setAsNewOffice(NEW_OFFICE)
+  //     assignedToArea.clickMoveStudentButton()
+  //
+  //     expect(assignedToArea.agencyName.getText()).to.eventually.equal(NEW_OFFICE)
+  //   })
+  //
+  //   it('should assign a student to an owner', () => {
+  //     let studentProfile = new StudentProfilePage()
+  //     let assignedToArea = new studentProfile.AssignedToArea()
+  //     assignedToArea.clickChangeOwnerButton()
+  //     assignedToArea.setAsNewOwner(NEW_OWNER)
+  //
+  //     expect(assignedToArea.ownerName.getText()).to.eventually.equal(NEW_OWNER)
+  //   })
+  // })
 
   describe('pipeline assignment', () => {
     const EXPECTED_STATUS_ONE = 'Deciding'
@@ -77,7 +91,7 @@ describe('the student profile page', () => {
       let pipelineArea = new studentProfile.PipelineArea()
       pipelineArea.clickChangePipelineFirstButton()
       pipelineArea.clickChangePipelineStatusOption()
-      pipelineArea.clickPipelineStatusSecondRelativeOption()
+      pipelineArea.clickPipelineStatusSecondOption()
 
       expect(pipelineArea.firstHeader.getText()).to.eventually.equal(EXPECTED_STATUS_ONE)
     })
@@ -102,18 +116,18 @@ describe('the student profile page', () => {
       let pipelineArea = new studentProfile.PipelineArea()
       pipelineArea.clickChangePipelineFirstButton()
       pipelineArea.clickChangePipelineStatusOption()
-      pipelineArea.clickPipelineStatusSecondRelativeOption()
+      pipelineArea.clickPipelineStatusSecondOption()
 
       pipelineArea.clickAddToAnotherPipelineButton()
       pipelineArea.clickAddToAnotherPipelineFirstOption()
-      pipelineArea.clickPipelineStatusesSecondOption()
+      pipelineArea.clickAddToAnotherPipelineStatusesSecondOption()
 
       expect(pipelineArea.firstHeader.getText()).to.eventually.equal(EXPECTED_STATUS_ONE)
       expect(pipelineArea.lastHeader.getText()).to.eventually.equal(EXPECTED_STATUS_TWO)
     })
 
     it('should change to the next status when all checklist items are clicked', () => {
-      const NEW_STATUS = 'Client'
+      const NEW_STATUS = 'Client' // because clickDecidingStatusThreeCheckboxes()
 
       let agencyNav = new AgencyNav()
       agencyNav.goToSettings()
@@ -134,23 +148,10 @@ describe('the student profile page', () => {
       let pipelineArea = new studentProfile.PipelineArea()
       pipelineArea.clickAddToAnotherPipelineButton()
       pipelineArea.clickAddToAnotherPipelineFirstOption()
-      pipelineArea.clickPipelineStatusesSecondOption()
+      pipelineArea.clickAddToAnotherPipelineStatusesSecondOption()
       pipelineArea.clickDecidingStatusThreeCheckboxes()
 
       expect(pipelineArea.lastHeader.getText()).to.eventually.equal(NEW_STATUS)
     })
-  })
-
-  it('should create a task', () => {
-    const TASK_TITLE = 'Do a followup call'
-    const DUE_TIME = '11:00pm'
-
-    let studentListing = new StudentListingPage()
-    studentListing.clickFirstStudentInTable()
-
-    let studentProfile = new StudentProfilePage()
-    studentProfile.addTask(TASK_TITLE, DUE_TIME)
-
-    expect(studentProfile.alertBoxMessage.getText()).to.eventually.equal('Saved  ')
   })
 })

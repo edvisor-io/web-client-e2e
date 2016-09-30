@@ -16,9 +16,11 @@ export default class PipelineArea {
     this.addToAnotherPipelineDropdown = this.container.$('ul.menu')
     this.addToAnotherPipelineFirstOption = this.addToAnotherPipelineDropdown
       .element(by.repeater('item in items').row(0))
-    this.pipelineStatusesOpenedMenu = this.container.$('ul.open')
-    this.pipelineStatusesSecondOption = this.pipelineStatusesOpenedMenu
-      .$('li:nth-child(2) a')
+    // this.pipelineStatusesOpenedMenu = this.container.$('ul.open')
+    // this.pipelineStatusesSecondOption = this.pipelineStatusesOpenedMenu
+    //   .$('li:nth-child(2) a')
+    this.addToAnotherPipelineStatusesSecondOption = this.container
+      .$('ul.open li:nth-child(2) a')
 
     this.lastCheckboxList = this.container
       .all(by.css('.student-status_list')).last()
@@ -38,7 +40,7 @@ export default class PipelineArea {
     this.changePipelineStatusOption.click()
   }
 
-  clickPipelineStatusSecondRelativeOption() {
+  clickPipelineStatusSecondOption() {
     this.pipelineStatusSecondRelativeOption.click()
   }
 
@@ -50,8 +52,8 @@ export default class PipelineArea {
     this.addToAnotherPipelineFirstOption.click()
   }
 
-  clickPipelineStatusesSecondOption() {
-    this.pipelineStatusesSecondOption.click()
+  clickAddToAnotherPipelineStatusesSecondOption() {
+    this.addToAnotherPipelineStatusesSecondOption.click()
   }
 
   clickDecidingStatusThreeCheckboxes() {
