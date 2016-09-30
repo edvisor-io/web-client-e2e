@@ -72,9 +72,10 @@ exports.config = {
   suites: {
     auth: './auth/**/*_spec.js',
     courses: './agency/courses/*_spec.js',
+    products: './agency/products/*_spec.js',
     quotes: './agency/quotes/*_spec.js',
+    settings: './agency/settings/*_spec.js',
     studentListing: './agency/student/listing_spec.js',
-    studentProfile: './agency/student/profile_spec.js',
-    settings: './agency/settings/*_spec.js'
+    studentProfile: './agency/student/profile_spec.js'
   }
 }

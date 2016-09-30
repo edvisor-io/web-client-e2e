@@ -16,6 +16,12 @@ web-client repo.
 
 🤖 : *"Patterns are beautiful weaves of code 😍"*
 
+If it's for a page, such as the Student Profile page, then the filename will be
+`studentProfile.pageObject.js`
+
+If it's for a part of a page, such as an Area/Modal etc, then the filename will
+be `addStudentModal.pageObject.js`
+
 Each app or sub-app has a pageObject file of its very own. Only the root
 pageObject file `imports` from any other pageObject file that it may need. This
 is to minimize the chaos of pageObjects endlessly importing from others. You

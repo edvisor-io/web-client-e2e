@@ -1,5 +1,6 @@
 import QuotesPage from './quotes.pageObject'
 import CoursesPage from '../courses/courses.pageObject'
+import ProductsPage from '../products/products.pageObject'
 import AgencyNav from '../nav.pageObject'
 import LoginPage from '../../shared/pages/login.pageObject'
 import constants from '../../shared/constants'
@@ -10,11 +11,13 @@ import chaiAsPromised from 'chai-as-promised'
 var expect = chai.expect
 chai.use(chaiAsPromised)
 
+beforeEach(() => {
+  browser.get('/')
+  LoginPage.waitForLoader()
+})
+
 describe('the quotes page', () => {
   beforeEach(() => {
-    browser.get('/')
-    LoginPage.waitForLoader()
-
     let loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     LoginPage.waitForLoader()

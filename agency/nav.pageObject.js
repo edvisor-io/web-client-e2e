@@ -2,13 +2,21 @@ import constants from '../shared/constants'
 
 export default class AgencyNav {
   constructor() {
-    this.navSidebar = element(by.css('.sidebar > ul'))
+    this.navSidebar = $('.sidebar > ul')
     this.studentsButton = this.navSidebar.element(by.id('ext28-students'))
     this.findCoursesButton = this.navSidebar.element(by.id('ext28-browse'))
     this.quotesButton = this.navSidebar.element(by.id('ext28-student-quote'))
+    this.productsPromotionsButton = this.navSidebar
+      .element(by.id('ext28-offerings'))
+    this.accommodationsButton = this.productsPromotionsButton
+      .all(by.css('a')).get(1)
+    this.addonsButton = this.productsPromotionsButton.all(by.css('a')).get(2)
+    this.feesButton = this.productsPromotionsButton.all(by.css('a')).get(3)
+    this.promotionsButton = this.productsPromotionsButton
+      .all(by.css('a')).get(4)
 
-    this.navHeader = element(by.css('header'))
-    this.userDropdown = this.navHeader.element(by.css('.settings-dropdown'))
+    this.navHeader = $('header')
+    this.userDropdown = this.navHeader.$('.settings-dropdown')
     this.settingsButton = this.userDropdown.element(by.id('ext27-settings'))
   }
 
@@ -36,5 +44,25 @@ export default class AgencyNav {
     this.userDropdown.click()
     browser.wait(expected.elementToBeClickable(this.settingsButton), constants.TIMEOUT_TIME)
     this.settingsButton.click()
+  }
+
+  openProductsPromotionsButton() {
+    this.productsPromotionsButton.click()
+  }
+
+  clickAccommodationsButton() {
+    this.accommodationsButton.click()
+  }
+
+  clickAddonsButton() {
+    this.addonsButton.click()
+  }
+
+  clickFeesButton() {
+    this.feesButton.click()
+  }
+
+  clickPromotionsButton() {
+    this.promotionsButton.click()
   }
 }
