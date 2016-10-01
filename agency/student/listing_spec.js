@@ -10,7 +10,7 @@ import chaiAsPromised from 'chai-as-promised'
 import uuid from 'node-uuid'
 
 chai.use(chaiAsPromised)
-var expect = chai.expect
+const {expect} = chai
 
 describe('the student listing page', () => {
   const ASSIGNED_TO = 'Shelley Chen'
@@ -23,11 +23,11 @@ describe('the student listing page', () => {
     browser.get('/')
     LoginPage.waitForLoader()
 
-    let loginPage = new LoginPage()
+    const loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     LoginPage.waitForLoader()
 
-    let agencyNav = new AgencyNav()
+    const agencyNav = new AgencyNav()
     agencyNav.goToStudents()
   })
 
@@ -38,12 +38,12 @@ describe('the student listing page', () => {
   it('should create a new student successfully', () => {
     const email = uuid.v4() + AT_EMAIL_DOMAIN
 
-    let studentListing = new StudentListingPage()
+    const studentListing = new StudentListingPage()
     studentListing.openAddStudentModal()
-    let addStudentModal = new studentListing.AddStudentModal()
+    const addStudentModal = new studentListing.AddStudentModal()
     addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
-    let studentProfile = new StudentProfilePage()
+    const studentProfile = new StudentProfilePage()
     expect(studentProfile.assignedToLabel.getText()).to.eventually.equal(ASSIGNED_TO)
     expect(studentProfile.firstNameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
     expect(studentProfile.lastNameField.getAttribute('value')).to.eventually.equal(LAST_NAME)
@@ -54,12 +54,12 @@ describe('the student listing page', () => {
   it('should not create a student with the same email', () => {
     const email = uuid.v4() + AT_EMAIL_DOMAIN
 
-    let studentListing = new StudentListingPage()
+    const studentListing = new StudentListingPage()
     studentListing.openAddStudentModal()
-    let addStudentModal = new studentListing.AddStudentModal()
+    const addStudentModal = new studentListing.AddStudentModal()
     addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
-    let agencyNav = new AgencyNav()
+    const agencyNav = new AgencyNav()
     agencyNav.goToStudents()
 
     studentListing.openAddStudentModal()
@@ -67,18 +67,34 @@ describe('the student listing page', () => {
 
     expect(studentListing.nopeAlert.isPresent()).to.eventually.equal(true)
   })
+  
+  it('should download a file of exported students', () => {
+    const studentListing = new StudentListingPage()
+    studentListing.clickSelectAllStudentsCheckbox()
+    studentListing.clickExportButton()
+
+    expect(studentListing.exportMessage.isPresent()).to.eventually.equal(true)
+  })
+
+  it('should show a student profile from the students table', () => {
+    const studentListing = new StudentListingPage()
+    studentListing.clickFirstStudentInTable()
+
+    const studentProfile = new StudentProfilePage()
+    expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
+  })
 
   describe('search function', () => {
     const SECONDARY_CONTACT = 'Anna Faris'
 
     beforeEach(() => {
-      let studentListing = new StudentListingPage()
+      const studentListing = new StudentListingPage()
       studentListing.openSearchBar()
     })
 
     it('should not show a name, email and office without a search term', () => {
-      let studentListing = new StudentListingPage()
-      let searchBar = new studentListing.SearchBar()
+      const studentListing = new StudentListingPage()
+      const searchBar = new studentListing.SearchBar()
       searchBar.inputSearchTerm('')
 
       expect(searchBar.searchResultName.isPresent()).to.eventually.equal(false)
@@ -87,8 +103,8 @@ describe('the student listing page', () => {
     })
 
     it('should show a name, email and office on search by student name', () => {
-      let studentListing = new StudentListingPage()
-      let searchBar = new studentListing.SearchBar()
+      const studentListing = new StudentListingPage()
+      const searchBar = new studentListing.SearchBar()
       searchBar.inputSearchTerm(FIRST_NAME)
 
       expect(searchBar.searchResultName.isPresent()).to.eventually.equal(true)
@@ -97,8 +113,8 @@ describe('the student listing page', () => {
     })
 
     it('should show a name, email and office on search by secondary contact', () => {
-      let studentListing = new StudentListingPage()
-      let searchBar = new studentListing.SearchBar()
+      const studentListing = new StudentListingPage()
+      const searchBar = new studentListing.SearchBar()
       searchBar.openSearchDropdown()
       searchBar.chooseBySecondaryContact()
       searchBar.focusSearchContainer()
@@ -108,21 +124,5 @@ describe('the student listing page', () => {
       expect(searchBar.searchResultEmail.isPresent()).to.eventually.equal(true)
       expect(searchBar.searchResultEmail.isPresent()).to.eventually.equal(true)
     })
-  })
-
-  it('should download a file of exported students', () => {
-    let studentListing = new StudentListingPage()
-    studentListing.clickSelectAllStudentsCheckbox()
-    studentListing.clickExportButton()
-
-    expect(studentListing.exportMessage.isPresent()).to.eventually.equal(true)
-  })
-
-  it('should show a student profile from the students table', () => {
-    let studentListing = new StudentListingPage()
-    studentListing.clickFirstStudentInTable()
-
-    let studentProfile = new StudentProfilePage()
-    expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
   })
 })
