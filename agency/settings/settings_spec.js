@@ -1,6 +1,4 @@
 import SettingsPage from './settings.pageObject'
-import QuotesPage from '../quotes/quotes.pageObject'
-import CoursesPage from '../courses/courses.pageObject'
 import LoginPage from '../../auth/login/login.pageObject'
 import HomePage from '../../shared/pages/home.pageObject'
 import AgencyNav from '../nav.pageObject'
@@ -11,7 +9,7 @@ import chaiAsPromised from 'chai-as-promised'
 import uuid from 'node-uuid'
 
 chai.use(chaiAsPromised)
-var expect = chai.expect
+const {expect} = chai
 
 describe('the settings page', () => {
   beforeEach(() => {
@@ -23,10 +21,113 @@ describe('the settings page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe('user slots maxed out', () => {
-    it('should not allow new TeamTab invites before adding in PaymentTab', () => {
-      const NO_SLOTS_ALERT_TEXT = 'You do not have any more slots available.'
+  describe('sales reps', () => {
+    beforeEach(() => {
+      const loginPage = new LoginPage()
+      loginPage.login(constants.SALES_REP_EMAIL, constants.SALES_REP_PASS)
+      LoginPage.waitForLoader()
+    })
 
+    it('should only see one "Personal" tab under settings', () => {
+      const TAB_TITLE = 'Personal'
+      const EXPECTED_TAB_COUNT = 1
+
+      const agencyNav = new AgencyNav()
+      agencyNav.goToSettings()
+      SettingsPage.waitForGhostTab()
+
+      const settingsPage = new SettingsPage()
+      expect(settingsPage.tabs.count()).to.eventually.equal(EXPECTED_TAB_COUNT)
+      expect(settingsPage.firstTabTitleElement.getText()).to.eventually.equal(TAB_TITLE)
+    })
+
+    it('should not see the "Commissions" box on the home page', () => {
+      const homePage = new HomePage()
+      expect(homePage.totalCommissionBoxContent.isPresent()).to.eventually.equal(false)
+    })
+  })
+
+  describe('admins', () => {
+    beforeEach(() => {
+      const loginPage = new LoginPage()
+      loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
+      LoginPage.waitForLoader()
+
+      const agencyNav = new AgencyNav()
+      agencyNav.goToSettings()
+      SettingsPage.waitForGhostTab()
+    })
+
+    it('can see all the tabs', () => {
+      const EXPECTED_TAB_COUNT = 5
+
+      const settingsPage = new SettingsPage()
+      expect(settingsPage.tabs.count()).to.eventually.be.at.least(EXPECTED_TAB_COUNT)
+    })
+
+    it('can invite a new team member', () => {
+      const firstname = 'Arthur'
+      const lastname = 'Dent'
+      const email = `${uuid.v4()}@earth.io`
+      const role = 'Manager'
+
+      const settingsPage = new SettingsPage()
+      settingsPage.goToPaymentTab()
+      const paymentTab = new settingsPage.PaymentTab()
+      paymentTab.clickChangeUsersAndSubscriptionButton()
+      paymentTab.clickIncrementButton()
+      paymentTab.clickChangeSubscriptionButton()
+      paymentTab.clickOkButton()
+
+      settingsPage.goToTeamTab()
+      const teamTab = new settingsPage.TeamTab()
+      const inviteArea = new teamTab.InviteArea()
+      inviteArea.invite(firstname, lastname, email, role)
+
+      const manageMembersArea = new teamTab.ManageMembersArea()
+
+      const teamMemberCard = new manageMembersArea.TeamMember(manageMembersArea.managers.last())
+      expect(teamMemberCard.name.getText()).to.eventually.equal(`${firstname} ${lastname}`)
+    })
+  })
+
+  it('should increase slots in TeamTab when added in PaymentTab', () => {
+    let loginPage = new LoginPage()
+    loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
+    LoginPage.waitForLoader()
+
+    let agencyNav = new AgencyNav()
+    agencyNav.goToSettings()
+
+    let settingsPage = new SettingsPage()
+    settingsPage.goToTeamTab()
+    let teamTab = new settingsPage.TeamTab()
+    let inviteArea = new teamTab.InviteArea()
+    inviteArea.slotsElement.getText()
+    .then((originalText) => {
+      var originalMaxSlots = originalText.match(/\d+/g)[1]
+
+      settingsPage.goToPaymentTab()
+      let paymentTab = new settingsPage.PaymentTab()
+      paymentTab.clickChangeUsersAndSubscriptionButton()
+      paymentTab.clickIncrementButton()
+      paymentTab.clickChangeSubscriptionButton()
+      paymentTab.clickOkButton()
+
+      settingsPage.goToTeamTab()
+      inviteArea.slotsElement.getText()
+      .then((newText) => {
+        var newMaxSlots = newText.match(/\d+/g)[1]
+
+        expect(+newMaxSlots).to.equal(+originalMaxSlots + 1)
+      })
+    })
+  })
+
+  describe('user slots maxed out', () => {
+    const NO_SLOTS_ALERT_TEXT = 'You do not have any more slots available.'
+
+    it('should not allow new TeamTab invites before adding in PaymentTab', () => {
       let loginPage = new LoginPage()
       loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
       LoginPage.waitForLoader()
@@ -56,8 +157,6 @@ describe('the settings page', () => {
     })
 
     it('should not allow new TeamTab invites before removing existing members', () => {
-      const NO_SLOTS_ALERT_TEXT = 'You do not have any more slots available.'
-
       let loginPage = new LoginPage()
       loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
       LoginPage.waitForLoader()
@@ -95,8 +194,6 @@ describe('the settings page', () => {
     })
 
     it('should not allow a slot change to less than current team size until members are reduced', () => {
-      const NO_SLOTS_ALERT_TEXT = 'You do not have any more slots available.'
-
       let loginPage = new LoginPage()
       loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
       LoginPage.waitForLoader()
@@ -135,105 +232,6 @@ describe('the settings page', () => {
           paymentTab.clickDecrementButton()
           expect(paymentTab.changeSubscriptionButton.isPresent()).to.eventually.equal(true)
         })
-    })
-  })
-
-  it('should increase slots in TeamTab when added in PaymentTab', () => {
-    let loginPage = new LoginPage()
-    loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
-    LoginPage.waitForLoader()
-
-    let agencyNav = new AgencyNav()
-    agencyNav.goToSettings()
-
-    let settingsPage = new SettingsPage()
-    settingsPage.goToTeamTab()
-    let teamTab = new settingsPage.TeamTab()
-    let inviteArea = new teamTab.InviteArea()
-    inviteArea.slotsElement.getText()
-      .then((originalText) => {
-        var originalMaxSlots = originalText.match(/\d+/g)[1]
-
-        settingsPage.goToPaymentTab()
-        let paymentTab = new settingsPage.PaymentTab()
-        paymentTab.clickChangeUsersAndSubscriptionButton()
-        paymentTab.clickIncrementButton()
-        paymentTab.clickChangeSubscriptionButton()
-        paymentTab.clickOkButton()
-
-        settingsPage.goToTeamTab()
-        inviteArea.slotsElement.getText()
-          .then((newText) => {
-            var newMaxSlots = newText.match(/\d+/g)[1]
-
-            expect(+newMaxSlots).to.equal(+originalMaxSlots + 1)
-          })
-      })
-  })
-
-  describe('sales reps', () => {
-    beforeEach(() => {
-      let loginPage = new LoginPage()
-      loginPage.login(constants.SALES_REP_EMAIL, constants.SALES_REP_PASS)
-      LoginPage.waitForLoader()
-    })
-
-    it('should only see "Personal" tab under settings', () => {
-      var tabTitle = 'Personal'
-      var tabCount = 1
-      var settingsPage = new SettingsPage()
-      var tabTitleElement = settingsPage.tabs.get(0).all(by.css('span')).get(0)
-
-      let agencyNav = new AgencyNav()
-      agencyNav.goToSettings()
-      SettingsPage.waitForGhostTab()
-
-      expect(settingsPage.tabs.count()).to.eventually.equal(tabCount)
-      expect(tabTitleElement.getText()).to.eventually.equal(tabTitle)
-    })
-
-    it('should not see the "Commissions" box on the home page', () => {
-      let homePage = new HomePage()
-      expect(homePage.totalCommissionBoxContent.isPresent()).to.eventually.equal(false)
-    })
-  })
-
-  describe('Admins', () => {
-    beforeEach(() => {
-      let loginPage = new LoginPage()
-      loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
-      LoginPage.waitForLoader()
-
-      let agencyNav = new AgencyNav()
-      agencyNav.goToSettings()
-      SettingsPage.waitForGhostTab()
-    })
-
-    it('can see all the tabs', () => {
-      var settingsPage = new SettingsPage()
-      var allTabCount = 5
-
-      expect(settingsPage.tabs.count()).to.eventually.be.at.least(allTabCount)
-    })
-
-    it('can invite a new team member', () => {
-      const firstname = 'NewTeamMember'
-      const lastname = 'Lastname'
-      const email = `${uuid.v4()}@test.io`
-      const role = 'Manager'
-
-      var settingsPage = new SettingsPage()
-      settingsPage.goToTeamTab()
-
-      var teamTab = new settingsPage.TeamTab()
-      var inviteArea = new teamTab.InviteArea()
-
-      inviteArea.invite(firstname, lastname, email, role)
-
-      var manageMembersArea = new teamTab.ManageMembersArea()
-
-      var teamMemberCard = new manageMembersArea.TeamMember(manageMembersArea.managers.last())
-      expect(teamMemberCard.name.getText()).to.eventually.equal(`${firstname} ${lastname}`)
     })
   })
 

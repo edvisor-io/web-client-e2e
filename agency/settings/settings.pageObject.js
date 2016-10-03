@@ -13,6 +13,7 @@ class SettingsPage {
 
     this.tabContainer = element(by.id('ext01-settings-tabs'))
     this.tabs = this.tabContainer.all(by.css('li'))
+    this.firstTabTitleElement = this.tabs.get(0).all(by.css('span')).get(0)
     this.companyTabButton = this.tabs.get(3)
 
     this.alertBoxMessage = $('.alert-box-message')

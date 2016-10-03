@@ -53,27 +53,29 @@ class ManageMembersArea {
 class InviteArea {
   constructor() {
     this.inviteForm = element(by.id('ext01-team-invite'))
-    this.firstname = this.inviteForm.element(by.name('firstname'))
-    this.lastname = this.inviteForm.element(by.name('lastname'))
-    this.email = this.inviteForm.element(by.name('email'))
-    this.role = this.inviteForm.element(by.name('role'))
-    this.office = this.inviteForm.element(by.name('office'))
-    this.inviteBtn = this.inviteForm.$('button[type="submit"]')
+    this.firstNameField = this.inviteForm.element(by.name('firstname'))
+    this.lastNameField = this.inviteForm.element(by.name('lastname'))
+    this.emailField = this.inviteForm.element(by.name('email'))
+    this.roleField = this.inviteForm.element(by.name('role'))
+    this.officeField = this.inviteForm.element(by.name('office'))
+    this.inviteButton = this.inviteForm.$('button[type="submit"]')
     this.slotsElement = element.all(by.css('div.subtext')).first()
     this.noSlotsAlert = $('.alert-danger')
   }
 
-  invite(firstname, lastname, email, role) {
-    this.firstname.sendKeys(firstname)
-    this.lastname.sendKeys(lastname)
-    this.email.sendKeys(email)
+  invite(firstName, lastName, email, role) {
+    let expected = protractor.ExpectedConditions
+    browser.wait(expected.elementToBeClickable(this.firstNameField), constants.TIMEOUT_TIME)
+    this.firstNameField.sendKeys(firstName)
+    this.lastNameField.sendKeys(lastName)
+    this.emailField.sendKeys(email)
     this.setRole(role)
-    this.inviteBtn.click()
+    this.inviteButton.click()
     SweetAlertWidget.ok()
   }
 
   setRole(roleName) {
-    ChosenWidget.setChosenValue(this.role, roleName)
+    ChosenWidget.setChosenValue(this.roleField, roleName)
   }
 }
 

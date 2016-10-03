@@ -40,8 +40,9 @@ export default class AgencyNav {
 
   goToSettings() {
     let expected = protractor.ExpectedConditions
-
+    browser.wait(expected.elementToBeClickable(this.navHeader), constants.TIMEOUT_TIME)
     this.userDropdown.click()
+
     browser.wait(expected.elementToBeClickable(this.settingsButton), constants.TIMEOUT_TIME)
     this.settingsButton.click()
   }
