@@ -49,13 +49,6 @@ export class CoursesPage {
     this.findCoursesButton.click()
   }
 
-  doBasicSearch(location = 'Vancouver', duration = 1) {
-    this.inputLocation(location)
-    this.inputDuration(duration)
-    this.setStartDateAsToday()
-    this.clickFindCoursesButton()
-  }
-
   selectFirstResultCheckbox() {
     let expected = protractor.ExpectedConditions
     browser.wait(expected.elementToBeClickable(this.firstResultCheckbox), constants.TIMEOUT_TIME)
@@ -64,6 +57,19 @@ export class CoursesPage {
 
   clickStartQuoteButton() {
     this.startQuoteButton.click()
+  }
+
+  doBasicSearch(location = 'Vancouver', duration = 1) {
+    this.inputLocation(location)
+    this.inputDuration(duration)
+    this.setStartDateAsToday()
+    this.clickFindCoursesButton()
+  }
+
+  startQuoteUsingBasicSearch() {
+    this.doBasicSearch()
+    this.selectFirstResultCheckbox()
+    this.clickStartQuoteButton()
   }
 }
 

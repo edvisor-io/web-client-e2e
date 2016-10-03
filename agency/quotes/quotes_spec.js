@@ -7,7 +7,7 @@ import constants from '../../shared/constants'
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 
-var expect = chai.expect
+const {expect} = chai
 chai.use(chaiAsPromised)
 
 beforeEach(() => {
@@ -16,12 +16,14 @@ beforeEach(() => {
 })
 
 describe('the quotes page', () => {
+  const SEARCH_TERM = 'Alex'
+
   beforeEach(() => {
-    let loginPage = new LoginPage()
+    const loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     LoginPage.waitForLoader()
 
-    let agencyNav = new AgencyNav()
+    const agencyNav = new AgencyNav()
     agencyNav.goToQuotes()
   })
 
@@ -30,17 +32,13 @@ describe('the quotes page', () => {
   })
 
   it('should create a new quote', () => {
-    const SEARCH_TERM = 'Alex'
-
-    let quotesPage = new QuotesPage()
-    let quotesListingPage = new quotesPage.QuotesListingPage()
+    const quotesPage = new QuotesPage()
+    const quotesListingPage = new quotesPage.QuotesListingPage()
     quotesListingPage.clickNewButton()
 
-    let coursesPage = new CoursesPage()
-    coursesPage.doBasicSearch()
-    coursesPage.selectFirstResultCheckbox()
-    coursesPage.clickStartQuoteButton()
-    let quotesEditPage = new quotesPage.QuotesEditPage()
+    const coursesPage = new CoursesPage()
+    coursesPage.startQuoteUsingBasicSearch()
+    const quotesEditPage = new quotesPage.QuotesEditPage()
     quotesEditPage.inputNameSearch(SEARCH_TERM)
     quotesPage.clickSaveButton()
 
@@ -48,27 +46,23 @@ describe('the quotes page', () => {
   })
 
   it('should add accommodation with start plus end dates to a quote', () => {
-    const SEARCH_TERM = 'Alex'
-
-    let quotesPage = new QuotesPage()
-    let quotesListingPage = new quotesPage.QuotesListingPage()
+    const quotesPage = new QuotesPage()
+    const quotesListingPage = new quotesPage.QuotesListingPage()
     quotesListingPage.clickNewButton()
 
-    let coursesPage = new CoursesPage()
-    coursesPage.doBasicSearch()
-    coursesPage.selectFirstResultCheckbox()
-    coursesPage.clickStartQuoteButton()
-    let quotesEditPage = new quotesPage.QuotesEditPage()
+    const coursesPage = new CoursesPage()
+    coursesPage.startQuoteUsingBasicSearch()
+    const quotesEditPage = new quotesPage.QuotesEditPage()
     quotesEditPage.inputNameSearch(SEARCH_TERM)
     quotesPage.clickSaveButton()
 
     // remove when 'back' bug is fixed
-    let agencyNav = new AgencyNav()
+    const agencyNav = new AgencyNav()
     agencyNav.goToQuotes()
 
     quotesListingPage.clickFirstQuote()
     quotesEditPage.clickFirstOptionEditButton()
-    let quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
+    const quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
     quotesOptionEditPage.clickAccommodationCheckbox()
     quotesOptionEditPage.clickSchoolAccommodationButton()
     quotesOptionEditPage.clickFirstAccommodationRadioButton()
@@ -78,38 +72,34 @@ describe('the quotes page', () => {
   })
 
   it('should email a quote to a student', () => {
-    let quotesPage = new QuotesPage()
-    let quotesListingPage = new quotesPage.QuotesListingPage()
+    const quotesPage = new QuotesPage()
+    const quotesListingPage = new quotesPage.QuotesListingPage()
     quotesListingPage.clickFirstQuote()
-    let quotesEditPage = new quotesPage.QuotesEditPage()
+    const quotesEditPage = new quotesPage.QuotesEditPage()
     quotesEditPage.clickEmailToStudentButton()
-    let emailQuoteModal = new quotesEditPage.EmailQuoteModal()
+    const emailQuoteModal = new quotesEditPage.EmailQuoteModal()
     emailQuoteModal.clickSendButton()
     expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
 
   it('should add an insurance addon with start plus end dates to a quote', () => {
-    const SEARCH_TERM = 'Alex'
-
-    let quotesPage = new QuotesPage()
-    let quotesListingPage = new quotesPage.QuotesListingPage()
+    const quotesPage = new QuotesPage()
+    const quotesListingPage = new quotesPage.QuotesListingPage()
     quotesListingPage.clickNewButton()
 
-    let coursesPage = new CoursesPage()
-    coursesPage.doBasicSearch()
-    coursesPage.selectFirstResultCheckbox()
-    coursesPage.clickStartQuoteButton()
-    let quotesEditPage = new quotesPage.QuotesEditPage()
+    const coursesPage = new CoursesPage()
+    coursesPage.startQuoteUsingBasicSearch()
+    const quotesEditPage = new quotesPage.QuotesEditPage()
     quotesEditPage.inputNameSearch(SEARCH_TERM)
     quotesPage.clickSaveButton()
 
     // remove when 'back' bug is fixed
-    let agencyNav = new AgencyNav()
+    const agencyNav = new AgencyNav()
     agencyNav.goToQuotes()
 
     quotesListingPage.clickFirstQuote()
     quotesEditPage.clickFirstOptionEditButton()
-    let quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
+    const quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
     quotesOptionEditPage.clickAddAddonsButton()
     quotesOptionEditPage.clickSecondCheckbox()
     expect(quotesOptionEditPage.addonsStartDateField.isPresent()).to.eventually.equal(true)

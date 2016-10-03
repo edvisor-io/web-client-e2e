@@ -290,9 +290,10 @@ describe('the settings page', () => {
     quotesListingPage.clickNewButton()
 
     let coursesPage = new CoursesPage()
-    coursesPage.doBasicSearch()
-    coursesPage.selectFirstResultCheckbox()
-    coursesPage.clickStartQuoteButton()
+    coursesPage.startQuoteUsingBasicSearch()
+    // coursesPage.doBasicSearch()
+    // coursesPage.selectFirstResultCheckbox()
+    // coursesPage.clickStartQuoteButton()
     let quotesEditPage = new quotesPage.QuotesEditPage()
     quotesEditPage.inputNameSearch(SEARCH_TERM)
     quotesEditPage.selectCurrencyFromDropdown()

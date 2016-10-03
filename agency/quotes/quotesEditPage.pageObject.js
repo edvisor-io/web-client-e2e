@@ -18,8 +18,10 @@ export default class QuotesEditPage {
     this.emailToStudentButton = element(by.id('ext06-email'))
 
     this.quoteInfoContainer = element(by.id('ext06-new-ingo'))
-    this.nameSearch = this.quoteInfoContainer.element(by.model('n.selectedStudent'))
-    this.currencyDropdown = this.quoteInfoContainer.element(by.model('select.selection'))
+    this.nameSearch = this.quoteInfoContainer
+      .element(by.model('n.selectedStudent'))
+    this.currencyDropdown = this.quoteInfoContainer
+      .element(by.model('select.selection'))
 
     this.firstOption = $('#ext06-edit-summary div.quote-option_flex')
     this.firstOptionEditButton = this.firstOption.all(by.css('button')).get(0)

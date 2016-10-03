@@ -31,9 +31,7 @@ describe('find courses page', () => {
     const SEARCH_TERM = 'Alex'
 
     const coursesPage = new CoursesPage()
-    coursesPage.doBasicSearch()
-    coursesPage.selectFirstResultCheckbox()
-    coursesPage.clickStartQuoteButton()
+    coursesPage.startQuoteUsingBasicSearch()
 
     const quotesPage = new QuotesPage()
     const quotesEditPage = new quotesPage.QuotesEditPage()

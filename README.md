@@ -14,7 +14,7 @@ web-client repo.
 
 #### pageObject patterns 👚
 
-🤖 : *"Patterns are beautiful weaves of code 😍"*
+🤖 : "*Patterns are beautiful weaves of code*"
 
 If it's for a page, such as the Student Profile page, then the filename will be
 `studentProfile.pageObject.js`
@@ -27,6 +27,14 @@ pageObject file `imports` from any other pageObject file that it may need. This
 is to minimize the chaos of pageObjects endlessly importing from others. You
 can see which pageObjects an app test suite is dependent on by looking at only
 the `imports` in the root pageObject file.
+
+#### spec file patterns
+
+🤖 : "*Moar patterns* 😍"
+
+The `before()` and `beforeEach` functions contain logic that the tests are
+dependent on *but are not being tested*. The logic being tested will always
+be inside an `it('should be put in here if being tested')`.
 
 #### Naming objects
 
@@ -86,7 +94,7 @@ Then, in both repos:
 
 4. Run `git submodule update`
 
-5. Run `cp .env.sample .env`
+5. Copy the sample env into the env with `cp .env.sample .env`
 
 #### To set up the client:
 
@@ -157,7 +165,7 @@ Navigate to the directory containing the conf.js of your desired test. Run test 
 ## Useful Docs (🆓 stuff to put out and prevent pesky 🔥🔥🔥)
 
 🤖 : *"I've found these pages very very helpful. Maybe you should check them
-out. ✨"*
+out.* ✨"
 
 > Protractor styleguide: https://github.com/CarmenPopoviciu/protractor-styleguide 🤖 : *"This one has good links at the end of README.md"*
 
