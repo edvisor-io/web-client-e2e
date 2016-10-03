@@ -24,27 +24,25 @@ export class UISelectWidget {
 }
 
 export class DatePickerWidget {
-  static setPikaDate(input, month, day, year) {
+  static setPikaDate(inputElement, month, day, year) {
     let expected = protractor.ExpectedConditions
-    browser.wait(expected.elementToBeClickable(input), constants.TIMEOUT_TIME)
-    input.click()
+    browser.wait(expected.elementToBeClickable(inputElement), constants.TIMEOUT_TIME)
 
-    let datepicker = element(by.css('.pika-single.is-bound:not(.is-hidden)'))
-    browser.wait(expected.visibilityOf(datepicker), constants.TIMEOUT_TIME)
-
-    let monthContainer = datepicker.element(by.css('.pika-select-month'))
-    let yearContainer = datepicker.element(by.css('.pika-select-year'))
+    inputElement.click()
+    let datePicker = $('.pika-single.is-bound:not(.is-hidden)')
+    browser.wait(expected.visibilityOf(datePicker), constants.TIMEOUT_TIME)
+    let monthContainer = datePicker.$('.pika-select-month')
     monthContainer.element(by.cssContainingText('option', month)).click()
 
-    input.click()
-    browser.wait(expected.visibilityOf(datepicker), constants.TIMEOUT_TIME)
-
+    inputElement.click()
+    browser.wait(expected.visibilityOf(datePicker), constants.TIMEOUT_TIME)
+    let yearContainer = datePicker.$('.pika-select-year')
     yearContainer.element(by.cssContainingText('option', year)).click()
 
-    input.click()
-    browser.wait(expected.visibilityOf(datepicker), constants.TIMEOUT_TIME)
-
-    datepicker.element(by.css('[data-pika-day="' + day + '"]')).click()
+    inputElement.click()
+    browser.wait(expected.visibilityOf(datePicker), constants.TIMEOUT_TIME)
+    let dayContainer = datePicker.$(`[data-pika-day="${day}"]`)
+    dayContainer.click()
   }
 }
 
