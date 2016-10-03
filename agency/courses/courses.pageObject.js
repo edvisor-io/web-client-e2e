@@ -40,8 +40,8 @@ export class CoursesPage {
 
   setStartDateAsToday() {
     let month = moment().format('MMMM')
-    let date = moment().format('DD')
-    let year = moment().format('YYYY')
+    let date = +moment().format('DD')
+    let year = +moment().format('YYYY')
     DatePickerWidget.setPikaDate(this.startDatePicker, month, date, year)
   }
 
