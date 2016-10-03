@@ -8,18 +8,18 @@ import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 
 chai.use(chaiAsPromised)
-var expect = chai.expect
+const {expect} = chai
 
 describe('find courses page', () => {
   beforeEach(() => {
     browser.get('/')
     LoginPage.waitForLoader()
 
-    let loginPage = new LoginPage()
+    const loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     LoginPage.waitForLoader()
 
-    let agencyNav = new AgencyNav()
+    const agencyNav = new AgencyNav()
     agencyNav.goToFindCourses()
   })
 
@@ -30,13 +30,13 @@ describe('find courses page', () => {
   it('should create a new quote from a search result', () => {
     const SEARCH_TERM = 'Alex'
 
-    let coursesPage = new CoursesPage()
+    const coursesPage = new CoursesPage()
     coursesPage.doBasicSearch()
     coursesPage.selectFirstResultCheckbox()
     coursesPage.clickStartQuoteButton()
 
-    let quotesPage = new QuotesPage()
-    let quotesEditPage = new quotesPage.QuotesEditPage()
+    const quotesPage = new QuotesPage()
+    const quotesEditPage = new quotesPage.QuotesEditPage()
     quotesEditPage.inputNameSearch(SEARCH_TERM)
     quotesPage.clickSaveButton()
 
@@ -44,7 +44,7 @@ describe('find courses page', () => {
   })
 
   it('search result should have course name, school, intensity, duration, price', () => {
-    let coursesPage = new CoursesPage()
+    const coursesPage = new CoursesPage()
     coursesPage.doBasicSearch()
 
     expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
