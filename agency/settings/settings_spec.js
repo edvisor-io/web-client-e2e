@@ -305,21 +305,30 @@ describe('the settings page', () => {
     })
   })
 
-  describe('tier: Platform', () => {
-    it('should only show Office Information in Agency Tab', () => {
+  describe.skip('tier: Platform', () => {
+    beforeEach(() => {
       const loginPage = new LoginPage()
       loginPage.login(constants.PLATFORM_ADMIN_EMAIL, constants.PASSWORD)
       LoginPage.waitForLoader()
 
       const agencyNav = new AgencyNav()
       agencyNav.goToSettings()
+    })
 
+    it('should only show Office Information in Agency Tab', () => {
       const settingsPage = new SettingsPage()
       settingsPage.goToAgencyTab()
 
       const agencyTab = new settingsPage.AgencyTab()
-      expect(agencyTab.rowsInInformationTab.count()).to.eventually.equal(1)
-      browser.sleep(10000)
+      expect(agencyTab.rowsInInformationTab.count()).to.eventually.equal(2)
+    })
+
+    it('should only show Personal Info, Password and Language in Personal Tab', () => {
+      const settingsPage = new SettingsPage()
+      settingsPage.goToPersonalTab()
+
+      const personalTab = new settingsPage.PersonalTab()
+      expect(personalTab.rows.count()).to.eventually.equal(3)
     })
   })
 })

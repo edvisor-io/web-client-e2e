@@ -1,4 +1,5 @@
-import AgencyTab from './settingsAgencyTab.pageObject.js'
+import PersonalTab from './settingsPersonalTab.pageObject'
+import AgencyTab from './settingsAgencyTab.pageObject'
 import TeamTab from './settingsTeamTab.pageObject'
 import CompanyTab from './settingsCompanyTab.pageObject'
 import PaymentTab from './settingsPaymentTab.pageObject'
@@ -6,8 +7,9 @@ import constants from '../../shared/constants'
 
 class SettingsPage {
   constructor() {
-    this.TeamTab = TeamTab
+    this.PersonalTab = PersonalTab
     this.AgencyTab = AgencyTab
+    this.TeamTab = TeamTab
     this.CompanyTab = CompanyTab
     this.PaymentTab = PaymentTab
 
