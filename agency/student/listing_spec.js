@@ -67,7 +67,7 @@ describe('the student listing page', () => {
 
     expect(studentListing.nopeAlert.isPresent()).to.eventually.equal(true)
   })
-  
+
   it('should download a file of exported students', () => {
     const studentListing = new StudentListingPage()
     studentListing.clickSelectAllStudentsCheckbox()
@@ -122,7 +122,7 @@ describe('the student listing page', () => {
 
       expect(searchBar.searchResultName.isPresent()).to.eventually.equal(true)
       expect(searchBar.searchResultEmail.isPresent()).to.eventually.equal(true)
-      expect(searchBar.searchResultEmail.isPresent()).to.eventually.equal(true)
+      expect(searchBar.searchResultOffice.isPresent()).to.eventually.equal(true)
     })
   })
 })
