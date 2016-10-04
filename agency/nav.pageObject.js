@@ -18,6 +18,7 @@ export default class AgencyNav {
     this.navHeader = $('header')
     this.userDropdown = this.navHeader.$('.settings-dropdown')
     this.settingsButton = this.userDropdown.element(by.id('ext27-settings'))
+    this.manageSchoolsButton = this.userDropdown.element(by.id('ext27-schools'))
   }
 
   goToFindCourses() {
@@ -45,6 +46,15 @@ export default class AgencyNav {
 
     browser.wait(expected.elementToBeClickable(this.settingsButton), constants.TIMEOUT_TIME)
     this.settingsButton.click()
+  }
+
+  goToManageSchools() {
+    const EXPECTED = protractor.ExpectedConditions
+    browser.wait(EXPECTED.elementToBeClickable(this.navHeader), constants.TIMEOUT_TIME)
+    this.userDropdown.click()
+
+    browser.wait(EXPECTED.elementToBeClickable(this.manageSchoolsButton), constants.TIMEOUT_TIME)
+    this.manageSchoolsButton.click()
   }
 
   openProductsPromotionsButton() {
