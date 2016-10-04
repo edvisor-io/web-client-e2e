@@ -12,6 +12,8 @@ class CurrencySettingsArea {
       .model('setRates.companyRates[fromCompanyCurrency.currencyId][toCompanyCurrency.currencyId]')).get(0)
     this.fourthRateField = this.setRatesModalContainer.all(by
       .model('setRates.companyRates[fromCompanyCurrency.currencyId][toCompanyCurrency.currencyId]')).get(3)
+    this.fiftySeventhRateField = this.setRatesModalContainer.all(by
+      .model('setRates.companyRates[fromCompanyCurrency.currencyId][toCompanyCurrency.currencyId]')).get(56)
     this.inModalSaveButton = this.setRatesModalContainer.$('button[type="submit"]')
   }
 
@@ -38,6 +40,11 @@ class CurrencySettingsArea {
   inputRateIntoFourthField(rate) {
     this.fourthRateField.clear()
     this.fourthRateField.sendKeys(rate)
+  }
+
+  inputRateIntoFiftySeventhField(rate) {
+    this.fiftySeventhRateField.clear()
+    this.fiftySeventhRateField.sendKeys(rate)
   }
 
   waitForModal() {
