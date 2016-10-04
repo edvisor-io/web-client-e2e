@@ -1,5 +1,7 @@
 export default class AgencyTab {
   constructor() {
+    this.rowsInInformationTab = element.all(by.id('ext01-agency-areas'))
+
     this.pipelineButton = element(by
       .repeater('menuItem in ::subMenu.selectionOptions track by menuItem.name')
       .row(2))

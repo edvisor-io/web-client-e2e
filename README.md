@@ -144,9 +144,10 @@ Navigate to the directory containing the conf.js of your desired test. Run test 
 
 ## Do this, when there's new code in the web-client 🌱 😎 :
 
-1. Navigate to the web-client repo and `git pull`.
+1. If new code is on remote, `git pull` from the web-client repo.
 
-2. Run `./bin/edvisor build -s client`.
+2. Otherwise go straight to api-server repo (remember client is symlinked) and
+run `./bin/edvisor build -s client`.
 
 ## To interact with the database:
 
