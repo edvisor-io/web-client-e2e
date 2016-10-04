@@ -236,66 +236,61 @@ describe('the settings page', () => {
   //   })
   // })
 
-  it('should manually add a currency exchange rate', () => {
-    const RATE = 1
+  describe('exchange rates', () => {
+    beforeEach(() => {
+      const loginPage = new LoginPage()
+      loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
+      LoginPage.waitForLoader()
 
-    const loginPage = new LoginPage()
-    loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
-    LoginPage.waitForLoader()
+      const agencyNav = new AgencyNav()
+      agencyNav.goToSettings()
 
-    const agencyNav = new AgencyNav()
-    agencyNav.goToSettings()
+      const settingsPage = new SettingsPage()
+      settingsPage.goToCompanyTab()
+    })
 
-    const settingsPage = new SettingsPage()
-    settingsPage.goToCompanyTab()
+    it('should manually add an exchange rate', () => {
+      const RATE = 1
 
-    const companyTab = new settingsPage.CompanyTab()
-    const currencySettingsArea = new companyTab.CurrencySettingsArea()
-    currencySettingsArea.clickManuallySetRadio()
-    currencySettingsArea.clickSetRatesButton()
-    currencySettingsArea.inputRateIntoFirstField(RATE)
-    currencySettingsArea.clickInModalSaveButton()
+      const settingsPage = new SettingsPage()
+      const companyTab = new settingsPage.CompanyTab()
+      const currencySettingsArea = new companyTab.CurrencySettingsArea()
+      currencySettingsArea.clickManuallySetRadio()
+      currencySettingsArea.clickSetRatesButton()
+      currencySettingsArea.inputRateIntoFirstField(RATE)
+      currencySettingsArea.clickInModalSaveButton()
 
-    expect(settingsPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
-  })
+      expect(settingsPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+    })
 
-  it('should change the quoted amount according to manually set rates', () => {
-    const EXCHANGE_RATE = 0.00001
-    const EXPECTED_MAX = 10.01 // is sufficient unless multi million CAD quote
-    const SEARCH_TERM = 'Alex'
+    it('should change the quoted amount according to manually set rates', () => {
+      const EXCHANGE_RATE = 0.00001
+      const EXPECTED_MAX = 10.01 // is sufficient unless multi million CAD quote
+      const SEARCH_TERM = 'Alex'
 
-    const loginPage = new LoginPage()
-    loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
-    LoginPage.waitForLoader()
+      const settingsPage = new SettingsPage()
+      const companyTab = new settingsPage.CompanyTab()
+      const currencySettingsArea = new companyTab.CurrencySettingsArea()
+      currencySettingsArea.clickManuallySetRadio()
+      currencySettingsArea.clickSetRatesButton()
+      currencySettingsArea.inputRateIntoFiftySeventhField(EXCHANGE_RATE)
+      currencySettingsArea.clickInModalSaveButton()
+      currencySettingsArea.clickManuallySetRadio()
+      currencySettingsArea.clickSaveButton()
 
-    const agencyNav = new AgencyNav()
-    agencyNav.goToSettings()
+      const agencyNav = new AgencyNav()
+      agencyNav.goToQuotes()
+      const quotesPage = new QuotesPage()
+      const quotesListingPage = new quotesPage.QuotesListingPage()
+      quotesListingPage.clickNewButton()
 
-    const settingsPage = new SettingsPage()
-    settingsPage.goToCompanyTab()
+      const coursesPage = new CoursesPage()
+      coursesPage.startQuoteUsingBasicSearch()
+      const quotesEditPage = new quotesPage.QuotesEditPage()
+      quotesEditPage.inputNameSearch(SEARCH_TERM)
+      quotesEditPage.selectCurrencyFromDropdown()
 
-    const companyTab = new settingsPage.CompanyTab()
-    const currencySettingsArea = new companyTab.CurrencySettingsArea()
-    currencySettingsArea.clickManuallySetRadio()
-    currencySettingsArea.clickSetRatesButton()
-    // currencySettingsArea.inputRateIntoFourthField(EXCHANGE_RATE)
-    currencySettingsArea.inputRateIntoFiftySeventhField(EXCHANGE_RATE)
-    currencySettingsArea.clickInModalSaveButton()
-    currencySettingsArea.clickManuallySetRadio()
-    currencySettingsArea.clickSaveButton()
-
-    agencyNav.goToQuotes()
-    const quotesPage = new QuotesPage()
-    const quotesListingPage = new quotesPage.QuotesListingPage()
-    quotesListingPage.clickNewButton()
-
-    const coursesPage = new CoursesPage()
-    coursesPage.startQuoteUsingBasicSearch()
-    const quotesEditPage = new quotesPage.QuotesEditPage()
-    quotesEditPage.inputNameSearch(SEARCH_TERM)
-    quotesEditPage.selectCurrencyFromDropdown()
-
-    quotesEditPage.totalInCustomCurrency.getText()
+      quotesEditPage.totalInCustomCurrency.getText()
       .then((text) => {
         let amountText = text.replace(/[^0-9\.]/g, '')
         expect(+amountText).to.be.at.most(EXPECTED_MAX)
@@ -305,5 +300,6 @@ describe('the settings page', () => {
         currencySettingsArea.clickAutomaticallySetRadio()
         currencySettingsArea.clickSaveButton()
       })
+    })
   })
 })
