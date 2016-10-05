@@ -10,7 +10,8 @@ const {expect} = chai
 chai.use(chaiAsPromised)
 
 describe('the agencies page', () => {
-  it('should invite an agency by email', () => {
+  it('should invite an agency by email', function() {
+    this.retries(3)
     browser.get('/')
     LoginPage.waitForLoader()
 

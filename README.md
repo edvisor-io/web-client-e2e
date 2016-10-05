@@ -168,12 +168,16 @@ run `./bin/edvisor build -s client`.
 🤖 : *"I've found these pages very very helpful. Maybe you should check them
 out.* ✨"
 
-> Protractor styleguide: https://github.com/CarmenPopoviciu/protractor-styleguide 🤖 : *"This one has good links at the end of README.md"*
+> [Protractor styleguide](https://github.com/CarmenPopoviciu/protractor-styleguide) 🤖 : *"This one has good links at the end of README.md"*
 
-> Protractor debugging: https://github.com/angular/protractor/blob/master/docs/debugging.md
+> [Best of Mocha, just read this page to start](https://mochajs.org/)
 
-> Protractor timeouts: https://github.com/angular/protractor/blob/master/docs/timeouts.md (many errors from here 💩)
+> [Protractor docs, with search](http://www.protractortest.org/#/api)
 
-> Did you know how many ways you'll need to run this for reliable results? Well, now you do 😁: http://stackoverflow.com/questions/30600738/difference-running-protractor-with-without-selenium
+> [Protractor debugging](https://github.com/angular/protractor/blob/master/docs/debugging.md)
 
-> Using MariaDB: https://www.digitalocean.com/community/tutorials/how-to-create-and-manage-databases-in-mysql-and-mariadb-on-a-cloud-server
+> [Protractor timeouts](https://github.com/angular/protractor/blob/master/docs/timeouts.md) (many errors from here 💩)
+
+> [Did you know how many ways you'll need to run this for reliable results?](http://stackoverflow.com/questions/30600738/difference-running-protractor-with-without-selenium) This will help 😁
+
+> [Using MariaDB](https://www.digitalocean.com/community/tutorials/how-to-create-and-manage-databases-in-mysql-and-mariadb-on-a-cloud-server)
