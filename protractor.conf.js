@@ -74,7 +74,8 @@ exports.config = {
     products: './agency/products/*_spec.js',
     quotes: './agency/quotes/*_spec.js',
     schools: './agency/schools/*_spec.js',
-    settings: './agency/settings/*_spec.js',
+    agencySettings: './agency/settings/*_spec.js',
+    agencies: './school/agencies/*_spec.js',
     studentListing: './agency/student/listing_spec.js',
     studentProfile: './agency/student/profile_spec.js'
   }
