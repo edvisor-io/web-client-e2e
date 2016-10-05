@@ -11,6 +11,7 @@ class SchoolsListingPage {
     this.saveButton = this.addSchoolModal.$('form.company-new_edit button[type="submit"]')
 
     this.alertBoxMessage = $('span.alert-box-message')
+    this.requestsAlert = $('#ext08-requests')
   }
 
   clickAddSchoolButton() {

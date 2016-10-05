@@ -29,7 +29,7 @@ describe('the agencies page', () => {
     expect(agenciesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
 
-  it('should invite an agency by ID', () => {
+  it('should invite an agency by ID, which gets notified in-app', () => {
     const ID = `${uuid.v4()}`
 
     browser.get('/')
@@ -58,5 +58,14 @@ describe('the agencies page', () => {
     agenciesPage.inputIntoAddByIDField(ID)
     agenciesPage.clickAddButton()
     expect(agenciesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+
+    browser.driver.manage().deleteAllCookies()
+    browser.get('/')
+    LoginPage.waitForLoader()
+    loginPage.login(constants.PLATFORM_ADMIN_EMAIL, constants.PASSWORD)
+    LoginPage.waitForLoader()
+
+    agencyNav.goToManageSchools()
+    expect(schoolsPage.requestsAlert.isPresent()).to.eventually.equal(true)
   })
 })
