@@ -6,6 +6,8 @@ class AgenciesPage {
     this.connectByEmailButton = this.addAgencyModal.$('div.company-new_add > button')
     this.emailField = this.addAgencyModal.$('input')
     this.sendButton = this.addAgencyModal.$('button[type="submit"]')
+    this.addByIDField = this.addAgencyModal.$('form.company-new_name input')
+    this.addButton = this.addAgencyModal.$('form.company-new_name button[type="submit"]')
 
     this.alertBoxMessage = $('span.alert-box-message')
   }
@@ -26,6 +28,15 @@ class AgenciesPage {
     this.emailField.clear()
     this.emailField.sendKeys(email)
     this.clickSendButton()
+  }
+
+  inputIntoAddByIDField(id = 'id01') {
+    this.addByIDField.clear()
+    this.addByIDField.sendKeys(id)
+  }
+
+  clickAddButton() {
+    this.addButton.click()
   }
 }
 

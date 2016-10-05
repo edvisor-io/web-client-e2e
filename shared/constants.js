@@ -14,7 +14,7 @@ export default {
   PLATFORM_CRM_ADMIN_EMAIL: 'platformcrm-admin@edvisor.io',
   PLATFORM_CRM_MANAGER_EMAIL: 'platformcrm-manager@edvisor.io',
   PLATFORM_CRM_SALES_REP_EMAIL: 'platformcrm-salesrep@edvisor.io',
-  SCHOOL_EMAIL: 'school19@edvisor.io',
+  SCHOOL_EMAIL: 'school20@edvisor.io',
   PASSWORD: 'password',
 
   BACKUP_SCHOOL_EMAIL: 'school19@edvisor.io',
