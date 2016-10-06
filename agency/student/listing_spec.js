@@ -84,7 +84,14 @@ describe('the student listing page', () => {
     expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
   })
 
-  describe('search function', () => {
+  it('should switch displayed students pipeline', () => {
+    const studentListing = new StudentListingPage()
+    studentListing.clickFirstPipelineTab()
+
+    expect(studentListing.firstStudentInTable.isPresent()).to.eventually.equal(true)
+  })
+
+  describe.skip('search function', () => {
     const SECONDARY_CONTACT = 'Anna Faris'
 
     beforeEach(() => {
