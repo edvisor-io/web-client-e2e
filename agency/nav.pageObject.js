@@ -3,9 +3,10 @@ import constants from '../shared/constants'
 export default class AgencyNav {
   constructor() {
     this.navSidebar = $('.sidebar > ul')
-    this.studentsButton = this.navSidebar.element(by.id('ext28-students'))
     this.findCoursesButton = this.navSidebar.element(by.id('ext28-browse'))
     this.quotesButton = this.navSidebar.element(by.id('ext28-student-quote'))
+    this.studentsButton = this.navSidebar.element(by.id('ext28-students'))
+    this.applicationsButton = this.navSidebar.element(by.id('ext28-applications'))
     this.productsPromotionsButton = this.navSidebar
       .element(by.id('ext28-offerings'))
     this.accommodationsButton = this.productsPromotionsButton
@@ -39,22 +40,10 @@ export default class AgencyNav {
     this.studentsButton.click()
   }
 
-  goToSettings() {
+  goToApplications() {
     let expected = protractor.ExpectedConditions
-    browser.wait(expected.elementToBeClickable(this.navHeader), constants.TIMEOUT_TIME)
-    this.userDropdown.click()
-
-    browser.wait(expected.elementToBeClickable(this.settingsButton), constants.TIMEOUT_TIME)
-    this.settingsButton.click()
-  }
-
-  goToManageSchools() {
-    const EXPECTED = protractor.ExpectedConditions
-    browser.wait(EXPECTED.elementToBeClickable(this.navHeader), constants.TIMEOUT_TIME)
-    this.userDropdown.click()
-
-    browser.wait(EXPECTED.elementToBeClickable(this.manageSchoolsButton), constants.TIMEOUT_TIME)
-    this.manageSchoolsButton.click()
+    browser.wait(expected.elementToBeClickable(this.applicationsButton), constants.TIMEOUT_TIME)
+    this.applicationsButton.click()
   }
 
   openProductsPromotionsButton() {
@@ -75,5 +64,23 @@ export default class AgencyNav {
 
   clickPromotionsButton() {
     this.promotionsButton.click()
+  }
+
+  goToSettings() {
+    let expected = protractor.ExpectedConditions
+    browser.wait(expected.elementToBeClickable(this.navHeader), constants.TIMEOUT_TIME)
+    this.userDropdown.click()
+
+    browser.wait(expected.elementToBeClickable(this.settingsButton), constants.TIMEOUT_TIME)
+    this.settingsButton.click()
+  }
+
+  goToManageSchools() {
+    const EXPECTED = protractor.ExpectedConditions
+    browser.wait(EXPECTED.elementToBeClickable(this.navHeader), constants.TIMEOUT_TIME)
+    this.userDropdown.click()
+
+    browser.wait(EXPECTED.elementToBeClickable(this.manageSchoolsButton), constants.TIMEOUT_TIME)
+    this.manageSchoolsButton.click()
   }
 }
