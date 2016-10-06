@@ -39,6 +39,18 @@ describe('the quotes page', () => {
     const coursesPage = new CoursesPage()
     coursesPage.startQuoteUsingBasicSearch()
     const quotesEditPage = new quotesPage.QuotesEditPage()
+
+    expect(quotesEditPage.nameSearch.isPresent()).to.eventually.equal(true)
+  })
+
+  it('should save a new quote', () => {
+    const quotesPage = new QuotesPage()
+    const quotesListingPage = new quotesPage.QuotesListingPage()
+    quotesListingPage.clickNewButton()
+
+    const coursesPage = new CoursesPage()
+    coursesPage.startQuoteUsingBasicSearch()
+    const quotesEditPage = new quotesPage.QuotesEditPage()
     quotesEditPage.inputNameSearch(SEARCH_TERM)
     quotesPage.clickSaveButton()
 
@@ -56,7 +68,7 @@ describe('the quotes page', () => {
     quotesEditPage.inputNameSearch(SEARCH_TERM)
     quotesPage.clickSaveButton()
 
-    // remove when 'back' bug is fixed
+    // replace when 'back' bug is fixed
     const agencyNav = new AgencyNav()
     agencyNav.goToQuotes()
 
@@ -93,7 +105,7 @@ describe('the quotes page', () => {
     quotesEditPage.inputNameSearch(SEARCH_TERM)
     quotesPage.clickSaveButton()
 
-    // remove when 'back' bug is fixed
+    // replace when 'back' bug is fixed
     const agencyNav = new AgencyNav()
     agencyNav.goToQuotes()
 
