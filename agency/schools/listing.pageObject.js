@@ -6,9 +6,11 @@ class SchoolsListingPage {
     this.connectByEmailButton = this.addSchoolModal.all(by.css('div.company-new_add button')).last()
     this.emailField = this.addSchoolModal.$('input')
     this.sendButton = this.addSchoolModal.$('button[type="submit"]')
-    // this.changeIDButton = this.addSchoolModal.$('button.company-new_change')
     this.setIDField = this.addSchoolModal.$('form.company-new_edit input')
     this.saveButton = this.addSchoolModal.$('form.company-new_edit button[type="submit"]')
+    this.firstIncomingRequestAcceptButton = this.addSchoolModal.element(by
+      .repeater('invite in inviteModel.incomingItems track by $id(invite)')
+      .row(0)).$('button.btn-success')
 
     this.alertBoxMessage = $('span.alert-box-message')
     this.requestsAlert = $('#ext08-requests')
@@ -35,10 +37,6 @@ class SchoolsListingPage {
     this.clickSendButton()
   }
 
-  // clickChangeIDButton() {
-  //   this.changeIDButton.click()
-  // }
-
   inputIntoSetIDField(id = 'id01') {
     this.setIDField.clear()
     this.setIDField.sendKeys(id)
@@ -46,6 +44,10 @@ class SchoolsListingPage {
 
   clickSaveButton() {
     this.saveButton.click()
+  }
+
+  clickFirstIncomingRequestAcceptButton() {
+    this.firstIncomingRequestAcceptButton.click()
   }
 }
 

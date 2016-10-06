@@ -1,8 +1,9 @@
 import AgenciesPage from './agencies.pageObject'
 import SchoolNav from '../nav.pageObject'
 import AgencyNav from '../../agency/nav.pageObject'
-import SchoolsPage from '../../agency/schools/listing.pageObject'
+import SchoolsListingPage from '../../agency/schools/listing.pageObject'
 import LoginPage from '../../auth/login/login.pageObject'
+import NotificationArea from '../../shared/pages/notification.pageObject'
 import constants from '../../shared/constants'
 
 import chai from 'chai'
@@ -13,6 +14,10 @@ const {expect} = chai
 chai.use(chaiAsPromised)
 
 describe('the agencies page', () => {
+  afterEach(() => {
+    browser.driver.manage().deleteAllCookies()
+  })
+
   it('should invite an agency by email', function() {
     browser.get('/')
     LoginPage.waitForLoader()
@@ -40,10 +45,10 @@ describe('the agencies page', () => {
 
     const agencyNav = new AgencyNav()
     agencyNav.goToManageSchools()
-    const schoolsPage = new SchoolsPage()
-    schoolsPage.clickAddSchoolButton()
-    schoolsPage.inputIntoSetIDField(ID)
-    schoolsPage.clickSaveButton()
+    const schoolsListingPage = new SchoolsListingPage()
+    schoolsListingPage.clickAddSchoolButton()
+    schoolsListingPage.inputIntoSetIDField(ID)
+    schoolsListingPage.clickSaveButton()
 
     browser.driver.manage().deleteAllCookies()
     browser.get('/')
@@ -66,6 +71,30 @@ describe('the agencies page', () => {
     LoginPage.waitForLoader()
 
     agencyNav.goToManageSchools()
-    expect(schoolsPage.requestsAlert.isPresent()).to.eventually.equal(true)
+    expect(schoolsListingPage.requestsAlert.isPresent()).to.eventually.equal(true)
+  })
+
+  it('should notify that an agency accepted an invite', () => {
+    browser.get('/')
+    LoginPage.waitForLoader()
+    const loginPage = new LoginPage()
+    loginPage.login(constants.PLATFORM_ADMIN_EMAIL, constants.PASSWORD)
+    LoginPage.waitForLoader()
+
+    const agencyNav = new AgencyNav()
+    agencyNav.goToManageSchools()
+    const schoolsListingPage = new SchoolsListingPage()
+    schoolsListingPage.clickAddSchoolButton()
+    schoolsListingPage.clickFirstIncomingRequestAcceptButton()
+
+    browser.driver.manage().deleteAllCookies()
+    browser.get('/')
+    LoginPage.waitForLoader()
+    loginPage.login(constants.SCHOOL_EMAIL, constants.PASSWORD)
+    LoginPage.waitForLoader()
+
+    const notificationArea = new NotificationArea()
+    notificationArea.clickNotificationToggle()
+    expect(notificationArea.notificationItems.count()).to.eventually.be.at.least(1)
   })
 })
