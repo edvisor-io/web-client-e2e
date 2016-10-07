@@ -11,20 +11,24 @@ chai.use(chaiAsPromised)
 const {expect} = chai
 
 describe('find courses page', () => {
-  beforeEach(() => {
+  before(() => {
     browser.get('/')
     LoginPage.waitForLoader()
 
     const loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     LoginPage.waitForLoader()
-
-    const agencyNav = new AgencyNav()
-    agencyNav.goToFindCourses()
   })
 
-  afterEach(() => {
+  after(() => {
     browser.driver.manage().deleteAllCookies()
+  })
+
+  beforeEach(() => {
+    browser.get('/')
+    LoginPage.waitForLoader()
+    const agencyNav = new AgencyNav()
+    agencyNav.goToFindCourses()
   })
 
   it('should search by city', () => {
@@ -34,17 +38,16 @@ describe('find courses page', () => {
     expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
   })
 
-  it('should search by school', () => {
+  it('should search by country', () => {
     const coursesPage = new CoursesPage()
-    coursesPage.clickBySchoolButton()
-    coursesPage.doBasicSearch('bySchool')
+    coursesPage.doBasicSearch('byCountry')
 
     expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
   })
 
-  it('should search by country', () => {
+  it('should search by school', () => {
     const coursesPage = new CoursesPage()
-    coursesPage.doBasicSearch('byCountry')
+    coursesPage.doBasicSearch('bySchool')
 
     expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
   })

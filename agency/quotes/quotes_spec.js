@@ -10,25 +10,28 @@ import chaiAsPromised from 'chai-as-promised'
 const {expect} = chai
 chai.use(chaiAsPromised)
 
-beforeEach(() => {
-  browser.get('/')
-  LoginPage.waitForLoader()
-})
-
 describe('the quotes page', () => {
   const SEARCH_TERM = 'Alex'
 
-  beforeEach(() => {
+  before(() => {
+    browser.get('/')
+    LoginPage.waitForLoader()
+
     const loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
+    LoginPage.waitForLoader()
+  })
+
+  after(() => {
+    browser.driver.manage().deleteAllCookies()
+  })
+
+  beforeEach(() => {
+    browser.get('/')
     LoginPage.waitForLoader()
 
     const agencyNav = new AgencyNav()
     agencyNav.goToQuotes()
-  })
-
-  afterEach(() => {
-    browser.driver.manage().deleteAllCookies()
   })
 
   it('should email a quote to a student', () => {

@@ -13,20 +13,25 @@ chai.use(chaiAsPromised)
 const {expect} = chai
 
 describe('the student profile page', () => {
-  beforeEach(() => {
+  before(() => {
     browser.get('/')
     LoginPage.waitForLoader()
 
     const loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     LoginPage.waitForLoader()
+  })
+
+  after(() => {
+    browser.driver.manage().deleteAllCookies()
+  })
+
+  beforeEach(() => {
+    browser.get('/')
+    LoginPage.waitForLoader()
 
     const agencyNav = new AgencyNav()
     agencyNav.goToStudents()
-  })
-
-  afterEach(() => {
-    browser.driver.manage().deleteAllCookies()
   })
 
   it('should create a task', () => {

@@ -33,12 +33,12 @@ describe('own products and promotions', () => {
     promotionsPage.createNewPromotion()
   })
 
+  after(() => {
+    browser.driver.manage().deleteAllCookies()
+  })
+
   beforeEach(() => {
     browser.get('/')
-    LoginPage.waitForLoader()
-
-    const loginPage = new LoginPage()
-    loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     LoginPage.waitForLoader()
   })
 })

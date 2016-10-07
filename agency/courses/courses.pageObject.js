@@ -9,6 +9,7 @@ export class CoursesPage {
     this.searchResults = $('div.browse_results')
     this.actionBar = $('div.bs-actions')
 
+    this.byLocationButton = this.searchForm.all(by.css('div.btn-group-select button')).get(0)
     this.bySchoolButton = this.searchForm.all(by.css('div.btn-group-select button')).get(1)
     this.locationField = this.searchForm.element(by.id('js-location-select'))
     this.schoolField = this.searchForm.element(by.id('js-school-select'))
@@ -32,6 +33,9 @@ export class CoursesPage {
       .all(by.css('input[type="checkbox"]')).get(0)
   }
 
+  clickByLocationButton() {
+    this.byLocationButton.click()
+  }
   clickBySchoolButton() {
     this.bySchoolButton.click()
   }
@@ -71,10 +75,13 @@ export class CoursesPage {
 
   doBasicSearch(option = 'byLocation') {
     if (option === 'bySchool') {
+      this.clickBySchoolButton()
       this.inputSchool()
     } else if (option === 'byLocation') {
+      this.clickByLocationButton()
       this.inputLocation()
     } else if (option === 'byCountry') {
+      this.clickByLocationButton()
       this.inputLocation('Canada')
     }
     this.inputDuration()

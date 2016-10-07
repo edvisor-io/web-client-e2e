@@ -19,20 +19,25 @@ describe('the student listing page', () => {
   const AT_EMAIL_DOMAIN = '@betelgeuse.com'
   const NATIONALITY = 'United Kingdom'
 
-  beforeEach(() => {
+  before(() => {
     browser.get('/')
     LoginPage.waitForLoader()
 
     const loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     LoginPage.waitForLoader()
+  })
+
+  after(() => {
+    browser.driver.manage().deleteAllCookies()
+  })
+
+  beforeEach(() => {
+    browser.get('/')
+    LoginPage.waitForLoader()
 
     const agencyNav = new AgencyNav()
     agencyNav.goToStudents()
-  })
-
-  afterEach(() => {
-    browser.driver.manage().deleteAllCookies()
   })
 
   it('should create a new student successfully', () => {
@@ -91,7 +96,7 @@ describe('the student listing page', () => {
     expect(studentListing.firstStudentInTable.isPresent()).to.eventually.equal(true)
   })
 
-  describe.skip('search function', () => {
+  describe('search function', () => {
     const SECONDARY_CONTACT = 'Anna Faris'
 
     beforeEach(() => {

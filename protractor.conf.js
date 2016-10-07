@@ -57,7 +57,7 @@ exports.config = {
 
     browser.addMockModule('disableNgAnimate', disableNgAnimate)
 
-    // ignored in linux test environments
+    // setup the window, ignored in linux test environments
     browser.driver.manage().window().setSize(1280, 800)
     browser.driver.manage().window().setPosition(xOffset, 0)
   },
