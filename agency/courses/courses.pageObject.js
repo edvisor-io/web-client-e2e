@@ -9,7 +9,9 @@ export class CoursesPage {
     this.searchResults = $('div.browse_results')
     this.actionBar = $('div.bs-actions')
 
+    this.bySchoolButton = this.searchForm.all(by.css('div.btn-group-select button')).get(1)
     this.locationField = this.searchForm.element(by.id('js-location-select'))
+    this.schoolField = this.searchForm.element(by.id('js-school-select'))
     this.durationField = this.searchForm.element(by.model('$ctrl.minDuration'))
     this.startDatePicker = this.searchForm.element(by.model('startDate'))
     this.findCoursesButton = this.searchForm.$('button[type="submit"]')
@@ -30,18 +32,26 @@ export class CoursesPage {
       .all(by.css('input[type="checkbox"]')).get(0)
   }
 
-  inputLocation(location) {
+  clickBySchoolButton() {
+    this.bySchoolButton.click()
+  }
+
+  inputLocation(location = 'Vancouver') {
     ChosenWidget.searchAndSetChosenValue(this.locationField, location)
   }
 
-  inputDuration(duration) {
+  inputSchool(school = 'Camber') {
+    ChosenWidget.searchAndSetChosenValue(this.schoolField, school)
+  }
+
+  inputDuration(duration = 1) {
     ChosenWidget.setChosenValue(this.durationField, duration)
   }
 
   setStartDateAsToday() {
     let month = moment().format('MMMM')
-    let date = +moment().format('DD')
-    let year = +moment().format('YYYY')
+    let date = +(moment().format('DD'))
+    let year = +(moment().format('YYYY'))
     DatePickerWidget.setPikaDate(this.startDatePicker, month, date, year)
   }
 
@@ -59,9 +69,13 @@ export class CoursesPage {
     this.startQuoteButton.click()
   }
 
-  doBasicSearch(location = 'Vancouver', duration = 1) {
-    this.inputLocation(location)
-    this.inputDuration(duration)
+  doBasicSearch(option = 'byLocation') {
+    if (option === 'bySchool') {
+      this.inputSchool()
+    } else if (option === 'byLocation') {
+      this.inputLocation()
+    }
+    this.inputDuration()
     this.setStartDateAsToday()
     this.clickFindCoursesButton()
   }
