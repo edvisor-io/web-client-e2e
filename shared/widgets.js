@@ -1,23 +1,23 @@
 import constants from './constants'
 
 export class UISelectWidget {
-  static clickUiSelect(elem, option) {
+  static clickUiSelect(containerElement, input) {
     let expected = protractor.ExpectedConditions
-    browser.wait(expected.elementToBeClickable(elem), constants.TIMEOUT_TIME)
-    var chooseElem = elem.element(by.css('.ui-select-search'))
+    browser.wait(expected.elementToBeClickable(containerElement), constants.TIMEOUT_TIME)
+    var fieldElement = containerElement.$('.ui-select-search')
 
-    elem.click()
-    chooseElem.sendKeys(option)
+    containerElement.click()
+    fieldElement.sendKeys(input)
 
-    var choices = elem.all(by.css('.ui-select-choices-row'))
-
-    browser.wait(function() {
-      return choices.count().then(function(count) {
-        return count > 0
-      })
+    var choices = containerElement.all(by.css('.ui-select-choices-row'))
+    browser.wait(() => {
+      return choices.count()
+        .then((count) => {
+          return count > 0
+        })
     }, constants.TIMEOUT_TIME)
 
-    var firstOption = choices.first().all(by.css('div')).first()
+    let firstOption = choices.first().all(by.css('div')).first()
     browser.wait(expected.elementToBeClickable(firstOption), constants.TIMEOUT_TIME)
     firstOption.click()
   }

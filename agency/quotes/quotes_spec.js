@@ -31,58 +31,6 @@ describe('the quotes page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  it('should create a new quote', () => {
-    const quotesPage = new QuotesPage()
-    const quotesListingPage = new quotesPage.QuotesListingPage()
-    quotesListingPage.clickNewButton()
-
-    const coursesPage = new CoursesPage()
-    coursesPage.startQuoteUsingBasicSearch()
-    const quotesEditPage = new quotesPage.QuotesEditPage()
-
-    expect(quotesEditPage.nameSearch.isPresent()).to.eventually.equal(true)
-  })
-
-  it('should save a new quote', () => {
-    const quotesPage = new QuotesPage()
-    const quotesListingPage = new quotesPage.QuotesListingPage()
-    quotesListingPage.clickNewButton()
-
-    const coursesPage = new CoursesPage()
-    coursesPage.startQuoteUsingBasicSearch()
-    const quotesEditPage = new quotesPage.QuotesEditPage()
-    quotesEditPage.inputNameSearch(SEARCH_TERM)
-    quotesPage.clickSaveButton()
-
-    expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
-  })
-
-  it('should add accommodation with start plus end dates to a quote', () => {
-    const quotesPage = new QuotesPage()
-    const quotesListingPage = new quotesPage.QuotesListingPage()
-    quotesListingPage.clickNewButton()
-
-    const coursesPage = new CoursesPage()
-    coursesPage.startQuoteUsingBasicSearch()
-    const quotesEditPage = new quotesPage.QuotesEditPage()
-    quotesEditPage.inputNameSearch(SEARCH_TERM)
-    quotesPage.clickSaveButton()
-
-    // replace when 'back' bug is fixed
-    const agencyNav = new AgencyNav()
-    agencyNav.goToQuotes()
-
-    quotesListingPage.clickFirstQuote()
-    quotesEditPage.clickFirstOptionEditButton()
-    const quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
-    quotesOptionEditPage.clickAccommodationCheckbox()
-    quotesOptionEditPage.clickSchoolAccommodationButton()
-    quotesOptionEditPage.clickFirstAccommodationRadioButton()
-    expect(quotesOptionEditPage.accommodationStartDateField.isPresent()).to.eventually.equal(true)
-    quotesOptionEditPage.clickSaveChangesButton()
-    expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
-  })
-
   it('should email a quote to a student', () => {
     const quotesPage = new QuotesPage()
     const quotesListingPage = new quotesPage.QuotesListingPage()
@@ -94,28 +42,78 @@ describe('the quotes page', () => {
     expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
 
-  it('should add an insurance addon with start plus end dates to a quote', () => {
-    const quotesPage = new QuotesPage()
-    const quotesListingPage = new quotesPage.QuotesListingPage()
-    quotesListingPage.clickNewButton()
+  describe('new quotes', () => {
+    beforeEach(() => {
+      const quotesPage = new QuotesPage()
+      const quotesListingPage = new quotesPage.QuotesListingPage()
+      quotesListingPage.clickNewButton()
+    })
 
-    const coursesPage = new CoursesPage()
-    coursesPage.startQuoteUsingBasicSearch()
-    const quotesEditPage = new quotesPage.QuotesEditPage()
-    quotesEditPage.inputNameSearch(SEARCH_TERM)
-    quotesPage.clickSaveButton()
+    it('should create a new quote', () => {
+      const coursesPage = new CoursesPage()
+      coursesPage.startQuoteUsingBasicSearch()
+      const quotesPage = new QuotesPage()
+      const quotesEditPage = new quotesPage.QuotesEditPage()
 
-    // replace when 'back' bug is fixed
-    const agencyNav = new AgencyNav()
-    agencyNav.goToQuotes()
+      expect(quotesEditPage.nameSearch.isPresent()).to.eventually.equal(true)
+    })
 
-    quotesListingPage.clickFirstQuote()
-    quotesEditPage.clickFirstOptionEditButton()
-    const quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
-    quotesOptionEditPage.clickAddAddonsButton()
-    quotesOptionEditPage.clickSecondCheckbox()
-    expect(quotesOptionEditPage.addonsStartDateField.isPresent()).to.eventually.equal(true)
-    quotesOptionEditPage.clickSaveButton()
-    expect(quotesOptionEditPage.durationFields.isPresent()).to.eventually.equal(true)
+    it('should save a new quote', () => {
+      const coursesPage = new CoursesPage()
+      coursesPage.startQuoteUsingBasicSearch()
+      const quotesPage = new QuotesPage()
+      const quotesEditPage = new quotesPage.QuotesEditPage()
+      quotesEditPage.inputNameSearch(SEARCH_TERM)
+      quotesPage.clickSaveButton()
+
+      expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+    })
+
+    it('should add an insurance addon with start plus end dates to a quote', () => {
+      const coursesPage = new CoursesPage()
+      coursesPage.startQuoteUsingBasicSearch()
+      const quotesPage = new QuotesPage()
+      const quotesEditPage = new quotesPage.QuotesEditPage()
+      quotesEditPage.inputNameSearch(SEARCH_TERM)
+      quotesPage.clickSaveButton()
+
+      // replace when 'back' bug is fixed
+      const agencyNav = new AgencyNav()
+      agencyNav.goToQuotes()
+
+      const quotesListingPage = new quotesPage.QuotesListingPage()
+      quotesListingPage.clickFirstQuote()
+      quotesEditPage.clickFirstOptionEditButton()
+      const quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
+      quotesOptionEditPage.clickAddAddonsButton()
+      quotesOptionEditPage.clickSecondCheckbox()
+      expect(quotesOptionEditPage.addonsStartDateField.isPresent()).to.eventually.equal(true)
+      quotesOptionEditPage.clickSaveButton()
+      expect(quotesOptionEditPage.durationFields.isPresent()).to.eventually.equal(true)
+    })
+
+    it('should add accommodation with start plus end dates to a quote', () => {
+      const coursesPage = new CoursesPage()
+      coursesPage.startQuoteUsingBasicSearch()
+      const quotesPage = new QuotesPage()
+      const quotesEditPage = new quotesPage.QuotesEditPage()
+      quotesEditPage.inputNameSearch(SEARCH_TERM)
+      quotesPage.clickSaveButton()
+
+      // replace when 'back' bug is fixed
+      const agencyNav = new AgencyNav()
+      agencyNav.goToQuotes()
+
+      const quotesListingPage = new quotesPage.QuotesListingPage()
+      quotesListingPage.clickFirstQuote()
+      quotesEditPage.clickFirstOptionEditButton()
+      const quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
+      quotesOptionEditPage.clickAccommodationCheckbox()
+      quotesOptionEditPage.clickSchoolAccommodationButton()
+      quotesOptionEditPage.clickFirstAccommodationRadioButton()
+      expect(quotesOptionEditPage.accommodationStartDateField.isPresent()).to.eventually.equal(true)
+      quotesOptionEditPage.clickSaveChangesButton()
+      expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+    })
   })
 })
