@@ -74,6 +74,8 @@ export class CoursesPage {
       this.inputSchool()
     } else if (option === 'byLocation') {
       this.inputLocation()
+    } else if (option === 'byCountry') {
+      this.inputLocation('Canada')
     }
     this.inputDuration()
     this.setStartDateAsToday()

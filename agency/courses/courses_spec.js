@@ -27,6 +27,13 @@ describe('find courses page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
+  it('should search by city', () => {
+    const coursesPage = new CoursesPage()
+    coursesPage.doBasicSearch()
+
+    expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
+  })
+
   it('should search by school', () => {
     const coursesPage = new CoursesPage()
     coursesPage.clickBySchoolButton()
@@ -35,28 +42,35 @@ describe('find courses page', () => {
     expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
   })
 
-  // it('should create a new quote from a search result', () => {
-  //   const SEARCH_TERM = 'Alex'
-  //
-  //   const coursesPage = new CoursesPage()
-  //   coursesPage.startQuoteUsingBasicSearch()
-  //
-  //   const quotesPage = new QuotesPage()
-  //   const quotesEditPage = new quotesPage.QuotesEditPage()
-  //   quotesEditPage.inputNameSearch(SEARCH_TERM)
-  //   quotesPage.clickSaveButton()
-  //
-  //   expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
-  // })
-  //
-  // it('search result should have course name, school, intensity, duration, price', () => {
-  //   const coursesPage = new CoursesPage()
-  //   coursesPage.doBasicSearch()
-  //
-  //   expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
-  //   expect(coursesPage.firstResultSchool.isPresent()).to.eventually.equal(true)
-  //   expect(coursesPage.firstResultIntensity.isPresent()).to.eventually.equal(true)
-  //   expect(coursesPage.firstResultDuration.isPresent()).to.eventually.equal(true)
-  //   expect(coursesPage.firstResultPrice.isPresent()).to.eventually.equal(true)
-  // })
+  it('should search by country', () => {
+    const coursesPage = new CoursesPage()
+    coursesPage.doBasicSearch('byCountry')
+
+    expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
+  })
+
+  it('should create a new quote from a search result', () => {
+    const SEARCH_TERM = 'Alex'
+
+    const coursesPage = new CoursesPage()
+    coursesPage.startQuoteUsingBasicSearch()
+
+    const quotesPage = new QuotesPage()
+    const quotesEditPage = new quotesPage.QuotesEditPage()
+    quotesEditPage.inputNameSearch(SEARCH_TERM)
+    quotesPage.clickSaveButton()
+
+    expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+  })
+
+  it('search result should have course name, school, intensity, duration, price', () => {
+    const coursesPage = new CoursesPage()
+    coursesPage.doBasicSearch()
+
+    expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
+    expect(coursesPage.firstResultSchool.isPresent()).to.eventually.equal(true)
+    expect(coursesPage.firstResultIntensity.isPresent()).to.eventually.equal(true)
+    expect(coursesPage.firstResultDuration.isPresent()).to.eventually.equal(true)
+    expect(coursesPage.firstResultPrice.isPresent()).to.eventually.equal(true)
+  })
 })
