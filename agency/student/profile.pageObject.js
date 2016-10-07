@@ -2,6 +2,8 @@ import SecondaryContactsArea from './profile/secondaryContactsArea.pageObject'
 import AssignedToArea from './profile/assignedToArea.pageObject'
 import PipelineArea from './profile/pipelineArea.pageObject'
 
+import uuid from 'node-uuid'
+
 export default class StudentProfilePage {
   constructor() {
     this.SecondaryContactsArea = SecondaryContactsArea
@@ -25,6 +27,7 @@ export default class StudentProfilePage {
     this.submitTaskButton = this.tasksContainer.$('button[type="submit"]')
     this.alertBoxMessage = $('.alert-box-message')
 
+    this.studentInfoContainer = $('#ext02-info')
     this.assignedToLabel = this.studentSidebarOwnerContainer
       .$('photo-initials + div > p')
     this.firstNameField = this.informationContainer
@@ -33,6 +36,8 @@ export default class StudentProfilePage {
     this.emailField = this.informationContainer.element(by.name('email'))
     this.nationalityField = this.informationContainer
       .element(by.name('nationality'))
+
+    this.saveButton = this.studentInfoContainer.$('button[type="submit"]')
   }
 
   addTask(taskTitle, dueTime) {
@@ -43,5 +48,14 @@ export default class StudentProfilePage {
 
   clickBackToStudentsButton() {
     this.backToStudentsButton.click()
+  }
+
+  inputFirstName(firstName = `${uuid.v4()}`) {
+    this.firstNameField.clear()
+    this.firstNameField.sendKeys(firstName)
+  }
+
+  clickSaveButton() {
+    this.saveButton.click()
   }
 }

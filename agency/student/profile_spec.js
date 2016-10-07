@@ -7,6 +7,7 @@ import constants from '../../shared/constants'
 
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
+import uuid from 'node-uuid'
 
 chai.use(chaiAsPromised)
 const {expect} = chai
@@ -41,12 +42,24 @@ describe('the student profile page', () => {
     expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
 
-  it('should display a student profile on click of search result', () => {
+  it('should display a student profile when one in listing is clicked', () => {
     const studentListing = new StudentListingPage()
     studentListing.clickFirstStudentInTable()
 
     const studentProfile = new StudentProfilePage()
     expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
+  })
+
+  it('should view and edit an existing student profile', () => {
+    const FIRST_NAME = `${uuid.v4()}`
+    const studentListing = new StudentListingPage()
+    studentListing.clickFirstStudentInTable()
+
+    const studentProfile = new StudentProfilePage()
+    studentProfile.inputFirstName(FIRST_NAME)
+    studentProfile.clickSaveButton()
+
+    expect(studentProfile.firstNameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
   })
 
   describe('office and owner assignment', () => {
