@@ -7,7 +7,7 @@ export default class ForgotPage {
     this.messageBox = $('div.sa-confirm-button-container')
   }
 
-  send(email) {
+  requestRecovery(email) {
     this.emailField.sendKeys(email)
     this.submitBtn.click()
   }

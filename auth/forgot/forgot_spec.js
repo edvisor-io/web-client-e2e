@@ -4,10 +4,10 @@ import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 
 chai.use(chaiAsPromised)
-var expect = chai.expect
+const {expect} = chai
 
 describe('the forgot page', function() {
-  beforeEach(function() {
+  beforeEach(() => {
     browser.get('/auth/en/forgot')
     ForgotPage.waitForLoader()
   })
@@ -17,19 +17,19 @@ describe('the forgot page', function() {
   })
 
   it('should load the required page elements', () => {
-    let forgotPage = new ForgotPage()
+    const forgotPage = new ForgotPage()
     expect(forgotPage.emailField.isPresent()).to.eventually.equal(true)
     expect(forgotPage.submitBtn.isPresent()).to.eventually.equal(true)
   })
 
   it('should not display a message initially', () => {
-    let forgotPage = new ForgotPage()
+    const forgotPage = new ForgotPage()
     expect(forgotPage.messageBox.isPresent()).to.eventually.equal(false)
   })
 
   it('should display message if email is accepted', () => {
-    let forgotPage = new ForgotPage()
-    forgotPage.send(constants.ADMIN_EMAIL)
+    const forgotPage = new ForgotPage()
+    forgotPage.requestRecovery(constants.ADMIN_EMAIL)
     expect(forgotPage.messageBox.isPresent()).to.eventually.equal(true)
   })
 })

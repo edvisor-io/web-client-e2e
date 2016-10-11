@@ -62,6 +62,8 @@ exports.config = {
     browser.driver.manage().window().setPosition(xOffset, 0)
   },
 
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: [
