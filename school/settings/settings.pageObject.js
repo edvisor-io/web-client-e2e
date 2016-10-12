@@ -1,7 +1,7 @@
 // import PersonalTab from './settingsPersonalTab.pageObject'
 // import SchoolTab from './settingsSchoolTab.pageObject'
 // import TeamTab from './settingsTeamTab.pageObject'
-import CampusTab from './settingsCampusTab.pageObject'
+import CampusTab from './campus/campusTab.pageObject'
 
 class SettingsPage {
   constructor() {

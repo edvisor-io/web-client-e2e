@@ -17,7 +17,7 @@ export class UISelectWidget {
         })
     }, constants.TIMEOUT_TIME)
 
-    let firstOption = choices.first().all(by.css('div')).first()
+    let firstOption = choices.first().all(by.css('span')).first()
     browser.wait(expected.elementToBeClickable(firstOption), constants.TIMEOUT_TIME)
     firstOption.click()
   }
