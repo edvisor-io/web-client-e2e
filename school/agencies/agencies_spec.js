@@ -34,7 +34,7 @@ describe('the agencies page', () => {
     expect(agenciesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
 
-  it('should invite an agency by ID, which gets notified in-app', () => {
+  it('(1/2) can invite an agency by ID, which gets notified in-app', () => {
     const ID = `${uuid.v4()}`
 
     browser.get('/')
@@ -74,7 +74,7 @@ describe('the agencies page', () => {
     expect(schoolsListingPage.requestsAlert.isPresent()).to.eventually.equal(true)
   })
 
-  it('should notify that an agency accepted an invite', () => {
+  it('(2/2) ...agency can accept the invitation, which gets notified in-app', () => {
     browser.get('/')
     LoginPage.waitForLoader()
     const loginPage = new LoginPage()
