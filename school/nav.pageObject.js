@@ -3,11 +3,26 @@ import constants from '../shared/constants'
 export default class SchoolNav {
   constructor() {
     this.navSidebar = $('.sidebar > ul')
+    this.applicationsButton = element(by.id('ext30-applications'))
+    this.productsAndAddonsButton = element(by.id('ext30-offerings'))
+    this.promotionsButton = element(by.id('ext30-promotion'))
 
     this.navHeader = $('header')
     this.userDropdown = this.navHeader.$('.settings-dropdown')
     this.settingsButton = this.userDropdown.element(by.id('ext29-settings'))
     this.manageAgenciesButton = this.userDropdown.element(by.id('ext29-manage-agencies'))
+  }
+
+  goToApplications() {
+    this.applicationsButton.click()
+  }
+
+  goToProductsAndAddons() {
+    this.productsAndAddonsButton.click()
+  }
+
+  goToPromotions() {
+    this.promotionsButton.click()
   }
 
   clickUserDropdown() {

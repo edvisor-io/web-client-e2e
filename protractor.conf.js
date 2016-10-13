@@ -73,7 +73,8 @@ exports.config = {
   suites: {
     auth: './auth/**/*_spec.js',
     courses: './agency/courses/*_spec.js',
-    products: './agency/products/*_spec.js',
+    aProducts: './agency/products/*_spec.js',
+    sProducts: './school/products/*_spec.js',
     quotes: './agency/quotes/*_spec.js',
     schools: './agency/schools/*_spec.js',
     aSettings: './agency/settings/*_spec.js',

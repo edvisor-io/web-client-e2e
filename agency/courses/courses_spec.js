@@ -10,7 +10,7 @@ import chaiAsPromised from 'chai-as-promised'
 chai.use(chaiAsPromised)
 const {expect} = chai
 
-describe('find courses page', () => {
+describe('the find courses page', () => {
   before(() => {
     browser.get('/')
     LoginPage.waitForLoader()
