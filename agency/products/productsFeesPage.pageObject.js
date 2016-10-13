@@ -5,6 +5,8 @@ export default class FeesPage {
     this.newFeeButton = element(by.id('ext33-new-btn'))
     this.nameField = $('input[name="name"]')
     this.saveButton = $('button[type="submit"]')
+
+    this.alertBoxMessage = $('.alert-box-message')
   }
 
   clickNewFeeButton() {

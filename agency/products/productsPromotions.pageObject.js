@@ -10,6 +10,8 @@ export default class PromotionsPage {
     this.fromDateField = element(by.model('vm.promotionModel.data.beginBookingExpiry'))
     this.toDateField = element(by.model('vm.promotionModel.data.endBookingExpiry'))
     this.saveButton = $('button[type="submit"]')
+
+    this.alertBoxMessage = $('.alert-box-message')
   }
 
   clickNewPromotionButton() {

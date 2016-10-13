@@ -3,6 +3,8 @@ export default class AddonsPage {
     this.newAddonsButton = element(by.id('ext32-new-btn'))
     this.nameField = $('input[name="name"]')
     this.saveButton = $('button[type="submit"]')
+
+    this.alertBoxMessage = $('.alert-box-message')
   }
 
   clickNewAddonsButton() {

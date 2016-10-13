@@ -12,6 +12,8 @@ export default class AccommodationsPage {
       .repeater('roomType in roomTypeOptions').row(0))
     this.mealTypeDropdown = element.all(by.model('select.selection')).get(0)
     this.saveButton = $('div.save-right button[type="submit"]')
+
+    this.alertBoxMessage = $('.alert-box-message')
   }
 
   clickNewAccommodationButton() {

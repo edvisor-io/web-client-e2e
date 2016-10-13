@@ -29,8 +29,7 @@ export class CoursesPage {
     this.firstResultDuration = this.firstResult
       .all(by.css('p.ng-binding')).get(1)
     this.firstResultPrice = this.firstResult.all(by.css('p.ng-binding')).get(2)
-    this.firstResultCheckbox = this.searchResults
-      .all(by.css('input[type="checkbox"]')).get(0)
+    this.firstResultCheckbox = this.firstResult.$('input[type="checkbox"]')
   }
 
   clickByLocationButton() {
@@ -64,8 +63,8 @@ export class CoursesPage {
   }
 
   selectFirstResultCheckbox() {
-    let expected = protractor.ExpectedConditions
-    browser.wait(expected.elementToBeClickable(this.firstResultCheckbox), constants.TIMEOUT_TIME)
+    // let expected = protractor.ExpectedConditions
+    // browser.wait(expected.elementToBeClickable(this.firstResultCheckbox), constants.TIMEOUT_TIME)
     this.firstResultCheckbox.click()
   }
 
