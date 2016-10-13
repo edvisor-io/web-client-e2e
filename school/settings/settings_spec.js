@@ -11,44 +11,45 @@ chai.use(chaiAsPromised)
 const {expect} = chai
 
 describe('the school app settings page', () => {
-  it('should duplicate a campus', () => {
-    const CAMPUS_NAME = `${uuid.v4()}`
-
+  before(() => {
     browser.get('/')
     LoginPage.waitForLoader()
     const loginPage = new LoginPage()
     loginPage.login(constants.SCHOOL_EMAIL, constants.PASSWORD)
     LoginPage.waitForLoader()
-
-    const schoolNav = new SchoolNav()
-    schoolNav.goToSettings()
-    const settingsPage = new SettingsPage()
-    settingsPage.goToCampusTab()
-    const campusTab = new settingsPage.CampusTab()
-    campusTab.duplicateCampus(CAMPUS_NAME)
-
-    campusTab.clickSelectCampusDropdown()
-    expect(campusTab.lastItemInDropdown.getText()).to.eventually.equal(CAMPUS_NAME)
   })
 
-  it('should create a campus profile', () => {
-    const CAMPUS_NAME = `${uuid.v4()}`
+  describe('campus tab', () => {
+    beforeEach(() => {
+      browser.get('/')
+      LoginPage.waitForLoader()
 
-    browser.get('/')
-    LoginPage.waitForLoader()
-    const loginPage = new LoginPage()
-    loginPage.login(constants.SCHOOL_EMAIL, constants.PASSWORD)
-    LoginPage.waitForLoader()
+      const schoolNav = new SchoolNav()
+      schoolNav.goToSettings()
+      const settingsPage = new SettingsPage()
+      settingsPage.goToCampusTab()
+    })
 
-    const schoolNav = new SchoolNav()
-    schoolNav.goToSettings()
-    const settingsPage = new SettingsPage()
-    settingsPage.goToCampusTab()
-    const campusTab = new settingsPage.CampusTab()
-    campusTab.createANewCampus(CAMPUS_NAME)
+    it('should duplicate a campus', () => {
+      const CAMPUS_NAME = `${uuid.v4()}`
 
-    campusTab.clickSelectCampusDropdown()
-    expect(campusTab.lastItemInDropdown.getText()).to.eventually.equal(CAMPUS_NAME)
-    browser.sleep(5000)
+      const settingsPage = new SettingsPage()
+      const campusTab = new settingsPage.CampusTab()
+      campusTab.duplicateCampus(CAMPUS_NAME)
+
+      campusTab.clickSelectCampusDropdown()
+      expect(campusTab.lastItemInDropdown.getText()).to.eventually.equal(CAMPUS_NAME)
+    })
+
+    it('should create a campus profile', () => {
+      const CAMPUS_NAME = `${uuid.v4()}`
+
+      const settingsPage = new SettingsPage()
+      const campusTab = new settingsPage.CampusTab()
+      campusTab.createANewCampus(CAMPUS_NAME)
+
+      campusTab.clickSelectCampusDropdown()
+      expect(campusTab.lastItemInDropdown.getText()).to.eventually.equal(CAMPUS_NAME)
+    })
   })
 })
