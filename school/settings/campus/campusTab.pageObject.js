@@ -6,7 +6,7 @@ export default class CampusTab {
     this.duplicateButton = $('div.flex-spread > div > button')
     this.selectCampusDropdown = element.all(by.css('div.selected_item')).first()
     this.lastItemInDropdown = element.all(by.css('ul.menu li span')).last()
-    this.newCampusButton = $('div.flex-spread > button.btn-default')
+    this.newCampusButton = $('div.flex-spread > button.btn--default')
 
     this.alertBoxMessage = $('.alert-box-message')
   }

@@ -8,7 +8,7 @@ export default class AgencyTab {
     this.firstPipelineCard = element(by
       .repeater('studentPipeline in pipelineCtrl.studentPipelines').row(0))
     this.firstDuplicateButton = this.firstPipelineCard
-      .all(by.css('.btn-group-dropdown > .btn-default')).get(0)
+      .all(by.css('.btn-group-dropdown > .btn--default')).get(0)
   }
 
   clickPipelineButton() {

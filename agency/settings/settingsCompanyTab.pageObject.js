@@ -3,10 +3,10 @@ import constants from '../../shared/constants'
 class CurrencySettingsArea {
   constructor() {
     this.currencySettingsContainer = $('.currency-settings')
-    this.automaticallySetRadio = this.currencySettingsContainer.element(by.id('ext01-currency-auto'))
-    this.manuallySetRatesRadio = this.currencySettingsContainer.element(by.id('ext01-currency-manual'))
+    this.automaticallySetRadio = this.currencySettingsContainer.all(by.css('label.input-checked-gray')).get(0)
+    this.manuallySetRatesRadio = this.currencySettingsContainer.all(by.css('label.input-checked-gray')).get(1)
     this.setRatesButton = this.currencySettingsContainer.element(by.id('ext01-set-exchange'))
-    this.saveButton = this.currencySettingsContainer.$('button[type="submit"]')
+    this.saveButton = this.currencySettingsContainer.$('form#ext01-currency-type').$('button[type="submit"]')
     this.setRatesModalContainer = $('.e-modal-container')
     this.firstRateField = this.setRatesModalContainer.all(by
       .model('setRates.companyRates[fromCompanyCurrency.currencyId][toCompanyCurrency.currencyId]')).get(0)

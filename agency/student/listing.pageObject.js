@@ -6,7 +6,7 @@ export default class StudentListingPage {
     this.AddStudentModal = AddStudentModal
     this.SearchBar = SearchBar
 
-    this.selectAllStudentsCheckbox = $('.select-box')
+    this.selectAllStudentsCheckbox = $('div.ag-header-cell-label label.checkbox')
     this.exportButton = $('.action-bar #ext02-export-data')
     this.exportMessage = $('.e-alert_inner-container')
 

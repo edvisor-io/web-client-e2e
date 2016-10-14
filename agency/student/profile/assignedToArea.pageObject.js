@@ -9,7 +9,7 @@ export default class AssignedToArea {
     this.officeField = this.container.element(by.name('agency'))
     this.saveButton = this.container.$('button[type="submit"]')
     this.changeOfficeExceptionModal = $('.e-alert_inner-container')
-    this.moveStudentButton = this.changeOfficeExceptionModal.$('.btn-default')
+    this.moveStudentButton = this.changeOfficeExceptionModal.$('.btn--default')
     this.ownerField = this.container.element(by.name('name'))
     this.agencyName = this.container.element(by.id('student-agency-name'))
     this.ownerName = this.container.$('photo-initials + div > p')

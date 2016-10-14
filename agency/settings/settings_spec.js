@@ -24,7 +24,7 @@ describe('the settings page', () => {
   })
 
   // being changed, don't fix
-  describe.skip('sales reps', () => {
+  describe('sales reps', () => {
     beforeEach(() => {
       const loginPage = new LoginPage()
       loginPage.login(constants.SALES_REP_EMAIL, constants.SALES_REP_PASS)
@@ -50,7 +50,7 @@ describe('the settings page', () => {
     })
   })
 
-  describe.skip('admins', () => {
+  describe('admins', () => {
     beforeEach(() => {
       const loginPage = new LoginPage()
       loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
@@ -95,7 +95,7 @@ describe('the settings page', () => {
   })
 
   // being changed, don't fix
-  describe.skip('user slots', () => {
+  describe('user slots', () => {
     const NO_SLOTS_ALERT_TEXT = 'You do not have any more slots available.'
 
     it('should increase slots in TeamTab when added in PaymentTab', () => {
@@ -187,7 +187,7 @@ describe('the settings page', () => {
           let manageMembersArea = new teamTab.ManageMembersArea()
           manageMembersArea.clickLastManagerEditButton()
           manageMembersArea.clickLastManagerDeleteButton()
-          manageMembersArea.clickDeleteButton()
+          manageMembersArea.clickConfirmDeleteButton()
 
           expect(inviteArea.noSlotsAlert.isPresent()).to.eventually.equal(false)
 
@@ -226,7 +226,7 @@ describe('the settings page', () => {
           let manageMembersArea = new teamTab.ManageMembersArea()
           manageMembersArea.clickLastManagerEditButton()
           manageMembersArea.clickLastManagerDeleteButton()
-          manageMembersArea.clickDeleteButton()
+          manageMembersArea.clickConfirmDeleteButton()
 
           settingsPage.goToPaymentTab()
           browser.driver.navigate().refresh()
@@ -238,7 +238,7 @@ describe('the settings page', () => {
     })
   })
 
-  describe.skip('exchange rates', () => {
+  describe('exchange rates', () => {
     beforeEach(() => {
       const loginPage = new LoginPage()
       loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
@@ -305,7 +305,7 @@ describe('the settings page', () => {
     })
   })
 
-  describe.skip('tier: Platform', () => {
+  describe('tier: Platform', () => {
     beforeEach(() => {
       const loginPage = new LoginPage()
       loginPage.login(constants.PLATFORM_ADMIN_EMAIL, constants.PASSWORD)

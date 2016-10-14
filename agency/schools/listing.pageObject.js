@@ -10,7 +10,7 @@ class SchoolsListingPage {
     this.saveButton = this.addSchoolModal.$('form.company-new_edit button[type="submit"]')
     this.firstIncomingRequestAcceptButton = this.addSchoolModal.element(by
       .repeater('invite in inviteModel.incomingItems track by $id(invite)')
-      .row(0)).$('button.btn-success')
+      .row(0)).$('button.btn--success')
 
     this.alertBoxMessage = $('span.alert-box-message')
     this.requestsAlert = $('#ext08-requests')

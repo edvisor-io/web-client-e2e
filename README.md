@@ -12,7 +12,48 @@ The directory structure models that of the web client. Each directory contains
 tests for one application, and corresponds to the same named directory in the
 web-client repo.
 
-#### pageObject patterns 👚
+***
+
+## For a quick guide to certain situations, read this section ⚡️. For a high-
+level guide to the code, move on to the next section.
+
+### Do this, when there's new code in the web-client 🌱 😎 :
+
+1. If new code is on remote, `git pull` from the web-client repo.
+
+2. Otherwise go straight to api-server repo (remember client is symlinked) and
+run `./bin/edvisor build -s client`.
+
+### To interact with the database:
+
+1. `mysql -u root`
+
+2. Update with Stripe token to stop Stripe errors.
+
+### When you want to reset the database:
+
+1. Make sure the database is running. If not, `mysql.server start`.
+
+2. Then go into `.env` in `api-server` repo and make sure database is local.
+
+3. Then reset the database by running `./bin/edvisor full-reset`
+
+***
+
+## High-level overview of how things are structured
+
+### the `.conf` file: Where it all begins
+
+The `.conf` file helps set the stage for your tests.
+
+#### suites
+
+Suites let you organize your tests. In our tests, those suites that start with
+`a` such as `aSettings`, refer to the Settings functionality of the Agency app.
+Those that start with `s` such as `sSettings` are for the Settings functionality
+of the School app.
+
+### pageObject patterns 👚
 
 🤖 : "*Patterns are beautiful weaves of code*"
 
@@ -28,7 +69,7 @@ is to minimize the chaos of pageObjects endlessly importing from others. You
 can see which pageObjects an app test suite is dependent on by looking at only
 the `imports` in the root pageObject file.
 
-#### spec file patterns
+### spec file patterns
 
 🤖 : "*Moar patterns* 😍"
 
@@ -36,14 +77,14 @@ The `before()` and `beforeEach` functions contain logic that the tests are
 dependent on *but are not being tested*. The logic being tested will always
 be inside an `it('should be put in here if being tested')`.
 
-#### Naming objects
+### Naming objects
 
 Here you'll find naming patterns for the variables and prototypal methods we're
 using.
 
 🤖 : *"✨ Magical conventions help keep your sanity."*
 
-##### verb + detail about the element + element type
+#### verb + detail about the element + element type
 
 We use prototypal methods to do actions on the page. Method names are:
 verb + detail about the element + element type. For example, a method for
@@ -78,7 +119,9 @@ in turn call static widget methods.
 
 Filenames may make more sense in context of the complete filepath.
 
-## What you need to get started 🐣
+***
+
+## Now the fun stuff. What you need to get started 🐣
 
 In addition to the web-client-e2e, you'll need other repos.
 
@@ -114,13 +157,17 @@ Then, in both repos:
 
 Ok, setup is done!
 
-### Almost ready to run tests. To get the test tools. You'll need Protractor (and maybe Selenium if not using DirectConnect):
+***
+
+## Almost ready to run tests. Get the test tools.
+
+### You'll need Protractor (and maybe Selenium if not using DirectConnect):
 
 1. Install Protractor globally with `npm install -g protractor`
 
 2. Webdriver-manager will be installed with the above. Now run `Webdriver-manager update`. This is for Selenium.
 
-## "These need to be running when doing tests!" said the 🤖 happily:
+### "These need to be running when doing tests!" said the 🤖 happily:
 
 1. Are you using DirectConnect or Selenium? If Selenium: Protractor may start a standalone Selenium server. Otherwise run `webdriver-manager start`. Check that conf.js points to this Selenium server. Doesn’t matter where from. Terminal will stay running. If DirectConnect, check that directConnect: 'true' in `conf.js`.
 
@@ -142,26 +189,7 @@ Navigate to the directory containing the conf.js of your desired test. Run test 
 #### Option C: Running one specific test (short) (coming soon)
 - `protractor protractor.conf.js --specs agency/student_profile_spec.js`
 
-## Do this, when there's new code in the web-client 🌱 😎 :
-
-1. If new code is on remote, `git pull` from the web-client repo.
-
-2. Otherwise go straight to api-server repo (remember client is symlinked) and
-run `./bin/edvisor build -s client`.
-
-## To interact with the database:
-
-1. `mysql -u root`
-
-2. Update with Stripe token to stop Stripe errors.
-
-## When you want to reset the database:
-
-1. Make sure the database is running. If not, `mysql.server start`.
-
-2. Then go into `.env` in `api-server` repo and make sure database is local.
-
-3. Then reset the database by running `./bin/edvisor full-reset`
+***
 
 ## Useful Docs (🆓 stuff to put out and prevent pesky 🔥🔥🔥)
 

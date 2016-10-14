@@ -3,7 +3,7 @@ export default class PipelineArea {
     this.container = element(by.tagName('student-sidebar-pipelines'))
 
     this.changePipelineFirstButton = this.container.all(by
-      .css('.btn-group-dropdown > button[type="button"]')).get(0)
+      .css('.btn-group > button[type="button"]')).get(0)
     this.changePipelineStatusOption = this.container
       .$('button#this-pipeline-toggle')
     this.pipelineStatusSecondRelativeOption = this.container
@@ -11,7 +11,7 @@ export default class PipelineArea {
     this.firstHeader = this.container.all(by.css('h5:nth-child(1)')).get(0)
     this.secondHeader = this.container.all(by.css('h5:nth-child(1)')).get(1)
     this.lastHeader = this.container.all(by.css('h5:nth-child(1)')).last()
-    this.addToAnotherPipelineButton = this.container.$('button.btn-default')
+    this.addToAnotherPipelineButton = this.container.$('button.btn--default')
 
     this.addToAnotherPipelineDropdown = this.container.$('ul.menu')
     this.addToAnotherPipelineFirstOption = this.addToAnotherPipelineDropdown
