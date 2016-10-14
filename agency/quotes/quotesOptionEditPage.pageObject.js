@@ -1,10 +1,10 @@
 export default class QuotesOptionEditPage {
   constructor() {
-    this.accommodationCheckbox = $('input[type="checkbox"]')
+    this.accommodationCheckbox = $('label.checkbox')
     this.accommondationButtons = element
       .all(by.css('div.btn-group-select button'))
     this.schoolAccommodationButton = this.accommondationButtons.get(0)
-    this.accommondationRadioButtons = element.all(by.css('input[type="radio"]'))
+    this.accommondationRadioButtons = element.all(by.css('label.radio'))
     this.firstAccommodationRadioButton = this.accommondationRadioButtons.get(0)
     this.bottomSaveChangesButton = element
       .all(by.css('button[type="submit"]')).get(1)
@@ -12,9 +12,10 @@ export default class QuotesOptionEditPage {
 
     this.addonsArea = element.all(by.css('.table-basic')).get(0)
     this.durationFields = this.addonsArea.$('edit-option-offering-dates')
-    this.addAddonsButton = this.addonsArea.$('button.btn-default')
+    this.addAddonsButton = this.addonsArea.$('button.btn--default')
     this.addAddonsModal = $('.e-modal-container')
-    this.modalCheckboxes = this.addAddonsModal.all(by.css('input[type="checkbox"]'))
+    this.modalCheckboxes = this.addAddonsModal.all(by.css('label.checkbox'))
+    this.secondCheckbox = this.modalCheckboxes.get(1)
     this.addonsStartDateField = this.addAddonsModal.$('offering-start-date-picker')
     this.saveButton = this.addAddonsModal.$('button[type="submit"]')
   }
@@ -36,7 +37,7 @@ export default class QuotesOptionEditPage {
   }
 
   clickSecondCheckbox() {
-    this.modalCheckboxes.get(1).click()
+    this.secondCheckbox.click()
   }
 
   clickSaveChangesButton() {
