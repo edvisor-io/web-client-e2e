@@ -29,7 +29,7 @@ export class CoursesPage {
     this.firstResultDuration = this.firstResult
       .all(by.css('p.ng-binding')).get(1)
     this.firstResultPrice = this.firstResult.all(by.css('p.ng-binding')).get(2)
-    this.firstResultCheckbox = this.firstResult.$('input[type="checkbox"]')
+    this.firstResultCheckbox = this.firstResult.$('label.checkbox')
   }
 
   clickByLocationButton() {
