@@ -1,6 +1,7 @@
 export default class AgencyTab {
   constructor() {
-    this.rowsInInformationTab = element.all(by.css('#ext01-agency-information-areas > div'))
+    // this.agencyTabInformationAreas = element.all(by.css('div.page-padding section')).get(3)
+    this.headingsInInformationTab = element.all(by.css('div > div> div > h4'))
 
     this.pipelineButton = element(by
       .repeater('menuItem in ::subMenu.selectionOptions track by menuItem.name')

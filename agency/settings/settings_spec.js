@@ -320,7 +320,7 @@ describe('the settings page', () => {
       settingsPage.goToAgencyTab()
 
       const agencyTab = new settingsPage.AgencyTab()
-      expect(agencyTab.rowsInInformationTab.count()).to.eventually.equal(2)
+      expect(agencyTab.headingsInInformationTab.count()).to.eventually.equal(1)
     })
 
     it('should only show Personal Info, Password and Language in Personal Tab', () => {
