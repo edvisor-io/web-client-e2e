@@ -6,6 +6,9 @@ export default class SchoolNav {
     this.applicationsButton = element(by.id('ext30-applications'))
     this.productsAndAddonsButton = element(by.id('ext30-offerings'))
     this.promotionsButton = element(by.id('ext30-promotion'))
+    this.configureButton = $('#ext30-settings > a')
+    this.configureMenu = element.all(by.css('#ext30-settings ul li a'))
+    this.feesButton = this.configureMenu.get(1)
 
     this.navHeader = $('header')
     this.userDropdown = this.navHeader.$('.settings-dropdown')
@@ -23,6 +26,13 @@ export default class SchoolNav {
 
   goToPromotions() {
     this.promotionsButton.click()
+  }
+
+  goToFees() {
+    const EXPECTED = protractor.ExpectedConditions
+    browser.wait(EXPECTED.elementToBeClickable(this.configureButton), constants.TIMEOUT_TIME) 
+    this.configureButton.click()
+    this.feesButton.click()
   }
 
   clickUserDropdown() {
