@@ -22,11 +22,11 @@ export default class PipelineArea {
     this.lastCheckboxList = this.container
       .all(by.css('.student-status_list')).last()
     this.decidingStatusFirstCheckbox = this.lastCheckboxList
-      .all(by.css('input[type="checkbox"]')).get(0)
+      .all(by.css('label.checkbox')).get(0)
     this.decidingStatusSecondCheckbox = this.lastCheckboxList
-      .all(by.css('input[type="checkbox"]')).get(1)
+      .all(by.css('label.checkbox')).get(1)
     this.decidingStatusThirdCheckbox = this.lastCheckboxList
-      .all(by.css('input[type="checkbox"]')).get(2)
+      .all(by.css('label.checkbox')).get(2)
   }
 
   clickChangePipelineFirstButton() {
