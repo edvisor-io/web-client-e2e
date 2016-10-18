@@ -1,25 +1,19 @@
-import constants from '../../../shared/constants'
+import {ChosenWidget} from '../../../shared/widgets'
 
 export default class SecondaryContactsArea {
   constructor() {
-    this.contactsContainer = element(by.id('ext02-secondary-contact-container'))
+    this.container = element(by.id('ext02-secondary-contact-container'))
     this.addContactButton = element(by.id('ext02-secondary-contact-toggle'))
-    this.contactEditor = element(by.id('ext02-secondary-contact-form'))
-    this.nameField = this.contactEditor.$('input[name="name"]')
-    this.relationshipField = this.contactEditor.element(by.model('$select.search'))
-    this.addContactConfirmButton = this.contactEditor.$('button[type="submit"]')
+    this.contactEditorContainer = element(by.id('ext02-secondary-contact-form'))
+    this.nameField = this.contactEditorContainer.$('input[name="name"]')
+    this.relationshipField = this.contactEditorContainer.$('select[name="studentSecondaryContactRelationship"]')
+    this.addContactConfirmButton = this.contactEditorContainer.$('button[type="submit"]')
   }
 
-  clickAddContactButton() {
+  addContact(name = 'Totoro', relationship = 'Friend') {
     this.addContactButton.click()
-  }
-
-  addContact(name, relationship) {
-    let expected = protractor.ExpectedConditions
-    browser.wait(expected.visibilityOf(this.addContactConfirmButton), constants.TIMEOUT_TIME)
-
     this.nameField.sendKeys(name)
-    this.relationshipField.sendKeys(relationship)
+    ChosenWidget.setChosenValue(this.relationshipField, relationship)
     this.addContactConfirmButton.click()
   }
 }

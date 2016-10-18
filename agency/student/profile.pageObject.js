@@ -1,6 +1,7 @@
 import SecondaryContactsArea from './profile/secondaryContactsArea.pageObject'
 import AssignedToArea from './profile/assignedToArea.pageObject'
 import PipelineArea from './profile/pipelineArea.pageObject'
+import GoalsArea from './profile/goalsArea.pageObject'
 
 import uuid from 'node-uuid'
 
@@ -10,8 +11,12 @@ export default class StudentProfilePage {
     this.AssignedToArea = AssignedToArea
     this.PipelineArea = PipelineArea
 
+    this.goalsArea = GoalsArea
+
     this.backToStudentsButton = element(by.id('ext02-back'))
 
+    this.tabsContainer = $('#ext02-tabs')
+    this.goalsTabElement = element(by.repeater('tab in tabs.items | limitTo: max track by $index').row(1))
     this.container = $('section.student-profile')
     this.informationContainer = this.container.$('student-edit-information')
     this.studentSidebarOwnerContainer = this.container
@@ -25,6 +30,7 @@ export default class StudentProfilePage {
     this.taskTimeDropdown = this.tasksContainer.element(by.model('data.time'))
     this.assignToField = this.tasksContainer.$('select + div')
     this.submitTaskButton = this.tasksContainer.$('button[type="submit"]')
+
     this.alertBoxMessage = $('.alert-box-message')
 
     this.studentInfoContainer = $('#ext02-info')
@@ -57,5 +63,14 @@ export default class StudentProfilePage {
 
   clickSaveButton() {
     this.saveButton.click()
+  }
+
+  goToGoalsTab() {
+    this.goalsTabElement.click()
+  }
+
+  addSecondaryContact() {
+    const secondaryContactsArea = new SecondaryContactsArea()
+    secondaryContactsArea.addContact()
   }
 }
