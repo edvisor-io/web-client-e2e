@@ -40,39 +40,6 @@ describe('the student listing page', () => {
     agencyNav.goToStudents()
   })
 
-  it('should create a new student successfully', () => {
-    const email = uuid.v4() + AT_EMAIL_DOMAIN
-
-    const studentListing = new StudentListingPage()
-    studentListing.openAddStudentModal()
-    const addStudentModal = new studentListing.AddStudentModal()
-    addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
-
-    const studentProfile = new StudentProfilePage()
-    expect(studentProfile.assignedToLabel.getText()).to.eventually.equal(ASSIGNED_TO)
-    expect(studentProfile.firstNameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
-    expect(studentProfile.lastNameField.getAttribute('value')).to.eventually.equal(LAST_NAME)
-    expect(studentProfile.emailField.getAttribute('value')).to.eventually.equal(email)
-    expect(ChosenWidget.getChosenValue(studentProfile.nationalityField)).to.eventually.equal(NATIONALITY)
-  })
-
-  it('should not create a student with the same email', () => {
-    const email = uuid.v4() + AT_EMAIL_DOMAIN
-
-    const studentListing = new StudentListingPage()
-    studentListing.openAddStudentModal()
-    const addStudentModal = new studentListing.AddStudentModal()
-    addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
-
-    const agencyNav = new AgencyNav()
-    agencyNav.goToStudents()
-
-    studentListing.openAddStudentModal()
-    addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
-
-    expect(studentListing.nopeAlert.isPresent()).to.eventually.equal(true)
-  })
-
   it('should download a file of exported students', () => {
     const studentListing = new StudentListingPage()
     studentListing.clickSelectAllStudentsCheckbox()
@@ -89,14 +56,66 @@ describe('the student listing page', () => {
     expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
   })
 
-  it('should switch displayed students pipeline', () => {
-    const studentListing = new StudentListingPage()
-    studentListing.clickFirstPipelineTab()
+  describe.skip('pipeline tabs', () => {
+    it('should switch displayed students pipeline', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickSecondPipelineTab()
 
-    expect(studentListing.firstStudentInTable.isPresent()).to.eventually.equal(true)
+      expect(studentListing.firstStudentInTable.isPresent()).to.eventually.equal(true)
+    })
+
+    it('should display all students in a pipeline through pagination', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickSecondPipelineTab()
+
+      studentListing.secondPipelineTabCountElement.getText()
+      .then((text) => {
+        let studentCount = +text
+        studentListing.goToLastPageOfTab(studentCount)
+        expect(studentListing.currentPageField.getAttribute('value')).to
+        .eventually
+        .equal((Math.floor(studentListing.calculatePaginations(studentCount) + 1))
+        .toString())
+      })
+    })
   })
 
-  describe('search function', () => {
+  describe.skip('add student modal', () => {
+    it('should create a new student successfully', () => {
+      const email = uuid.v4() + AT_EMAIL_DOMAIN
+
+      const studentListing = new StudentListingPage()
+      studentListing.openAddStudentModal()
+      const addStudentModal = new studentListing.AddStudentModal()
+      addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
+
+      const studentProfile = new StudentProfilePage()
+      expect(studentProfile.assignedToLabel.getText()).to.eventually.equal(ASSIGNED_TO)
+      expect(studentProfile.firstNameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
+      expect(studentProfile.lastNameField.getAttribute('value')).to.eventually.equal(LAST_NAME)
+      expect(studentProfile.emailField.getAttribute('value')).to.eventually.equal(email)
+      expect(ChosenWidget.getChosenValue(studentProfile.nationalityField)).to.eventually.equal(NATIONALITY)
+    })
+
+    it('should not create a student with the same email', () => {
+      const email = uuid.v4() + AT_EMAIL_DOMAIN
+
+      const studentListing = new StudentListingPage()
+      studentListing.openAddStudentModal()
+      const addStudentModal = new studentListing.AddStudentModal()
+      addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
+
+      const agencyNav = new AgencyNav()
+      agencyNav.goToStudents()
+
+      studentListing.openAddStudentModal()
+      addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
+
+      expect(studentListing.nopeAlert.isPresent()).to.eventually.equal(true)
+    })
+  })
+
+  describe.skip('search function', () => {
     const SECONDARY_CONTACT = 'Anna Faris'
 
     beforeEach(() => {
