@@ -1,3 +1,5 @@
+import constants from '../../../shared/constants'
+
 export default class PipelineArea {
   constructor() {
     this.container = element(by.tagName('student-sidebar-pipelines'))
@@ -6,6 +8,7 @@ export default class PipelineArea {
       .css('.btn-group > button[type="button"]')).get(0)
     this.changePipelineStatusOption = this.container
       .$('button#this-pipeline-toggle')
+    this.removeFromPipelineOption = this.container.all(by.css('button.btn-menu_item')).get(2)
     this.pipelineStatusSecondRelativeOption = this.container
       .$('div.student-status_status button:nth-child(2)')
     this.firstHeader = this.container.all(by.css('h5:nth-child(1)')).get(0)
@@ -27,6 +30,8 @@ export default class PipelineArea {
       .all(by.css('label.checkbox')).get(1)
     this.decidingStatusThirdCheckbox = this.lastCheckboxList
       .all(by.css('label.checkbox')).get(2)
+
+    this.confirmRemoveButton = $('button.btn--danger')
   }
 
   clickChangePipelineFirstButton() {
@@ -57,5 +62,15 @@ export default class PipelineArea {
     this.decidingStatusFirstCheckbox.click()
     this.decidingStatusSecondCheckbox.click()
     this.decidingStatusThirdCheckbox.click()
+  }
+
+  clickRemoveFromPipelineOption() {
+    const EXPECTED = protractor.ExpectedConditions
+    browser.wait(EXPECTED.elementToBeClickable(this.removeFromPipelineOption), constants.TIMEOUT_TIME)
+    this.removeFromPipelineOption.click()
+  }
+
+  clickConfirmRemoveButton() {
+    this.confirmRemoveButton.click()
   }
 }

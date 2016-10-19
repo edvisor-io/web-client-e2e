@@ -73,4 +73,18 @@ export default class StudentProfilePage {
     const secondaryContactsArea = new SecondaryContactsArea()
     secondaryContactsArea.addContact()
   }
+
+  assignStatusSecondOptionInFirstPipeline() {
+    const pipelineArea = new PipelineArea()
+    pipelineArea.clickChangePipelineFirstButton()
+    pipelineArea.clickChangePipelineStatusOption()
+    pipelineArea.clickPipelineStatusSecondOption()
+  }
+
+  assignToNewlyMadePipeline() {
+    const pipelineArea = new PipelineArea()
+    pipelineArea.clickAddToAnotherPipelineButton()
+    pipelineArea.clickAddToAnotherPipelineFirstOption()
+    pipelineArea.clickAddToAnotherPipelineStatusesSecondOption()
+  }
 }

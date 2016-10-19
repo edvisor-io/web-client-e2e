@@ -33,15 +33,15 @@ describe('the student profile page', () => {
     agencyNav.goToStudents()
   })
 
-  it('should add a secondary contact', () => {
-    const studentListing = new StudentListingPage()
-    studentListing.clickFirstStudentInTable()
-    const studentProfile = new StudentProfilePage()
-    studentProfile.addSecondaryContact()
-    expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
-  })
-
   describe.skip('temporary grouping', () => {
+    it('should add a secondary contact', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickFirstStudentInTable()
+      const studentProfile = new StudentProfilePage()
+      studentProfile.addSecondaryContact()
+      expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
+    })
+
     it('should create a task', () => {
       const TASK_TITLE = 'Do a followup call'
       const DUE_TIME = '11:00pm'
@@ -105,21 +105,31 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('pipeline assignment', () => {
+  describe('pipeline assignment', () => {
     const EXPECTED_STATUS_ONE = 'Deciding'
     const EXPECTED_STATUS_TWO = 'Deciding'
 
     it('should assign a student to a pipeline status', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
+      const studentProfile = new StudentProfilePage()
+      studentProfile.assignStatusSecondOptionInFirstPipeline()
+
+      const pipelineArea = new studentProfile.PipelineArea()
+      expect(pipelineArea.firstHeader.getText()).to.eventually.equal(EXPECTED_STATUS_ONE)
+    })
+
+    it('should unassign a student to a pipeline status', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickFirstStudentInTable()
 
       const studentProfile = new StudentProfilePage()
       const pipelineArea = new studentProfile.PipelineArea()
       pipelineArea.clickChangePipelineFirstButton()
-      pipelineArea.clickChangePipelineStatusOption()
-      pipelineArea.clickPipelineStatusSecondOption()
+      pipelineArea.clickRemoveFromPipelineOption()
+      pipelineArea.clickConfirmRemoveButton()
 
-      expect(pipelineArea.firstHeader.getText()).to.eventually.equal(EXPECTED_STATUS_ONE)
+      expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
     })
 
     it('should assign a student to more than one pipeline', () => {
@@ -137,16 +147,11 @@ describe('the student profile page', () => {
       agencyNav.goToStudents()
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
-
       const studentProfile = new StudentProfilePage()
-      const pipelineArea = new studentProfile.PipelineArea()
-      pipelineArea.clickChangePipelineFirstButton()
-      pipelineArea.clickChangePipelineStatusOption()
-      pipelineArea.clickPipelineStatusSecondOption()
+      studentProfile.assignStatusSecondOptionInFirstPipeline()
 
-      pipelineArea.clickAddToAnotherPipelineButton()
-      pipelineArea.clickAddToAnotherPipelineFirstOption()
-      pipelineArea.clickAddToAnotherPipelineStatusesSecondOption()
+      const pipelineArea = new studentProfile.PipelineArea()
+      studentProfile.assignToNewlyMadePipeline()
 
       expect(pipelineArea.firstHeader.getText()).to.eventually.equal(EXPECTED_STATUS_ONE)
       expect(pipelineArea.lastHeader.getText()).to.eventually.equal(EXPECTED_STATUS_TWO)
@@ -172,9 +177,7 @@ describe('the student profile page', () => {
 
       const studentProfile = new StudentProfilePage()
       const pipelineArea = new studentProfile.PipelineArea()
-      pipelineArea.clickAddToAnotherPipelineButton()
-      pipelineArea.clickAddToAnotherPipelineFirstOption()
-      pipelineArea.clickAddToAnotherPipelineStatusesSecondOption()
+      studentProfile.assignToNewlyMadePipeline()
       pipelineArea.clickDecidingStatusThreeCheckboxes()
 
       expect(pipelineArea.lastHeader.getText()).to.eventually.equal(NEW_STATUS)
