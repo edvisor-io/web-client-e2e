@@ -34,7 +34,7 @@ describe('the student profile page', () => {
   })
 
   describe.skip('temporary grouping', () => {
-    it('should add a secondary contact', () => {
+    it('adds a secondary contact', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
       const studentProfile = new StudentProfilePage()
@@ -42,7 +42,7 @@ describe('the student profile page', () => {
       expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
     })
 
-    it('should create a task', () => {
+    it('creates a task', () => {
       const TASK_TITLE = 'Do a followup call'
       const DUE_TIME = '11:00pm'
 
@@ -55,7 +55,7 @@ describe('the student profile page', () => {
       expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
     })
 
-    it('should display a student profile when one in listing is clicked', () => {
+    it('displays a student profile when one in listing is clicked', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
 
@@ -63,7 +63,7 @@ describe('the student profile page', () => {
       expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
     })
 
-    it('should view and edit an existing student profile', () => {
+    it('views and edits an existing student profile', () => {
       const FIRST_NAME = `${uuid.v4()}`
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
@@ -85,7 +85,7 @@ describe('the student profile page', () => {
       studentListing.clickFirstStudentInTable()
     })
 
-    it('should assign a student to an office from profile', () => {
+    it('assigns a student to an office from profile', () => {
       const studentProfile = new StudentProfilePage()
       const assignedToArea = new studentProfile.AssignedToArea()
       assignedToArea.clickChangeOwnerButton()
@@ -95,7 +95,7 @@ describe('the student profile page', () => {
       expect(assignedToArea.agencyName.getText()).to.eventually.equal(NEW_OFFICE)
     })
 
-    it('should assign a student to an owner', () => {
+    it('assigns a student to an owner', () => {
       const studentProfile = new StudentProfilePage()
       const assignedToArea = new studentProfile.AssignedToArea()
       assignedToArea.clickChangeOwnerButton()
@@ -105,11 +105,12 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('pipeline assignment', () => {
+  describe.skip('pipeline assignment', () => {
     const EXPECTED_STATUS_ONE = 'Deciding'
     const EXPECTED_STATUS_TWO = 'Deciding'
+    const EXPECTED_STATUS_THREE = 'Client'
 
-    it('should assign a student to a pipeline status', () => {
+    it('assigns a student to a pipeline status', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
       const studentProfile = new StudentProfilePage()
@@ -119,7 +120,18 @@ describe('the student profile page', () => {
       expect(pipelineArea.firstHeader.getText()).to.eventually.equal(EXPECTED_STATUS_ONE)
     })
 
-    it('should unassign a student to a pipeline status', () => {
+    it('reassigns a student to a different pipeline status', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickFirstStudentInTable()
+      const studentProfile = new StudentProfilePage()
+      studentProfile.assignStatusSecondOptionInFirstPipeline()
+      studentProfile.assignStatusThirdOptionInFirstPipeline()
+
+      const pipelineArea = new studentProfile.PipelineArea()
+      expect(pipelineArea.firstHeader.getText()).to.eventually.equal(EXPECTED_STATUS_THREE)
+    })
+
+    it('unassigns a student to a pipeline status', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
 

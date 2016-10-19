@@ -9,8 +9,10 @@ export default class PipelineArea {
     this.changePipelineStatusOption = this.container
       .$('button#this-pipeline-toggle')
     this.removeFromPipelineOption = this.container.all(by.css('button.btn-menu_item')).get(2)
-    this.pipelineStatusSecondRelativeOption = this.container
+    this.pipelineStatusSecondOption = this.container
       .$('div.student-status_status button:nth-child(2)')
+    this.pipelineStatusThirdOption = this.container
+      .$('div.student-status_status button:nth-child(3)')
     this.firstHeader = this.container.all(by.css('h5:nth-child(1)')).get(0)
     this.secondHeader = this.container.all(by.css('h5:nth-child(1)')).get(1)
     this.lastHeader = this.container.all(by.css('h5:nth-child(1)')).last()
@@ -43,7 +45,7 @@ export default class PipelineArea {
   }
 
   clickPipelineStatusSecondOption() {
-    this.pipelineStatusSecondRelativeOption.click()
+    this.pipelineStatusSecondOption.click()
   }
 
   clickAddToAnotherPipelineButton() {

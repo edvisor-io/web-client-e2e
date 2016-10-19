@@ -81,6 +81,13 @@ export default class StudentProfilePage {
     pipelineArea.clickPipelineStatusSecondOption()
   }
 
+  assignStatusThirdOptionInFirstPipeline() {
+    const pipelineArea = new PipelineArea()
+    pipelineArea.clickChangePipelineFirstButton()
+    pipelineArea.clickChangePipelineStatusOption()
+    pipelineArea.pipelineStatusThirdOption.click()
+  }
+
   assignToNewlyMadePipeline() {
     const pipelineArea = new PipelineArea()
     pipelineArea.clickAddToAnotherPipelineButton()
