@@ -31,7 +31,7 @@ export default class QuotesEditPage {
   }
 
   inputNameSearch(input) {
-    UISelectWidget.clickUiSelect(this.nameSearch, input)
+    UISelectWidget.clickUISelect(this.nameSearch, input)
   }
 
   selectCurrencyFromDropdown(currency = 'ALL') {

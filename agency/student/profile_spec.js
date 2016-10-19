@@ -33,6 +33,14 @@ describe('the student profile page', () => {
     agencyNav.goToStudents()
   })
 
+  it('creates a student record', () => {
+    const studentListing = new StudentListingPage()
+    studentListing.clickFirstStudentInTable()
+    const studentProfile = new StudentProfilePage()
+    studentProfile.addRecord()
+    expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
+  })
+
   describe.skip('temporary grouping', () => {
     it('adds a secondary contact', () => {
       const studentListing = new StudentListingPage()

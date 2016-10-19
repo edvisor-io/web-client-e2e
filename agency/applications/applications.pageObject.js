@@ -19,7 +19,7 @@ class ApplicationsPage {
   }
 
   inputName(name = 'Alex') {
-    UISelectWidget.clickUiSelect(this.nameField, name)
+    UISelectWidget.clickUISelect(this.nameField, name)
   }
 
   clickFirstPrefillButton() {
@@ -31,7 +31,7 @@ class ApplicationsPage {
   inputSchool(school = '20') {
     let expected = protractor.ExpectedConditions
     browser.wait(expected.elementToBeClickable(this.schoolField), constants.TIMEOUT_TIME)
-    UISelectWidget.clickUiSelect(this.schoolField, school)
+    UISelectWidget.clickUISelect(this.schoolField, school)
   }
 
   clickContinueButton() {

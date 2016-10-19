@@ -14,11 +14,11 @@ export default class CreateANewCampusModal {
   }
 
   inputCityCountry(location = 'Vancouver BC') {
-    UISelectWidget.clickUiSelect(this.cityCountryField, location)
+    UISelectWidget.clickUISelect(this.cityCountryField, location)
   }
 
   inputCampusCurrency(currency = 'CAD') {
-    UISelectWidget.clickUiSelect(this.campusCurrencyField, currency)
+    UISelectWidget.clickUISelect(this.campusCurrencyField, currency)
   }
 
   clickSaveButton() {
