@@ -33,35 +33,36 @@ describe('the student profile page', () => {
     agencyNav.goToStudents()
   })
 
-  it('creates a student record', () => {
-    const studentListing = new StudentListingPage()
-    studentListing.clickFirstStudentInTable()
-    const studentProfile = new StudentProfilePage()
-    studentProfile.addRecord()
-    expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
+  describe('tasks area', () => {
+    it('creates a task', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickFirstStudentInTable()
+      const studentProfile = new StudentProfilePage()
+      studentProfile.addTask()
+
+      expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
+    })
   })
 
   describe.skip('temporary grouping', () => {
+    it('creates a student record', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickFirstStudentInTable()
+      const studentProfile = new StudentProfilePage()
+      studentProfile.addRecord()
+
+      expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
+    })
+
     it('adds a secondary contact', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
       const studentProfile = new StudentProfilePage()
       studentProfile.addSecondaryContact()
+      
       expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
     })
 
-    it('creates a task', () => {
-      const TASK_TITLE = 'Do a followup call'
-      const DUE_TIME = '11:00pm'
-
-      const studentListing = new StudentListingPage()
-      studentListing.clickFirstStudentInTable()
-
-      const studentProfile = new StudentProfilePage()
-      studentProfile.addTask(TASK_TITLE, DUE_TIME)
-
-      expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
-    })
 
     it('displays a student profile when one in listing is clicked', () => {
       const studentListing = new StudentListingPage()

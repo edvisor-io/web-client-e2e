@@ -1,6 +1,7 @@
 import SecondaryContactsArea from './profile/secondaryContactsArea.pageObject'
 import AssignedToArea from './profile/assignedToArea.pageObject'
 import PipelineArea from './profile/pipelineArea.pageObject'
+import TasksArea from './profile/tasksArea.pageObject'
 import GoalsTabArea from './profile/goalsTabArea.pageObject'
 
 import uuid from 'node-uuid'
@@ -11,8 +12,6 @@ export default class StudentProfilePage {
     this.AssignedToArea = AssignedToArea
     this.PipelineArea = PipelineArea
 
-    this.GoalsTabArea = GoalsTabArea
-
     this.backToStudentsButton = element(by.id('ext02-back'))
 
     this.tabsContainer = $('#ext02-tabs')
@@ -21,15 +20,6 @@ export default class StudentProfilePage {
     this.informationContainer = this.container.$('student-edit-information')
     this.studentSidebarOwnerContainer = this.container
       .$('student-sidebar-owner')
-
-    this.tasksContainer = this.container.$('.sidebar-tasks')
-    this.taskTitleField = this.tasksContainer
-      .element(by.model('addTask.data.details'))
-    this.taskDatePicker = this.tasksContainer
-      .element(by.model('data.date'))
-    this.taskTimeDropdown = this.tasksContainer.element(by.model('data.time'))
-    this.assignToField = this.tasksContainer.$('select + div')
-    this.submitTaskButton = this.tasksContainer.$('button[type="submit"]')
 
     this.alertBoxMessage = $('.alert-box-message')
 
@@ -46,10 +36,9 @@ export default class StudentProfilePage {
     this.saveButton = this.studentInfoContainer.$('button[type="submit"]')
   }
 
-  addTask(taskTitle, dueTime) {
-    this.taskTitleField.sendKeys(taskTitle)
-    this.taskTimeDropdown.sendKeys(dueTime)
-    this.submitTaskButton.click()
+  addTask(taskTitle = 'Do a followup call', dueTime = '11:00pm') {
+    const tasksArea = new TasksArea()
+    tasksArea.fillAndSaveNewTaskForm(taskTitle, dueTime)
   }
 
   clickBackToStudentsButton() {
