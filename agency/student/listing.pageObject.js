@@ -6,7 +6,10 @@ export default class StudentListingPage {
     this.AddStudentModal = AddStudentModal
     this.SearchBar = SearchBar
 
-    this.buttonAddStudent = element(by.id('add-student-button'))
+    this.viewingPipelineDropdown = $('pipeline-select')
+    this.allStudentsOption = this.viewingPipelineDropdown.all(by.css('button')).get(2)
+
+    this.addStudentButton = $('#add-student-button')
     this.buttonSearch = element(by.id('ext02-search-student-btn'))
 
     this.currentPageField = $('div.page-display input')
@@ -22,13 +25,14 @@ export default class StudentListingPage {
     this.studentsTableContainer = $('.students-table')
     this.firstStudentInTable = this.studentsTableContainer
       .all(by.css('.table-student-name')).get(0)
-
+    this.firstStudentInTableCheckboxContainer = this.studentsTableContainer
+      .all(by.css('div.ag-cell')).first()
     this.nopeAlert = $('.alert-box-message')
   }
 
-  openAddStudentModal() {
-    this.buttonAddStudent.click()
-  }
+  // openAddStudentModal() {
+  //   this.buttonAddStudent.click()
+  // }
 
   openSearchBar() {
     this.buttonSearch.click()
@@ -64,5 +68,16 @@ export default class StudentListingPage {
   goToLastPageOfTab(studentCount) {
     let clicksNeeded = this.calculatePaginations(studentCount)
     this.clickNextButton(clicksNeeded)
+  }
+
+  addStudent(assignedTo, firstname, lastname, email, nationality) {
+    this.addStudentButton.click()
+    const addStudentModal = new AddStudentModal()
+    addStudentModal.fillAndSubmitForm(assignedTo, firstname, lastname, email, nationality)
+  }
+
+  selectViewingAllStudents() {
+    this.viewingPipelineDropdown.click()
+    this.allStudentsOption.click()
   }
 }

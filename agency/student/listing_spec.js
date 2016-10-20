@@ -40,20 +40,36 @@ describe('the student listing page', () => {
     agencyNav.goToStudents()
   })
 
-  it('should download a file of exported students', () => {
-    const studentListing = new StudentListingPage()
-    studentListing.clickSelectAllStudentsCheckbox()
-    studentListing.clickExportButton()
+  describe.skip('temporary grouping', () => {
+    it('lists new students in pale yellow', () => {
+      const email = uuid.v4() + AT_EMAIL_DOMAIN
+      const PALE_YELLOW = 'rgba(252, 248, 240, 1)'
 
-    expect(studentListing.exportMessage.isPresent()).to.eventually.equal(true)
-  })
+      const studentListing = new StudentListingPage()
+      studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
-  it('should show a student profile from the students table', () => {
-    const studentListing = new StudentListingPage()
-    studentListing.clickFirstStudentInTable()
+      const studentProfile = new StudentProfilePage()
+      studentProfile.clickBackToStudentsButton()
+      studentListing.selectViewingAllStudents()
+      expect(studentListing.firstStudentInTableCheckboxContainer
+        .getCssValue('background-color')).to.eventually.equal(PALE_YELLOW)
+    })
 
-    const studentProfile = new StudentProfilePage()
-    expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
+    it('should download a file of exported students', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickSelectAllStudentsCheckbox()
+      studentListing.clickExportButton()
+
+      expect(studentListing.exportMessage.isPresent()).to.eventually.equal(true)
+    })
+
+    it('should show a student profile from the students table', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickFirstStudentInTable()
+
+      const studentProfile = new StudentProfilePage()
+      expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
+    })
   })
 
   describe.skip('pipeline tabs', () => {
@@ -85,9 +101,9 @@ describe('the student listing page', () => {
       const email = uuid.v4() + AT_EMAIL_DOMAIN
 
       const studentListing = new StudentListingPage()
-      studentListing.openAddStudentModal()
-      const addStudentModal = new studentListing.AddStudentModal()
-      addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
+      // studentListing.openAddStudentModal()
+      // const addStudentModal = new studentListing.AddStudentModal()
+      studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
       const studentProfile = new StudentProfilePage()
       expect(studentProfile.assignedToLabel.getText()).to.eventually.equal(ASSIGNED_TO)
@@ -101,15 +117,15 @@ describe('the student listing page', () => {
       const email = uuid.v4() + AT_EMAIL_DOMAIN
 
       const studentListing = new StudentListingPage()
-      studentListing.openAddStudentModal()
-      const addStudentModal = new studentListing.AddStudentModal()
-      addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
+      // studentListing.openAddStudentModal()
+      // const addStudentModal = new studentListing.AddStudentModal()
+      studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
       const agencyNav = new AgencyNav()
       agencyNav.goToStudents()
 
-      studentListing.openAddStudentModal()
-      addStudentModal.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
+      // studentListing.openAddStudentModal()
+      studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
       expect(studentListing.nopeAlert.isPresent()).to.eventually.equal(true)
     })

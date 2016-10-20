@@ -11,7 +11,7 @@ export default class AddStudentModal {
     this.submitButton = this.container.$('button[type="submit"]')
   }
 
-  addStudent(assignedTo, firstname, lastname, email, nationality) {
+  fillAndSubmitForm(assignedTo, firstname, lastname, email, nationality) {
     ChosenWidget.setChosenValue(this.assignedToField, assignedTo)
     this.firstNameField.sendKeys(firstname)
     this.lastNameField.sendKeys(lastname)
