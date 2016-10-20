@@ -40,7 +40,16 @@ describe('the student listing page', () => {
     agencyNav.goToStudents()
   })
 
-  describe.skip('temporary grouping', () => {
+  describe('temporary grouping', () => {
+    it('displays pipeline lists from the tabs hidden by page width', () => {
+      const COLOUR_WHEN_ACTIVE = 'rgba(87, 88, 89, 1)'
+
+      const studentListing = new StudentListingPage()
+      studentListing.openPipelineTabsOverflowDropdown()
+      studentListing.selectLastPipelineTab()
+      expect(studentListing.lastPipelineTabTitleSpanElement.getCssValue('color')).to.eventually.equal(COLOUR_WHEN_ACTIVE)
+    })
+
     it('reassigns multiple students to another office', () => {
       const studentListing = new StudentListingPage()
       studentListing.selectViewingAllStudents()
@@ -79,7 +88,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('pipeline tabs', () => {
+  describe('pipeline tabs', () => {
     it('should switch displayed students pipeline', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickSecondPipelineTab()
@@ -103,7 +112,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('add student modal', () => {
+  describe('add student modal', () => {
     it('should create a new student successfully', () => {
       const email = uuid.v4() + AT_EMAIL_DOMAIN
 
@@ -138,7 +147,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('search function', () => {
+  describe('search function', () => {
     const SECONDARY_CONTACT = 'Anna Faris'
 
     beforeEach(() => {

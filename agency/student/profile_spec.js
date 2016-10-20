@@ -44,7 +44,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('temporary grouping', () => {
+  describe('temporary grouping', () => {
     it('creates a student record', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
@@ -59,7 +59,7 @@ describe('the student profile page', () => {
       studentListing.clickFirstStudentInTable()
       const studentProfile = new StudentProfilePage()
       studentProfile.addSecondaryContact()
-      
+
       expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
     })
 
@@ -85,7 +85,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('office and owner assignment', () => {
+  describe('office and owner assignment', () => {
     const NEW_OFFICE = 'Bogotá Office'
     const NEW_OWNER = 'Shelley Chen'
 
@@ -114,7 +114,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('pipeline assignment', () => {
+  describe('pipeline assignment', () => {
     const EXPECTED_STATUS_ONE = 'Deciding'
     const EXPECTED_STATUS_TWO = 'Deciding'
     const EXPECTED_STATUS_THREE = 'Client'

@@ -30,6 +30,10 @@ export default class StudentListingPage {
     this.secondPipelineTabCountElement = this.secondPipelineTab.$('span.subtitle')
     this.thirdPipelineTab = element.all(by.repeater('tab in tabs.items | limitTo: max track by $index').row(2))
     this.thirdPipelineTab = element.all(by.repeater('tab in tabs.items | limitTo: max track by $index').row(3))
+    this.pipelineTabsOverflowDropdown = element.all(by.css('#ext02-tab-selection > li')).last()
+    this.lastPipelineTab = element.all(by.css('ul.inner-dropdown li')).last()
+    this.lastPipelineTabTitleSpanElement = this.lastPipelineTab.all(by.css('span')).first()
+
     this.studentsTableContainer = $('.students-table')
     this.firstStudentInTable = this.studentsTableContainer
       .all(by.css('.table-student-name')).get(0)
@@ -93,5 +97,13 @@ export default class StudentListingPage {
     this.lastOfficeInDropdown.click()
     this.firstOwnerOption.click()
     this.confirmMoveStudentButton.click()
+  }
+
+  openPipelineTabsOverflowDropdown() {
+    this.pipelineTabsOverflowDropdown.click()
+  }
+
+  selectLastPipelineTab() {
+    this.lastPipelineTab.click()
   }
 }
