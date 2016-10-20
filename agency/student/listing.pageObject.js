@@ -3,7 +3,6 @@ import SearchBar from './listing/searchBar.pageObject'
 
 export default class StudentListingPage {
   constructor() {
-    this.AddStudentModal = AddStudentModal
     this.SearchBar = SearchBar
 
     this.viewingPipelineDropdown = $('pipeline-select')
@@ -18,6 +17,15 @@ export default class StudentListingPage {
     this.exportMessage = $('.e-alert_inner-container')
     this.selectAllStudentsCheckbox = $('div.ag-header-cell-label label.checkbox')
 
+    this.firstStudentCheckbox = element.all(by.css('div.ag-cell label.checkbox')).get(0)
+    this.secondStudentCheckbox = element.all(by.css('div.ag-cell label.checkbox')).get(1)
+    this.assignButton = $('#ext02-listings-assign-btn')
+    this.lastOfficeInDropdown = element.all(by
+      .css('div.assign div.menu-container > ul > li')).last()
+    this.firstOwnerOption = element.all(by
+      .css('div.assign div.menu-container > ul.submenu.open > div > li')).first()
+    this.confirmMoveStudentButton = element.all(by.css('div.e-alert_buttons button')).get(1)
+
     this.secondPipelineTab = element(by.repeater('tab in tabs.items | limitTo: max track by $index').row(1))
     this.secondPipelineTabCountElement = this.secondPipelineTab.$('span.subtitle')
     this.thirdPipelineTab = element.all(by.repeater('tab in tabs.items | limitTo: max track by $index').row(2))
@@ -27,12 +35,9 @@ export default class StudentListingPage {
       .all(by.css('.table-student-name')).get(0)
     this.firstStudentInTableCheckboxContainer = this.studentsTableContainer
       .all(by.css('div.ag-cell')).first()
-    this.nopeAlert = $('.alert-box-message')
-  }
 
-  // openAddStudentModal() {
-  //   this.buttonAddStudent.click()
-  // }
+    this.alertBoxMessage = $('.alert-box-message')
+  }
 
   openSearchBar() {
     this.buttonSearch.click()
@@ -79,5 +84,14 @@ export default class StudentListingPage {
   selectViewingAllStudents() {
     this.viewingPipelineDropdown.click()
     this.allStudentsOption.click()
+  }
+
+  reassignFirstTwoStudents() {
+    this.firstStudentCheckbox.click()
+    this.secondStudentCheckbox.click()
+    this.assignButton.click()
+    this.lastOfficeInDropdown.click()
+    this.firstOwnerOption.click()
+    this.confirmMoveStudentButton.click()
   }
 }

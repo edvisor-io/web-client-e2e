@@ -41,6 +41,13 @@ describe('the student listing page', () => {
   })
 
   describe.skip('temporary grouping', () => {
+    it('reassigns multiple students to another office', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.selectViewingAllStudents()
+      studentListing.reassignFirstTwoStudents()
+      expect(studentListing.alertBoxMessage.isPresent()).to.eventually.equal(true)
+    })
+
     it('lists new students in pale yellow', () => {
       const email = uuid.v4() + AT_EMAIL_DOMAIN
       const PALE_YELLOW = 'rgba(252, 248, 240, 1)'
@@ -127,7 +134,7 @@ describe('the student listing page', () => {
       // studentListing.openAddStudentModal()
       studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
-      expect(studentListing.nopeAlert.isPresent()).to.eventually.equal(true)
+      expect(studentListing.alertBoxMessage.isPresent()).to.eventually.equal(true)
     })
   })
 
