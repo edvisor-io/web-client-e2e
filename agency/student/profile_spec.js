@@ -33,7 +33,7 @@ describe('the student profile page', () => {
     agencyNav.goToStudents()
   })
 
-  describe.skip('tasks area', () => {
+  describe('tasks area', () => {
     it('creates a task', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
@@ -44,7 +44,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('temporary grouping', () => {
+  describe('temporary grouping', () => {
     it('creates a student record', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
@@ -85,7 +85,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('office and owner assignment', () => {
+  describe('office and owner assignment', () => {
     const NEW_OFFICE = 'Bogotá Office'
     const NEW_OWNER = 'Shelley Chen'
 

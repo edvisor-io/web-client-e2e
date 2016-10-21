@@ -14,10 +14,10 @@ chai.use(chaiAsPromised)
 const {expect} = chai
 
 describe('the agency app settings page', () => {
-  beforeEach(() => {
-    browser.get('/')
-    LoginPage.waitForLoader()
-  })
+  // beforeEach(() => {
+  //   browser.get('/')
+  //   LoginPage.waitForLoader()
+  // })
 
   afterEach(() => {
     browser.driver.manage().deleteAllCookies()
@@ -240,6 +240,8 @@ describe('the agency app settings page', () => {
 
   describe('exchange rates', () => {
     beforeEach(() => {
+      browser.get('/')
+      LoginPage.waitForLoader()
       const loginPage = new LoginPage()
       loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
       LoginPage.waitForLoader()
@@ -293,20 +295,22 @@ describe('the agency app settings page', () => {
       quotesEditPage.selectCurrencyFromDropdown()
 
       quotesEditPage.totalInCustomCurrency.getText()
-      .then((text) => {
-        let amountText = text.replace(/[^0-9\.]/g, '')
-        expect(+amountText).to.be.at.most(EXPECTED_MAX)
+        .then((text) => {
+          let amountText = text.replace(/[^0-9\.]/g, '')
+          expect(+amountText).to.be.at.most(EXPECTED_MAX)
 
-        browser.get('/agency/en/504/settings/company')
-        LoginPage.waitForLoader()
-        currencySettingsArea.clickAutomaticallySetRadio()
-        currencySettingsArea.clickSaveButton()
-      })
+          browser.get('/agency/en/504/settings/company')
+          LoginPage.waitForLoader()
+          currencySettingsArea.clickAutomaticallySetRadio()
+          currencySettingsArea.clickSaveButton()
+        })
     })
   })
 
   describe('tier: Platform', () => {
     beforeEach(() => {
+      browser.get('/')
+      LoginPage.waitForLoader()
       const loginPage = new LoginPage()
       loginPage.login(constants.PLATFORM_ADMIN_EMAIL, constants.PASSWORD)
       LoginPage.waitForLoader()

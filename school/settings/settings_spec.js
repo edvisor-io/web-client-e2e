@@ -19,6 +19,10 @@ describe('the school app settings page', () => {
     LoginPage.waitForLoader()
   })
 
+  after(() => {
+    browser.driver.manage().deleteAllCookies()
+  })
+
   describe('campus tab', () => {
     beforeEach(() => {
       browser.get('/')
