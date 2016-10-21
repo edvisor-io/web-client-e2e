@@ -1,3 +1,5 @@
+import constants from '../../shared/constants'
+
 export default class QuotesListingPage {
   constructor() {
     this.container = element(by.id('ext06-listings'))
@@ -8,6 +10,8 @@ export default class QuotesListingPage {
   }
 
   clickNewButton() {
+    const EXPECTED = protractor.ExpectedConditions
+    browser.wait(EXPECTED.elementToBeClickable(this.newButton), constants.TIMEOUT_TIME)
     this.newButton.click()
   }
 

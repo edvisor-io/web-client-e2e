@@ -14,7 +14,7 @@ export default class LoginPage {
   }
 
   static waitForLoader() {
-    var appLoader = $('.app-loader')
+    var appLoader = $('div.app-loader')
 
     //wait until the loader has disappeared
     browser.wait(() => {

@@ -13,7 +13,7 @@ import uuid from 'node-uuid'
 chai.use(chaiAsPromised)
 const {expect} = chai
 
-describe('the settings page', () => {
+describe('the agency app settings page', () => {
   beforeEach(() => {
     browser.get('/')
     LoginPage.waitForLoader()
