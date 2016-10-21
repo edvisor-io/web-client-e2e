@@ -24,7 +24,7 @@ describe('the settings page', () => {
   })
 
   // being changed, don't fix
-  describe('sales reps', () => {
+  describe.skip('sales reps', () => {
     beforeEach(() => {
       const loginPage = new LoginPage()
       loginPage.login(constants.SALES_REP_EMAIL, constants.SALES_REP_PASS)
@@ -50,7 +50,7 @@ describe('the settings page', () => {
     })
   })
 
-  describe('admins', () => {
+  describe.skip('admins', () => {
     beforeEach(() => {
       const loginPage = new LoginPage()
       loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
@@ -95,7 +95,7 @@ describe('the settings page', () => {
   })
 
   // being changed, don't fix
-  describe('user slots', () => {
+  describe.skip('user slots', () => {
     const NO_SLOTS_ALERT_TEXT = 'You do not have any more slots available.'
 
     it('should increase slots in TeamTab when added in PaymentTab', () => {

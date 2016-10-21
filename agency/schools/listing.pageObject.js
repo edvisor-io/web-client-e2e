@@ -6,8 +6,8 @@ class SchoolsListingPage {
     this.connectByEmailButton = this.addSchoolModal.all(by.css('div.company-new_add button')).last()
     this.emailField = this.addSchoolModal.$('input')
     this.sendButton = this.addSchoolModal.$('button[type="submit"]')
-    this.setIDField = this.addSchoolModal.$('form.company-new_edit input')
-    this.saveButton = this.addSchoolModal.$('form.company-new_edit button[type="submit"]')
+    this.setIDField = this.addSchoolModal.$('form.company-new_name input')
+    this.saveButton = this.addSchoolModal.$('form.company-new_name button[type="submit"]')
     this.firstIncomingRequestAcceptButton = this.addSchoolModal.element(by
       .repeater('invite in inviteModel.incomingItems track by $id(invite)')
       .row(0)).$('button.btn--success')
