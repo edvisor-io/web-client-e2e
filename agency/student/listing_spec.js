@@ -135,7 +135,6 @@ describe('the student listing page', () => {
 
       const agencyNav = new AgencyNav()
       agencyNav.goToStudents()
-
       studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
       expect(studentListing.alertBoxMessage.isPresent()).to.eventually.equal(true)
