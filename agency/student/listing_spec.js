@@ -40,7 +40,21 @@ describe('the student listing page', () => {
     agencyNav.goToStudents()
   })
 
-  describe('temporary grouping', () => {
+  describe('filters students', () => {
+    it('filters students by agents > unassigned', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.filterByAgentsUnassigned()
+      expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
+    })
+    
+    it('filters students by agents > first, archive reasons > finished studying', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.filterByAgentsFirst()
+      expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
+    })
+  })
+
+  describe.skip('temporary grouping', () => {
     it('displays pipeline lists from the tabs hidden by page width', () => {
       const COLOUR_WHEN_ACTIVE = 'rgba(87, 88, 89, 1)'
 
@@ -88,7 +102,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('pipeline tabs', () => {
+  describe.skip('pipeline tabs', () => {
     it('should switch displayed students pipeline', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickSecondPipelineTab()
@@ -112,7 +126,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('add student modal', () => {
+  describe.skip('add student modal', () => {
     it('should create a new student successfully', () => {
       const email = uuid.v4() + AT_EMAIL_DOMAIN
 
@@ -141,7 +155,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('search function', () => {
+  describe.skip('search function', () => {
     const SECONDARY_CONTACT = 'Anna Faris'
 
     beforeEach(() => {
