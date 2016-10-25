@@ -1,0 +1,171 @@
+#!/bin/sh
+
+function help () {
+  echo " here's the help text!"
+  echo ""
+  echo " 🤖 jazz - your robot friend for e2e tests."
+  echo ""
+  echo " update [something]    - pull new code from [webclient/apiserver/both] "
+  echo " ignitedb              - starts the db "
+  echo " resetdb               - resets the db "
+  echo " build                 - builds the web-client "
+  echo " shiny                 - all of the above "
+  echo " e2e [branch]          - pushes [branch] to e2e.edvisor.io "
+}
+
+function ignitedb () {
+  echo " 🔥 db igniting"
+  mysql.server start
+  woohoo
+}
+
+function resetdb () {
+  echo " 🌪 turning back time."
+  cd /Users/Beastie/development/edvisorio/api-server && ./bin/edvisor full-reset
+  woohoo
+}
+
+function pullwebclient () {
+  echo " ⚡️ jazzing up your web-client."
+  cd /Users/Beastie/development/edvisorio/web-client && git pull --rebase
+  woohoo
+}
+
+function pullapiserver () {
+  echo " ⚡️ jazzing up your api-server."
+  cd /Users/Beastie/development/edvisorio/api-server && git pull --rebase
+  woohoo
+}
+
+function buildclient () {
+  echo " 🛠 building client."
+  cd /Users/Beastie/development/edvisorio/api-server && ./bin/edvisor build -s client
+  woohoo
+}
+
+function woohoo () {
+  echo " ✨ all done!"
+}
+
+function woops () {
+  echo " 🚫 can't do that"
+}
+
+if [ $1 ]
+then
+  case "$1" in
+  update)
+    if [ $2 ]
+    then
+      case "$2" in
+      webclient)
+        pullwebclient
+      ;;
+      apiserver)
+        pullapiserver
+      ;;
+      both)
+        pullwebclient
+        pullapiserver
+      ;;
+      *)
+        woops
+      ;;
+      esac
+    else
+      help
+    fi
+  ;;
+  resetdb)
+    resetdb
+  ;;
+  ignitedb)
+    ignitedb
+  ;;
+  buildclient)
+    buildclient
+  ;;
+  shiny)
+    pullwebclient
+    pullapiserver
+    ignitedb
+    resetdb
+    buildclient
+  ;;
+  e2e)
+    if [ $2 ]
+    then
+      echo " 🚀 pushing the $2 branch to e2e.edvisor.io "
+      cd /Users/Beastie/development/edvisorio/web-client && git pull --rebase && git push origin origin/$2:e2e
+      cd /Users/Beastie/development/edvisorio/api-server && git pull --rebase && git push origin origin/$2:e2e
+    else
+      woops
+      help
+    fi
+  ;;
+  *)
+    woops
+    help
+  ;;
+  esac
+else
+  help
+fi
+
+ 1 | #!/bin/sh
+ 2 |
+ 3 | function help () {
+ 4 |  echo " here's the help text!"
+ 5 |  echo ""
+ 6 |  echo " 🤖 marvin - your helpful robot friend."
+ 7 |  echo ""
+ 8 |  echo " update - pull new code from [webclient/apiserver/both] "
+ 9 |  echo " ignitedb - starts the db "
+10 | }
+11 |
+12 | if [ $1 ]
+13 | then  
+14 |  case "$1" in
+15 |  update)
+16 |   echo " ⚡️ jazzing up your web client."
+17 |   cd /Users/Beastie/development/edvisorio/api-server && git pull --rebase
+18 |   echo " ⚡️ jazzing up your api server."
+19 |   cd /Users/Beastie/development/edvisorio/api-server && git pull --rebase
+20 |  ;;
+20 |  ignitedb
+20 |   echo " 🔥 db igniting"
+20 |   mysql.server start
+20 |  ;;
+20 |  *)
+20 |   echo " 🤖: what should I do?"
+20 |  ;;
+20 | esac
+20 | else
+20 |  help
+20 | fi
+
+
+
+
+20 |
+20 |
+20 |
+20 |
+
+function ignitedb () {
+  echo " 🔥 db igniting"
+  mysql.server start
+  woohoo
+}
+
+function pullwebclient () {
+  echo " ⚡️ jazzing up your web-client."
+  cd /Users/Beastie/development/edvisorio/web-client && git pull --rebase
+  woohoo
+}
+
+function pullapiserver () {
+  echo " ⚡️ jazzing up your api-server."
+  cd /Users/Beastie/development/edvisorio/api-server && git pull --rebase
+  woohoo
+}
