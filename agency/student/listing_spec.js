@@ -40,16 +40,22 @@ describe('the student listing page', () => {
     agencyNav.goToStudents()
   })
 
-  describe('filters students', () => {
-    it('filters students by agents > unassigned', () => {
+  describe.skip('filters students', () => {
+    it('by agents > unassigned', () => {
       const studentListing = new StudentListingPage()
       studentListing.filterByAgentsUnassigned()
       expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
     })
-    
-    it('filters students by agents > first, archive reasons > finished studying', () => {
+
+    it('by agents > first, archive reasons > finished studying', () => {
       const studentListing = new StudentListingPage()
       studentListing.filterByAgentsFirst()
+      expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
+    })
+
+    it('by custom field', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.filterByCustomFields()
       expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
     })
   })

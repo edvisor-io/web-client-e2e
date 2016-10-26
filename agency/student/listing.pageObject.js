@@ -16,6 +16,9 @@ export default class StudentListingPage {
     this.filterListFirstOption = element.all(by.css('#ext02-filter-list ul.menu > li')).get(0)
     this.filterListFirstOptionInFirstOption = element.all(by.css('#ext02-filter-list div.submenu-inner > li')).get(0)
     this.filterListSecondOptionInFirstOption = element.all(by.css('#ext02-filter-list div.submenu-inner > li')).get(1)
+    this.filterListLastOption = element.all(by.css('#ext02-filter-list ul.menu > li')).last()
+    this.filterListFirstOptionInLastOption = element.all(by.css('#ext02-filter-list div.submenu-inner > li')).get(345)
+    this.filterListFirstOptionInFirstOptionInLastOption = element.all(by.css('#ext02-filter-list div.menu-container ul.submenu > ul.submenu > div.submenu-inner > li')).get(184)
 
     this.currentPageField = $('div.page-display input')
     this.nextButton = $('button.btn--default.next')
@@ -125,5 +128,13 @@ export default class StudentListingPage {
     this.filterListFirstOption.click()
     this.filterListFirstOptionInFirstOption.click()
     this.filterListSecondOptionInFirstOption.click()
+  }
+
+  filterByCustomFields() {
+    this.filterListButton.click()
+    browser.executeScript('arguments[0].scrollIntoView(true)', this.filterListLastOption)
+    this.filterListLastOption.click()
+    this.filterListFirstOptionInLastOption.click()
+    this.filterListFirstOptionInFirstOptionInLastOption.click()
   }
 }
