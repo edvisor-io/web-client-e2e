@@ -9,7 +9,7 @@ export default class AssignedToArea {
     this.officeField = this.container.element(by.name('agency'))
     this.saveButton = this.container.$('button[type="submit"]')
     this.changeOfficeExceptionModal = $('.e-alert_inner-container')
-    this.moveStudentButton = this.changeOfficeExceptionModal.$('.btn--default')
+    this.moveStudentConfirmButton = this.changeOfficeExceptionModal.all(by.css('button')).last()
     this.ownerField = this.container.element(by.name('name'))
     this.agencyName = this.container.element(by.id('student-agency-name'))
     this.ownerName = this.container.$('photo-initials + div > p')
@@ -19,13 +19,13 @@ export default class AssignedToArea {
     this.changeOwnerButton.click()
   }
 
-  setAsNewOffice(newOffice) {
+  setAsNewOffice(newOffice = 'Bogotá Office') {
     ChosenWidget.setChosenValue(this.officeField, newOffice)
     this.saveButton.click()
   }
 
-  clickMoveStudentButton() {
-    this.moveStudentButton.click()
+  clickMoveStudentConfirmButton() {
+    this.moveStudentConfirmButton.click()
   }
 
   setAsNewOwner(newOwner) {

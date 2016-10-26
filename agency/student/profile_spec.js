@@ -33,18 +33,45 @@ describe('the student profile page', () => {
     agencyNav.goToStudents()
   })
 
-  describe('tasks area', () => {
-    it('creates a task', () => {
+  describe('recent actitivies', () => {
+    it('updates on saved changes to profile', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
-      const studentProfile = new StudentProfilePage()
-      studentProfile.addTask()
 
-      expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
+      const studentProfile = new StudentProfilePage()
+      const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
+      if (recentActivitiesArea.showAllActivityButton) {
+        recentActivitiesArea.showAllActivityButton.click()
+      }
+      recentActivitiesArea.allActivitiesElements.count()
+        .then((count) => {
+          let currentActivitiesCount = count
+          studentProfile.inputFirstName()
+          studentProfile.clickSaveButton()
+          expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(currentActivitiesCount + 1)
+        })
+    })
+
+    it('updates on changes to pipeline area', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickFirstStudentInTable()
+
+      const studentProfile = new StudentProfilePage()
+      const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
+      if (recentActivitiesArea.showAllActivityButton) {
+        recentActivitiesArea.showAllActivityButton.click()
+      }
+      recentActivitiesArea.allActivitiesElements.count()
+      .then((count) => {
+        let currentActivitiesCount = count
+        studentProfile.assignStatusSecondOptionInFirstPipeline()
+        expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(currentActivitiesCount + 1)
+        browser.sleep(5000)
+      })
     })
   })
 
-  describe('temporary grouping', () => {
+  describe.skip('temporary grouping', () => {
     it('creates a student record', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
@@ -85,7 +112,18 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('office and owner assignment', () => {
+  describe.skip('tasks area', () => {
+    it('creates a task', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickFirstStudentInTable()
+      const studentProfile = new StudentProfilePage()
+      studentProfile.addTask()
+
+      expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
+    })
+  })
+
+  describe.skip('office and owner assignment', () => {
     const NEW_OFFICE = 'Bogotá Office'
     const NEW_OWNER = 'Shelley Chen'
 
@@ -96,11 +134,8 @@ describe('the student profile page', () => {
 
     it('assigns a student to an office from profile', () => {
       const studentProfile = new StudentProfilePage()
+      studentProfile.reassignToOffice(NEW_OFFICE)
       const assignedToArea = new studentProfile.AssignedToArea()
-      assignedToArea.clickChangeOwnerButton()
-      assignedToArea.setAsNewOffice(NEW_OFFICE)
-      assignedToArea.clickMoveStudentButton()
-
       expect(assignedToArea.agencyName.getText()).to.eventually.equal(NEW_OFFICE)
     })
 
@@ -114,7 +149,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('pipeline assignment', () => {
+  describe.skip('pipeline assignment', () => {
     const EXPECTED_STATUS_ONE = 'Deciding'
     const EXPECTED_STATUS_TWO = 'Deciding'
     const EXPECTED_STATUS_THREE = 'Client'

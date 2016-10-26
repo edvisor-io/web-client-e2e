@@ -3,6 +3,7 @@ import AssignedToArea from './profile/assignedToArea.pageObject'
 import PipelineArea from './profile/pipelineArea.pageObject'
 import TasksArea from './profile/tasksArea.pageObject'
 import GoalsTabArea from './profile/goalsTabArea.pageObject'
+import RecentActivitiesArea from './profile/recentActivitiesArea.pageObject'
 
 import uuid from 'node-uuid'
 
@@ -11,6 +12,7 @@ export default class StudentProfilePage {
     this.SecondaryContactsArea = SecondaryContactsArea
     this.AssignedToArea = AssignedToArea
     this.PipelineArea = PipelineArea
+    this.RecentActivitiesArea = RecentActivitiesArea
 
     this.backToStudentsButton = element(by.id('ext02-back'))
 
@@ -88,5 +90,12 @@ export default class StudentProfilePage {
     this.goToGoalsTab()
     const goalsTabArea = new GoalsTabArea()
     goalsTabArea.fillAndSaveNewRecordForm()
+  }
+
+  reassignToOffice(newOffice) {
+    const assignedToArea = new AssignedToArea()
+    assignedToArea.clickChangeOwnerButton()
+    assignedToArea.setAsNewOffice(newOffice)
+    assignedToArea.clickMoveStudentConfirmButton()
   }
 }
