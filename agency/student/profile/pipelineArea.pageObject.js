@@ -9,6 +9,7 @@ export default class PipelineArea {
     this.changePipelineStatusOption = this.container
       .$('button#this-pipeline-toggle')
     this.removeFromPipelineOption = this.container.all(by.css('button.btn-menu_item')).last()
+    this.pipelineStatusAllElements = this.container.all(by.css('div.student-status_status button span'))
     this.pipelineStatusSecondOption = this.container
       .$('div.student-status_status button:nth-child(2)')
     this.pipelineStatusThirdOption = this.container

@@ -1,6 +1,5 @@
 export default class AgencyTab {
   constructor() {
-    // this.agencyTabInformationAreas = element.all(by.css('div.page-padding section')).get(3)
     this.headingsInInformationTab = element.all(by.css('div > div> div > h4'))
 
     this.pipelineButton = element(by
@@ -8,6 +7,7 @@ export default class AgencyTab {
       .row(2))
     this.firstPipelineCard = element(by
       .repeater('studentPipeline in pipelineCtrl.studentPipelines').row(0))
+    this.stageElements = this.firstPipelineCard.all(by.css('p.ellipsis'))
     this.firstDuplicateButton = this.firstPipelineCard
       .all(by.css('.btn-group-dropdown > .btn--default')).get(0)
   }
