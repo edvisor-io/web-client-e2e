@@ -4,6 +4,7 @@ import PipelineArea from './profile/pipelineArea.pageObject'
 import TasksArea from './profile/tasksArea.pageObject'
 import GoalsTabArea from './profile/goalsTabArea.pageObject'
 import RecentActivitiesArea from './profile/recentActivitiesArea.pageObject'
+import SettingsPage from '../settings/settings.pageObject'
 
 import uuid from 'node-uuid'
 

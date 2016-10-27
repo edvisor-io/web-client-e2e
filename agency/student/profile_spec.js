@@ -33,7 +33,7 @@ describe('the student profile page', () => {
     agencyNav.goToStudents()
   })
 
-  describe('recent actitivies', () => {
+  describe.skip('recent actitivies', () => {
     it('updates on saved changes to profile', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
@@ -149,7 +149,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('pipeline assignment', () => {
+  describe('pipeline assignment', () => {
     const EXPECTED_STATUS_ONE = 'Deciding'
     const EXPECTED_STATUS_TWO = 'Deciding'
     const EXPECTED_STATUS_THREE = 'Client'
@@ -189,23 +189,15 @@ describe('the student profile page', () => {
     })
 
     it('should assign a student to more than one pipeline', () => {
-      const agencyNav = new AgencyNav()
-      agencyNav.goToSettings()
-      SettingsPage.waitForGhostTab()
-
       const settingsPage = new SettingsPage()
-      settingsPage.goToAgencyTab()
+      settingsPage.testNeedsDuplicatePipeline()
 
-      const agencyTab = new settingsPage.AgencyTab()
-      agencyTab.clickPipelineButton()
-      agencyTab.clickDuplicateButton()
-
+      const agencyNav = new AgencyNav()
       agencyNav.goToStudents()
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
       const studentProfile = new StudentProfilePage()
       studentProfile.assignStatusSecondOptionInFirstPipeline()
-
       const pipelineArea = new studentProfile.PipelineArea()
       studentProfile.assignToNewlyMadePipeline()
 
@@ -216,24 +208,16 @@ describe('the student profile page', () => {
     it('should change to the next status when all checklist items are clicked', () => {
       const NEW_STATUS = 'Client' // because clickDecidingStatusThreeCheckboxes()
 
-      const agencyNav = new AgencyNav()
-      agencyNav.goToSettings()
-      SettingsPage.waitForGhostTab()
-
       const settingsPage = new SettingsPage()
-      settingsPage.goToAgencyTab()
+      settingsPage.testNeedsDuplicatePipeline()
 
-      const agencyTab = new settingsPage.AgencyTab()
-      agencyTab.clickPipelineButton()
-      agencyTab.clickDuplicateButton()
-
+      const agencyNav = new AgencyNav()
       agencyNav.goToStudents()
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
-
       const studentProfile = new StudentProfilePage()
-      const pipelineArea = new studentProfile.PipelineArea()
       studentProfile.assignToNewlyMadePipeline()
+      const pipelineArea = new studentProfile.PipelineArea()
       pipelineArea.clickDecidingStatusThreeCheckboxes()
 
       expect(pipelineArea.lastHeader.getText()).to.eventually.equal(NEW_STATUS)

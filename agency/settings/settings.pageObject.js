@@ -3,6 +3,7 @@ import AgencyTab from './settingsAgencyTab.pageObject'
 import TeamTab from './settingsTeamTab.pageObject'
 import CompanyTab from './settingsCompanyTab.pageObject'
 import PaymentTab from './settingsPaymentTab.pageObject'
+import LoginPage from '../../auth/login/login.pageObject'
 import constants from '../../shared/constants'
 
 class SettingsPage {
@@ -52,6 +53,17 @@ class SettingsPage {
         return !presenceOfElement
       })
     }, constants.TIMEOUT_TIME)
+  }
+
+  testNeedsDuplicatePipeline() {
+    browser.get('https://e2e.edvisor.io:2999/agency/en/504/settings/agency/504/information')
+    LoginPage.waitForLoader()
+    SettingsPage.waitForGhostTab()
+
+    const settingsPage = new SettingsPage()
+    const agencyTab = new settingsPage.AgencyTab()
+    agencyTab.clickPipelineButton()
+    agencyTab.clickDuplicateButton()
   }
 }
 

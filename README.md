@@ -101,7 +101,12 @@ pattern. They just omit the leading verb, because they don't "do" things. The
 button being clicked in the example above can be initialized as
 "changePipelineButton".
 
-The word 'relative' is used in a name when the element is only available in a
+Functions prefixed with 'testNeeds' (e.g. `testNeedsDuplicatePipeline`) means
+that it isn't meant to represent human behaviour. Rather that it's needed by a
+test. So such functions may take shortcuts, such as navigating to a
+specific page in the app by url instead of clicking to it as a user is likely to.
+
+(Undergoing changes) The word 'relative' is used in a name when the element is only available in a
 given context. For example, 'changePipelineStatusRelativeOption' is an option
 that only appears when a dropdown is present.
 
