@@ -31,6 +31,8 @@ describe('the configure page', () => {
     feesPage.createNewFee(FEE_NAME)
     feesPage.goToFeesListing()
 
+    const EXPECTED = protractor.ExpectedConditions
+    browser.wait(EXPECTED.visibilityOf(feesPage.lastFeeNameInList), constants.TIMEOUT_TIME)
     expect(feesPage.lastFeeNameInList.getText()).to.eventually.equal(FEE_NAME)
   })
 })

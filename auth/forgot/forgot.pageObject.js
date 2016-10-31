@@ -4,7 +4,7 @@ export default class ForgotPage {
   constructor() {
     this.emailField = $('input[name="email"]')
     this.submitBtn = $('button[type="submit"]')
-    this.messageBox = $('div.sa-confirm-button-container')
+    this.messageBox = $('div.sweet-alert')
   }
 
   requestRecovery(email) {

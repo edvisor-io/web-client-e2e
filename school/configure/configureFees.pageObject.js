@@ -21,7 +21,7 @@ export class FeesPage {
   constructor() {
     this.newFeePage = NewFeePage
     this.newFeeButton = $('div.listing_actions button')
-    this.lastFeeNameInList = element.all(by.css('div.fee_name')).last()
+    this.lastFeeNameInList = element.all(by.css('div.fee_name a')).last()
   }
 
   clickNewFeeButton() {

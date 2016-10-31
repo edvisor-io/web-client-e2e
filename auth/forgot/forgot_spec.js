@@ -30,6 +30,7 @@ describe('the forgot page', function() {
   it('should display message if email is accepted', () => {
     const forgotPage = new ForgotPage()
     forgotPage.requestRecovery(constants.ADMIN_EMAIL)
+    browser.sleep(5000)
     expect(forgotPage.messageBox.isPresent()).to.eventually.equal(true)
   })
 })
