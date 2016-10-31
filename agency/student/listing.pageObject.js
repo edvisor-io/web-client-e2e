@@ -1,6 +1,7 @@
 import AddStudentModal from './listing/addStudentModal.pageObject'
 import SearchBar from './listing/searchBar.pageObject'
 import constants from '../../shared/constants'
+import ListArea from './listing/listArea.pageObject'
 
 export default class StudentListingPage {
   constructor() {

@@ -149,47 +149,6 @@ describe('the student profile page', () => {
     })
   })
 
-  it('orders the statuses as defined in settings > agency > pipeline', () => {
-    browser.get('https://e2e.edvisor.io:2999/agency/en/504/settings/agency/504/information')
-    LoginPage.waitForLoader()
-    SettingsPage.waitForGhostTab()
-
-    const settingsPage = new SettingsPage()
-    const agencyTab = new settingsPage.AgencyTab()
-    agencyTab.clickPipelineButton()
-    agencyTab.stageElements.count()
-      .then((count) => {
-        var stageArray = []
-        for (let i = 0; i < count; i++) {
-          stageArray.push(agencyTab.stageElements.get(i).getText())
-        }
-        return Promise.all(stageArray)
-      }).then((textArray) => {
-        var arrayFromSettings = textArray
-
-        const agencyNav = new AgencyNav()
-        agencyNav.goToStudents()
-        const studentListing = new StudentListingPage()
-        studentListing.clickFirstStudentInTable()
-        const studentProfile = new StudentProfilePage()
-        const pipelineArea = new studentProfile.PipelineArea()
-        pipelineArea.clickChangePipelineFirstButton()
-        pipelineArea.clickChangePipelineStatusOption()
-        pipelineArea.pipelineStatusAllElements.count()
-          .then((count) => {
-            var stageArray = []
-            for (let i = 0; i < count; i++) {
-              stageArray.push(pipelineArea.pipelineStatusAllElements.get(i).getText())
-            }
-            return Promise.all(stageArray)
-          }).then((textArray) => {
-            for (let i = 0; i < textArray.length; i++) {
-              expect(textArray[i]).to.equal(arrayFromSettings[i])
-            }
-          })
-      })
-  })
-
   describe.skip('pipeline area', () => {
     const EXPECTED_STATUS_ONE = 'Deciding'
     const EXPECTED_STATUS_TWO = 'Deciding'
@@ -262,6 +221,46 @@ describe('the student profile page', () => {
       pipelineArea.clickDecidingStatusThreeCheckboxes()
 
       expect(pipelineArea.lastHeader.getText()).to.eventually.equal(NEW_STATUS)
+    })
+
+    it('statuses match those in settings > agency > pipeline', () => {
+      browser.get('https://e2e.edvisor.io:2999/agency/en/504/settings/agency/504/information')
+      LoginPage.waitForLoader()
+      SettingsPage.waitForGhostTab()
+
+      const settingsPage = new SettingsPage()
+      const agencyTab = new settingsPage.AgencyTab()
+      agencyTab.clickPipelineButton()
+      agencyTab.stageElements.count()
+        .then((count) => {
+          var stageArray = []
+          for (let i = 0; i < count; i++) {
+            stageArray.push(agencyTab.stageElements.get(i).getText())
+          }
+          return Promise.all(stageArray)
+        }).then((textArray) => {
+          var arrayFromSettings = textArray
+          const agencyNav = new AgencyNav()
+          agencyNav.goToStudents()
+          const studentListing = new StudentListingPage()
+          studentListing.clickFirstStudentInTable()
+          const studentProfile = new StudentProfilePage()
+          const pipelineArea = new studentProfile.PipelineArea()
+          pipelineArea.clickChangePipelineFirstButton()
+          pipelineArea.clickChangePipelineStatusOption()
+          pipelineArea.pipelineStatusAllElements.count()
+            .then((count) => {
+              var stageArray = []
+              for (let i = 0; i < count; i++) {
+                stageArray.push(pipelineArea.pipelineStatusAllElements.get(i).getText())
+              }
+              return Promise.all(stageArray)
+            }).then((textArray) => {
+              for (let i = 0; i < textArray.length; i++) {
+                expect(textArray[i]).to.equal(arrayFromSettings[i])
+              }
+            })
+        })
     })
   })
 })

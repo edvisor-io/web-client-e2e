@@ -40,6 +40,16 @@ describe('the student listing page', () => {
     agencyNav.goToStudents()
   })
 
+  it('the number of students indicated in the pipeline tab is shown', () => {
+    const studentListing = new StudentListingPage()
+    studentListing.clickSecondPipelineTab()
+    var studentCount
+    studentListing.studentCheckboxElements.count()
+      .then((count) => {
+        studentCount += count
+      })
+  })
+
   describe.skip('filters students', () => {
     it('by agents > unassigned', () => {
       const studentListing = new StudentListingPage()
