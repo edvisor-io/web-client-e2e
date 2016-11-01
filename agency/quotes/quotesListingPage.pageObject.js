@@ -16,6 +16,8 @@ export default class QuotesListingPage {
   }
 
   clickFirstQuote() {
+    const EXPECTED = protractor.ExpectedConditions
+    browser.wait(EXPECTED.elementToBeClickable(this.firstQuoteId), constants.TIMEOUT_TIME)
     this.firstQuoteId.click()
   }
 }

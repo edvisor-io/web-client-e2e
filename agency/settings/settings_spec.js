@@ -14,11 +14,6 @@ chai.use(chaiAsPromised)
 const {expect} = chai
 
 describe('the agency app settings page', () => {
-  // beforeEach(() => {
-  //   browser.get('/')
-  //   LoginPage.waitForLoader()
-  // })
-
   afterEach(() => {
     browser.driver.manage().deleteAllCookies()
   })

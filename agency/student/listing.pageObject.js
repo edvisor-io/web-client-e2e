@@ -1,12 +1,13 @@
 import AddStudentModal from './listing/addStudentModal.pageObject'
 import SearchBar from './listing/searchBar.pageObject'
+import constants from '../../shared/constants'
 
 export default class StudentListingPage {
   constructor() {
     this.SearchBar = SearchBar
 
     this.viewingPipelineDropdown = $('pipeline-select')
-    this.allStudentsOption = this.viewingPipelineDropdown.all(by.css('button')).get(2)
+    this.allStudentsOption = this.viewingPipelineDropdown.all(by.css('button')).get(-2)
 
     this.addStudentButton = $('#add-student-button')
     this.buttonSearch = element(by.id('ext02-search-student-btn'))
@@ -63,19 +64,19 @@ export default class StudentListingPage {
     this.secondPipelineTab.click()
   }
 
-  calculatePaginations(studentCount) {
+  calculatePages(studentCount) {
     let paginationNumber = 20
-    return Math.floor(studentCount / paginationNumber)
+    return Math.ceil(studentCount / paginationNumber)
   }
 
   clickNextButton(howManyClicks) {
-    for (let i = howManyClicks; i >= 0; i--) {
+    for (let i = 1; i < howManyClicks; i++) {
       this.nextButton.click()
     }
   }
 
   goToLastPageOfTab(studentCount) {
-    let clicksNeeded = this.calculatePaginations(studentCount)
+    let clicksNeeded = this.calculatePages(studentCount)
     this.clickNextButton(clicksNeeded)
   }
 
