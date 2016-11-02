@@ -14,8 +14,9 @@ web-client repo.
 
 ***
 
-## For a quick guide to certain situations, read this section ⚡️. For a high-
-level guide to the code, move on to the next section.
+## For a quick guide ⚡️ to certain situations, read this section.
+
+For a high level overview of the code, move on to the next section.
 
 ### Do this, when there's new code in the web-client 🌱 😎 :
 

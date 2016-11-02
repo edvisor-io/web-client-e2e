@@ -49,6 +49,7 @@ export default class StudentListingPage {
       .all(by.css('.table-student-name')).get(0)
     this.firstStudentInTableCheckboxContainer = this.studentsTableContainer
       .all(by.css('div.ag-cell')).first()
+    this.checkboxElements = element.all(by.css('.students-table div.ag-cell label.checkbox'))
 
     this.alertBoxMessage = $('.alert-box-message')
     this.alertDanger = $('.alert-danger')
@@ -79,7 +80,7 @@ export default class StudentListingPage {
     return Math.ceil(studentCount / paginationNumber)
   }
 
-  clickNextButton(howManyClicks) {
+  clickNextButtonTillEnd(howManyClicks) {
     for (let i = 1; i < howManyClicks; i++) {
       this.nextButton.click()
     }
@@ -87,7 +88,35 @@ export default class StudentListingPage {
 
   goToLastPageOfTab(studentCount) {
     let clicksNeeded = this.calculatePages(studentCount)
-    this.clickNextButton(clicksNeeded)
+    this.clickNextButtonTillEnd(clicksNeeded)
+  }
+
+  clickAndCount(pageLeft, countArray) {
+    if (pageLeft === 0) {
+      return Promise.resolve(countArray)
+    } else {
+      return this.nextButton.click()
+        .then(() => {
+          countArray.push(this.checkboxElements.count())
+          console.log(countArray)
+          return pageLeft--
+        })
+        .then(pageLeft => this.clickAndCount(pageLeft, countArray))
+    }
+  }
+  countClickNextButtonAndCount(studentCount) {
+    var countArray = []
+    countArray.push(this.checkboxElements.count())
+    let clicksNeeded = this.calculatePages(studentCount)
+    for (let i = 1; i < clicksNeeded; i++) {
+      this.nextButton.click()
+      browser.sleep(3000)
+      countArray.push(this.checkboxElements.count())
+    }
+    Promise.all(countArray)
+    return countArray.reduce((a, b) => {
+      return a + b
+    })
   }
 
   addStudent(assignedTo, firstname, lastname, email, nationality) {

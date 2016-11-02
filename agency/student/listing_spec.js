@@ -43,11 +43,14 @@ describe('the student listing page', () => {
   it('the number of students indicated in the pipeline tab is shown', () => {
     const studentListing = new StudentListingPage()
     studentListing.clickSecondPipelineTab()
-    var studentCount
-    studentListing.studentCheckboxElements.count()
-      .then((count) => {
-        studentCount += count
+    studentListing.secondPipelineTabCountElement.getText()
+      .then((text) => {
+        let studentCount = +text
+        return studentListing.countClickNextButtonAndCount(studentCount)
+      }).then((countArray) => {
+        console.log(countArray)
       })
+    browser.sleep(5000)
   })
 
   describe.skip('filters students', () => {

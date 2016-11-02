@@ -43,13 +43,12 @@ describe('the student profile page', () => {
       if (recentActivitiesArea.showAllActivityButton) {
         recentActivitiesArea.showAllActivityButton.click()
       }
-      recentActivitiesArea.allActivitiesElements.count()
-        .then((count) => {
-          let currentActivitiesCount = count
-          studentProfile.inputFirstName()
-          studentProfile.clickSaveButton()
-          expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(currentActivitiesCount + 1)
-        })
+      recentActivitiesArea.allActivitiesElements.count().then((count) => {
+        let currentActivitiesCount = count
+        studentProfile.inputFirstName()
+        studentProfile.clickSaveButton()
+        expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(currentActivitiesCount + 1)
+      })
     })
 
     it('updates on changes to pipeline area', () => {
@@ -61,12 +60,10 @@ describe('the student profile page', () => {
       if (recentActivitiesArea.showAllActivityButton) {
         recentActivitiesArea.showAllActivityButton.click()
       }
-      recentActivitiesArea.allActivitiesElements.count()
-      .then((count) => {
+      recentActivitiesArea.allActivitiesElements.count().then((count) => {
         let currentActivitiesCount = count
         studentProfile.assignStatusSecondOptionInFirstPipeline()
         expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(currentActivitiesCount + 1)
-        browser.sleep(5000)
       })
     })
   })
@@ -222,45 +219,46 @@ describe('the student profile page', () => {
 
       expect(pipelineArea.lastHeader.getText()).to.eventually.equal(NEW_STATUS)
     })
+  })
 
-    it('statuses match those in settings > agency > pipeline', () => {
-      browser.get('https://e2e.edvisor.io:2999/agency/en/504/settings/agency/504/information')
-      LoginPage.waitForLoader()
-      SettingsPage.waitForGhostTab()
+  it('statuses match those in settings > agency > pipeline', () => {
+    browser.get('https://e2e.edvisor.io:2999/agency/en/504/settings/agency/504/information')
+    LoginPage.waitForLoader()
+    SettingsPage.waitForGhostTab()
 
-      const settingsPage = new SettingsPage()
-      const agencyTab = new settingsPage.AgencyTab()
-      agencyTab.clickPipelineButton()
-      agencyTab.stageElements.count()
-        .then((count) => {
-          var stageArray = []
-          for (let i = 0; i < count; i++) {
-            stageArray.push(agencyTab.stageElements.get(i).getText())
-          }
-          return Promise.all(stageArray)
-        }).then((textArray) => {
-          var arrayFromSettings = textArray
-          const agencyNav = new AgencyNav()
-          agencyNav.goToStudents()
-          const studentListing = new StudentListingPage()
-          studentListing.clickFirstStudentInTable()
-          const studentProfile = new StudentProfilePage()
-          const pipelineArea = new studentProfile.PipelineArea()
-          pipelineArea.clickChangePipelineFirstButton()
-          pipelineArea.clickChangePipelineStatusOption()
-          pipelineArea.pipelineStatusAllElements.count()
-            .then((count) => {
-              var stageArray = []
-              for (let i = 0; i < count; i++) {
-                stageArray.push(pipelineArea.pipelineStatusAllElements.get(i).getText())
-              }
-              return Promise.all(stageArray)
-            }).then((textArray) => {
-              for (let i = 0; i < textArray.length; i++) {
-                expect(textArray[i]).to.equal(arrayFromSettings[i])
-              }
-            })
-        })
-    })
+    const settingsPage = new SettingsPage()
+    const agencyTab = new settingsPage.AgencyTab()
+    agencyTab.clickPipelineButton()
+
+    var arrayFromSettings
+    const studentProfile = new StudentProfilePage()
+    const pipelineArea = new studentProfile.PipelineArea()
+
+    agencyTab.stageElements.count().then((count) => {
+      var stageArray = []
+      for (let i = 0; i < count; i++) {
+        stageArray.push(agencyTab.stageElements.get(i).getText())
+      }
+      return Promise.all(stageArray)
+    }).then((textArray) => {
+      arrayFromSettings = textArray
+      const agencyNav = new AgencyNav()
+      agencyNav.goToStudents()
+      const studentListing = new StudentListingPage()
+      studentListing.clickFirstStudentInTable()
+      pipelineArea.clickChangePipelineFirstButton()
+      pipelineArea.clickChangePipelineStatusOption()
+      return pipelineArea.pipelineStatusAllElements.count()
+    }).then((count) => {
+      var stageArray = []
+      for (let i = 0; i < count; i++) {
+        stageArray.push(pipelineArea.pipelineStatusAllElements.get(i).getText())
+      }
+      return Promise.all(stageArray)
+    }).then((textArray) => {
+      for (let i = 0; i < textArray.length; i++) {
+        expect(textArray[i]).to.equal(arrayFromSettings[i])
+      }
+    }).catch(console.log.bind(console))
   })
 })
