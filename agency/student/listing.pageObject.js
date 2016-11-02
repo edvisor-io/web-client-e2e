@@ -1,7 +1,7 @@
 import AddStudentModal from './listing/addStudentModal.pageObject'
 import SearchBar from './listing/searchBar.pageObject'
-import constants from '../../shared/constants'
 import ListArea from './listing/listArea.pageObject'
+import constants from '../../shared/constants'
 
 export default class StudentListingPage {
   constructor() {
@@ -35,8 +35,8 @@ export default class StudentListingPage {
     this.lastPipelineTab = element.all(by.css('ul.inner-dropdown li')).last()
     this.lastPipelineTabTitleSpanElement = this.lastPipelineTab.all(by.css('span')).first()
 
-    this.firstStudentCheckbox = element.all(by.css('div.ag-cell label.checkbox')).get(0)
-    this.secondStudentCheckbox = element.all(by.css('div.ag-cell label.checkbox')).get(1)
+    // this.firstStudentCheckbox = element.all(by.css('div.ag-cell label.checkbox')).get(0)
+    // this.secondStudentCheckbox = element.all(by.css('div.ag-cell label.checkbox')).get(1)
     this.assignButton = $('#ext02-listings-assign-btn')
     this.lastOfficeInDropdown = element.all(by
       .css('div.assign div.menu-container > ul > li')).last()
@@ -45,11 +45,10 @@ export default class StudentListingPage {
     this.confirmMoveStudentButton = element.all(by.css('div.e-alert_buttons button')).get(1)
 
     this.studentsTableContainer = $('.students-table')
-    this.firstStudentInTable = this.studentsTableContainer
-      .all(by.css('.table-student-name')).get(0)
+    // this.firstStudentInTable = this.studentsTableContainer
+    //   .all(by.css('.table-student-name')).get(0)
     this.firstStudentInTableCheckboxContainer = this.studentsTableContainer
       .all(by.css('div.ag-cell')).first()
-    this.checkboxElements = element.all(by.css('.students-table div.ag-cell label.checkbox'))
 
     this.alertBoxMessage = $('.alert-box-message')
     this.alertDanger = $('.alert-danger')
@@ -67,9 +66,9 @@ export default class StudentListingPage {
     this.exportButton.click()
   }
 
-  clickFirstStudentInTable() {
-    this.firstStudentInTable.click()
-  }
+  // clickFirstStudentInTable() {
+  //   this.firstStudentInTable.click()
+  // }
 
   clickSecondPipelineTab() {
     this.secondPipelineTab.click()
@@ -91,32 +90,30 @@ export default class StudentListingPage {
     this.clickNextButtonTillEnd(clicksNeeded)
   }
 
-  clickAndCount(pageLeft, countArray) {
-    if (pageLeft === 0) {
-      return Promise.resolve(countArray)
-    } else {
-      return this.nextButton.click()
-        .then(() => {
-          countArray.push(this.checkboxElements.count())
-          console.log(countArray)
-          return pageLeft--
-        })
-        .then(pageLeft => this.clickAndCount(pageLeft, countArray))
-    }
-  }
+  // recursive not working, for counting elements in subsequent function
+  // clickAndCount(pageLeft, countArray) {
+  //   if (pageLeft === 0) {
+  //     return Promise.resolve(countArray)
+  //   } else {
+  //     return this.nextButton.click().then(() => {
+  //       countArray.push(this.checkboxElements.count())
+  //       console.log(countArray)
+  //       return pageLeft--
+  //     }).then(pageLeft => this.clickAndCount(pageLeft, countArray))
+  //   }
+  // }
   countClickNextButtonAndCount(studentCount) {
     var countArray = []
-    countArray.push(this.checkboxElements.count())
+    const listArea = new ListArea()
+
+    countArray.push(listArea.checkboxElements.count())
     let clicksNeeded = this.calculatePages(studentCount)
     for (let i = 1; i < clicksNeeded; i++) {
       this.nextButton.click()
-      browser.sleep(3000)
-      countArray.push(this.checkboxElements.count())
+      browser.sleep(2000) // to allow next page to load and be counted from
+      countArray.push(listArea.checkboxElements.count())
     }
-    Promise.all(countArray)
-    return countArray.reduce((a, b) => {
-      return a + b
-    })
+    return Promise.all(countArray).then(countArray => countArray.reduce((a, b) => a + b))
   }
 
   addStudent(assignedTo, firstname, lastname, email, nationality) {
@@ -131,8 +128,9 @@ export default class StudentListingPage {
   }
 
   reassignFirstTwoStudents() {
-    this.firstStudentCheckbox.click()
-    this.secondStudentCheckbox.click()
+    const listArea = new ListArea()
+    listArea.firstStudentCheckbox.click()
+    listArea.secondStudentCheckbox.click()
     this.assignButton.click()
     this.lastOfficeInDropdown.click()
     this.firstOwnerOption.click()

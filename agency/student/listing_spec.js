@@ -40,19 +40,6 @@ describe('the student listing page', () => {
     agencyNav.goToStudents()
   })
 
-  it('the number of students indicated in the pipeline tab is shown', () => {
-    const studentListing = new StudentListingPage()
-    studentListing.clickSecondPipelineTab()
-    studentListing.secondPipelineTabCountElement.getText()
-      .then((text) => {
-        let studentCount = +text
-        return studentListing.countClickNextButtonAndCount(studentCount)
-      }).then((countArray) => {
-        console.log(countArray)
-      })
-    browser.sleep(5000)
-  })
-
   describe.skip('filters students', () => {
     it('by agents > unassigned', () => {
       const studentListing = new StudentListingPage()
@@ -74,15 +61,6 @@ describe('the student listing page', () => {
   })
 
   describe.skip('temporary grouping', () => {
-    it('displays pipeline lists from the tabs hidden by page width', () => {
-      const COLOUR_WHEN_ACTIVE = 'rgba(87, 88, 89, 1)'
-
-      const studentListing = new StudentListingPage()
-      studentListing.openPipelineTabsOverflowDropdown()
-      studentListing.selectLastPipelineTab()
-      expect(studentListing.lastPipelineTabTitleSpanElement.getCssValue('color')).to.eventually.equal(COLOUR_WHEN_ACTIVE)
-    })
-
     it('reassigns multiple students to another office', () => {
       const studentListing = new StudentListingPage()
       studentListing.selectViewingAllStudents()
@@ -121,7 +99,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('pipeline tabs', () => {
+  describe('pipeline tabs', () => {
     it('should switch displayed students pipeline', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickSecondPipelineTab()
@@ -133,8 +111,7 @@ describe('the student listing page', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickSecondPipelineTab()
 
-      studentListing.secondPipelineTabCountElement.getText()
-      .then((text) => {
+      studentListing.secondPipelineTabCountElement.getText().then((text) => {
         let studentCount = +text
         studentListing.goToLastPageOfTab(studentCount)
         expect(studentListing.currentPageField.getAttribute('value')).to
@@ -142,6 +119,30 @@ describe('the student listing page', () => {
           .equal((Math.floor(studentListing.calculatePages(studentCount)))
           .toString())
       })
+    })
+
+    it('displays the same number of students as total given in the pipeline tab element', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickSecondPipelineTab()
+
+      var studentCount
+
+      studentListing.secondPipelineTabCountElement.getText().then((text) => {
+        studentCount = +text
+        return studentListing.countClickNextButtonAndCount(studentCount)
+      }).then((countArray) => {
+        expect(countArray).to.equal(studentCount)
+      }).catch(console.log.bind(console))
+    })
+
+    it('displays pipeline lists from the tabs hidden by page width', () => {
+      const COLOUR_WHEN_ACTIVE = 'rgba(87, 88, 89, 1)'
+
+      const studentListing = new StudentListingPage()
+      studentListing.openPipelineTabsOverflowDropdown()
+      studentListing.selectLastPipelineTab()
+      expect(studentListing.lastPipelineTabTitleSpanElement.getCssValue('color'))
+        .to.eventually.equal(COLOUR_WHEN_ACTIVE)
     })
   })
 

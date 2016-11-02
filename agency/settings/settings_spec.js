@@ -45,7 +45,7 @@ describe('the agency app settings page', () => {
     })
   })
 
-  describe.skip('admins', () => {
+  describe('admins', () => {
     beforeEach(() => {
       const loginPage = new LoginPage()
       loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
