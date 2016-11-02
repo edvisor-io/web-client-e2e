@@ -103,18 +103,21 @@ describe('the student listing page', () => {
     it('should switch displayed students pipeline', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickSecondPipelineTab()
-
-      expect(studentListing.firstStudentInTable.isPresent()).to.eventually.equal(true)
+      studentListing.clickThirdPipelineTab()
+      studentListing.clickFourthPipelineTab()
+      const listArea = new studentListing.ListArea()
+      expect(listArea.firstStudentInTable.isPresent()).to.eventually.equal(true)
     })
 
     it('should display all students in a pipeline through pagination', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickSecondPipelineTab()
-
-      studentListing.secondPipelineTabCountElement.getText().then((text) => {
+      const pipelineTabs = new studentListing.PipelineTabs()
+      pipelineTabs.secondPipelineTabCountElement.getText().then((text) => {
         let studentCount = +text
         studentListing.goToLastPageOfTab(studentCount)
-        expect(studentListing.currentPageField.getAttribute('value')).to
+        const filterNavigationDownloadCustomizeBar = new studentListing.FilterNavigationDownloadCustomizeBar()
+        expect(filterNavigationDownloadCustomizeBar.currentPageField.getAttribute('value')).to
           .eventually
           .equal((Math.floor(studentListing.calculatePages(studentCount)))
           .toString())
@@ -126,8 +129,8 @@ describe('the student listing page', () => {
       studentListing.clickSecondPipelineTab()
 
       var studentCount
-
-      studentListing.secondPipelineTabCountElement.getText().then((text) => {
+      const pipelineTabs = new studentListing.PipelineTabs()
+      pipelineTabs.secondPipelineTabCountElement.getText().then((text) => {
         studentCount = +text
         return studentListing.countClickNextButtonAndCount(studentCount)
       }).then((countArray) => {
@@ -141,7 +144,8 @@ describe('the student listing page', () => {
       const studentListing = new StudentListingPage()
       studentListing.openPipelineTabsOverflowDropdown()
       studentListing.selectLastPipelineTab()
-      expect(studentListing.lastPipelineTabTitleSpanElement.getCssValue('color'))
+      const pipelineTabs = new studentListing.PipelineTabs()
+      expect(pipelineTabs.lastPipelineTabTitleSpanElement.getCssValue('color'))
         .to.eventually.equal(COLOUR_WHEN_ACTIVE)
     })
   })
