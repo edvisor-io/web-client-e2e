@@ -41,7 +41,46 @@ run `./bin/edvisor build -s client`.
 
 ***
 
-## High-level overview of how things are structured
+## Styleguides
+
+An overview of how things are structured
+
+### Git Commit Messages
+
+* Use the present tense ("Add feature" not "Added feature")
+* Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
+* Limit the first line to 72 characters or less
+* Consider starting the commit message with an applicable emoji:
+    * :art: `:art:` when improving the format/structure of the code
+    * :rocket: `:rocket:` when improving performance
+    * :memo: `:memo:` when writing docs
+    * :bug: `:bug:` when fixing a bug
+    * :fire: `:fire:` when removing code or files
+    * :green_heart: `:green_heart:` when fixing the CI build
+    * :white_check_mark: `:white_check_mark:` when adding tests
+    * :lock: `:lock:` when dealing with security
+    * :arrow_up: `:arrow_up:` when upgrading dependencies
+    * :arrow_down: `:arrow_down:` when downgrading dependencies
+    * :shirt: `:shirt:` when removing linter warnings
+
+### JavaScript Styleguide
+
+All JavaScript must adhere to [JavaScript Standard Style](http://standardjs.com/).
+
+* Prefer the object spread operator (`{...anotherObj}`) to `Object.assign()`
+* Inline `export`s with expressions whenever possible
+  ```js
+  // Use this:
+  export default class ClassName {
+
+  }
+
+  // Instead of:
+  class ClassName {
+
+  }
+  export default ClassName
+  ```
 
 ### the `.conf` file: Where it all begins
 
