@@ -40,27 +40,7 @@ describe('the student listing page', () => {
     agencyNav.goToStudents()
   })
 
-  describe.skip('filters students', () => {
-    it('by agents > unassigned', () => {
-      const studentListing = new StudentListingPage()
-      studentListing.filterByAgentsUnassigned()
-      expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
-    })
-
-    it('by agents > first, archive reasons > finished studying', () => {
-      const studentListing = new StudentListingPage()
-      studentListing.filterByAgentsFirst()
-      expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
-    })
-
-    it('by custom field', () => {
-      const studentListing = new StudentListingPage()
-      studentListing.filterByCustomFields()
-      expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
-    })
-  })
-
-  describe.skip('temporary grouping', () => {
+  describe('temporary grouping', () => {
     it('reassigns multiple students to another office', () => {
       const studentListing = new StudentListingPage()
       studentListing.selectViewingAllStudents()
@@ -78,7 +58,8 @@ describe('the student listing page', () => {
       const studentProfile = new StudentProfilePage()
       studentProfile.clickBackToStudentsButton()
       studentListing.selectViewingAllStudents()
-      expect(studentListing.firstStudentInTableCheckboxContainer
+      const listArea = new studentListing.ListArea()
+      expect(listArea.firstStudentInTableCheckboxContainer
         .getCssValue('background-color')).to.eventually.equal(PALE_YELLOW)
     })
 
@@ -86,14 +67,12 @@ describe('the student listing page', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickSelectAllStudentsCheckbox()
       studentListing.clickExportButton()
-
       expect(studentListing.exportMessage.isPresent()).to.eventually.equal(true)
     })
 
     it('should show a student profile from the students table', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
-
       const studentProfile = new StudentProfilePage()
       expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
     })
@@ -113,15 +92,19 @@ describe('the student listing page', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickSecondPipelineTab()
       const pipelineTabs = new studentListing.PipelineTabs()
+
+      var studentCount
+
       pipelineTabs.secondPipelineTabCountElement.getText().then((text) => {
-        let studentCount = +text
+        studentCount = +text
         studentListing.goToLastPageOfTab(studentCount)
+      }).then(() => {
         const filterNavigationDownloadCustomizeBar = new studentListing.FilterNavigationDownloadCustomizeBar()
         expect(filterNavigationDownloadCustomizeBar.currentPageField.getAttribute('value')).to
-          .eventually
-          .equal((Math.floor(studentListing.calculatePages(studentCount)))
-          .toString())
-      })
+        .eventually
+        .equal((Math.floor(studentListing.calculatePages(studentCount)))
+        .toString())
+      }).catch(console.log.bind(console))
     })
 
     it('displays the same number of students as total given in the pipeline tab element', () => {
@@ -150,7 +133,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('add student modal', () => {
+  describe('add student modal', () => {
     it('should create a new student successfully', () => {
       const email = uuid.v4() + AT_EMAIL_DOMAIN
 
@@ -179,7 +162,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('search function', () => {
+  describe('search function', () => {
     const SECONDARY_CONTACT = 'Anna Faris'
 
     beforeEach(() => {
@@ -218,6 +201,26 @@ describe('the student listing page', () => {
       expect(searchBar.searchResultName.isPresent()).to.eventually.equal(true)
       expect(searchBar.searchResultEmail.isPresent()).to.eventually.equal(true)
       expect(searchBar.searchResultOffice.isPresent()).to.eventually.equal(true)
+    })
+  })
+
+  describe('filters students', () => { // the effects of this persist until cookies cleared, put at end
+    it('by agents > unassigned', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.filterByAgentsUnassigned()
+      expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
+    })
+
+    it('by agents > first, archive reasons > finished studying', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.filterByAgentsFirst()
+      expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
+    })
+
+    it('by custom field', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.filterByCustomFields()
+      expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
     })
   })
 })

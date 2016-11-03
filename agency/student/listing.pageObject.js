@@ -2,6 +2,7 @@ import SearchBar from './listing/searchBar.pageObject'
 import AddStudentModal from './listing/addStudentModal.pageObject'
 import PipelineTabs from './listing/pipelineTabs.pageObject'
 import FilterNavigationDownloadCustomizeBar from './listing/filterNavigationDownloadCustomizeBar.pageObject'
+import BatchOptions from './listing/batchOptions.pageObject'
 import ListArea from './listing/listArea.pageObject'
 import constants from '../../shared/constants'
 
@@ -18,33 +19,13 @@ export default class StudentListingPage {
     this.addStudentButton = $('#add-student-button')
     this.buttonSearch = element(by.id('ext02-search-student-btn'))
 
-    // this.currentPageField = $('div.page-display input')
-    // this.nextButton = $('button.btn--default.next')
-    // this.exportButton = $('.action-bar #ext02-export-data')
-
-    // this.secondPipelineTab = element(by.repeater('tab in tabs.items | limitTo: max track by $index').row(1))
-    // this.secondPipelineTabCountElement = this.secondPipelineTab.$('span.subtitle')
-    // this.thirdPipelineTab = element.all(by.repeater('tab in tabs.items | limitTo: max track by $index').row(2))
-    // this.fourthPipelineTab = element.all(by.repeater('tab in tabs.items | limitTo: max track by $index').row(3))
-    // this.pipelineTabsOverflowDropdown = element.all(by.css('#ext02-tab-selection > li')).last()
-    // this.lastPipelineTab = element.all(by.css('ul.inner-dropdown li')).last()
-    // this.lastPipelineTabTitleSpanElement = this.lastPipelineTab.all(by.css('span')).first()
-
-    // this.firstStudentCheckbox = element.all(by.css('div.ag-cell label.checkbox')).get(0)
-    // this.secondStudentCheckbox = element.all(by.css('div.ag-cell label.checkbox')).get(1)
-    this.selectAllStudentsCheckbox = $('div.ag-header-cell-label label.checkbox')
-    this.assignButton = $('#ext02-listings-assign-btn')
-    this.lastOfficeInDropdown = element.all(by
-      .css('div.assign div.menu-container > ul > li')).last()
-    this.firstOwnerOption = element.all(by
-      .css('div.assign div.menu-container > ul.submenu.open > div > li')).first()
+    // this.selectAllStudentsCheckbox = $('div.ag-header-cell-label label.checkbox')
+    // this.assignButton = $('#ext02-listings-assign-btn')
+    // this.lastOfficeInDropdown = element.all(by
+    //   .css('div.assign div.menu-container > ul > li')).last()
+    // this.firstOwnerOption = element.all(by
+    //   .css('div.assign div.menu-container > ul.submenu.open > div > li')).first()
     this.confirmMoveStudentButton = element.all(by.css('div.e-alert_buttons button')).get(1)
-
-    // this.studentsTableContainer = $('.students-table')
-    // this.firstStudentInTable = this.studentsTableContainer
-    //   .all(by.css('.table-student-name')).get(0)
-    // this.firstStudentInTableCheckboxContainer = this.studentsTableContainer
-    //   .all(by.css('div.ag-cell')).first()
 
     this.exportMessage = $('.e-alert_inner-container')
     this.alertBoxMessage = $('.alert-box-message')
@@ -56,7 +37,8 @@ export default class StudentListingPage {
   }
 
   clickSelectAllStudentsCheckbox() {
-    this.selectAllStudentsCheckbox.click()
+    const batchOptions = new BatchOptions()
+    batchOptions.selectAllStudentsCheckbox.click()
   }
 
   clickExportButton() {
@@ -64,9 +46,10 @@ export default class StudentListingPage {
     filterNavigationDownloadCustomizeBar.exportButton.click()
   }
 
-  // clickFirstStudentInTable() {
-  //   this.firstStudentInTable.click()
-  // }
+  clickFirstStudentInTable() {
+    const listArea = new ListArea()
+    listArea.clickFirstStudentInTable()
+  }
 
   clickSecondPipelineTab() {
     const pipelineTabs = new PipelineTabs()
@@ -141,9 +124,10 @@ export default class StudentListingPage {
     const listArea = new ListArea()
     listArea.firstStudentCheckbox.click()
     listArea.secondStudentCheckbox.click()
-    this.assignButton.click()
-    this.lastOfficeInDropdown.click()
-    this.firstOwnerOption.click()
+    const batchOptions = new BatchOptions()
+    batchOptions.assignButton.click()
+    batchOptions.lastOfficeInDropdown.click()
+    batchOptions.firstOwnerOption.click()
     this.confirmMoveStudentButton.click()
   }
 
