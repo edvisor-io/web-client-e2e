@@ -74,7 +74,8 @@ describe('the student listing page', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
       const studentProfile = new StudentProfilePage()
-      expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
+      const studentInformationArea = new studentProfile.StudentInformationArea()
+      expect(studentInformationArea.firstNameField.isPresent()).to.eventually.equal(true)
     })
   })
 
@@ -142,10 +143,11 @@ describe('the student listing page', () => {
 
       const studentProfile = new StudentProfilePage()
       expect(studentProfile.assignedToLabel.getText()).to.eventually.equal(ASSIGNED_TO)
-      expect(studentProfile.firstNameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
-      expect(studentProfile.lastNameField.getAttribute('value')).to.eventually.equal(LAST_NAME)
-      expect(studentProfile.emailField.getAttribute('value')).to.eventually.equal(email)
-      expect(ChosenWidget.getChosenValue(studentProfile.nationalityField)).to.eventually.equal(NATIONALITY)
+      const studentInformationArea = new studentProfile.StudentInformationArea()
+      expect(studentInformationArea.firstNameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
+      expect(studentInformationArea.lastNameField.getAttribute('value')).to.eventually.equal(LAST_NAME)
+      expect(studentInformationArea.emailField.getAttribute('value')).to.eventually.equal(email)
+      expect(ChosenWidget.getChosenValue(studentInformationArea.nationalityField)).to.eventually.equal(NATIONALITY)
     })
 
     it('should not create a student with the same email', () => {

@@ -33,6 +33,29 @@ describe('the student profile page', () => {
     agencyNav.goToStudents()
   })
 
+  // it('saves changes on student profile', () => {
+  //   const email = uuid.v4() + AT_EMAIL_DOMAIN
+  //
+  //   const studentListing = new StudentListingPage()
+  //   studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
+  //
+  //   const studentProfile = new StudentProfilePage()
+  //   expect(studentProfile.assignedToLabel.getText()).to.eventually.equal(ASSIGNED_TO)
+  //   const studentInformationArea = new studentProfile.StudentInformationArea()
+  //   expect(studentInformationArea.firstNameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
+  //   expect(studentInformationArea.lastNameField.getAttribute('value')).to.eventually.equal(LAST_NAME)
+  //   expect(studentInformationArea.emailField.getAttribute('value')).to.eventually.equal(email)
+  //   expect(ChosenWidget.getChosenValue(studentInformationArea.nationalityField)).to.eventually.equal(NATIONALITY)
+  // })
+
+  it('saves a note', () => {
+    const studentListing = new StudentListingPage()
+    studentListing.clickFirstStudentInTable()
+    const studentProfile = new StudentProfilePage()
+    studentProfile.saveANote()
+    expect(studentProfile.alertSuccessMessage.isPresent()).to.eventually.equal(true)
+  })
+
   describe.skip('recent actitivies', () => {
     it('updates on saved changes to profile', () => {
       const studentListing = new StudentListingPage()
@@ -93,7 +116,8 @@ describe('the student profile page', () => {
       studentListing.clickFirstStudentInTable()
 
       const studentProfile = new StudentProfilePage()
-      expect(studentProfile.firstNameField.isPresent()).to.eventually.equal(true)
+      const studentInformationArea = new studentProfile.StudentInformationArea()
+      expect(studentInformationArea.firstNameField.isPresent()).to.eventually.equal(true)
     })
 
     it('views and edits an existing student profile', () => {
@@ -104,8 +128,8 @@ describe('the student profile page', () => {
       const studentProfile = new StudentProfilePage()
       studentProfile.inputFirstName(FIRST_NAME)
       studentProfile.clickSaveButton()
-
-      expect(studentProfile.firstNameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
+      const studentInformationArea = new studentProfile.StudentInformationArea()
+      expect(studentInformationArea.firstNameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
     })
   })
 
@@ -219,46 +243,46 @@ describe('the student profile page', () => {
 
       expect(pipelineArea.lastHeader.getText()).to.eventually.equal(NEW_STATUS)
     })
-  })
+    
+    it('statuses match those in settings > agency > pipeline', () => {
+      browser.get('https://e2e.edvisor.io:2999/agency/en/504/settings/agency/504/information')
+      LoginPage.waitForLoader()
+      SettingsPage.waitForGhostTab()
 
-  it('statuses match those in settings > agency > pipeline', () => {
-    browser.get('https://e2e.edvisor.io:2999/agency/en/504/settings/agency/504/information')
-    LoginPage.waitForLoader()
-    SettingsPage.waitForGhostTab()
+      const settingsPage = new SettingsPage()
+      const agencyTab = new settingsPage.AgencyTab()
+      agencyTab.clickPipelineButton()
 
-    const settingsPage = new SettingsPage()
-    const agencyTab = new settingsPage.AgencyTab()
-    agencyTab.clickPipelineButton()
+      var arrayFromSettings
+      const studentProfile = new StudentProfilePage()
+      const pipelineArea = new studentProfile.PipelineArea()
 
-    var arrayFromSettings
-    const studentProfile = new StudentProfilePage()
-    const pipelineArea = new studentProfile.PipelineArea()
-
-    agencyTab.stageElements.count().then((count) => {
-      var stageArray = []
-      for (let i = 0; i < count; i++) {
-        stageArray.push(agencyTab.stageElements.get(i).getText())
-      }
-      return Promise.all(stageArray)
-    }).then((textArray) => {
-      arrayFromSettings = textArray
-      const agencyNav = new AgencyNav()
-      agencyNav.goToStudents()
-      const studentListing = new StudentListingPage()
-      studentListing.clickFirstStudentInTable()
-      pipelineArea.clickChangePipelineFirstButton()
-      pipelineArea.clickChangePipelineStatusOption()
-      return pipelineArea.pipelineStatusAllElements.count()
-    }).then((count) => {
-      var stageArray = []
-      for (let i = 0; i < count; i++) {
-        stageArray.push(pipelineArea.pipelineStatusAllElements.get(i).getText())
-      }
-      return Promise.all(stageArray)
-    }).then((textArray) => {
-      for (let i = 0; i < textArray.length; i++) {
-        expect(textArray[i]).to.equal(arrayFromSettings[i])
-      }
-    }).catch(console.log.bind(console))
+      agencyTab.stageElements.count().then((count) => {
+        var stageArray = []
+        for (let i = 0; i < count; i++) {
+          stageArray.push(agencyTab.stageElements.get(i).getText())
+        }
+        return Promise.all(stageArray)
+      }).then((textArray) => {
+        arrayFromSettings = textArray
+        const agencyNav = new AgencyNav()
+        agencyNav.goToStudents()
+        const studentListing = new StudentListingPage()
+        studentListing.clickFirstStudentInTable()
+        pipelineArea.clickChangePipelineFirstButton()
+        pipelineArea.clickChangePipelineStatusOption()
+        return pipelineArea.pipelineStatusAllElements.count()
+      }).then((count) => {
+        var stageArray = []
+        for (let i = 0; i < count; i++) {
+          stageArray.push(pipelineArea.pipelineStatusAllElements.get(i).getText())
+        }
+        return Promise.all(stageArray)
+      }).then((textArray) => {
+        for (let i = 0; i < textArray.length; i++) {
+          expect(textArray[i]).to.equal(arrayFromSettings[i])
+        }
+      }).catch(console.log.bind(console))
+    })
   })
 })
