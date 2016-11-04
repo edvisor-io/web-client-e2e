@@ -24,6 +24,11 @@ export class UISelectWidget {
     browser.wait(expected.elementToBeClickable(firstOption), constants.TIMEOUT_TIME)
     firstOption.click()
   }
+
+  static getUISelectValue(containerElement) {
+    var uiSpan = containerElement.$('div.ui-select-container span.ui-select-match-text > span')
+    return uiSpan.getText()
+  }
 }
 
 export class DatePickerWidget {
@@ -50,9 +55,8 @@ export class DatePickerWidget {
 }
 
 export class ChosenWidget {
-  static getChosenContainer(selectElement) {
-    let chosenContainer = selectElement.element(by.xpath('following-sibling::div[1]'))
-    return chosenContainer
+  static getChosenContainer(element) {
+    return element.element(by.xpath('following-sibling::div[1]'))
   }
 
   static setChosenValue(element, value) {
@@ -60,14 +64,15 @@ export class ChosenWidget {
     let chosenContainer = ChosenWidget.getChosenContainer(element)
     browser.wait(expected.visibilityOf(chosenContainer), constants.TIMEOUT_TIME)
 
-    let chosenSearch = chosenContainer.$('.chosen-search input')
-    let chosenResults = chosenContainer.$('.chosen-results')
+    let chosenSearchElement = chosenContainer.$('.chosen-search input')
+    let chosenResultsElement = chosenContainer.$('.chosen-results')
+
     chosenContainer.click()
+    chosenContainer.click()
+    browser.wait(expected.visibilityOf(chosenResultsElement), constants.TIMEOUT_TIME)
+    chosenSearchElement.sendKeys(value)
 
-    browser.wait(expected.visibilityOf(chosenResults), constants.TIMEOUT_TIME)
-    chosenSearch.sendKeys(value)
-
-    chosenResults.all(by.cssContainingText('li', value)).first().click()
+    chosenResultsElement.all(by.cssContainingText('li', value)).first().click()
   }
 
   static searchAndSetChosenValue(element, value) {
@@ -75,10 +80,10 @@ export class ChosenWidget {
     let chosenContainer = ChosenWidget.getChosenContainer(element)
     browser.wait(expected.visibilityOf(chosenContainer), constants.TIMEOUT_TIME)
 
-    let chosenSearch = chosenContainer.element(by.css('.search-field input'))
-    let chosenResults = chosenContainer.element(by.css('.chosen-results'))
-    chosenContainer.click()
+    let chosenSearch = chosenContainer.$('.search-field input')
+    let chosenResults = chosenContainer.$('.chosen-results')
 
+    chosenContainer.click()
     browser.wait(expected.visibilityOf(chosenResults), constants.TIMEOUT_TIME)
     chosenSearch.sendKeys(value)
 

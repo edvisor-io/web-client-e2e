@@ -7,10 +7,11 @@ import constants from '../../shared/constants'
 
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
-import uuid from 'node-uuid'
+import Chance from 'chance'
 
 chai.use(chaiAsPromised)
 const {expect} = chai
+var chance = new Chance()
 
 describe('the student profile page', () => {
   before(() => {
@@ -33,30 +34,7 @@ describe('the student profile page', () => {
     agencyNav.goToStudents()
   })
 
-  // it('saves changes on student profile', () => {
-  //   const email = uuid.v4() + AT_EMAIL_DOMAIN
-  //
-  //   const studentListing = new StudentListingPage()
-  //   studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
-  //
-  //   const studentProfile = new StudentProfilePage()
-  //   expect(studentProfile.assignedToLabel.getText()).to.eventually.equal(ASSIGNED_TO)
-  //   const studentInformationArea = new studentProfile.StudentInformationArea()
-  //   expect(studentInformationArea.firstNameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
-  //   expect(studentInformationArea.lastNameField.getAttribute('value')).to.eventually.equal(LAST_NAME)
-  //   expect(studentInformationArea.emailField.getAttribute('value')).to.eventually.equal(email)
-  //   expect(ChosenWidget.getChosenValue(studentInformationArea.nationalityField)).to.eventually.equal(NATIONALITY)
-  // })
-
-  it('saves a note', () => {
-    const studentListing = new StudentListingPage()
-    studentListing.clickFirstStudentInTable()
-    const studentProfile = new StudentProfilePage()
-    studentProfile.saveANote()
-    expect(studentProfile.alertSuccessMessage.isPresent()).to.eventually.equal(true)
-  })
-
-  describe.skip('recent actitivies', () => {
+  describe('recent actitivies', () => {
     it('updates on saved changes to profile', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
@@ -68,8 +46,7 @@ describe('the student profile page', () => {
       }
       recentActivitiesArea.allActivitiesElements.count().then((count) => {
         let currentActivitiesCount = count
-        studentProfile.inputFirstName()
-        studentProfile.clickSaveButton()
+        studentProfile.fillAndSaveANote()
         expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(currentActivitiesCount + 1)
       })
     })
@@ -91,7 +68,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('temporary grouping', () => {
+  describe('temporary grouping', () => {
     it('creates a student record', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
@@ -119,21 +96,46 @@ describe('the student profile page', () => {
       const studentInformationArea = new studentProfile.StudentInformationArea()
       expect(studentInformationArea.firstNameField.isPresent()).to.eventually.equal(true)
     })
+  })
 
-    it('views and edits an existing student profile', () => {
-      const FIRST_NAME = `${uuid.v4()}`
+  describe('student information area, notes area', () => {
+    it('edits and saves an existing student profile', () => {
+      const FIRST_NAME = `${chance.first()}`
+      const LAST_NAME = `${chance.last()}`
+      const EMAIL = `${FIRST_NAME}@earth.io`
+      const PHONE_NUMBER = `${chance.phone()}`
+      const GENDER = `${chance.gender()}`
+      const HOME_ADDRESS = `${chance.address()}`
+      const CITY_COUNTRY = `${chance.country({full: true})}`
+      const POSTAL_CODE = `${chance.postal()}`
+      const PASSPORT_NUMBER = `${chance.phone()}`
+      const NOTE = `${chance.sentence()}`
+
       const studentListing = new StudentListingPage()
+      const studentProfile = new StudentProfilePage()
+      const studentInformationArea = new studentProfile.StudentInformationArea()
+      const notesArea = new studentProfile.NotesArea()
+      const agencyNav = new AgencyNav()
+
+      studentListing.clickFirstStudentInTable()
+      studentProfile.fillAndSaveStudentInformation(FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, GENDER, HOME_ADDRESS, CITY_COUNTRY, POSTAL_CODE, PASSPORT_NUMBER)
+      studentProfile.fillAndSaveANote(NOTE)
+      agencyNav.goToStudents()
       studentListing.clickFirstStudentInTable()
 
-      const studentProfile = new StudentProfilePage()
-      studentProfile.inputFirstName(FIRST_NAME)
-      studentProfile.clickSaveButton()
-      const studentInformationArea = new studentProfile.StudentInformationArea()
       expect(studentInformationArea.firstNameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
+      expect(studentInformationArea.lastNameField.getAttribute('value')).to.eventually.equal(LAST_NAME)
+      expect(studentInformationArea.emailField.getAttribute('value')).to.eventually.equal(EMAIL)
+      expect(studentInformationArea.phoneNumberField.getAttribute('value')).to.eventually.equal(PHONE_NUMBER)
+      expect(studentInformationArea.homeAddressField.getAttribute('value')).to.eventually.equal(HOME_ADDRESS)
+      expect(studentInformationArea.getCityCountryValue()).to.eventually.equal(CITY_COUNTRY)
+      expect(studentInformationArea.postalCodeField.getAttribute('value')).to.eventually.equal(POSTAL_CODE)
+      expect(studentInformationArea.passportNumberField.getAttribute('value')).to.eventually.equal(PASSPORT_NUMBER)
+      expect(notesArea.field.getAttribute('value')).to.eventually.equal(NOTE)
     })
   })
 
-  describe.skip('tasks area', () => {
+  describe('tasks area', () => {
     it('creates a task', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
@@ -144,7 +146,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('office and owner area', () => {
+  describe('office and owner area', () => {
     const NEW_OFFICE = 'Bogotá Office'
     const NEW_OWNER = 'Shelley Chen'
 
@@ -170,7 +172,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('pipeline area', () => {
+  describe('pipeline area', () => {
     const EXPECTED_STATUS_ONE = 'Deciding'
     const EXPECTED_STATUS_TWO = 'Deciding'
     const EXPECTED_STATUS_THREE = 'Client'
@@ -243,7 +245,7 @@ describe('the student profile page', () => {
 
       expect(pipelineArea.lastHeader.getText()).to.eventually.equal(NEW_STATUS)
     })
-    
+
     it('statuses match those in settings > agency > pipeline', () => {
       browser.get('https://e2e.edvisor.io:2999/agency/en/504/settings/agency/504/information')
       LoginPage.waitForLoader()

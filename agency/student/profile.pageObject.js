@@ -16,6 +16,7 @@ export default class StudentProfilePage {
     this.SecondaryContactsArea = SecondaryContactsArea
     this.AssignedToArea = AssignedToArea
     this.PipelineArea = PipelineArea
+    this.NotesArea = NotesArea
     this.RecentActivitiesArea = RecentActivitiesArea
     this.container = $('section.student-profile')
 
@@ -31,9 +32,9 @@ export default class StudentProfilePage {
     this.alertSuccessMessage = $('div.alert-success')
   }
 
-  saveANote() {
+  fillAndSaveANote(note) {
     const notesArea = new NotesArea()
-    notesArea.inputTextIntoField()
+    notesArea.inputTextIntoField(note)
     notesArea.clickSaveButton()
   }
 
@@ -46,15 +47,20 @@ export default class StudentProfilePage {
     this.backToStudentsButton.click()
   }
 
-  inputFirstName(firstName = `${uuid.v4()}`) {
+  fillAndSaveStudentInformation(firstName, lastName, email, phoneNumber, gender, homeAddress, cityCountry, postalCode, passportNumber) {
     const studentInformationArea = new StudentInformationArea()
-    studentInformationArea.firstNameField.clear()
-    studentInformationArea.firstNameField.sendKeys(firstName)
-  }
-
-  clickSaveButton() {
-    const studentInformationArea = new StudentInformationArea()
-    studentInformationArea.saveButton.click()
+    studentInformationArea.inputFirstName(firstName)
+    studentInformationArea.inputLastName(lastName)
+    studentInformationArea.inputEmail(email)
+    studentInformationArea.inputPhoneNumber(phoneNumber)
+    studentInformationArea.selectGender(gender)
+    studentInformationArea.selectBirthday()
+    studentInformationArea.inputHomeAddress(homeAddress)
+    studentInformationArea.selectCityCountry(cityCountry)
+    studentInformationArea.inputPostalCode(postalCode)
+    studentInformationArea.selectNationality()
+    studentInformationArea.inputPassportNumber(passportNumber)
+    studentInformationArea.clickSaveButton()
   }
 
   goToGoalsTab() {

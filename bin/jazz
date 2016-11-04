@@ -19,20 +19,20 @@ function help () {
 
 function runtest () {
   echo ""
-  echo " 🔥 TESTING ALL THE THINGS "
+  echo " 🔥 TESTING ALL THE THINGS 🔥      ((::.. 🤖  ..::))"
   echo ""
   cd /Users/Beastie/development/edvisorio/web-client-e2e && CI=true LM=true protractor protractor.conf.js --suite studentProfile
   woohoo
 }
 
 function ignitedb () {
-  echo " 🔥 db igniting"
+  echo " 🔥 db igniting --- 🤖"
   mysql.server start
   woohoo
 }
 
 function resetdb () {
-  echo " 🌪 turning back time."
+  echo " 🌪 turning back time --- 🤖"
   cd /Users/Beastie/development/edvisorio/api-server && ./bin/edvisor full-reset
   woohoo
 }
