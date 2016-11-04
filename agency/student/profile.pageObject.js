@@ -38,6 +38,11 @@ export default class StudentProfilePage {
     notesArea.clickSaveButton()
   }
 
+  getNoteAsPromise() {
+    const notesArea = new NotesArea()
+    return notesArea.field.getAttribute('value')
+  }
+
   addTask(taskTitle = 'Do a followup call', dueTime = '11:00pm') {
     const tasksArea = new TasksArea()
     tasksArea.fillAndSaveNewTaskForm(taskTitle, dueTime)

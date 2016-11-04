@@ -4,7 +4,6 @@ import PipelineTabs from './listing/pipelineTabs.pageObject'
 import FilterNavigationDownloadCustomizeBar from './listing/filterNavigationDownloadCustomizeBar.pageObject'
 import BatchOptions from './listing/batchOptions.pageObject'
 import ListArea from './listing/listArea.pageObject'
-import constants from '../../shared/constants'
 
 export default class StudentListingPage {
   constructor() {
@@ -22,7 +21,7 @@ export default class StudentListingPage {
     this.confirmMoveStudentButton = element.all(by.css('div.e-alert_buttons button')).get(1)
 
     this.exportMessage = $('.e-alert_inner-container')
-    this.alertBoxMessage = $('.alert-box-message')
+    this.alertBoxMessage = $('.alert-box-message') // deprecated, use more specific locator below
     this.alertDanger = $('.alert-danger')
   }
 
@@ -43,6 +42,24 @@ export default class StudentListingPage {
   clickFirstStudentInTable() {
     const listArea = new ListArea()
     listArea.clickFirstStudentInTable()
+  }
+
+  clickSecondStudentInTable() {
+    const listArea = new ListArea()
+    listArea.secondStudentInTable.click()
+  }
+
+  clickThirdStudentInTable() {
+    const listArea = new ListArea()
+    listArea.thirdStudentInTable.click()
+  }
+  clickFourthStudentInTable() {
+    const listArea = new ListArea()
+    listArea.fourthStudentInTable.click()
+  }
+  clickFifthStudentInTable() {
+    const listArea = new ListArea()
+    listArea.fifthStudentInTable.click()
   }
 
   clickSecondPipelineTab() {
@@ -114,7 +131,7 @@ export default class StudentListingPage {
     this.allStudentsOption.click()
   }
 
-  reassignFirstTwoStudents() {
+  reassignFirstTwoStudentsToAnOffice() {
     const listArea = new ListArea()
     listArea.firstStudentCheckbox.click()
     listArea.secondStudentCheckbox.click()
@@ -123,6 +140,15 @@ export default class StudentListingPage {
     batchOptions.lastOfficeInDropdown.click()
     batchOptions.firstOwnerOption.click()
     this.confirmMoveStudentButton.click()
+  }
+
+  reassignTwoStudentsToAUser() {
+    const listArea = new ListArea()
+    listArea.firstStudentCheckbox.click()
+    listArea.secondStudentCheckbox.click()
+    const batchOptions = new BatchOptions()
+    batchOptions.assignButton.click()
+    batchOptions.firstUserInDropdown.click()
   }
 
   openPipelineTabsOverflowDropdown() {

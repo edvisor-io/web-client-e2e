@@ -7,10 +7,12 @@ import constants from '../../shared/constants'
 
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
+import Chance from 'chance'
 import uuid from 'node-uuid'
 
 chai.use(chaiAsPromised)
 const {expect} = chai
+var chance = new Chance()
 
 describe('the student listing page', () => {
   const ASSIGNED_TO = 'Shelley Chen'
@@ -40,14 +42,51 @@ describe('the student listing page', () => {
     agencyNav.goToStudents()
   })
 
-  describe('temporary grouping', () => {
+  // describe('navigation', () => {
+  //   it('works from login', () => {
+  //     browser.get('/')
+  //     LoginPage.waitForLoader()
+  //     const agencyNav = new AgencyNav()
+  //     agencyNav.goToStudents()
+  //   })
+  // })
+  describe('batch function', () => {
+    it('reassigns multiple students to another user and preserves profile data', () => {
+      let notesArray = []
+      var note = chance.sentence()
+      const studentListing = new StudentListingPage()
+      const studentProfile = new StudentProfilePage()
+
+      studentListing.clickFirstStudentInTable()
+      studentProfile.fillAndSaveANote(note)
+      studentProfile.backToStudentsButton.click()
+      studentListing.clickSecondStudentInTable()
+      studentProfile.fillAndSaveANote(note)
+      studentProfile.backToStudentsButton.click()
+
+      studentListing.reassignTwoStudentsToAUser()
+
+      studentListing.clickFirstStudentInTable()
+      notesArray.push(studentProfile.getNoteAsPromise())
+      studentProfile.backToStudentsButton.click()
+      studentListing.clickSecondStudentInTable()
+      notesArray.push(studentProfile.getNoteAsPromise())
+      studentProfile.backToStudentsButton.click()
+
+      for (let i = 0; i < notesArray.length; i++) {
+        expect(notesArray[i]).to.eventually.equal(note + '\n') // notes adds new line character and comparison fails
+      }
+    })
+
     it('reassigns multiple students to another office', () => {
       const studentListing = new StudentListingPage()
       studentListing.selectViewingAllStudents()
-      studentListing.reassignFirstTwoStudents()
+      studentListing.reassignFirstTwoStudentsToAnOffice()
       expect(studentListing.alertBoxMessage.isPresent()).to.eventually.equal(true)
     })
+  })
 
+  describe.skip('temporary grouping', () => {
     it('lists new students in pale yellow', () => {
       const email = uuid.v4() + AT_EMAIL_DOMAIN
       const PALE_YELLOW = 'rgba(252, 248, 240, 1)'
@@ -79,7 +118,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('pipeline tabs', () => {
+  describe.skip('pipeline tabs', () => {
     it('should switch displayed students pipeline', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickSecondPipelineTab()
@@ -134,7 +173,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('add student modal', () => {
+  describe.skip('add student modal', () => {
     it('should create a new student successfully', () => {
       const email = uuid.v4() + AT_EMAIL_DOMAIN
 
@@ -164,7 +203,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('search function', () => {
+  describe.skip('search function', () => {
     const SECONDARY_CONTACT = 'Anna Faris'
 
     beforeEach(() => {
@@ -206,7 +245,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('filters students', () => { // the effects of this persist until cookies cleared, put at end
+  describe.skip('filters students', () => { // the effects of this persist until cookies cleared, put at end
     it('by agents > unassigned', () => {
       const studentListing = new StudentListingPage()
       studentListing.filterByAgentsUnassigned()
