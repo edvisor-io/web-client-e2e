@@ -9,7 +9,7 @@ export default class ListArea {
     this.fourthStudentCheckbox = this.checkboxElements.get(3)
     this.fifthStudentCheckbox = this.checkboxElements.get(4)
 
-    this.studentsInTable = this.container.all(by.css('.table-student-name'))
+    this.studentsInTable = this.container.all(by.css('.table-student-name > a'))
     this.firstStudentInTable = this.studentsInTable.get(0)
     this.secondStudentInTable = this.studentsInTable.get(1)
     this.thirdStudentInTable = this.studentsInTable.get(2)
@@ -20,7 +20,7 @@ export default class ListArea {
     .all(by.css('div.ag-cell')).first()
   }
 
-  clickFirstStudentInTable() {
-    this.firstStudentInTable.click()
-  }
+  // clickFirstStudentInTable() {
+  //   this.firstStudentInTable.click()
+  // }
 }

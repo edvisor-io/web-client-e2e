@@ -21,7 +21,7 @@ function runtest () {
   echo ""
   echo " 🔥 TESTING ALL THE THINGS 🔥      ((::.. 🤖  ..::))"
   echo ""
-  cd /Users/Beastie/development/edvisorio/web-client-e2e && LM=true protractor protractor.conf.js --suite studentListing
+  cd /Users/Beastie/development/edvisorio/web-client-e2e && CI=true LM=true protractor protractor.conf.js --suite studentProfile
   woohoo
 }
 
@@ -39,13 +39,13 @@ function resetdb () {
 
 function pullwebclient () {
   echo " ⚡️ jazzing up your web-client."
-  cd /Users/Beastie/development/edvisorio/web-client && git pull --rebase
+  cd /Users/Beastie/development/edvisorio/web-client && git pull --rebase && npm install
   woohoo
 }
 
 function pullapiserver () {
   echo " ⚡️ jazzing up your api-server."
-  cd /Users/Beastie/development/edvisorio/api-server && git pull --rebase
+  cd /Users/Beastie/development/edvisorio/api-server && git pull --rebase && npm install
   woohoo
 }
 

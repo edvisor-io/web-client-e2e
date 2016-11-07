@@ -20,5 +20,8 @@ export default {
   BACKUP_SCHOOL_EMAIL: 'school19@edvisor.io',
   BACKUP_SCHOOL_PASSWORD: 'password',
 
-  TIMEOUT_TIME: 60000
+  TIMEOUT_TIME: 60000,
+  SLEEP_SHORT: 1000,
+  SLEEP_MEDIUM: 2000,
+  SLEEP_LONG: 3000
 }

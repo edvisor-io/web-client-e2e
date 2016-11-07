@@ -41,7 +41,7 @@ export default class StudentListingPage {
 
   clickFirstStudentInTable() {
     const listArea = new ListArea()
-    listArea.clickFirstStudentInTable()
+    listArea.firstStudentInTable.click()
   }
 
   clickSecondStudentInTable() {

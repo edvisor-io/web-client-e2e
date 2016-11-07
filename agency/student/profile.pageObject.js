@@ -1,14 +1,13 @@
+import GoalsTabArea from './profile/goalsTabArea.pageObject'
+import QuotesInvoicesTabArea from './profile/quotesInvoicesTabArea.pageObject'
 import StudentInformationArea from './profile/studentInformationArea.pageObject'
 import SecondaryContactsArea from './profile/secondaryContactsArea.pageObject'
 import AssignedToArea from './profile/assignedToArea.pageObject'
 import PipelineArea from './profile/pipelineArea.pageObject'
 import TasksArea from './profile/tasksArea.pageObject'
-import GoalsTabArea from './profile/goalsTabArea.pageObject'
 import NotesArea from './profile/notesArea.pageObject'
 import RecentActivitiesArea from './profile/recentActivitiesArea.pageObject'
-import SettingsPage from '../settings/settings.pageObject'
-
-import uuid from 'node-uuid'
+import InvoicesPage from '../invoices/invoices.pageObject'
 
 export default class StudentProfilePage {
   constructor() {
@@ -24,6 +23,7 @@ export default class StudentProfilePage {
 
     this.tabsContainer = $('#ext02-tabs')
     this.goalsTabElement = element(by.repeater('tab in tabs.items | limitTo: max track by $index').row(1))
+    this.quotesInvoicesTabElement = element(by.repeater('tab in tabs.items | limitTo: max track by $index').row(2))
 
     this.informationContainer = this.container.$('student-edit-information')
     this.assignedToLabel = $('student-sidebar-owner photo-initials + div > p')
@@ -41,6 +41,15 @@ export default class StudentProfilePage {
   getNoteAsPromise() {
     const notesArea = new NotesArea()
     return notesArea.field.getAttribute('value')
+  }
+
+  makeNewInvoice() {
+    this.quotesInvoicesTabElement.click()
+    const quotesInvoicesTabArea = new QuotesInvoicesTabArea()
+    quotesInvoicesTabArea.newInvoiceButton.click()
+    const invoicesPage = new InvoicesPage()
+    invoicesPage.clickNextThroughNewInvoiceSteps()
+    invoicesPage.saveButton.click()
   }
 
   addTask(taskTitle = 'Do a followup call', dueTime = '11:00pm') {

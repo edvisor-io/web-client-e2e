@@ -1,6 +1,7 @@
 import StudentProfilePage from './profile.pageObject'
 import StudentListingPage from './listing.pageObject'
 import SettingsPage from '../settings/settings.pageObject'
+import InvoicesPage from '../invoices/invoices.pageObject'
 import LoginPage from '../../auth/login/login.pageObject'
 import AgencyNav from '../nav.pageObject'
 import constants from '../../shared/constants'
@@ -95,6 +96,15 @@ describe('the student profile page', () => {
       const studentProfile = new StudentProfilePage()
       const studentInformationArea = new studentProfile.StudentInformationArea()
       expect(studentInformationArea.firstNameField.isPresent()).to.eventually.equal(true)
+    })
+
+    it('starts an invoice', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickSecondStudentInTable()
+      const studentProfile = new StudentProfilePage()
+      studentProfile.makeNewInvoice()
+      const invoicesPage = new InvoicesPage()
+      expect(invoicesPage.startApplicationButton.isPresent()).to.eventually.equal(true)
     })
   })
 
