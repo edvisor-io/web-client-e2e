@@ -7,6 +7,7 @@ import PipelineArea from './profile/pipelineArea.pageObject'
 import TasksArea from './profile/tasksArea.pageObject'
 import NotesArea from './profile/notesArea.pageObject'
 import RecentActivitiesArea from './profile/recentActivitiesArea.pageObject'
+import ArchiveStudentModal from './profile/archiveStudentModal.pageObject'
 import InvoicesPage from '../invoices/invoices.pageObject'
 
 export default class StudentProfilePage {
@@ -21,12 +22,17 @@ export default class StudentProfilePage {
 
     this.backToStudentsButton = element(by.id('ext02-back'))
 
-    this.tabsContainer = $('#ext02-tabs')
-    this.goalsTabElement = element(by.repeater('tab in tabs.items | limitTo: max track by $index').row(1))
-    this.quotesInvoicesTabElement = element(by.repeater('tab in tabs.items | limitTo: max track by $index').row(2))
+    this.tabsContainer = element(by.id('#ext02-tabs'))
+    this.goalsTabElement = this.tabsContainer
+      .element(by.repeater('tab in tabs.items | limitTo: max track by $index').row(1))
+    this.quotesInvoicesTabElement = this.tabsContainer
+      .element(by.repeater('tab in tabs.items | limitTo: max track by $index').row(2))
 
     this.informationContainer = this.container.$('student-edit-information')
     this.assignedToLabel = $('student-sidebar-owner photo-initials + div > p')
+
+    this.archiveStudentButton = element(by.id('ext02-archive-student'))
+    this.restoreStudentButton = element(by.id('ext02-restore-student-btn'))
 
     this.alertBoxMessage = $('.alert-box-message') // deprecated, please replace with more specific options below
     this.alertSuccessMessage = $('div.alert-success')
@@ -86,6 +92,24 @@ export default class StudentProfilePage {
     secondaryContactsArea.addContact()
   }
 
+  getPipelinesAsPromise() {
+    const pipelineArea = new PipelineArea()
+    let pipelinesArray = []
+    for (let i = 0; i < pipelineArea.currentPipelines.count; i++) {
+      pipelinesArray.push(pipelineArea.currentPipelines[i].getText())
+    }
+    return pipelinesArray
+  }
+
+  getStatusesAsPromise() {
+    const pipelineArea = new PipelineArea()
+    let statusesArray = []
+    for (let i = 0; i < pipelineArea.currentPipelineStatuses.count; i++) {
+      statusesArray.push(pipelineArea.currentPipelineStatuses[i].getText())
+    }
+    return statusesArray
+  }
+
   assignStatusSecondOptionInFirstPipeline() {
     const pipelineArea = new PipelineArea()
     pipelineArea.clickChangePipelineFirstButton()
@@ -118,5 +142,15 @@ export default class StudentProfilePage {
     assignedToArea.clickChangeOwnerButton()
     assignedToArea.setAsNewOffice(newOffice)
     assignedToArea.clickMoveStudentConfirmButton()
+  }
+
+  archiveStudent() {
+    this.archiveStudentButton.click()
+    const archiveStudentModal = new ArchiveStudentModal()
+    archiveStudentModal.fillAndSaveForm()
+  }
+
+  unarchiveStudent() {
+    this.restoreStudentButton.click()
   }
 }

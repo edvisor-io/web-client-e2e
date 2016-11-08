@@ -35,6 +35,15 @@ describe('the student profile page', () => {
     agencyNav.goToStudents()
   })
 
+  // describe('navigation', () => {
+  //   it('works from login', () => {
+  //     browser.get('/')
+  //     LoginPage.waitForLoader()
+  //     const agencyNav = new AgencyNav()
+  //     agencyNav.goToStudents()
+  //   })
+  // })
+
   describe('recent actitivies', () => {
     it('updates on saved changes to profile', () => {
       const studentListing = new StudentListingPage()
@@ -130,9 +139,9 @@ describe('the student profile page', () => {
       studentListing.clickFirstStudentInTable()
       studentProfile.fillAndSaveStudentInformation(FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, GENDER, HOME_ADDRESS, CITY_COUNTRY, POSTAL_CODE, PASSPORT_NUMBER)
       studentProfile.fillAndSaveANote(NOTE)
+
       agencyNav.goToStudents()
       studentListing.clickFirstStudentInTable()
-
       expect(studentInformationArea.firstNameField.getAttribute('value')).to.eventually.equal(FIRST_NAME)
       expect(studentInformationArea.lastNameField.getAttribute('value')).to.eventually.equal(LAST_NAME)
       expect(studentInformationArea.emailField.getAttribute('value')).to.eventually.equal(EMAIL)
@@ -157,24 +166,26 @@ describe('the student profile page', () => {
   })
 
   describe('office and owner area', () => {
-    const NEW_OFFICE = 'Bogotá Office'
-    const NEW_OWNER = 'Shelley Chen'
-
     beforeEach(() => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
     })
 
     it('assigns a student to an office from profile', () => {
+      const NEW_OFFICE = 'Bogotá Office'
       const studentProfile = new StudentProfilePage()
+
       studentProfile.reassignToOffice(NEW_OFFICE)
+
       const assignedToArea = new studentProfile.AssignedToArea()
       expect(assignedToArea.agencyName.getText()).to.eventually.equal(NEW_OFFICE)
     })
 
     it('assigns a student to an owner', () => {
+      const NEW_OWNER = 'Shelley Chen'
       const studentProfile = new StudentProfilePage()
       const assignedToArea = new studentProfile.AssignedToArea()
+
       assignedToArea.clickChangeOwnerButton()
       assignedToArea.setAsNewOwner(NEW_OWNER)
 
@@ -295,6 +306,39 @@ describe('the student profile page', () => {
           expect(textArray[i]).to.equal(arrayFromSettings[i])
         }
       }).catch(console.log.bind(console))
+    })
+
+    it('preserves pipelines and statuses when archiving then unarchiving', () => {
+      const studentListing = new StudentListingPage()
+      const studentProfile = new StudentProfilePage()
+      const pipelineArea = new studentProfile.PipelineArea()
+      var originalArray
+
+      studentListing.clickFirstStudentInTable()
+      pipelineArea.currentPipelines.count().then((count) => {
+        let pipelinesAndStatusesArray = []
+        for (let i = 0; i < count; i++) {
+          pipelinesAndStatusesArray.push(pipelineArea.currentPipelines.get(i).getText(), pipelineArea.currentPipelineStatuses.get(i).getText())
+        }
+        return Promise.all(pipelinesAndStatusesArray)
+      }).then((textArray) => {
+        originalArray = textArray
+        studentProfile.archiveStudent()
+        browser.refresh()
+        studentProfile.unarchiveStudent()
+        browser.refresh()
+        pipelineArea.currentPipelines.count().then((count) => {
+          let newArray = []
+          for (let i = 0; i < count; i++) {
+            newArray.push(pipelineArea.currentPipelines.get(i).getText(), pipelineArea.currentPipelineStatuses.get(i).getText())
+          }
+          return Promise.all(newArray)
+        }).then((textArray) => {
+          for (let i = 0; i < textArray.length; i++) {
+            expect(textArray[i]).to.equal(originalArray[i])
+          }
+        }).catch(console.log.bind(console))
+      })
     })
   })
 })
