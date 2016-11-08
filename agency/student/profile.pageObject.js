@@ -83,6 +83,12 @@ export default class StudentProfilePage {
     studentInformationArea.clickSaveButton()
   }
 
+  changeStudentFirstName(firstName) {
+    const studentInformationArea = new StudentInformationArea()
+    studentInformationArea.inputFirstName(firstName)
+    studentInformationArea.clickSaveButton()
+  }
+
   goToGoalsTab() {
     this.goalsTabElement.click()
   }

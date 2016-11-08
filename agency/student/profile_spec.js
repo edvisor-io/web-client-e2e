@@ -44,22 +44,6 @@ describe('the student profile page', () => {
   //   })
   // })
 
-  it('updates on reassigning owner', () => {
-    const studentListing = new StudentListingPage()
-    studentListing.clickFirstStudentInTable()
-
-    const studentProfile = new StudentProfilePage()
-    const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
-    if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
-      recentActivitiesArea.showAllActivityButton.click()
-    }
-    recentActivitiesArea.allActivitiesElements.count().then((count) => {
-      let originalActivitiesCount = count
-      studentProfile.reassignOwner()
-      expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(originalActivitiesCount + 1)
-    })
-  })
-
   describe.skip('recent actitivies', () => {
     it('updates on saved changes to profile', () => {
       const studentListing = new StudentListingPage()
@@ -109,7 +93,7 @@ describe('the student profile page', () => {
         expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(originalActivitiesCount + 2)
       })
     })
-    
+
     it('updates on reassigning owner', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
@@ -122,6 +106,22 @@ describe('the student profile page', () => {
       recentActivitiesArea.allActivitiesElements.count().then((count) => {
         let originalActivitiesCount = count
         studentProfile.reassignOwner()
+        expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(originalActivitiesCount + 1)
+      })
+    })
+
+    it('updates on student information change saves', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickFirstStudentInTable()
+
+      const studentProfile = new StudentProfilePage()
+      const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
+      if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
+        recentActivitiesArea.showAllActivityButton.click()
+      }
+      recentActivitiesArea.allActivitiesElements.count().then((count) => {
+        let originalActivitiesCount = count
+        studentProfile.changeStudentFirstName()
         expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(originalActivitiesCount + 1)
       })
     })
