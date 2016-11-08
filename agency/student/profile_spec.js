@@ -44,14 +44,30 @@ describe('the student profile page', () => {
   //   })
   // })
 
-  describe('recent actitivies', () => {
+  it('updates on reassigning owner', () => {
+    const studentListing = new StudentListingPage()
+    studentListing.clickFirstStudentInTable()
+
+    const studentProfile = new StudentProfilePage()
+    const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
+    if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
+      recentActivitiesArea.showAllActivityButton.click()
+    }
+    recentActivitiesArea.allActivitiesElements.count().then((count) => {
+      let originalActivitiesCount = count
+      studentProfile.reassignOwner()
+      expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(originalActivitiesCount + 1)
+    })
+  })
+
+  describe.skip('recent actitivies', () => {
     it('updates on saved changes to profile', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
 
       const studentProfile = new StudentProfilePage()
       const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
-      if (recentActivitiesArea.showAllActivityButton) {
+      if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
         recentActivitiesArea.showAllActivityButton.click()
       }
       recentActivitiesArea.allActivitiesElements.count().then((count) => {
@@ -67,7 +83,7 @@ describe('the student profile page', () => {
 
       const studentProfile = new StudentProfilePage()
       const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
-      if (recentActivitiesArea.showAllActivityButton) {
+      if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
         recentActivitiesArea.showAllActivityButton.click()
       }
       recentActivitiesArea.allActivitiesElements.count().then((count) => {
@@ -76,13 +92,47 @@ describe('the student profile page', () => {
         expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(currentActivitiesCount + 1)
       })
     })
-  })
 
-  describe('temporary grouping', () => {
-    it('creates a student record', () => {
+    it('updates on archiving and unarchiving', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
+
       const studentProfile = new StudentProfilePage()
+      const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
+      if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
+        recentActivitiesArea.showAllActivityButton.click()
+      }
+      recentActivitiesArea.allActivitiesElements.count().then((count) => {
+        let originalActivitiesCount = count
+        studentProfile.archiveStudent()
+        studentProfile.unarchiveStudent()
+        expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(originalActivitiesCount + 2)
+      })
+    })
+    
+    it('updates on reassigning owner', () => {
+      const studentListing = new StudentListingPage()
+      studentListing.clickFirstStudentInTable()
+
+      const studentProfile = new StudentProfilePage()
+      const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
+      if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
+        recentActivitiesArea.showAllActivityButton.click()
+      }
+      recentActivitiesArea.allActivitiesElements.count().then((count) => {
+        let originalActivitiesCount = count
+        studentProfile.reassignOwner()
+        expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(originalActivitiesCount + 1)
+      })
+    })
+  })
+
+  describe.skip('temporary grouping', () => {
+    it('creates a study record', () => {
+      const studentListing = new StudentListingPage()
+      const studentProfile = new StudentProfilePage()
+
+      studentListing.clickFirstStudentInTable()
       studentProfile.addRecord()
 
       expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
@@ -90,13 +140,13 @@ describe('the student profile page', () => {
 
     it('adds a secondary contact', () => {
       const studentListing = new StudentListingPage()
-      studentListing.clickFirstStudentInTable()
       const studentProfile = new StudentProfilePage()
+
+      studentListing.clickFirstStudentInTable()
       studentProfile.addSecondaryContact()
 
       expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
     })
-
 
     it('displays a student profile when one in listing is clicked', () => {
       const studentListing = new StudentListingPage()
@@ -109,15 +159,17 @@ describe('the student profile page', () => {
 
     it('starts an invoice', () => {
       const studentListing = new StudentListingPage()
-      studentListing.clickSecondStudentInTable()
       const studentProfile = new StudentProfilePage()
+
+      studentListing.clickSecondStudentInTable()
       studentProfile.makeNewInvoice()
+
       const invoicesPage = new InvoicesPage()
       expect(invoicesPage.startApplicationButton.isPresent()).to.eventually.equal(true)
     })
   })
 
-  describe('student information area, notes area', () => {
+  describe.skip('student information area, notes area', () => {
     it('edits and saves an existing student profile', () => {
       const FIRST_NAME = `${chance.first()}`
       const LAST_NAME = `${chance.last()}`
@@ -154,18 +206,19 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('tasks area', () => {
+  describe.skip('tasks area', () => {
     it('creates a task', () => {
       const studentListing = new StudentListingPage()
-      studentListing.clickFirstStudentInTable()
       const studentProfile = new StudentProfilePage()
+
+      studentListing.clickFirstStudentInTable()
       studentProfile.addTask()
 
       expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
     })
   })
 
-  describe('office and owner area', () => {
+  describe.skip('office and owner area', () => {
     beforeEach(() => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
@@ -184,24 +237,24 @@ describe('the student profile page', () => {
     it('assigns a student to an owner', () => {
       const NEW_OWNER = 'Shelley Chen'
       const studentProfile = new StudentProfilePage()
+
+      studentProfile.reassignOwner(NEW_OWNER)
+
       const assignedToArea = new studentProfile.AssignedToArea()
-
-      assignedToArea.clickChangeOwnerButton()
-      assignedToArea.setAsNewOwner(NEW_OWNER)
-
       expect(assignedToArea.ownerName.getText()).to.eventually.equal(NEW_OWNER)
     })
   })
 
-  describe('pipeline area', () => {
+  describe.skip('pipeline area', () => {
     const EXPECTED_STATUS_ONE = 'Deciding'
     const EXPECTED_STATUS_TWO = 'Deciding'
     const EXPECTED_STATUS_THREE = 'Client'
 
     it('assigns a student to a pipeline status', () => {
       const studentListing = new StudentListingPage()
-      studentListing.clickFirstStudentInTable()
       const studentProfile = new StudentProfilePage()
+
+      studentListing.clickFirstStudentInTable()
       studentProfile.assignStatusSecondOptionInFirstPipeline()
 
       const pipelineArea = new studentProfile.PipelineArea()
@@ -210,8 +263,9 @@ describe('the student profile page', () => {
 
     it('reassigns a student to a different pipeline status', () => {
       const studentListing = new StudentListingPage()
-      studentListing.clickFirstStudentInTable()
       const studentProfile = new StudentProfilePage()
+
+      studentListing.clickFirstStudentInTable()
       studentProfile.assignStatusSecondOptionInFirstPipeline()
       studentProfile.assignStatusThirdOptionInFirstPipeline()
 
@@ -221,10 +275,10 @@ describe('the student profile page', () => {
 
     it('unassigns a student to a pipeline status', () => {
       const studentListing = new StudentListingPage()
-      studentListing.clickFirstStudentInTable()
-
       const studentProfile = new StudentProfilePage()
       const pipelineArea = new studentProfile.PipelineArea()
+
+      studentListing.clickFirstStudentInTable()
       pipelineArea.clickChangePipelineFirstButton()
       pipelineArea.clickRemoveFromPipelineOption()
       pipelineArea.clickConfirmRemoveButton()

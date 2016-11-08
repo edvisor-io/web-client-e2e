@@ -144,6 +144,12 @@ export default class StudentProfilePage {
     assignedToArea.clickMoveStudentConfirmButton()
   }
 
+  reassignOwner(newOwner = 'Nicolas Miller') {
+    const assignedToArea = new AssignedToArea()
+    assignedToArea.clickChangeOwnerButton()
+    assignedToArea.setAsNewOwner(newOwner)
+  }
+
   archiveStudent() {
     this.archiveStudentButton.click()
     const archiveStudentModal = new ArchiveStudentModal()
