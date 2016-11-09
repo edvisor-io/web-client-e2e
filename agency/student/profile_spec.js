@@ -9,8 +9,6 @@ import constants from '../../shared/constants'
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import Chance from 'chance'
-import fs from 'fs'
-import request from 'request'
 
 chai.use(chaiAsPromised)
 const {expect} = chai
@@ -45,16 +43,35 @@ describe('the student profile page', () => {
   //     agencyNav.goToStudents()
   //   })
   // })
-  it('uploads a file', () => {
-    const studentProfile = new StudentProfilePage()
-    const studentListing = new StudentListingPage()
-    const filesTabArea = new studentProfile.FilesTabArea()
-    studentListing.clickFirstStudentInTable()
-    studentProfile.goToFilesTab()
-    filesTabArea.fileRows.count().then((count) => {
-      let rowCount = count
-      filesTabArea.fileUpload.sendKeys('/Users/Beastie/development/edvisorio/web-client-e2e/shared/images/angular.png')
-      expect(filesTabArea.fileRows.count()).to.eventually.equal(rowCount + 1)
+
+  describe.skip('files', () => {
+    it('uploads a file (1/2)', () => {
+      const studentProfile = new StudentProfilePage()
+      const studentListing = new StudentListingPage()
+      const filesTabArea = new studentProfile.FilesTabArea()
+
+      studentListing.clickFirstStudentInTable()
+      studentProfile.goToFilesTab()
+      filesTabArea.fileRows.count().then((count) => {
+        let rowCount = count
+        studentProfile.uploadFile()
+
+        expect(filesTabArea.fileRows.count()).to.eventually.equal(rowCount + 1)
+      })
+    })
+
+    it('deletes a file (2/2)', () => {
+      const studentProfile = new StudentProfilePage()
+      const studentListing = new StudentListingPage()
+      const filesTabArea = new studentProfile.FilesTabArea()
+      studentListing.clickFirstStudentInTable()
+      studentProfile.goToFilesTab()
+      filesTabArea.fileRows.count().then((count) => {
+        let rowCount = count
+        studentProfile.deleteFile()
+
+        expect(filesTabArea.fileRows.count()).to.eventually.equal(rowCount - 1)
+      })
     })
   })
 

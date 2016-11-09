@@ -10,6 +10,7 @@ import NotesArea from './profile/notesArea.pageObject'
 import RecentActivitiesArea from './profile/recentActivitiesArea.pageObject'
 import ArchiveStudentModal from './profile/archiveStudentModal.pageObject'
 import InvoicesPage from '../invoices/invoices.pageObject'
+import constants from '../../shared/constants'
 
 export default class StudentProfilePage {
   constructor() {
@@ -39,6 +40,7 @@ export default class StudentProfilePage {
 
     this.alertBoxMessage = $('.alert-box-message') // deprecated, please replace with more specific options below
     this.alertSuccessMessage = $('div.alert-success')
+    this.confirmDeleteButton = $('div.sweet-alert button.confirm')
   }
 
   fillAndSaveANote(note) {
@@ -171,5 +173,17 @@ export default class StudentProfilePage {
 
   unarchiveStudent() {
     this.restoreStudentButton.click()
+  }
+
+  uploadFile() {
+    const filesTabArea = new FilesTabArea()
+    filesTabArea.fileUpload.sendKeys('/Users/Beastie/development/edvisorio/web-client-e2e/shared/images/angular.png')
+  }
+
+  deleteFile() {
+    const filesTabArea = new FilesTabArea()
+    filesTabArea.lastRowDeleteButton.click()
+    browser.sleep(constants.SLEEP_SHORT)
+    this.confirmDeleteButton.click()
   }
 }
