@@ -1,5 +1,6 @@
 import GoalsTabArea from './profile/goalsTabArea.pageObject'
 import QuotesInvoicesTabArea from './profile/quotesInvoicesTabArea.pageObject'
+import FilesTabArea from './profile/filesTabArea.pageObject'
 import StudentInformationArea from './profile/studentInformationArea.pageObject'
 import SecondaryContactsArea from './profile/secondaryContactsArea.pageObject'
 import AssignedToArea from './profile/assignedToArea.pageObject'
@@ -18,16 +19,18 @@ export default class StudentProfilePage {
     this.PipelineArea = PipelineArea
     this.NotesArea = NotesArea
     this.RecentActivitiesArea = RecentActivitiesArea
+    this.FilesTabArea = FilesTabArea
     this.container = $('section.student-profile')
 
     this.backToStudentsButton = element(by.id('ext02-back'))
 
-    this.tabsContainer = element(by.id('#ext02-tabs'))
+    this.tabsContainer = element(by.id('ext02-tabs'))
     this.goalsTabElement = this.tabsContainer
       .element(by.repeater('tab in tabs.items | limitTo: max track by $index').row(1))
     this.quotesInvoicesTabElement = this.tabsContainer
       .element(by.repeater('tab in tabs.items | limitTo: max track by $index').row(2))
-
+    this.filesTabElement = this.tabsContainer
+      .element(by.repeater('tab in tabs.items | limitTo: max track by $index').row(3))
     this.informationContainer = this.container.$('student-edit-information')
     this.assignedToLabel = $('student-sidebar-owner photo-initials + div > p')
 
@@ -91,6 +94,10 @@ export default class StudentProfilePage {
 
   goToGoalsTab() {
     this.goalsTabElement.click()
+  }
+
+  goToFilesTab() {
+    this.filesTabElement.click()
   }
 
   addSecondaryContact() {

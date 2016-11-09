@@ -4,7 +4,8 @@
   "description": "end-to-end test suites for the web-client",
   "main": "index.js",
   "scripts": {
-    "test": "protractor protractor.conf.js"
+    "test": "protractor protractor.conf.js",
+    "update": "webdriver-manager update"
   },
   "repository": {
     "type": "git",
