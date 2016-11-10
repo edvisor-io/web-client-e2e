@@ -98,6 +98,10 @@ export default class StudentProfilePage {
     this.goalsTabElement.click()
   }
 
+  goToQuotesInvoicesTab() {
+    this.quotesInvoicesTabElement.click()
+  }
+
   goToFilesTab() {
     this.filesTabElement.click()
   }
@@ -163,6 +167,11 @@ export default class StudentProfilePage {
     const assignedToArea = new AssignedToArea()
     assignedToArea.clickChangeOwnerButton()
     assignedToArea.setAsNewOwner(newOwner)
+  }
+
+  startNewQuoteV1() {
+    const quotesInvoicesTabArea = new QuotesInvoicesTabArea()
+    quotesInvoicesTabArea.clickNewQuoteV1Button()
   }
 
   archiveStudent() {

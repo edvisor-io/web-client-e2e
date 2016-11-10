@@ -45,6 +45,17 @@ describe('the student profile page', () => {
   //   })
   // })
 
+  it('starts a quote (v1)', () => {
+    const studentListing = new StudentListingPage()
+    const studentProfile = new StudentProfilePage()
+
+    studentListing.clickFirstStudentInTable()  
+    studentProfile.goToQuotesInvoicesTab()
+    studentProfile.startNewQuoteV1()
+
+    expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\/en\/504\/quotes\/edit\//)
+  })
+
   describe.skip('files', () => {
     it('uploads a file (1/3)', () => {
       const studentProfile = new StudentProfilePage()
