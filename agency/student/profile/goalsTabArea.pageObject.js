@@ -8,6 +8,8 @@ import moment from 'moment'
 export class GoalsTabArea {
   constructor() {
     this.schoolsField = element.all(by.css('input.input')).get(1)
+    this.schoolsFieldAutocompleteMatches = element.all(by.css('ti-autocomplete-match'))
+    this.schoolsFieldLastSelectedElement = element.all(by.css('ti-tag-item span')).last()
     this.saveButton = $('button[type="submit"]')
     this.addRecordButton = $('#ext02-add-record-button')
 
@@ -18,8 +20,11 @@ export class GoalsTabArea {
     this.endDateField = $('input[name="endDate"]')
   }
 
-  inputSchool(school = 'EC Covent Garden') {
-    this.schoolsField.sendKeys(school)
+  inputSchoolName(school = 'kaplan santa') {
+    const goalsTabArea = new GoalsTabArea()
+    goalsTabArea.schoolsField.click()
+    goalsTabArea.schoolsField.sendKeys(school)
+    goalsTabArea.schoolsFieldAutocompleteMatches.first().click()
   }
 
   clickSaveButton() {
@@ -27,7 +32,7 @@ export class GoalsTabArea {
   }
 
   fillAndSaveStudentGoalForm() {
-    this.inputSchool()
+    this.inputSchoolName()
     this.clickSaveButton()
   }
 

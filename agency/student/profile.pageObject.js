@@ -21,6 +21,7 @@ export default class StudentProfilePage {
     this.NotesArea = NotesArea
     this.RecentActivitiesArea = RecentActivitiesArea
     this.FilesTabArea = FilesTabArea
+    this.GoalsTabArea = GoalsTabArea
     this.container = $('section.student-profile')
 
     this.backToStudentsButton = element(by.id('ext02-back'))
@@ -150,12 +151,6 @@ export default class StudentProfilePage {
     pipelineArea.clickAddToAnotherPipelineStatusesSecondOption()
   }
 
-  addRecord() {
-    this.goToGoalsTab()
-    const goalsTabArea = new GoalsTabArea()
-    goalsTabArea.fillAndSaveNewRecordForm()
-  }
-
   reassignToOffice(newOffice) {
     const assignedToArea = new AssignedToArea()
     assignedToArea.clickChangeOwnerButton()
@@ -167,6 +162,12 @@ export default class StudentProfilePage {
     const assignedToArea = new AssignedToArea()
     assignedToArea.clickChangeOwnerButton()
     assignedToArea.setAsNewOwner(newOwner)
+  }
+
+  addRecord() {
+    this.goToGoalsTab()
+    const goalsTabArea = new GoalsTabArea()
+    goalsTabArea.fillAndSaveNewRecordForm()
   }
 
   startNewQuoteV1() {
