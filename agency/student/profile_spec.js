@@ -9,6 +9,7 @@ import constants from '../../shared/constants'
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import Chance from 'chance'
+var request = require('request')
 
 chai.use(chaiAsPromised)
 const {expect} = chai
@@ -45,7 +46,7 @@ describe('the student profile page', () => {
   // })
 
   describe.skip('files', () => {
-    it('uploads a file (1/2)', () => {
+    it('uploads a file (1/3)', () => {
       const studentProfile = new StudentProfilePage()
       const studentListing = new StudentListingPage()
       const filesTabArea = new studentProfile.FilesTabArea()
@@ -60,7 +61,24 @@ describe('the student profile page', () => {
       })
     })
 
-    it('deletes a file (2/2)', () => {
+    it('downloads a file (2/3)', (done) => {
+      const studentProfile = new StudentProfilePage()
+      const studentListing = new StudentListingPage()
+      const filesTabArea = new studentProfile.FilesTabArea()
+
+      studentListing.clickFirstStudentInTable()
+      studentProfile.goToFilesTab()
+      filesTabArea.lastRowFileName.getAttribute('href').then((url) => {
+        request
+          .get(url)
+          .on('response', (response) => {
+            expect(response.statusCode).to.equal(200)
+            done()
+          })
+      })
+    })
+
+    it('deletes a file (3/3)', () => {
       const studentProfile = new StudentProfilePage()
       const studentListing = new StudentListingPage()
       const filesTabArea = new studentProfile.FilesTabArea()
