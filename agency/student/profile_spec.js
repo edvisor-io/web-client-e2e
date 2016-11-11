@@ -276,6 +276,31 @@ describe('the student profile page', () => {
       expect(studentInformationArea.passportNumberField.getAttribute('value')).to.eventually.equal(PASSPORT_NUMBER)
       expect(notesArea.field.getAttribute('value')).to.eventually.equal(NOTE)
     })
+
+    it('displays all custom fields', () => {
+      const settingsPage = new SettingsPage()
+      const settingsAgencyTab = new settingsPage.AgencyTab()
+      const studentListing = new StudentListingPage()
+      const studentProfile = new StudentProfilePage()
+
+      browser.get('https://e2e.edvisor.io:2999/agency/en/504/settings/agency/504/custom-fields')
+      settingsAgencyTab.customFieldsRowsLabelIDElements.count().then(() => {
+        let array = settingsAgencyTab.customFieldsRowsLabelIDElements.getText()
+        return Promise.resolve(array)
+      }).then((array) => {
+        return array.filter((string, index) => {
+          return index % 2 === 0
+        })
+      }).then((array) => {
+        browser.get('https://e2e.edvisor.io:2999/agency/en/504/student/listing/504')
+        studentListing.clickFirstStudentInTable()
+        studentProfile.customFieldLabelElements.count().then((count) => {
+          for (let i = 0; i < count; i++) {
+            expect(studentProfile.customFieldLabelElements.get(i).getText()).to.eventually.equal(array[i])
+          }
+        }).catch(console.log.bind(console))
+      }).catch(console.log.bind(console))
+    })
   })
 
   describe.skip('tasks area', () => {

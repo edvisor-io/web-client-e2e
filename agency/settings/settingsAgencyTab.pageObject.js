@@ -10,6 +10,9 @@ export default class AgencyTab {
     this.stageElements = this.firstPipelineCard.all(by.css('p.ellipsis'))
     this.firstDuplicateButton = this.firstPipelineCard
       .all(by.css('.btn-group-dropdown > .btn--default')).get(0)
+
+    this.customFieldsRows = element.all(by.repeater('customProperty in pageData.customProperties'))
+    this.customFieldsRowsLabelIDElements = this.customFieldsRows.all(by.css('div.ng-binding'))
   }
 
   clickPipelineButton() {

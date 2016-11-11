@@ -39,6 +39,8 @@ export default class StudentProfilePage {
     this.archiveStudentButton = element(by.id('ext02-archive-student'))
     this.restoreStudentButton = element(by.id('ext02-restore-student-btn'))
 
+    this.customFieldLabelElements = this.container.all(by.css('custom-field label'))
+
     this.alertBoxMessage = $('.alert-box-message') // deprecated, please replace with more specific options below
     this.alertSuccessMessage = $('div.alert-success')
     this.confirmDeleteButton = $('div.sweet-alert button.confirm')
