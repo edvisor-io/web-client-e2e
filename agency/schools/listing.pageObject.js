@@ -6,6 +6,7 @@ class SchoolsListingPage {
     this.connectByEmailButton = this.addSchoolModal.all(by.css('div.company-new_add button')).last()
     this.emailField = this.addSchoolModal.$('input')
     this.sendButton = this.addSchoolModal.$('button[type="submit"]')
+    this.changeIdButton = this.addSchoolModal.$('button.company-new_change')
     this.setIDField = this.addSchoolModal.$('form.company-new_edit input')
     this.saveButton = this.addSchoolModal.$('form.company-new_edit button[type="submit"]')
     this.firstIncomingRequestAcceptButton = this.addSchoolModal.element(by
@@ -38,6 +39,7 @@ class SchoolsListingPage {
   }
 
   inputIntoSetIDField(id = 'id01') {
+    this.changeIdButton.click()
     this.setIDField.clear()
     this.setIDField.sendKeys(id)
   }
