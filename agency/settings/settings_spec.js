@@ -47,6 +47,8 @@ describe('the agency app settings page', () => {
 
   describe('admins', () => {
     beforeEach(() => {
+      browser.get('/')
+      LoginPage.waitForLoader()
       const loginPage = new LoginPage()
       loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
       LoginPage.waitForLoader()
