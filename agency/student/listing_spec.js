@@ -34,24 +34,22 @@ describe('the student listing page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  beforeEach(() => {
-    browser.get('/')
-    LoginPage.waitForLoader()
+  describe('navigation', () => {
+    it('works from login', () => {
+      browser.get('/')
+      LoginPage.waitForLoader()
+      const agencyNav = new AgencyNav()
+      agencyNav.goToStudents()
 
-    const agencyNav = new AgencyNav()
-    agencyNav.goToStudents()
+      expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\/en\/504\/student\/listing\/504/)
+    })
   })
 
-  // describe('navigation', () => {
-  //   it('works from login', () => {
-  //     browser.get('/')
-  //     LoginPage.waitForLoader()
-  //     const agencyNav = new AgencyNav()
-  //     agencyNav.goToStudents()
-  //   })
-  // })
-  
   describe('batch function', () => {
+    beforeEach(() => {
+      browser.get('/agency/en/504/student/listing/504')
+    })
+
     it('reassigns multiple students to another user and preserves profile data', () => {
       let notesArray = []
       var note = chance.sentence()
@@ -87,7 +85,11 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('temporary grouping', () => {
+  describe('temporary grouping', () => {
+    beforeEach(() => {
+      browser.get('/agency/en/504/student/listing/504')
+    })
+
     it('lists new students in pale yellow', () => {
       const email = uuid.v4() + AT_EMAIL_DOMAIN
       const PALE_YELLOW = 'rgba(252, 248, 240, 1)'
@@ -119,7 +121,11 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('pipeline tabs', () => {
+  describe('pipeline tabs', () => {
+    beforeEach(() => {
+      browser.get('/agency/en/504/student/listing/504')
+    })
+
     it('should switch displayed students pipeline', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickSecondPipelineTab()
@@ -174,7 +180,11 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('add student modal', () => {
+  describe('add student modal', () => {
+    beforeEach(() => {
+      browser.get('/agency/en/504/student/listing/504')
+    })
+
     it('should create a new student successfully', () => {
       const email = uuid.v4() + AT_EMAIL_DOMAIN
 
@@ -204,7 +214,11 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('search function', () => {
+  describe('search function', () => {
+    beforeEach(() => {
+      browser.get('/agency/en/504/student/listing/504')
+    })
+
     const SECONDARY_CONTACT = 'Anna Faris'
 
     beforeEach(() => {
@@ -246,7 +260,11 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('filters students', () => { // the effects of this persist until cookies cleared, put at end
+  describe('filters students', () => { // the effects of this persist until cookies cleared, put at end
+    beforeEach(() => {
+      browser.get('/agency/en/504/student/listing/504')
+    })
+    
     it('by agents > unassigned', () => {
       const studentListing = new StudentListingPage()
       studentListing.filterByAgentsUnassigned()

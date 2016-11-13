@@ -29,21 +29,16 @@ describe('the student profile page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  beforeEach(() => {
-    browser.get('/')
-    LoginPage.waitForLoader()
-    const agencyNav = new AgencyNav()
-    agencyNav.goToStudents()
-  })
+  describe('navigation', () => {
+    it('works from login', () => {
+      browser.get('/')
+      LoginPage.waitForLoader()
+      const agencyNav = new AgencyNav()
+      agencyNav.goToStudents()
 
-  // describe('navigation', () => {
-  //   it('works from login', () => {
-  //     browser.get('/')
-  //     LoginPage.waitForLoader()
-  //     const agencyNav = new AgencyNav()
-  //     agencyNav.goToStudents()
-  //   })
-  // })
+      expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\/en\/504\/student\/listing\/504/)
+    })
+  })
 
   describe.skip('files', () => {
     it('uploads a file (1/3)', () => {
@@ -93,7 +88,11 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('recent actitivies', () => {
+  describe('recent actitivies', () => {
+    beforeEach(() => {
+      browser.get('/agency/en/504/student/listing/504')
+    })
+
     it('updates on saved changes to profile', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
@@ -176,7 +175,11 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('temporary grouping', () => {
+  describe('temporary grouping', () => {
+    beforeEach(() => {
+      browser.get('/agency/en/504/student/listing/504')
+    })
+
     it('enters a school name in goals and studies tab area', () => {
       const SCHOOL = 'Kaplan Santa Barbara City College'
       const studentListing = new StudentListingPage()
@@ -241,7 +244,11 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('student information area, notes area', () => {
+  describe('student information area, notes area', () => {
+    beforeEach(() => {
+      browser.get('/agency/en/504/student/listing/504')
+    })
+
     it('edits and saves an existing student profile', () => {
       const FIRST_NAME = `${chance.first()}`
       const LAST_NAME = `${chance.last()}`
@@ -303,7 +310,11 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('tasks area', () => {
+  describe('tasks area', () => {
+    beforeEach(() => {
+      browser.get('/agency/en/504/student/listing/504')
+    })
+
     it('creates a task', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
@@ -315,7 +326,11 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('office and owner area', () => {
+  describe('office and owner area', () => {
+    beforeEach(() => {
+      browser.get('/agency/en/504/student/listing/504')
+    })
+
     beforeEach(() => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
@@ -342,7 +357,11 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('pipeline area', () => {
+  describe('pipeline area', () => {
+    beforeEach(() => {
+      browser.get('/agency/en/504/student/listing/504')
+    })
+    
     const EXPECTED_STATUS_ONE = 'Deciding'
     const EXPECTED_STATUS_TWO = 'Deciding'
     const EXPECTED_STATUS_THREE = 'Client'
