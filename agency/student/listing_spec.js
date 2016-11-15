@@ -24,7 +24,7 @@ describe('the student listing page', () => {
   before(() => {
     browser.get('/')
     LoginPage.waitForLoader()
-    browser.pause()
+
     const loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     LoginPage.waitForLoader()
@@ -95,10 +95,12 @@ describe('the student listing page', () => {
 
       const studentListing = new StudentListingPage()
       studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
-      // const studentProfile = new StudentProfilePage()
-      // studentProfile.clickBackToStudentsButton()
-      browser.get('/agency/en/504/student/listing/504') // workaround for unexpected redirect to not studentListing page in weedle
+
+      const studentProfile = new StudentProfilePage()
+      studentProfile.clickBackToStudentsButton()
+      // browser.get('/agency/en/504/student/listing/504') // workaround for unexpected redirect to not studentListing page in weedle
       studentListing.selectViewingAllStudents()
+
       const listArea = new studentListing.ListArea()
       expect(listArea.firstStudentInTableCheckboxContainer
         .getCssValue('background-color')).to.eventually.equal(PALE_YELLOW)
@@ -179,7 +181,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('add student modal', () => {
+  describe.skip('add student modal', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
