@@ -75,6 +75,38 @@ export class ChosenWidget {
     chosenResultsElement.all(by.cssContainingText('li', value)).first().click()
   }
 
+  static setChosenValueWithDoubleClick(element, value) {
+    let expected = protractor.ExpectedConditions
+    let chosenContainer = ChosenWidget.getChosenContainer(element)
+    browser.wait(expected.visibilityOf(chosenContainer), constants.TIMEOUT_TIME)
+
+    let chosenSearchElement = chosenContainer.$('.chosen-search input')
+    let chosenResultsElement = chosenContainer.$('.chosen-results')
+
+    chosenContainer.click()
+    chosenContainer.click() // additional click for one test that breaks otherwise
+    browser.wait(expected.visibilityOf(chosenResultsElement), constants.TIMEOUT_TIME)
+    chosenSearchElement.sendKeys(value)
+
+    chosenResultsElement.all(by.cssContainingText('li', value)).first().click()
+  }
+
+  static setChosenValueWithExtraClick(element, value) {
+    let expected = protractor.ExpectedConditions
+    let chosenContainer = ChosenWidget.getChosenContainer(element)
+    browser.wait(expected.visibilityOf(chosenContainer), constants.TIMEOUT_TIME)
+
+    let chosenSearchElement = chosenContainer.$('.chosen-search input')
+    let chosenResultsElement = chosenContainer.$('.chosen-results')
+
+    chosenContainer.click()
+    browser.wait(expected.visibilityOf(chosenResultsElement), constants.TIMEOUT_TIME)
+    chosenSearchElement.sendKeys(value)
+
+    chosenResultsElement.all(by.cssContainingText('li', value)).first().click()
+    chosenContainer.click() // additional click for one test that breaks otherwise
+  }
+
   static searchAndSetChosenValue(element, value) {
     let expected = protractor.ExpectedConditions
     let chosenContainer = ChosenWidget.getChosenContainer(element)

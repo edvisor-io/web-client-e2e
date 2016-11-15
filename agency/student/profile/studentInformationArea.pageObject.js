@@ -71,7 +71,7 @@ export default class StudentInformationArea {
   }
 
   selectNationality(nationality = 'United Kingdom') {
-    ChosenWidget.setChosenValue(this.nationalityField, nationality)
+    ChosenWidget.setChosenValueWithDoubleClick(this.nationalityField, nationality)
   }
 
   inputPassportNumber(passportNumber = '!L@#^*FAS34') {

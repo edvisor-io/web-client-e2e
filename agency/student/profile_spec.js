@@ -29,7 +29,7 @@ describe('the student profile page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe('navigation', () => {
+  describe.skip('navigation', () => {
     it('works from login', () => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -41,6 +41,10 @@ describe('the student profile page', () => {
   })
 
   describe.skip('files', () => {
+    beforeEach(() => {
+      browser.get('/agency/en/504/student/listing/504')
+    })
+
     it('uploads a file (1/3)', () => {
       const studentProfile = new StudentProfilePage()
       const studentListing = new StudentListingPage()
@@ -88,7 +92,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('recent actitivies', () => {
+  describe.skip('recent actitivies', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -175,7 +179,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('temporary grouping', () => {
+  describe.skip('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -310,7 +314,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('tasks area', () => {
+  describe.skip('tasks area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -326,7 +330,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('office and owner area', () => {
+  describe.skip('office and owner area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -357,11 +361,11 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('pipeline area', () => {
+  describe.skip('pipeline area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
-    
+
     const EXPECTED_STATUS_ONE = 'Deciding'
     const EXPECTED_STATUS_TWO = 'Deciding'
     const EXPECTED_STATUS_THREE = 'Client'

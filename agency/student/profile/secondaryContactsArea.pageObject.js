@@ -13,7 +13,7 @@ export default class SecondaryContactsArea {
   addContact(name = 'Totoro', relationship = 'Friend') {
     this.addContactButton.click()
     this.nameField.sendKeys(name)
-    ChosenWidget.setChosenValue(this.relationshipField, relationship)
+    ChosenWidget.setChosenValueWithExtraClick(this.relationshipField, relationship)
     this.addContactConfirmButton.click()
   }
 }
