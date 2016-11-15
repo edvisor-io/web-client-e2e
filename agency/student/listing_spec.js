@@ -94,7 +94,6 @@ describe('the student listing page', () => {
       const PALE_YELLOW = 'rgba(252, 248, 240, 1)'
 
       const studentListing = new StudentListingPage()
-      // browser.pause()
       studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
       // const studentProfile = new StudentProfilePage()
       // studentProfile.clickBackToStudentsButton()
