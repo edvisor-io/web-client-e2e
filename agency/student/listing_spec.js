@@ -34,7 +34,7 @@ describe('the student listing page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe('navigation', () => {
+  describe.skip('navigation', () => {
     it('works from login', () => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -61,8 +61,8 @@ describe('the student listing page', () => {
       studentProfile.backToStudentsButton.click()
       studentListing.clickSecondStudentInTable()
       studentProfile.fillAndSaveANote(note)
-      studentProfile.backToStudentsButton.click()
 
+      studentProfile.backToStudentsButton.click()
       studentListing.reassignTwoStudentsToAUser()
 
       studentListing.clickFirstStudentInTable()
@@ -70,7 +70,6 @@ describe('the student listing page', () => {
       studentProfile.backToStudentsButton.click()
       studentListing.clickSecondStudentInTable()
       notesArray.push(studentProfile.getNoteAsPromise())
-      studentProfile.backToStudentsButton.click()
 
       for (let i = 0; i < notesArray.length; i++) {
         expect(notesArray[i]).to.eventually.equal(note + '\n') // notes adds new line character and comparison fails
@@ -80,12 +79,12 @@ describe('the student listing page', () => {
     it('reassigns multiple students to another office', () => {
       const studentListing = new StudentListingPage()
       studentListing.selectViewingAllStudents()
-      studentListing.reassignFirstTwoStudentsToAnOffice()
+      studentListing.reassignTwoStudentsToAnOffice()
       expect(studentListing.alertBoxMessage.isPresent()).to.eventually.equal(true)
     })
   })
 
-  describe('temporary grouping', () => {
+  describe.skip('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -121,7 +120,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('pipeline tabs', () => {
+  describe.skip('pipeline tabs', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -180,7 +179,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('add student modal', () => {
+  describe.skip('add student modal', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -214,7 +213,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('search function', () => {
+  describe.skip('search function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -260,11 +259,11 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('filters students', () => { // the effects of this persist until cookies cleared, put at end
+  describe.skip('filters students', () => { // the effects of this persist until cookies cleared, put at end
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
-    
+
     it('by agents > unassigned', () => {
       const studentListing = new StudentListingPage()
       studentListing.filterByAgentsUnassigned()

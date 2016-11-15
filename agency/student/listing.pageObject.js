@@ -131,10 +131,10 @@ export default class StudentListingPage {
     this.allStudentsOption.click()
   }
 
-  reassignFirstTwoStudentsToAnOffice() {
+  reassignTwoStudentsToAnOffice() {
     const listArea = new ListArea()
-    listArea.firstStudentCheckbox.click()
-    listArea.secondStudentCheckbox.click()
+    listArea.thirdStudentCheckbox.click()
+    listArea.fourthStudentCheckbox.click()
     const batchOptions = new BatchOptions()
     batchOptions.assignButton.click()
     batchOptions.lastOfficeInDropdown.click()

@@ -42,7 +42,7 @@ exports.config = {
 
   mochaOpts: {
     reporter: 'spec',
-    timeout: (80000 * environmentMultiplier),
+    timeout: (90000 * environmentMultiplier),
     slow: (10000 * environmentMultiplier)
   },
 
@@ -50,12 +50,12 @@ exports.config = {
     require('babel-register')
 
     // Disable animations so e2e tests run more quickly
-    const disableNgAnimate = () => {
-      angular.module('disableNgAnimate', [])
-        .run(['$animate', ($animate) => $animate.enabled(false)])
-    }
-
-    browser.addMockModule('disableNgAnimate', disableNgAnimate)
+    // const disableNgAnimate = () => {
+    //   angular.module('disableNgAnimate', [])
+    //     .run(['$animate', ($animate) => $animate.enabled(false)])
+    // }
+    //
+    // browser.addMockModule('disableNgAnimate', disableNgAnimate)
 
     // setup the window, ignored in linux test environments
     browser.driver.manage().window().setSize(1280, 800)
