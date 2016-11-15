@@ -110,11 +110,11 @@ export default class StudentListingPage {
     var countArray = []
     const listArea = new ListArea()
     const filterNavigationDownloadCustomizeBar = new FilterNavigationDownloadCustomizeBar()
-    countArray.push(listArea.checkboxElements.count())
     let clicksNeeded = this.calculatePages(studentCount)
+    countArray.push(listArea.checkboxElements.count())
     for (let i = 1; i < clicksNeeded; i++) {
       filterNavigationDownloadCustomizeBar.nextButton.click()
-      browser.sleep(2000) // to allow next page to load and be counted from
+      browser.sleep(2000) // allow next page to load and be counted from
       countArray.push(listArea.checkboxElements.count())
     }
     return Promise.all(countArray).then(countArray => countArray.reduce((a, b) => a + b))

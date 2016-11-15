@@ -24,7 +24,7 @@ describe('the student listing page', () => {
   before(() => {
     browser.get('/')
     LoginPage.waitForLoader()
-
+    browser.pause()
     const loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     LoginPage.waitForLoader()
@@ -84,7 +84,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('temporary grouping', () => {
+  describe.skip('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -164,7 +164,7 @@ describe('the student listing page', () => {
         return studentListing.countClickNextButtonAndCount(studentCount)
       }).then((countArray) => {
         expect(countArray).to.equal(studentCount)
-      }).catch(console.log.bind(console))
+      })
     })
 
     it('displays pipeline lists from the tabs hidden by page width', () => {
@@ -179,7 +179,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('add student modal', () => {
+  describe('add student modal', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -189,6 +189,10 @@ describe('the student listing page', () => {
 
       const studentListing = new StudentListingPage()
       studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
+
+      // browser.get('/agency/en/504/student/listing/504') // workaround for unexpected redirect to not studentListing page in weedle
+      // studentListing.selectViewingAllStudents()
+      // studentListing.clickFirstStudentInTable()
 
       const studentProfile = new StudentProfilePage()
       expect(studentProfile.assignedToLabel.getText()).to.eventually.equal(ASSIGNED_TO)
@@ -209,7 +213,7 @@ describe('the student listing page', () => {
       agencyNav.goToStudents()
       studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
-      expect(studentListing.alertBoxMessage.isPresent()).to.eventually.equal(true)
+      expect(studentListing.alertDanger.isPresent()).to.eventually.equal(true)
     })
   })
 
@@ -259,7 +263,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('filters students', () => { // the effects of this persist until cookies cleared, put at end
+  describe.skip('filters students', () => { // the state of this persist until cookies cleared, put after other tests
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
