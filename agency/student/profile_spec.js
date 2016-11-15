@@ -29,7 +29,7 @@ describe('the student profile page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe.skip('navigation', () => {
+  describe('navigation', () => {
     it('works from login', () => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -40,7 +40,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('files', () => {
+  describe.skip('files', () => { // keep skipped when committing as uploading cant work for CircleCI
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -92,7 +92,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('recent actitivies', () => {
+  describe('recent actitivies', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -179,7 +179,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('temporary grouping', () => {
+  describe('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -314,7 +314,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('tasks area', () => {
+  describe('tasks area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -330,7 +330,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('office and owner area', () => {
+  describe('office and owner area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -361,7 +361,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('pipeline area', () => {
+  describe('pipeline area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })

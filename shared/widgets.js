@@ -68,7 +68,6 @@ export class ChosenWidget {
     let chosenResultsElement = chosenContainer.$('.chosen-results')
 
     chosenContainer.click()
-    // chosenContainer.click() // additional click for one test that breaks otherwise
     browser.wait(expected.visibilityOf(chosenResultsElement), constants.TIMEOUT_TIME)
     chosenSearchElement.sendKeys(value)
 
