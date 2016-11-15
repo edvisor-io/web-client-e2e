@@ -45,7 +45,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('batch function', () => {
+  describe.skip('batch function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -84,7 +84,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('temporary grouping', () => {
+  describe('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -94,10 +94,11 @@ describe('the student listing page', () => {
       const PALE_YELLOW = 'rgba(252, 248, 240, 1)'
 
       const studentListing = new StudentListingPage()
+      // browser.pause()
       studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
-
-      const studentProfile = new StudentProfilePage()
-      studentProfile.clickBackToStudentsButton()
+      // const studentProfile = new StudentProfilePage()
+      // studentProfile.clickBackToStudentsButton()
+      browser.get('/agency/en/504/student/listing/504') // workaround for unexpected redirect to not studentListing page in weedle
       studentListing.selectViewingAllStudents()
       const listArea = new studentListing.ListArea()
       expect(listArea.firstStudentInTableCheckboxContainer
