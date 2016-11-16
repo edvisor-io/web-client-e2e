@@ -267,7 +267,6 @@ describe('the agency app settings page', () => {
     it('should change the quoted amount according to manually set rates', () => {
       const EXCHANGE_RATE = 0.00001
       const EXPECTED_MAX = 10.01 // is sufficient unless multi million CAD quote
-      const SEARCH_TERM = 'Alex'
 
       const settingsPage = new SettingsPage()
       const companyTab = new settingsPage.CompanyTab()
@@ -288,7 +287,8 @@ describe('the agency app settings page', () => {
       const coursesPage = new CoursesPage()
       coursesPage.startQuoteUsingBasicSearch()
       const quotesEditPage = new quotesPage.QuotesEditPage()
-      quotesEditPage.inputNameSearch(SEARCH_TERM)
+      quotesEditPage.inputNameSearch()
+      quotesEditPage.confirmChangeContinueButton.click()
       quotesEditPage.selectCurrencyFromDropdown()
 
       quotesEditPage.totalInCustomCurrency.getText()

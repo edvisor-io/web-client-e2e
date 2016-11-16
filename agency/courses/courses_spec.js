@@ -53,15 +53,11 @@ describe('the find courses page', () => {
   })
 
   it('should create a new quote from a search result', () => {
-    const SEARCH_TERM = 'Alex'
-
     const coursesPage = new CoursesPage()
     coursesPage.startQuoteUsingBasicSearch()
-
     const quotesPage = new QuotesPage()
     const quotesEditPage = new quotesPage.QuotesEditPage()
-    quotesEditPage.inputNameSearch(SEARCH_TERM)
-    quotesEditPage.clickSaveButton()
+    quotesEditPage.saveQuote()
 
     expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })

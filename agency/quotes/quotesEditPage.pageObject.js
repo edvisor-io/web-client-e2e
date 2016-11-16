@@ -32,7 +32,7 @@ export default class QuotesEditPage {
     this.confirmChangeContinueButton = element.all(by.css('div.e-alert_buttons button')).last()
   }
 
-  inputNameSearch(input) {
+  inputNameSearch(input = 'Barack') {
     UISelectWidget.clickUISelect(this.nameSearch, input)
   }
 
