@@ -29,7 +29,7 @@ describe('the student profile page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe('navigation', () => {
+  describe.skip('navigation', () => {
     it('works from login', () => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -37,6 +37,16 @@ describe('the student profile page', () => {
       agencyNav.goToStudents()
 
       expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\/en\/504\/student\/listing\/504/)
+    })
+
+    it('displays a student profile when one in listing is clicked', () => {
+      browser.get('/agency/en/504/student/listing/504')
+      const studentListing = new StudentListingPage()
+      studentListing.clickFirstStudentInTable()
+
+      const studentProfile = new StudentProfilePage()
+      const studentInformationArea = new studentProfile.StudentInformationArea()
+      expect(studentInformationArea.firstNameField.isPresent()).to.eventually.equal(true)
     })
   })
 
@@ -228,15 +238,6 @@ describe('the student profile page', () => {
       expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
     })
 
-    it('displays a student profile when one in listing is clicked', () => {
-      const studentListing = new StudentListingPage()
-      studentListing.clickFirstStudentInTable()
-
-      const studentProfile = new StudentProfilePage()
-      const studentInformationArea = new studentProfile.StudentInformationArea()
-      expect(studentInformationArea.firstNameField.isPresent()).to.eventually.equal(true)
-    })
-
     it('starts an invoice', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
@@ -249,7 +250,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('student information area, notes area', () => {
+  describe.skip('student information area, notes area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -315,7 +316,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('tasks area', () => {
+  describe.skip('tasks area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -331,7 +332,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('office and owner area', () => {
+  describe.skip('office and owner area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -362,7 +363,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('pipeline area', () => {
+  describe.skip('pipeline area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })

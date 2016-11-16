@@ -4,6 +4,7 @@ import PipelineTabs from './listing/pipelineTabs.pageObject'
 import FilterNavigationDownloadCustomizeBar from './listing/filterNavigationDownloadCustomizeBar.pageObject'
 import BatchOptions from './listing/batchOptions.pageObject'
 import ListArea from './listing/listArea.pageObject'
+import constants from '../../shared/constants'
 
 export default class StudentListingPage {
   constructor() {
@@ -114,7 +115,7 @@ export default class StudentListingPage {
     countArray.push(listArea.checkboxElements.count())
     for (let i = 1; i < clicksNeeded; i++) {
       filterNavigationDownloadCustomizeBar.nextButton.click()
-      browser.sleep(2000) // allow next page to load and be counted from
+      browser.sleep(constants.SLEEP_MEDIUM) // allow next page to load and be counted from
       countArray.push(listArea.checkboxElements.count())
     }
     return Promise.all(countArray).then(countArray => countArray.reduce((a, b) => a + b))

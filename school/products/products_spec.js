@@ -11,6 +11,9 @@ chai.use(chaiAsPromised)
 const {expect} = chai
 
 describe('the products and addons page', () => {
+  after(() => {
+    browser.driver.manage().deleteAllCookies()
+  })
   it('should create a course', () => {
     const COURSE_NAME = `${uuid.v4()}`
 
