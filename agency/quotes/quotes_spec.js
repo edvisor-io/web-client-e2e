@@ -11,12 +11,9 @@ const {expect} = chai
 chai.use(chaiAsPromised)
 
 describe('the quotes page', () => {
-  const SEARCH_TERM = 'Alex'
-
   before(() => {
     browser.get('/')
     LoginPage.waitForLoader()
-
     const loginPage = new LoginPage()
     loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
     LoginPage.waitForLoader()
@@ -26,27 +23,32 @@ describe('the quotes page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  beforeEach(() => {
-    browser.get('/')
-    LoginPage.waitForLoader()
-
-    const agencyNav = new AgencyNav()
-    agencyNav.goToQuotes()
+  describe('navigation', () => {
+    it('goes from login', () => {
+      browser.get('/')
+      LoginPage.waitForLoader()
+      const agencyNav = new AgencyNav()
+      agencyNav.goToQuotes()
+    })
   })
 
-  it('should email a quote to a student', () => {
-    const quotesPage = new QuotesPage()
-    const quotesListingPage = new quotesPage.QuotesListingPage()
-    quotesListingPage.clickFirstQuote()
-    const quotesEditPage = new quotesPage.QuotesEditPage()
-    quotesEditPage.clickEmailToStudentButton()
-    const emailQuoteModal = new quotesEditPage.EmailQuoteModal()
-    emailQuoteModal.clickSendButton()
-    expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+  describe('temporary grouping', () => {
+    it('should email a quote to a student', () => {
+      browser.get('/agency/en/504/student-quote/listing')
+      const quotesPage = new QuotesPage()
+      const quotesListingPage = new quotesPage.QuotesListingPage()
+      quotesListingPage.clickFirstQuote()
+      const quotesEditPage = new quotesPage.QuotesEditPage()
+      quotesEditPage.clickEmailToStudentButton()
+      const emailQuoteModal = new quotesEditPage.EmailQuoteModal()
+      emailQuoteModal.clickSendButton()
+      expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+    })
   })
 
   describe('new quotes', () => {
     beforeEach(() => {
+      browser.get('/agency/en/504/student-quote/listing')
       const quotesPage = new QuotesPage()
       const quotesListingPage = new quotesPage.QuotesListingPage()
       quotesListingPage.clickNewButton()
@@ -66,9 +68,7 @@ describe('the quotes page', () => {
       coursesPage.startQuoteUsingBasicSearch()
       const quotesPage = new QuotesPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
-      quotesEditPage.inputNameSearch(SEARCH_TERM)
-      quotesPage.clickSaveButton()
-
+      quotesEditPage.saveQuote()
       expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
     })
 
@@ -77,11 +77,9 @@ describe('the quotes page', () => {
       coursesPage.startQuoteUsingBasicSearch()
       const quotesPage = new QuotesPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
-      quotesEditPage.inputNameSearch(SEARCH_TERM)
-      quotesPage.clickSaveButton()
+      quotesEditPage.saveQuote()
 
-      // replace when 'back' bug is fixed
-      const agencyNav = new AgencyNav()
+      const agencyNav = new AgencyNav() // replace when 'back' bug is fixed
       agencyNav.goToQuotes()
 
       const quotesListingPage = new quotesPage.QuotesListingPage()
@@ -100,11 +98,9 @@ describe('the quotes page', () => {
       coursesPage.startQuoteUsingBasicSearch()
       const quotesPage = new QuotesPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
-      quotesEditPage.inputNameSearch(SEARCH_TERM)
-      quotesPage.clickSaveButton()
+      quotesEditPage.saveQuote()
 
-      // replace when 'back' bug is fixed
-      const agencyNav = new AgencyNav()
+      const agencyNav = new AgencyNav() // replace when 'back' bug is fixed
       agencyNav.goToQuotes()
 
       const quotesListingPage = new quotesPage.QuotesListingPage()
@@ -116,7 +112,7 @@ describe('the quotes page', () => {
       quotesOptionEditPage.clickFirstAccommodationRadioButton()
       expect(quotesOptionEditPage.accommodationStartDateField.isPresent()).to.eventually.equal(true)
       quotesOptionEditPage.clickSaveChangesButton()
-      expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+      expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true) // deprecated, replace with more specific alert
     })
   })
 })

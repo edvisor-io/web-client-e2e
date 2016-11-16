@@ -10,7 +10,7 @@ export class QuotesPage {
     this.QuotesOptionEditPage = QuotesOptionEditPage
 
     this.firstSearchResult = $('.ui-select-choices-row-inner')
-    this.saveButton = element(by.id('ext06-new-save-btn'))
+    // this.saveButton = element(by.id('ext06-new-save-btn')) // element no longer exists
     this.alertBoxMessage = $('span.alert-box-message')
   }
 
@@ -25,9 +25,9 @@ export class QuotesPage {
     }, constants.TIMEOUT_TIME)
   }
 
-  clickSaveButton() {
-    this.saveButton.click()
-  }
+  // clickSaveButton() { // element no longer exists
+  //   this.saveButton.click()
+  // }
 }
 
 export default QuotesPage

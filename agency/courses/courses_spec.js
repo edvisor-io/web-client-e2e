@@ -61,7 +61,7 @@ describe('the find courses page', () => {
     const quotesPage = new QuotesPage()
     const quotesEditPage = new quotesPage.QuotesEditPage()
     quotesEditPage.inputNameSearch(SEARCH_TERM)
-    quotesPage.clickSaveButton()
+    quotesEditPage.clickSaveButton()
 
     expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })

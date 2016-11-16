@@ -16,6 +16,7 @@ export default class QuotesEditPage {
     this.EmailQuoteModal = EmailQuoteModal
 
     this.emailToStudentButton = element(by.id('ext06-email'))
+    this.saveButton = element(by.id('ext06-new-save-btn'))
 
     this.quoteInfoContainer = element(by.id('ext06-new-ingo'))
     this.nameSearch = this.quoteInfoContainer
@@ -28,10 +29,21 @@ export default class QuotesEditPage {
     this.totalInCustomCurrency = $('div.quote-option_summary-total div.row div:nth-child(2) > div')
 
     this.alertBoxMessage = $('.alert-box-message')
+    this.confirmChangeContinueButton = element.all(by.css('div.e-alert_buttons button')).last()
   }
 
   inputNameSearch(input) {
     UISelectWidget.clickUISelect(this.nameSearch, input)
+  }
+
+  clickSaveButton() { // deprecated, remove when replaced
+    this.saveButton.click()
+  }
+
+  saveQuote(searchTerm = 'Barack') {
+    this.inputNameSearch(searchTerm)
+    this.confirmChangeContinueButton.click()
+    this.saveButton.click()
   }
 
   selectCurrencyFromDropdown(currency = 'ALL') {
