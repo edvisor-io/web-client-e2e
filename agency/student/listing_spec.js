@@ -15,7 +15,7 @@ const {expect} = chai
 var chance = new Chance()
 
 describe('the student listing page', () => {
-  const ASSIGNED_TO = 'Clarence'
+  const ASSIGNED_TO = 'Clarence Ng' // needs full name, else `expect` statement will fail
   const FIRST_NAME = 'Tricia'
   const LAST_NAME = 'McMillan'
   const AT_EMAIL_DOMAIN = '@betelgeuse.com'
@@ -34,7 +34,7 @@ describe('the student listing page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe.skip('navigation', () => {
+  describe('navigation', () => {
     it('works from login', () => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -45,7 +45,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('batch function', () => {
+  describe('batch function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -85,7 +85,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('temporary grouping', () => {
+  describe('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -183,7 +183,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('add student modal', () => {
+  describe('add student modal', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -222,7 +222,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('search function', () => {
+  describe('search function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -269,8 +269,8 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('filters students', () => { // the state of this persist until cookies cleared, put after other tests
-    beforeEach(() => {
+  describe('filters students', () => { // the state of this persist until
+    beforeEach(() => {                 // cookies cleared, put after other tests
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
     })
