@@ -15,7 +15,7 @@ const {expect} = chai
 var chance = new Chance()
 
 describe('the student listing page', () => {
-  const ASSIGNED_TO = 'Shelley Chen'
+  const ASSIGNED_TO = 'Clarence'
   const FIRST_NAME = 'Tricia'
   const LAST_NAME = 'McMillan'
   const AT_EMAIL_DOMAIN = '@betelgeuse.com'
@@ -34,7 +34,7 @@ describe('the student listing page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe('navigation', () => {
+  describe.skip('navigation', () => {
     it('works from login', () => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -45,7 +45,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('batch function', () => {
+  describe.skip('batch function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -84,7 +84,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('temporary grouping', () => {
+  describe.skip('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -100,7 +100,6 @@ describe('the student listing page', () => {
       studentProfile.clickBackToStudentsButton()
       // browser.get('/agency/en/504/student/listing/504') // workaround for unexpected redirect to not studentListing page in weedle
       studentListing.selectViewingAllStudents()
-
       const listArea = new studentListing.ListArea()
       expect(listArea.firstStudentInTableCheckboxContainer
         .getCssValue('background-color')).to.eventually.equal(PALE_YELLOW)
@@ -148,11 +147,11 @@ describe('the student listing page', () => {
         studentListing.goToLastPageOfTab(studentCount)
       }).then(() => {
         const filterNavigationDownloadCustomizeBar = new studentListing.FilterNavigationDownloadCustomizeBar()
-        expect(filterNavigationDownloadCustomizeBar.currentPageField.getAttribute('value')).to
-        .eventually
-        .equal((Math.floor(studentListing.calculatePages(studentCount)))
-        .toString())
-      }).catch(console.log.bind(console))
+        expect(filterNavigationDownloadCustomizeBar.currentPageField
+          .getAttribute('value')).to.eventually
+          .equal((Math.floor(studentListing.calculatePages(studentCount)))
+          .toString())
+      })
     })
 
     it('displays the same number of students as total given in the pipeline tab element', () => {
@@ -181,7 +180,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('add student modal', () => {
+  describe.skip('add student modal', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -219,7 +218,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('search function', () => {
+  describe.skip('search function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })
@@ -265,7 +264,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('filters students', () => { // the state of this persist until cookies cleared, put after other tests
+  describe.skip('filters students', () => { // the state of this persist until cookies cleared, put after other tests
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })

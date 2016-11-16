@@ -99,6 +99,7 @@ describe('the student profile page', () => {
 
     it('updates on saved changes to profile', () => {
       const studentListing = new StudentListingPage()
+      browser.sleep(5000)
       studentListing.clickFirstStudentInTable()
 
       const studentProfile = new StudentProfilePage()
