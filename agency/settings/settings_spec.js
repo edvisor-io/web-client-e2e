@@ -55,7 +55,7 @@ describe('the agency app settings page', () => {
 
       const agencyNav = new AgencyNav()
       agencyNav.goToSettings()
-      SettingsPage.waitForGhostTab()
+      // SettingsPage.waitForGhostTab()
     })
 
     it('can see all the tabs', () => {
