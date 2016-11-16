@@ -92,7 +92,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('recent actitivies', () => {
+  describe.skip('recent actitivies', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
     })

@@ -10,6 +10,10 @@ chai.use(chaiAsPromised)
 const {expect} = chai
 
 describe('the schools listing page', () => {
+  after(() => {
+    browser.driver.manage().deleteAllCookies()
+  })
+  
   it('should invite a school by email', () => {
     browser.get('/')
     LoginPage.waitForLoader()
