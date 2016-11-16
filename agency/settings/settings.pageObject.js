@@ -56,7 +56,7 @@ class SettingsPage {
   }
 
   testNeedsDuplicatePipeline() {
-    browser.get('https://e2e.edvisor.io:2999/agency/en/504/settings/agency/504/information')
+    browser.get('/agency/en/504/settings/agency/504/information')
     LoginPage.waitForLoader()
     SettingsPage.waitForGhostTab()
 

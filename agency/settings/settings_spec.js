@@ -14,7 +14,7 @@ chai.use(chaiAsPromised)
 const {expect} = chai
 
 describe('the agency app settings page', () => {
-  afterEach(() => {
+  after(() => {
     browser.driver.manage().deleteAllCookies()
   })
 
@@ -45,22 +45,29 @@ describe('the agency app settings page', () => {
     })
   })
 
-  describe('admins', () => {
-    beforeEach(() => {
+  describe.skip('admins', () => { // being changed, don't fix
+    before(() => {
       browser.get('/')
       LoginPage.waitForLoader()
       const loginPage = new LoginPage()
       loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
       LoginPage.waitForLoader()
+    })
 
-      const agencyNav = new AgencyNav()
-      agencyNav.goToSettings()
-      // SettingsPage.waitForGhostTab()
+    beforeEach(() => {
+      browser.get('/agency/en/504/settings/personal')
+      LoginPage.waitForLoader()
+      SettingsPage.waitForGhostTab()
+    })
+
+    after(() => {
+      browser.driver.manage().deleteAllCookies()
     })
 
     it('can see all the tabs', () => {
       const EXPECTED_TAB_COUNT = 5
-
+      LoginPage.waitForLoader()
+      SettingsPage.waitForGhostTab()
       const settingsPage = new SettingsPage()
       expect(settingsPage.tabs.count()).to.eventually.be.at.least(EXPECTED_TAB_COUNT)
     })
@@ -236,18 +243,22 @@ describe('the agency app settings page', () => {
   })
 
   describe('exchange rates', () => {
-    beforeEach(() => {
+    before(() => {
       browser.get('/')
       LoginPage.waitForLoader()
       const loginPage = new LoginPage()
       loginPage.login(constants.ADMIN_EMAIL, constants.ADMIN_PASS)
       LoginPage.waitForLoader()
+    })
 
-      const agencyNav = new AgencyNav()
-      agencyNav.goToSettings()
-
+    beforeEach(() => {
+      browser.get('/agency/en/504/settings/personal')
       const settingsPage = new SettingsPage()
       settingsPage.goToCompanyTab()
+    })
+
+    after(() => {
+      browser.driver.manage().deleteAllCookies()
     })
 
     it('should manually add an exchange rate', () => {
@@ -305,15 +316,21 @@ describe('the agency app settings page', () => {
   })
 
   describe('tier: Platform', () => {
-    beforeEach(() => {
+    before(() => {
       browser.get('/')
       LoginPage.waitForLoader()
       const loginPage = new LoginPage()
       loginPage.login(constants.PLATFORM_ADMIN_EMAIL, constants.PASSWORD)
       LoginPage.waitForLoader()
+    })
 
-      const agencyNav = new AgencyNav()
-      agencyNav.goToSettings()
+    beforeEach(() => {
+      browser.get('/agency/en/1054/settings/personal')
+      LoginPage.waitForLoader()
+    })
+
+    after(() => {
+      browser.driver.manage().deleteAllCookies()
     })
 
     it('should only show Office Information in Agency Tab', () => {
