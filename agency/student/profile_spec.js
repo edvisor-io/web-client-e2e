@@ -41,6 +41,7 @@ describe('the student profile page', () => {
 
     it('displays a student profile when one in listing is clicked', () => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
 
@@ -53,6 +54,7 @@ describe('the student profile page', () => {
   describe.skip('files', () => { // keep skipped when committing as uploading cant work for CircleCI
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
     })
 
     it('uploads a file (1/3)', () => {
@@ -105,11 +107,11 @@ describe('the student profile page', () => {
   describe.skip('recent actitivies', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
     })
 
     it('updates on saved changes to profile', () => {
       const studentListing = new StudentListingPage()
-      browser.sleep(5000)
       studentListing.clickFirstStudentInTable()
 
       const studentProfile = new StudentProfilePage()
@@ -190,9 +192,10 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('temporary grouping', () => {
+  describe.skip('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
     })
 
     it('enters a school name in goals and studies tab area', () => {
@@ -250,15 +253,16 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('student information area, notes area', () => {
+  describe('student information area, notes area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
     })
 
     it('edits and saves an existing student profile', () => {
       const FIRST_NAME = `${chance.first()}`
       const LAST_NAME = `${chance.last()}`
-      const EMAIL = `${FIRST_NAME}@earth.io`
+      const EMAIL = `${FIRST_NAME}@${LAST_NAME}.io`
       const PHONE_NUMBER = `${chance.phone()}`
       const GENDER = `${chance.gender()}`
       const HOME_ADDRESS = `${chance.address()}`
@@ -296,7 +300,8 @@ describe('the student profile page', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
 
-      browser.get('https://e2e.edvisor.io:2999/agency/en/504/settings/agency/504/custom-fields')
+      browser.get('/agency/en/504/settings/agency/504/custom-fields')
+      LoginPage.waitForLoader()
       settingsAgencyTab.customFieldsRowsLabelIDElements.count().then(() => {
         let array = settingsAgencyTab.customFieldsRowsLabelIDElements.getText()
         return Promise.resolve(array)
@@ -305,20 +310,22 @@ describe('the student profile page', () => {
           return index % 2 === 0
         })
       }).then((array) => {
-        browser.get('https://e2e.edvisor.io:2999/agency/en/504/student/listing/504')
+        browser.get('/agency/en/504/student/listing/504')
+        LoginPage.waitForLoader()
         studentListing.clickFirstStudentInTable()
         studentProfile.customFieldLabelElements.count().then((count) => {
           for (let i = 0; i < count; i++) {
             expect(studentProfile.customFieldLabelElements.get(i).getText()).to.eventually.equal(array[i])
           }
-        }).catch(console.log.bind(console))
-      }).catch(console.log.bind(console))
+        })
+      })
     })
   })
 
   describe.skip('tasks area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
     })
 
     it('creates a task', () => {
@@ -335,6 +342,7 @@ describe('the student profile page', () => {
   describe.skip('office and owner area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
     })
 
     beforeEach(() => {
@@ -366,6 +374,7 @@ describe('the student profile page', () => {
   describe.skip('pipeline area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
     })
 
     const EXPECTED_STATUS_ONE = 'Deciding'

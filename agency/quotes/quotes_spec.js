@@ -35,6 +35,7 @@ describe('the quotes page', () => {
   describe('temporary grouping', () => {
     it('should email a quote to a student', () => {
       browser.get('/agency/en/504/student-quote/listing')
+      LoginPage.waitForLoader()
       const quotesPage = new QuotesPage()
       const quotesListingPage = new quotesPage.QuotesListingPage()
       quotesListingPage.clickFirstQuote()

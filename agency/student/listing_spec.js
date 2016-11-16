@@ -48,6 +48,7 @@ describe('the student listing page', () => {
   describe.skip('batch function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
     })
 
     it('reassigns multiple students to another user and preserves profile data', () => {
@@ -87,6 +88,7 @@ describe('the student listing page', () => {
   describe.skip('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
     })
 
     it('lists new students in pale yellow', () => {
@@ -124,6 +126,7 @@ describe('the student listing page', () => {
   describe('pipeline tabs', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
     })
 
     it('should switch displayed students pipeline', () => {
@@ -183,6 +186,7 @@ describe('the student listing page', () => {
   describe.skip('add student modal', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
     })
 
     it('should create a new student successfully', () => {
@@ -221,6 +225,7 @@ describe('the student listing page', () => {
   describe.skip('search function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
     })
 
     const SECONDARY_CONTACT = 'Anna Faris'
@@ -267,6 +272,7 @@ describe('the student listing page', () => {
   describe.skip('filters students', () => { // the state of this persist until cookies cleared, put after other tests
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
+      LoginPage.waitForLoader()
     })
 
     it('by agents > unassigned', () => {

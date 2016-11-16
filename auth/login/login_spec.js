@@ -37,6 +37,7 @@ describe('the login page', function() {
 
   it('should be redirected to, if not signed in', () => {
     browser.get('/agency/en/504/student/listing/504')
+    LoginPage.waitForLoader()
     expect(browser.getCurrentUrl()).to.eventually.match(/\/auth\/en\/login/)
   })
 })
