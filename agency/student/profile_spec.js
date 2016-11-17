@@ -29,7 +29,7 @@ describe('the student profile page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe('navigation', () => {
+  describe.skip('navigation', () => {
     it('works from login', () => { // necessary? this is testing in studentListing
       browser.get('/')
       LoginPage.waitForLoader()
@@ -51,7 +51,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('files (will fail when run not on local)', () => { // keep skipped when committing as uploading cant work for CircleCI
+  describe.skip('files (will fail when run not on local)', () => { // keep skipped when committing as uploading cant work for CircleCI
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -104,7 +104,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('recent actitivies', () => {
+  describe.skip('recent actitivies', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -198,38 +198,38 @@ describe('the student profile page', () => {
       LoginPage.waitForLoader()
     })
 
-    it('enters a school name in goals and studies tab area', () => {
-      const SCHOOL = 'Kaplan Santa Barbara City College'
-      const studentListing = new StudentListingPage()
-      const studentProfile = new StudentProfilePage()
-      const goalsTabArea = new studentProfile.GoalsTabArea()
-
-      studentListing.clickFirstStudentInTable()
-      studentProfile.goToGoalsTab()
-      goalsTabArea.inputSchoolName(SCHOOL)
-      expect(goalsTabArea.schoolsFieldLastSelectedElement.getText()).to.eventually.equal(SCHOOL)
-    })
-
-    it('starts a quote (v1)', () => {
-      const studentListing = new StudentListingPage()
-      const studentProfile = new StudentProfilePage()
-
-      studentListing.clickFirstStudentInTable()
-      studentProfile.goToQuotesInvoicesTab()
-      studentProfile.startNewQuoteV1()
-
-      expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\/en\/504\/quotes\/edit\//)
-    })
-
-    it('creates a study record', () => {
-      const studentListing = new StudentListingPage()
-      const studentProfile = new StudentProfilePage()
-
-      studentListing.clickFirstStudentInTable()
-      studentProfile.addRecord()
-
-      expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
-    })
+    // it('enters a school name in goals and studies tab area', () => {
+    //   const SCHOOL = 'Kaplan Santa Barbara City College'
+    //   const studentListing = new StudentListingPage()
+    //   const studentProfile = new StudentProfilePage()
+    //   const goalsTabArea = new studentProfile.GoalsTabArea()
+    //
+    //   studentListing.clickFirstStudentInTable()
+    //   studentProfile.goToGoalsTab()
+    //   goalsTabArea.inputSchoolName(SCHOOL)
+    //   expect(goalsTabArea.schoolsFieldLastSelectedElement.getText()).to.eventually.equal(SCHOOL)
+    // })
+    //
+    // it('starts a quote (v1)', () => {
+    //   const studentListing = new StudentListingPage()
+    //   const studentProfile = new StudentProfilePage()
+    //
+    //   studentListing.clickFirstStudentInTable()
+    //   studentProfile.goToQuotesInvoicesTab()
+    //   studentProfile.startNewQuoteV1()
+    //
+    //   expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\/en\/504\/quotes\/edit\//)
+    // })
+    //
+    // it('creates a study record', () => {
+    //   const studentListing = new StudentListingPage()
+    //   const studentProfile = new StudentProfilePage()
+    //
+    //   studentListing.clickFirstStudentInTable()
+    //   studentProfile.addRecord()
+    //
+    //   expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
+    // })
 
     it('adds a secondary contact', () => {
       const studentListing = new StudentListingPage()
@@ -238,22 +238,22 @@ describe('the student profile page', () => {
       studentListing.clickFirstStudentInTable()
       studentProfile.addSecondaryContact()
 
-      expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
+      expect(studentProfile.alertSuccessMessage.isPresent()).to.eventually.equal(true)
     })
 
-    it('starts an invoice', () => {
-      const studentListing = new StudentListingPage()
-      const studentProfile = new StudentProfilePage()
-
-      studentListing.clickSecondStudentInTable()
-      studentProfile.makeNewInvoice()
-
-      const invoicesPage = new InvoicesPage()
-      expect(invoicesPage.startApplicationButton.isPresent()).to.eventually.equal(true)
-    })
+    // it('starts an invoice', () => {
+    //   const studentListing = new StudentListingPage()
+    //   const studentProfile = new StudentProfilePage()
+    //
+    //   studentListing.clickSecondStudentInTable()
+    //   studentProfile.makeNewInvoice()
+    //
+    //   const invoicesPage = new InvoicesPage()
+    //   expect(invoicesPage.startApplicationButton.isPresent()).to.eventually.equal(true)
+    // })
   })
 
-  describe('student information area, notes area', () => {
+  describe.skip('student information area, notes area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -322,7 +322,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('tasks area', () => {
+  describe.skip('tasks area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -339,7 +339,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('office and owner area', () => {
+  describe.skip('office and owner area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -371,7 +371,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('pipeline area', () => {
+  describe.skip('pipeline area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()

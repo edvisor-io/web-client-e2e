@@ -90,7 +90,7 @@ export class ChosenWidget {
     chosenResultsElement.all(by.cssContainingText('li', value)).first().click()
   }
 
-  static setChosenValueWithExtraClick(element, value) {
+  static setChosenValueWithExtraClicks(element, value) {
     let expected = protractor.ExpectedConditions
     let chosenContainer = ChosenWidget.getChosenContainer(element)
     browser.wait(expected.visibilityOf(chosenContainer), constants.TIMEOUT_TIME)
@@ -99,7 +99,7 @@ export class ChosenWidget {
     let chosenResultsElement = chosenContainer.$('.chosen-results')
 
     chosenContainer.click()
-    browser.wait(expected.visibilityOf(chosenResultsElement), constants.TIMEOUT_TIME)
+    browser.wait(expected.presenceOf(chosenResultsElement), constants.TIMEOUT_TIME)
     chosenSearchElement.sendKeys(value)
 
     chosenResultsElement.all(by.cssContainingText('li', value)).first().click()
