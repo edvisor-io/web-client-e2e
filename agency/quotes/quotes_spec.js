@@ -23,7 +23,7 @@ describe('the quotes page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe('navigation', () => {
+  describe.skip('navigation', () => {
     it('goes from login', () => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -32,7 +32,7 @@ describe('the quotes page', () => {
     })
   })
 
-  describe('temporary grouping', () => {
+  describe.skip('temporary grouping', () => {
     it('should email a quote to a student', () => {
       browser.get('/agency/en/504/student-quote/listing')
       LoginPage.waitForLoader()
@@ -47,7 +47,7 @@ describe('the quotes page', () => {
     })
   })
 
-  describe('new quotes', () => {
+  describe.skip('new quotes', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student-quote/listing')
       LoginPage.waitForLoader()
@@ -115,6 +115,27 @@ describe('the quotes page', () => {
       expect(quotesOptionEditPage.accommodationStartDateField.isPresent()).to.eventually.equal(true)
       quotesOptionEditPage.clickSaveChangesButton()
       expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true) // deprecated, replace with more specific alert
+    })
+  })
+
+  describe('external quotes', () => {
+    it('displays Price Summary', () => {
+      browser.get('/agency/en/504/student-quote/listing')
+      LoginPage.waitForLoader()
+      const quotesPage = new QuotesPage()
+      const quotesListingPage = new quotesPage.QuotesListingPage()
+      const quotesEditPage = new quotesPage.QuotesEditPage()
+      const coursesPage = new CoursesPage()
+      quotesListingPage.clickNewButton()
+
+      coursesPage.startQuoteUsingBasicSearch()
+      quotesEditPage.saveQuote()
+      quotesEditPage.previewQuoteButton.getAttribute('href').then((url) => {
+        browser.get(url)
+        LoginPage.waitForLoader()
+        const quotesExternal = new quotesPage.QuotesExternal()
+        expect(quotesExternal.totalRow.isDisplayed()).to.eventually.equal(true)
+      })
     })
   })
 })

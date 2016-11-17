@@ -1,6 +1,7 @@
 import QuotesListingPage from './quotesListingPage.pageObject'
 import QuotesEditPage from './quotesEditPage.pageObject'
 import QuotesOptionEditPage from './quotesOptionEditPage.pageObject'
+import QuotesExternal from './quotesExternal.pageObject'
 import constants from '../../shared/constants'
 
 export class QuotesPage {
@@ -8,6 +9,7 @@ export class QuotesPage {
     this.QuotesListingPage = QuotesListingPage
     this.QuotesEditPage = QuotesEditPage
     this.QuotesOptionEditPage = QuotesOptionEditPage
+    this.QuotesExternal = QuotesExternal
 
     this.firstSearchResult = $('.ui-select-choices-row-inner')
     // this.saveButton = element(by.id('ext06-new-save-btn')) // element no longer exists

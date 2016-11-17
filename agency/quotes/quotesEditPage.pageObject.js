@@ -16,6 +16,7 @@ export default class QuotesEditPage {
     this.EmailQuoteModal = EmailQuoteModal
 
     this.emailToStudentButton = element(by.id('ext06-email'))
+    this.previewQuoteButton = element(by.id('ext06-preview'))
     this.saveButton = element(by.id('ext06-new-save-btn'))
 
     this.quoteInfoContainer = element(by.id('ext06-new-ingo'))
