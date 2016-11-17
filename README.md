@@ -208,15 +208,18 @@ Ok, setup is done!
 
 ### You'll need Protractor (and maybe Selenium if not using DirectConnect):
 
-1. Install Protractor globally with `npm install -g protractor`
+1. Install Protractor for the project using `npm install`. This will install all
+dependencies for the `web-client-e2e` project.
 
-2. Webdriver-manager will be installed with the above. Now run `Webdriver-manager update`. This is for Selenium.
+2. webdriver-manager will be installed with the above. Now run
+`./node_modules/protractor/bin/webdriver-manager update`. This is for Selenium.
 
 ### "These need to be running when doing tests!" said the 🤖 happily:
 
-1. Are you using DirectConnect or Selenium? If Selenium: Protractor may start a standalone Selenium server. Otherwise run `webdriver-manager start`. Check that conf.js points to this Selenium server. Doesn’t matter where from. Terminal will stay running. If DirectConnect, check that directConnect: 'true' in `conf.js`.
+1. Are you using DirectConnect or Selenium? If Selenium: Protractor may start a standalone Selenium server.
+Otherwise if you have Protractor installed global from before, run `webdriver-manager start`. Doesn’t matter where from. Terminal will stay running. Check that conf.js points to this Selenium server. If DirectConnect, check that directConnect: 'true' in `conf.js`.
 
-2. Are you running it on localhost? You'll need a database. We use MariaDB. Run `mysql.server start`, one time. Will need to rerun when machine is restarted. FYI, `mysql.server stop` and `mysql.server restart`.
+2. Are you running it against localhost (is gulp is running from `api-server` directory)? You'll need a database. We use MariaDB. Run `mysql.server start`, one time. Will need to rerun when machine is restarted. FYI, `mysql.server stop` and `mysql.server restart`.
 
 3. Are you running it against on the localhost? If so, run `gulp` from api-server repo. Will keep running in terminal.
 
