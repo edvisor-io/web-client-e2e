@@ -23,7 +23,7 @@ describe('the quotes page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe.skip('navigation', () => {
+  describe('navigation', () => {
     it('goes from login', () => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -32,7 +32,7 @@ describe('the quotes page', () => {
     })
   })
 
-  describe.skip('temporary grouping', () => {
+  describe('temporary grouping', () => {
     it('should email a quote to a student', () => {
       browser.get('/agency/en/504/student-quote/listing')
       LoginPage.waitForLoader()
@@ -47,7 +47,7 @@ describe('the quotes page', () => {
     })
   })
 
-  describe.skip('new quotes', () => {
+  describe('new quotes', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student-quote/listing')
       LoginPage.waitForLoader()
