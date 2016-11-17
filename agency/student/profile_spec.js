@@ -41,8 +41,8 @@ describe('the student profile page', () => {
 
     it('displays a student profile when one in listing is clicked', () => {
       browser.get('/agency/en/504/student/listing/504')
-      LoginPage.waitForLoader()
       const studentListing = new StudentListingPage()
+      LoginPage.waitForLoader()
       studentListing.clickFirstStudentInTable()
 
       const studentProfile = new StudentProfilePage()
@@ -490,7 +490,7 @@ describe('the student profile page', () => {
         for (let i = 0; i < textArray.length; i++) {
           expect(textArray[i]).to.equal(arrayFromSettings[i])
         }
-      }).catch(console.log.bind(console))
+      })
     })
 
     it('preserves pipelines and statuses when archiving then unarchiving', () => {
@@ -522,7 +522,7 @@ describe('the student profile page', () => {
           for (let i = 0; i < textArray.length; i++) {
             expect(textArray[i]).to.equal(originalArray[i])
           }
-        }).catch(console.log.bind(console))
+        })
       })
     })
   })
