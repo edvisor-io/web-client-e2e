@@ -51,7 +51,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('files', () => { // keep skipped when committing as uploading cant work for CircleCI
+  describe('files (will fail when run not on local)', () => { // keep skipped when committing as uploading cant work for CircleCI
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
