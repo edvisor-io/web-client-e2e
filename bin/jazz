@@ -17,11 +17,19 @@ function help () {
   echo " e2e [branch]          - pushes [branch] to e2e.edvisor.io "
 }
 
-function runtest () {
+function runalltests () {
   echo ""
   echo " 🔥 TESTING ALL THE THINGS 🔥      ((::.. 🤖  ..::))"
   echo ""
-  cd /Users/Beastie/development/edvisorio/web-client-e2e && CI=false LM=true ./node_modules/protractor/bin/protractor protractor.conf.js --suite quotes
+  cd /Users/Beastie/development/edvisorio/web-client-e2e && CI=false LM=true ./node_modules/protractor/bin/protractor protractor.conf.js
+  woohoo
+}
+
+function runtest () {
+  echo ""
+  echo " 🔥 TESTING this one THING 🔥      ((::.. 🤖  ..::))"
+  echo ""
+  cd /Users/Beastie/development/edvisorio/web-client-e2e && CI=false LM=true ./node_modules/protractor/bin/protractor protractor.conf.js --suite studentProfile
   woohoo
 }
 
@@ -71,7 +79,19 @@ if [ $1 ]
 then
   case "$1" in
   test)
-    runtest
+    if [ $2 ]
+    then
+      case "$2" in
+      all)
+        runalltests
+      ;;
+      *)
+        woops
+      ;;
+      esac
+    else
+      runtest
+    fi
   ;;
   update)
     if [ $2 ]

@@ -30,7 +30,7 @@ describe('the student profile page', () => {
   })
 
   describe('navigation', () => {
-    it('works from login', () => {
+    it('works from login', () => { // necessary? this is testing in studentListing
       browser.get('/')
       LoginPage.waitForLoader()
       const agencyNav = new AgencyNav()
