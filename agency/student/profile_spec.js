@@ -51,7 +51,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('files (will fail when run not on local)', () => { // keep skipped when committing as uploading cant work for CircleCI
+  describe.skip('files (will fail when run not on local)', () => { // keep skipped when committing as uploading cant work for CircleCI
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -116,9 +116,10 @@ describe('the student profile page', () => {
 
       const studentProfile = new StudentProfilePage()
       const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
-      if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
-        recentActivitiesArea.showAllActivityButton.click()
-      }
+      // if (recentActivitiesArea.showAllActivityButton.isDisplayed()) { // deprecated, use checkForAndClickShowAllActivityButton()
+      //   recentActivitiesArea.showAllActivityButton.click()
+      // }
+      recentActivitiesArea.checkForAndClickShowAllActivityButton()
       recentActivitiesArea.allActivitiesElements.count().then((count) => {
         let currentActivitiesCount = count
         studentProfile.fillAndSaveANote()
@@ -132,9 +133,10 @@ describe('the student profile page', () => {
 
       const studentProfile = new StudentProfilePage()
       const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
-      if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
-        recentActivitiesArea.showAllActivityButton.click()
-      }
+      // if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
+      //   recentActivitiesArea.showAllActivityButton.click()
+      // }
+      recentActivitiesArea.checkForAndClickShowAllActivityButton()
       recentActivitiesArea.allActivitiesElements.count().then((count) => {
         let currentActivitiesCount = count
         studentProfile.assignStatusSecondOptionInFirstPipeline()
@@ -148,9 +150,10 @@ describe('the student profile page', () => {
 
       const studentProfile = new StudentProfilePage()
       const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
-      if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
-        recentActivitiesArea.showAllActivityButton.click()
-      }
+      // if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
+      //   recentActivitiesArea.showAllActivityButton.click()
+      // }
+      recentActivitiesArea.checkForAndClickShowAllActivityButton()
       recentActivitiesArea.allActivitiesElements.count().then((count) => {
         let originalActivitiesCount = count
         studentProfile.archiveStudent()
@@ -165,9 +168,10 @@ describe('the student profile page', () => {
 
       const studentProfile = new StudentProfilePage()
       const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
-      if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
-        recentActivitiesArea.showAllActivityButton.click()
-      }
+      // if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
+      //   recentActivitiesArea.showAllActivityButton.click()
+      // }
+      recentActivitiesArea.checkForAndClickShowAllActivityButton()
       recentActivitiesArea.allActivitiesElements.count().then((count) => {
         let originalActivitiesCount = count
         studentProfile.reassignOwner()
@@ -181,9 +185,10 @@ describe('the student profile page', () => {
 
       const studentProfile = new StudentProfilePage()
       const recentActivitiesArea = new studentProfile.RecentActivitiesArea()
-      if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
-        recentActivitiesArea.showAllActivityButton.click()
-      }
+      // if (recentActivitiesArea.showAllActivityButton.isDisplayed()) {
+      //   recentActivitiesArea.showAllActivityButton.click()
+      // }
+      recentActivitiesArea.checkForAndClickShowAllActivityButton()
       recentActivitiesArea.allActivitiesElements.count().then((count) => {
         let originalActivitiesCount = count
         studentProfile.changeStudentFirstName()

@@ -34,7 +34,7 @@ describe('the student listing page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe.skip('navigation', () => {
+  describe('navigation', () => {
     it('works from login', () => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -45,7 +45,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('batch function', () => {
+  describe('batch function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -85,7 +85,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('temporary grouping', () => {
+  describe('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -227,7 +227,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('search function', () => {
+  describe('search function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -274,7 +274,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe.skip('filters students', () => {
+  describe('filters students', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
