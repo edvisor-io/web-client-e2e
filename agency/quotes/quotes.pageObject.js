@@ -13,7 +13,8 @@ export class QuotesPage {
 
     this.firstSearchResult = $('.ui-select-choices-row-inner')
     // this.saveButton = element(by.id('ext06-new-save-btn')) // element no longer exists
-    this.alertBoxMessage = $('span.alert-box-message')
+    this.alertBoxMessage = $('span.alert-box-message') // deprecated, use more specific element below
+    this.alertSuccessMessage = $('div.alert-success')
   }
 
   static waitForQuoteReloadElement() {

@@ -43,7 +43,7 @@ describe('the quotes page', () => {
       quotesEditPage.clickEmailToStudentButton()
       const emailQuoteModal = new quotesEditPage.EmailQuoteModal()
       emailQuoteModal.clickSendButton()
-      expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+      expect(quotesEditPage.alertSuccessMessage.isPresent()).to.eventually.equal(true)
     })
   })
 
@@ -114,7 +114,7 @@ describe('the quotes page', () => {
       quotesOptionEditPage.clickFirstAccommodationRadioButton()
       expect(quotesOptionEditPage.accommodationStartDateField.isPresent()).to.eventually.equal(true)
       quotesOptionEditPage.clickSaveChangesButton()
-      expect(quotesEditPage.alertBoxMessage.isPresent()).to.eventually.equal(true) // deprecated, replace with more specific alert
+      expect(quotesEditPage.alertSuccessMessage.isPresent()).to.eventually.equal(true)
     })
   })
 
