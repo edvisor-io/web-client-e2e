@@ -34,7 +34,7 @@ describe('the student listing page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe('navigation', () => {
+  describe.skip('navigation', () => {
     it('works from login', () => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -45,7 +45,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('batch function', () => {
+  describe.skip('batch function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -85,7 +85,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('temporary grouping', () => {
+  describe.skip('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -127,6 +127,10 @@ describe('the student listing page', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
+    })
+
+    after(() => {
+      browser.driver.manage().window().setSize(1280, 800) // to restore window size just in case
     })
 
     it('should switch displayed students pipeline', () => {
@@ -173,8 +177,9 @@ describe('the student listing page', () => {
 
     it('displays pipeline lists from the tabs hidden by page width', () => {
       const COLOUR_WHEN_ACTIVE = 'rgba(87, 88, 89, 1)'
-
       const studentListing = new StudentListingPage()
+
+      browser.driver.manage().window().setSize(1180, 800) // make window less wide to make tabs go into dropdown
       studentListing.openPipelineTabsOverflowDropdown()
       studentListing.selectLastPipelineTab()
       const pipelineTabs = new studentListing.PipelineTabs()
@@ -222,7 +227,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('search function', () => {
+  describe.skip('search function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -269,7 +274,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('filters students', () => {
+  describe.skip('filters students', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
