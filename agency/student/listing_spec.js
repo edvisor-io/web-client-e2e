@@ -269,8 +269,8 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('filters students', () => { // the state of this persist until
-    beforeEach(() => {                 // cookies cleared, put after other tests
+  describe('filters students', () => {
+    beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
     })
@@ -279,18 +279,21 @@ describe('the student listing page', () => {
       const studentListing = new StudentListingPage()
       studentListing.filterByAgentsUnassigned()
       expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
+      studentListing.removeFirstFilter()
     })
 
     it('by agents > first, archive reasons > finished studying', () => {
       const studentListing = new StudentListingPage()
       studentListing.filterByAgentsFirst()
       expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
+      studentListing.removeFirstFilter()
     })
 
     it('by custom field', () => {
       const studentListing = new StudentListingPage()
       studentListing.filterByCustomFields()
       expect(studentListing.alertDanger.isPresent()).to.eventually.equal(false)
+      studentListing.removeFirstFilter()
     })
   })
 })

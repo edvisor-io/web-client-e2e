@@ -30,6 +30,19 @@ export default class StudentListingPage {
     this.buttonSearch.click()
   }
 
+  removeAllFilters() {
+    const filterNavigationDownloadCustomizeBar = new FilterNavigationDownloadCustomizeBar()
+    filterNavigationDownloadCustomizeBar.activeFilterElements.count().then((count) => {
+      for (let i = 0; i < count; i++) {
+        filterNavigationDownloadCustomizeBar.activeFilterElements.get(i).$('svg').click()
+      }
+    })
+  }
+  removeFirstFilter() {
+    const filterNavigationDownloadCustomizeBar = new FilterNavigationDownloadCustomizeBar()
+    filterNavigationDownloadCustomizeBar.firstActiveFilterRemoveButton.click()
+  }
+
   clickSelectAllStudentsCheckbox() {
     const batchOptions = new BatchOptions()
     batchOptions.selectAllStudentsCheckbox.click()
@@ -173,7 +186,7 @@ export default class StudentListingPage {
     const filterNavigationDownloadCustomizeBar = new FilterNavigationDownloadCustomizeBar()
     filterNavigationDownloadCustomizeBar.filterListButton.click()
     filterNavigationDownloadCustomizeBar.filterListFirstOption.click()
-    filterNavigationDownloadCustomizeBar.filterListFirstOptionInFirstOption.click()
+    // filterNavigationDownloadCustomizeBar.filterListFirstOptionInFirstOption.click() // erroneously clicking another also
     filterNavigationDownloadCustomizeBar.filterListSecondOptionInFirstOption.click()
   }
 

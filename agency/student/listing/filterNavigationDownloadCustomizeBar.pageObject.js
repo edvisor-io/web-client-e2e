@@ -11,6 +11,8 @@ export default class FilterNavigationDownloadCustomizeBar {
     // this.filterListFirstOptionInFirstOptionInLastOption = element.all(by.css('#ext02-filter-list div.menu-container ul.submenu > ul.submenu > div.submenu-inner > li')).get(184)
     this.filterListFirstOptionInFirstOptionInLastOption = element.all(by.css('#ext02-filter-list div.menu-container ul.submenu > ul.submenu > div.submenu-inner > li')).get(0)
 
+    this.activeFilterElements = element.all(by.repeater('filter in filterListModel.activeFilters track by $index'))
+    this.firstActiveFilterRemoveButton = this.activeFilterElements.first().$('svg')
     this.currentPageField = $('div.page-display input')
     this.nextButton = $('button.btn--default.next')
 

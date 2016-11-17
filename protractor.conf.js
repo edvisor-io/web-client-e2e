@@ -66,8 +66,8 @@ exports.config = {
   // protractor is called.
   specs: [
     './auth/**/*_spec.js',
+    './school/**/*_spec.js',
     './agency/**/*_spec.js',
-    './school/**/*_spec.js'
   ],
 
   suites: {

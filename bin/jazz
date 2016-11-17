@@ -29,7 +29,7 @@ function runtest () {
   echo ""
   echo " 🔥 TESTING this one THING 🔥      ((::.. 🤖  ..::))"
   echo ""
-  cd /Users/Beastie/development/edvisorio/web-client-e2e && CI=false LM=true ./node_modules/protractor/bin/protractor protractor.conf.js --suite studentProfile
+  cd /Users/Beastie/development/edvisorio/web-client-e2e && CI=false LM=true ./node_modules/protractor/bin/protractor protractor.conf.js --suite studentListing
   woohoo
 }
 
