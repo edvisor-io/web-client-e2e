@@ -81,7 +81,7 @@ describe('the student listing page', () => {
       const studentListing = new StudentListingPage()
       studentListing.selectViewingAllStudents()
       studentListing.reassignTwoStudentsToAnOffice()
-      expect(studentListing.alertBoxMessage.isPresent()).to.eventually.equal(true)
+      expect(studentListing.alertSuccessMessage.isPresent()).to.eventually.equal(true)
     })
   })
 

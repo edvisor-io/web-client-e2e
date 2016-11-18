@@ -19,8 +19,4 @@ export default class ListArea {
     this.firstStudentInTableCheckboxContainer = this.container
     .all(by.css('div.ag-cell')).first()
   }
-
-  // clickFirstStudentInTable() {
-  //   this.firstStudentInTable.click()
-  // }
 }

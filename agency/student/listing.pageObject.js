@@ -23,6 +23,7 @@ export default class StudentListingPage {
 
     this.exportMessage = $('.e-alert_inner-container')
     this.alertBoxMessage = $('.alert-box-message') // deprecated, use more specific locator below
+    this.alertSuccessMessage = $('div.alert-success')
     this.alertDanger = $('.alert-danger')
   }
 
