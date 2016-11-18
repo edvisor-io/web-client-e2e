@@ -29,7 +29,7 @@ describe('the student profile page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe('navigation', () => {
+  describe.skip('navigation', () => {
     it('works from login', () => { // necessary? this is testing in studentListing
       browser.get('/')
       LoginPage.waitForLoader()
@@ -123,6 +123,7 @@ describe('the student profile page', () => {
       recentActivitiesArea.allActivitiesElements.count().then((count) => {
         let currentActivitiesCount = count
         studentProfile.fillAndSaveANote()
+        recentActivitiesArea.checkForAndClickShowAllActivityButton() // the button may appear after an activity
         expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(currentActivitiesCount + 1)
       })
     })
@@ -140,6 +141,7 @@ describe('the student profile page', () => {
       recentActivitiesArea.allActivitiesElements.count().then((count) => {
         let currentActivitiesCount = count
         studentProfile.assignStatusSecondOptionInFirstPipeline()
+        recentActivitiesArea.checkForAndClickShowAllActivityButton() // the button may appear after an activity
         expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(currentActivitiesCount + 1)
       })
     })
@@ -158,6 +160,7 @@ describe('the student profile page', () => {
         let originalActivitiesCount = count
         studentProfile.archiveStudent()
         studentProfile.unarchiveStudent()
+        recentActivitiesArea.checkForAndClickShowAllActivityButton() // the button may appear after an activity
         expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(originalActivitiesCount + 2)
       })
     })
@@ -175,6 +178,7 @@ describe('the student profile page', () => {
       recentActivitiesArea.allActivitiesElements.count().then((count) => {
         let originalActivitiesCount = count
         studentProfile.reassignOwner()
+        recentActivitiesArea.checkForAndClickShowAllActivityButton() // the button may appear after an activity
         expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(originalActivitiesCount + 1)
       })
     })
@@ -192,12 +196,13 @@ describe('the student profile page', () => {
       recentActivitiesArea.allActivitiesElements.count().then((count) => {
         let originalActivitiesCount = count
         studentProfile.changeStudentFirstName()
+        recentActivitiesArea.checkForAndClickShowAllActivityButton() // the button may appear after an activity
         expect(recentActivitiesArea.allActivitiesElements.count()).to.eventually.equal(originalActivitiesCount + 1)
       })
     })
   })
 
-  describe('temporary grouping', () => {
+  describe.skip('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -258,7 +263,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('student information area, notes area', () => {
+  describe.skip('student information area, notes area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -327,7 +332,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('tasks area', () => {
+  describe.skip('tasks area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -344,7 +349,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('office and owner area', () => {
+  describe.skip('office and owner area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -376,7 +381,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe('pipeline area', () => {
+  describe.skip('pipeline area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()

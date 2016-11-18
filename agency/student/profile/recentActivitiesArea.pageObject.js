@@ -3,13 +3,18 @@ export default class RecentActivitiesArea {
     this.container = $('student-sidebar-recent')
     this.allActivitiesElements = this.container.all(by
       .repeater('activity in activityGroup.activities track by activity.activityId'))
-    this.showAllActivityButton = element(by.id('ext02-recent')).$('a')
+    this.activityToggleButton = element(by.id('ext02-recent')).$('a')
   }
 
   checkForAndClickShowAllActivityButton() {
-    this.showAllActivityButton.isDisplayed().then((value) => {
-      if (value) {
-        this.showAllActivityButton.click()
+    this.activityToggleButton.isPresent().then((isIt) => {
+      if (isIt) {
+        this.activityToggleButton.getText().then((text) => {
+          console.log(text)
+          if (text === 'Show all activity') {
+            this.activityToggleButton.click()
+          }
+        })
       }
     })
   }
