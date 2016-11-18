@@ -10,7 +10,6 @@ export default class RecentActivitiesArea {
     this.activityToggleButton.isPresent().then((isIt) => {
       if (isIt) {
         this.activityToggleButton.getText().then((text) => {
-          console.log(text)
           if (text === 'Show all activity') {
             this.activityToggleButton.click()
           }

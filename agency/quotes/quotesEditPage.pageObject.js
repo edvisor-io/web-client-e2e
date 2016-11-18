@@ -30,6 +30,7 @@ export default class QuotesEditPage {
     this.totalInCustomCurrency = $('div.quote-option_summary-total div.row div:nth-child(2) > div')
 
     this.alertBoxMessage = $('.alert-box-message')
+    this.alertSuccessMessage = $('div.alert-success')
     this.confirmChangeContinueButton = element.all(by.css('div.e-alert_buttons button')).last()
   }
 
