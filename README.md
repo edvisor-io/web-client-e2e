@@ -164,6 +164,12 @@ in turn call static widget methods.
 
 Filenames may make more sense in context of the complete filepath.
 
+### Shell script styleguide
+
+The styleguide linked below is rather good.
+
+[shell style guide](https://google.github.io/styleguide/shell.xml)
+
 ***
 
 ## Now the fun stuff. What you need to get started 🐣
