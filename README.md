@@ -14,6 +14,9 @@ web-client repo.
 
 ## Skipping tests
 
+Reminder: Search for keyword 'SPECIAL' for tests that may need `.skips` added or
+removed.
+
 ### These tests should be unskipped:
 
 Tests that can be run only one time per database reset should be unskipped in `master` branch.
