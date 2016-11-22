@@ -19,11 +19,11 @@ function help () {
 
 function update_e2e() {
   echo " 🚀 pushing the $2 branch to e2e.edvisor.io "
-  cd /Users/Beastie/development/edvisorio/web-client && git pull --rebase && git push origin origin/$2:e2e -f
-  cd /Users/Beastie/development/edvisorio/api-server && git pull --rebase && git push origin origin/$2:e2e -f
+  cd /Users/Beastie/development/edvisorio/web-client && git checkout $2 && git pull --rebase && git push origin origin/$2:e2e -f
+  cd /Users/Beastie/development/edvisorio/api-server && git checkout $2 && git pull --rebase && git push origin origin/$2:e2e -f
 }
 
-function runalltests () {
+function run_all_tests() {
   echo ""
   echo " 🔥 TESTING ALL THE THINGS 🔥      ((::.. 🤖  ..::))"
   echo ""
@@ -89,7 +89,7 @@ then
     then
       case "$2" in
       all)
-        runalltests
+        run_all_tests
       ;;
       *)
         woops
