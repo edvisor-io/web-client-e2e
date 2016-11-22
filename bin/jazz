@@ -17,6 +17,12 @@ function help () {
   echo " e2e [branch]          - pushes [branch] to e2e.edvisor.io "
 }
 
+function update_e2e() {
+  echo " 🚀 pushing the $2 branch to e2e.edvisor.io "
+  cd /Users/Beastie/development/edvisorio/web-client && git pull --rebase && git push origin origin/$2:e2e -f
+  cd /Users/Beastie/development/edvisorio/api-server && git pull --rebase && git push origin origin/$2:e2e -f
+}
+
 function runalltests () {
   echo ""
   echo " 🔥 TESTING ALL THE THINGS 🔥      ((::.. 🤖  ..::))"
@@ -134,9 +140,7 @@ then
   e2e)
     if [ $2 ]
     then
-      echo " 🚀 pushing the $2 branch to e2e.edvisor.io "
-      cd /Users/Beastie/development/edvisorio/web-client && git pull --rebase && git push origin origin/$2:e2e -f
-      cd /Users/Beastie/development/edvisorio/api-server && git pull --rebase && git push origin origin/$2:e2e -f
+      update_e2e
     else
       woops
       help

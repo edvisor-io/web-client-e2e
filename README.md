@@ -86,6 +86,18 @@ All JavaScript must adhere to [JavaScript Standard Style](http://standardjs.com/
 
 The `.conf` file helps set the stage for your tests.
 
+### Git
+
+Branches are divided simply as `master`, `PROJ-\d\d\d\d`, and `sprint-name`.
+
+The branch name reflects the test suites' compatibility with the corresponding
+`web-client` and `api-server`. `master` tests should work with `web-client`
+`master` branch. `weedle` tests should work with `api-server` `weedle` sprint
+branch.
+
+Both PROJ-\d\d\d\d and sprint-name branch off of master and are rebased back
+onto it.
+
 #### suites
 
 Suites let you organize your tests. In our tests, those suites that start with
