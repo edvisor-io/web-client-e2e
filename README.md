@@ -6,7 +6,7 @@
 
 🤖 : *"This repo contains end-to-end test suites for the Edvisor.io web-client"*
 
-## Quickly making sense of this repo ⚡️
+## On this repo's directory and file organisation ⚡️
 
 The directory structure models that of the web client. Each directory contains
 tests for one application, and corresponds to the same named directory in the
@@ -63,19 +63,20 @@ An overview of how things are structured
     * :arrow_down: `:arrow_down:` when downgrading dependencies
     * :shirt: `:shirt:` when removing linter warnings
 
-### Git Branch and contents
+### Git Branches and Contents
 
 Branches are divided simply as `master`, `PROJ-\d\d\d\d`, and `sprint-name`.
 
 The branch name reflects the test suites' compatibility with the corresponding
-`web-client` and `api-server`. `master` tests should work with `web-client`
-`master` branch. `weedle` tests should work with `api-server` `weedle` sprint
-branch.
+`web-client` and `api-server`. For example, `master` tests should work with the
+`master` branch of `web-client` and `api-server`. `weedle` tests should work with
+`weedle` sprint branch of `web-client` and `api-server`.
 
-New tests should go in the branch they're compatible with. Any other new feature,
-such as updates to shell scripts, should go into `master`
+New tests and fixes should go in the branch they're compatible with. Any other new feature,
+such as updates to shell scripts, should go into a `PROJ` branch branched off
+the merge-base of the branches they affect.
 
-Both PROJ-\d\d\d\d and sprint-name branch off of master and are rebased back
+Both `PROJ-\d\d\d\d` and `sprint-name` branch off of master and are rebased back
 onto it.
 
 ### JavaScript Styleguide
@@ -97,18 +98,20 @@ All JavaScript must adhere to [JavaScript Standard Style](http://standardjs.com/
   export default ClassName
   ```
 
-### the `.conf` file: Where it all begins
+### The basic parts of the tests
 
-The `.conf` file helps set the stage for your tests.
+#### The `.conf` file
 
-#### suites
+Where it all begins. The `.conf` file helps set the stage for your tests.
+
+#### Suites
 
 Suites let you organize your tests. In our tests, those suites that start with
 `a` such as `aSettings`, refer to the Settings functionality of the Agency app.
 Those that start with `s` such as `sSettings` are for the Settings functionality
 of the School app.
 
-### pageObject patterns 👚
+### pageObject Patterns 👚
 
 🤖 : "*Patterns are beautiful weaves of code*"
 
