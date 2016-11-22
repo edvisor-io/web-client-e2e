@@ -1,14 +1,11 @@
 machine:
   node:
-    version: 5.12.0
+    version: 6.9.1
 
 general:
   branches:
-    only:
-      - master
-
-dependencies:
-  post:
-    - npm install -g mocha protractor
-    - webdriver-manager update
-
+    ignore:
+      - /PROJ.*/
+test:
+  pre:
+    - npm run update
