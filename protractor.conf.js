@@ -6,7 +6,7 @@ var howManyInstancesAtMost = 1
 
 if (process.env.CI === 'true') {
   environmentMultiplier = 3
-  url = 'https://dev-a.edvisor.io:3001'
+  url = 'https://e2e.edvisor.io:2999'
 }
 
 if (process.env.LM === 'true') {
