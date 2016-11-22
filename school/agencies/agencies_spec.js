@@ -34,7 +34,7 @@ describe('the agencies page', () => {
     expect(agenciesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
 
-  describe.skip('(these can be run once per db-reset)', () => {
+  describe.skip('(SPECIAL: these can be run once per db-reset)', () => {
     it('(1/2) can invite an agency by ID, which gets notified in-app', () => {
       const ID = `${uuid.v4()}`
 

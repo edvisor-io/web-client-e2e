@@ -242,7 +242,7 @@ describe('the agency app settings page', () => {
     })
   })
 
-  describe.skip('exchange rates', () => { // will fail when not run from local, it will click intercom button
+  describe.skip('exchange rates. SPECIAL: will fail when not run from local', () => { // because it will click intercom button
     before(() => {
       browser.get('/')
       LoginPage.waitForLoader()
