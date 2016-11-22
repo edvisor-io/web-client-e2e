@@ -12,6 +12,20 @@ The directory structure models that of the web client. Each directory contains
 tests for one application, and corresponds to the same named directory in the
 web-client repo.
 
+## Skipping tests
+
+### These tests should be unskipped:
+
+Tests that can be run only one time per database reset should be unskipped in `master` branch.
+
+### These tests should be skipped:
+
+(being updated)
+
+#### For a reference to branches:
+
+[Git Branches and Contents](https://github.com/edvisor-io/web-client-e2e#git-branches-and-contents)
+
 ***
 
 ## For a quick guide ⚡️ to certain situations, read this section.
