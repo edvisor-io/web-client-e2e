@@ -23,7 +23,7 @@ describe('the quotes page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe('navigation', () => {
+  describe.skip('navigation', () => {
     it('goes from login', () => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -32,7 +32,7 @@ describe('the quotes page', () => {
     })
   })
 
-  describe('temporary grouping', () => {
+  describe.skip('temporary grouping', () => {
     it('should email a quote to a student', () => {
       browser.get('/agency/en/504/student-quote/listing')
       LoginPage.waitForLoader()
@@ -54,11 +54,13 @@ describe('the quotes page', () => {
       const quotesPage = new QuotesPage()
       const quotesListingPage = new quotesPage.QuotesListingPage()
       quotesListingPage.clickNewButton()
-    })
-
-    it('should create a new quote', () => {
       const coursesPage = new CoursesPage()
       coursesPage.startQuoteUsingBasicSearch()
+    })
+
+    it.skip('should create a new quote', () => {
+      // const coursesPage = new CoursesPage()
+      // coursesPage.startQuoteUsingBasicSearch()
       const quotesPage = new QuotesPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
 
@@ -66,17 +68,18 @@ describe('the quotes page', () => {
     })
 
     it('should save a new quote', () => {
-      const coursesPage = new CoursesPage()
-      coursesPage.startQuoteUsingBasicSearch()
+      // const coursesPage = new CoursesPage()
+      // coursesPage.startQuoteUsingBasicSearch()
       const quotesPage = new QuotesPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
       quotesEditPage.saveQuote()
-      expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+
+      expect(quotesEditPage.alertSuccessMessage.isDisplayed()).to.eventually.equal(true)
     })
 
-    it('should add an insurance addon with start plus end dates to a quote', () => {
-      const coursesPage = new CoursesPage()
-      coursesPage.startQuoteUsingBasicSearch()
+    it.skip('should add an insurance addon with start plus end dates to a quote', () => {
+      // const coursesPage = new CoursesPage()
+      // coursesPage.startQuoteUsingBasicSearch()
       const quotesPage = new QuotesPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
       quotesEditPage.saveQuote()
@@ -95,9 +98,9 @@ describe('the quotes page', () => {
       expect(quotesOptionEditPage.durationFields.isPresent()).to.eventually.equal(true)
     })
 
-    it('should add accommodation with start plus end dates to a quote', () => {
-      const coursesPage = new CoursesPage()
-      coursesPage.startQuoteUsingBasicSearch()
+    it.skip('should add accommodation with start plus end dates to a quote', () => {
+      // const coursesPage = new CoursesPage()
+      // coursesPage.startQuoteUsingBasicSearch()
       const quotesPage = new QuotesPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
       quotesEditPage.saveQuote()
@@ -110,15 +113,15 @@ describe('the quotes page', () => {
       quotesEditPage.clickFirstOptionEditButton()
       const quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
       quotesOptionEditPage.clickAccommodationCheckbox()
-      quotesOptionEditPage.clickSchoolAccommodationButton()
+      quotesOptionEditPage.clickSavedAccommodationButton()
       quotesOptionEditPage.clickFirstAccommodationRadioButton()
       expect(quotesOptionEditPage.accommodationStartDateField.isPresent()).to.eventually.equal(true)
       quotesOptionEditPage.clickSaveChangesButton()
-      expect(quotesEditPage.alertSuccessMessage.isPresent()).to.eventually.equal(true)
+      expect(quotesEditPage.alertSuccessMessage.isDisplayed()).to.eventually.equal(true)
     })
   })
 
-  describe('external quotes', () => {
+  describe.skip('external quotes', () => {
     it('displays Price Summary', () => {
       browser.get('/agency/en/504/student-quote/listing')
       LoginPage.waitForLoader()

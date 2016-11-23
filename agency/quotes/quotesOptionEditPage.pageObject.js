@@ -4,6 +4,7 @@ export default class QuotesOptionEditPage {
     this.accommondationButtons = element
       .all(by.css('div.btn-group-select button'))
     this.schoolAccommodationButton = this.accommondationButtons.get(0)
+    this.savedAccommodationButton = this.accommondationButtons.get(1)
     this.accommondationRadioButtons = element.all(by.css('label.radio'))
     this.firstAccommodationRadioButton = this.accommondationRadioButtons.get(0)
     this.bottomSaveChangesButton = element
@@ -28,6 +29,10 @@ export default class QuotesOptionEditPage {
     this.schoolAccommodationButton.click()
   }
 
+  clickSavedAccommodationButton() {
+    this.savedAccommodationButton.click()
+  }
+  
   clickFirstAccommodationRadioButton() {
     this.firstAccommodationRadioButton.click()
   }

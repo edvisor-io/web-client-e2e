@@ -9,7 +9,8 @@ if (process.env.CI === 'true') {
   if (process.env.CIRCLE_BRANCH === 'master') {
     url = 'https://staging.edvisor.io:3000'
   } else {
-    url = 'https://e2e.edvisor.io:2999'
+    // url = 'https://e2e.edvisor.io:2999'
+    url = 'https://staging.edvisor.io:3000'
   }
 }
 
