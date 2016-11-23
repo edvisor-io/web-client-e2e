@@ -31,21 +31,21 @@ describe('the find courses page', () => {
     agencyNav.goToFindCourses()
   })
 
-  it('should search by city', () => {
+  it.skip('should search by city', () => {
     const coursesPage = new CoursesPage()
     coursesPage.doBasicSearch()
 
     expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
   })
 
-  it('should search by country', () => {
+  it.skip('should search by country', () => {
     const coursesPage = new CoursesPage()
     coursesPage.doBasicSearch('byCountry')
 
     expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
   })
 
-  it('should search by school', () => {
+  it.skip('should search by school', () => {
     const coursesPage = new CoursesPage()
     coursesPage.doBasicSearch('bySchool')
 
@@ -62,7 +62,7 @@ describe('the find courses page', () => {
     expect(quotesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
   })
 
-  it('search result should have course name, school, intensity, duration, price', () => {
+  it.skip('search result should have course name, school, intensity, duration, price', () => {
     const coursesPage = new CoursesPage()
     coursesPage.doBasicSearch()
 
