@@ -42,7 +42,7 @@ export default class QuotesEditPage {
     this.saveButton.click()
   }
 
-  saveQuote(searchTerm = 'Barack') {
+  saveQuote(searchTerm = 'T') {
     this.inputNameSearch(searchTerm)
     this.confirmChangeContinueButton.click()
     this.saveButton.click()
