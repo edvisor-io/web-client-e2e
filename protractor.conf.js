@@ -11,8 +11,6 @@ if (process.env.CI === 'true') {
   } else {
     url = 'https://e2e.edvisor.io:2999'
   }
-} else {
-  url = 'http://localhost:3000'
 }
 
 if (process.env.LM === 'true') {
