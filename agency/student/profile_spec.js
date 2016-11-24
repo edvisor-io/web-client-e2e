@@ -29,7 +29,7 @@ describe('the student profile page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe.skip('navigation', () => {
+  describe('navigation', () => {
     it('works from login', () => { // necessary? this is testing in studentListing
       browser.get('/')
       LoginPage.waitForLoader()
@@ -51,7 +51,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('files (SPECIAL: will fail when run not from local)', () => { // because uploading path can't work from CircleCI
+  describe('files (SPECIAL: will fail when run not from local)', () => { // because uploading path can't work from CircleCI
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -104,7 +104,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('recent actitivies', () => {
+  describe('recent actitivies', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -193,7 +193,7 @@ describe('the student profile page', () => {
       LoginPage.waitForLoader()
     })
 
-    it.skip('enters a school name in goals and studies tab area', () => {
+    it('enters a school name in goals and studies tab area', () => {
       const SCHOOL = 'Kaplan Santa Barbara City College' // this is dependent on test data
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
@@ -205,7 +205,7 @@ describe('the student profile page', () => {
       expect(goalsTabArea.schoolsFieldLastSelectedElement.getText()).to.eventually.equal(SCHOOL)
     })
 
-    it.skip('starts a quote (v1)', () => {
+    it('starts a quote (v1)', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
 
@@ -219,14 +219,20 @@ describe('the student profile page', () => {
     it('creates a study record', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
-
+      const goalsTabArea = new studentProfile.GoalsTabArea()
+      const currentAndPastStudiesArea = new goalsTabArea.CurrentAndPastStudiesArea()
       studentListing.clickFirstStudentInTable()
-      studentProfile.addRecord()
-
-      expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true) // deprecated, replace with specific locator
+      studentProfile.goToGoalsTab()
+      browser.sleep(5000)
+      currentAndPastStudiesArea.allRecordElements.count()
+        .then((count) => {
+          let originalCount = count
+          studentProfile.addRecord()
+          expect(currentAndPastStudiesArea.allRecordElements.count()).to.eventually.equal(originalCount + 1)
+        })
     })
 
-    it.skip('adds a secondary contact', () => {
+    it('adds a secondary contact', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
 
@@ -236,7 +242,7 @@ describe('the student profile page', () => {
       expect(studentProfile.alertSuccessMessage.isPresent()).to.eventually.equal(true)
     })
 
-    it.skip('starts an invoice', () => { // failing because of ACL bug in BE
+    it('(FAILING, MASTER, BUG FILED) starts an invoice', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
 
@@ -248,7 +254,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('student information area, notes area', () => {
+  describe('student information area, notes area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -317,7 +323,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('tasks area', () => {
+  describe('tasks area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -334,7 +340,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('office and owner area', () => {
+  describe('office and owner area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -366,7 +372,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('pipeline area', () => {
+  describe('pipeline area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()

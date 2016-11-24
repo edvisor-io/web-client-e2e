@@ -167,7 +167,6 @@ export default class StudentProfilePage {
   }
 
   addRecord() {
-    this.goToGoalsTab()
     const goalsTabArea = new GoalsTabArea()
     goalsTabArea.fillAndSaveNewRecordForm()
   }

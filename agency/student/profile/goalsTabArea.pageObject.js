@@ -1,12 +1,17 @@
 import {UISelectWidget, DatePickerWidget} from '../../../shared/widgets'
 import moment from 'moment'
-// class CurrentAndPastStudiesArea {
-//   constructor() {
-//   }
-// }
+
+export class CurrentAndPastStudiesArea {
+  constructor() {
+    this.container = element(by.id('student-study-records'))
+    this.allRecordElements = this.container.all(by.css('div.card'))
+  }
+}
 
 export class GoalsTabArea {
   constructor() {
+    this.CurrentAndPastStudiesArea = CurrentAndPastStudiesArea
+    
     this.schoolsField = element.all(by.css('input.input')).get(1)
     this.schoolsFieldAutocompleteMatches = element.all(by.css('ti-autocomplete-match'))
     this.schoolsFieldLastSelectedElement = element.all(by.css('ti-tag-item span')).last()
