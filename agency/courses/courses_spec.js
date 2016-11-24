@@ -52,14 +52,24 @@ describe('the find courses page', () => {
     expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
   })
 
-  it('should create a new quote from a search result', () => {
-    const coursesPage = new CoursesPage()
-    coursesPage.startQuoteUsingBasicSearch()
+  it('creates a new quote from a search result', () => {
     const quotesPage = new QuotesPage()
+    const quotesListingPage = new quotesPage.QuotesListingPage()
+    const agencyNav = new AgencyNav()
+    const coursesPage = new CoursesPage()
     const quotesEditPage = new quotesPage.QuotesEditPage()
-    quotesEditPage.saveQuote()
-
-    expect(quotesPage.alertSuccessMessage.isPresent()).to.eventually.equal(true)
+    agencyNav.goToQuotes()
+    browser.wait(protractor.ExpectedConditions.presenceOf(quotesListingPage.firstQuoteId), constants.TIMEOUT_TIME)
+    quotesListingPage.firstQuoteId.getText()
+      .then((text) => {
+        var originalFirstQuoteId = text
+        agencyNav.goToFindCourses()
+        coursesPage.startQuoteUsingBasicSearch()
+        quotesEditPage.saveQuote()
+        browser.get('/agency/en/504/student-quote/listing')
+        LoginPage.waitForLoader()
+        expect(quotesListingPage.firstQuoteId.getText()).to.eventually.not.equal(originalFirstQuoteId)
+      })
   })
 
   it('search result should have course name, school, intensity, duration, price', () => {
