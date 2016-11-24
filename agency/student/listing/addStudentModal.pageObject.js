@@ -16,7 +16,7 @@ export default class AddStudentModal {
     this.firstNameField.sendKeys(firstname)
     this.lastNameField.sendKeys(lastname)
     this.emailField.sendKeys(email)
-    ChosenWidget.setValueOfAutocomplete(this.nationalityField, nationality)
+    ChosenWidget.setValueOfAutocomplete(this.nationalityField, nationality) // changed for staging
     this.submitButton.click()
   }
 }
