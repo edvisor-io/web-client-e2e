@@ -1,20 +1,26 @@
 #!/bin/sh
 
 function help () {
-  echo " THIS IS WHAT JAZZ CAN DO 💃💃💃💃💃💃💃🏽"
+  echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+="
   echo ""
-  echo " 🤖 jazz is your robot friend for e2e tests."
+  echo " jazz 🤖 "
+  echo ""
+  echo " jazz is your robot friend for e2e tests "
+  echo ""
+  echo "------------------------------------------------------------------------"
   echo ""
   echo "TESTING"
-  echo " test "
+  echo " test [option]      - run [all] tests or a specific suite, eg. 'courses'"
   echo ""
   echo "MAINTENANCE"
-  echo " update [something]    - pull new code from [webclient/apiserver/both] "
-  echo " ignitedb              - starts the db "
-  echo " resetdb               - resets the db "
-  echo " build                 - builds the web-client "
-  echo " shiny                 - all of the above "
-  echo " e2e [branch]          - pushes [branch] to e2e.edvisor.io "
+  echo " update [option]    - pull new code from [webclient/apiserver/both] "
+  echo " ignitedb           - starts the db "
+  echo " resetdb            - resets the db "
+  echo " build              - builds the web-client "
+  echo " shiny              - all of the above "
+  echo " e2e [branch]       - pushes [branch] to e2e.edvisor.io "
+  echo ""
+  echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+="
 }
 
 function update_e2e() {
