@@ -13,15 +13,16 @@ function help() {
   echo "------------------------------------------------------------------------"
   echo ""
   echo "TESTING ✅"
-  echo " test [option]      - run [all] tests or a specific suite, eg. 'courses'"
+  echo " test [opt]            - run [all] tests or a suite, eg. 'courses' "
   echo ""
   echo "MAINTENANCE 🛠"
-  echo " update [option]    - pull new code from [webclient/apiserver/both] "
-  echo " ignitedb           - starts the db "
-  echo " resetdb            - resets the db "
-  echo " build              - builds the web-client "
-  echo " shiny              - all of the above "
-  echo " e2e [branch]       - pushes latest [branch] to e2e.edvisor.io "
+  echo " ignitedb              - starts the db "
+  echo " resetdb               - resets the db "
+  echo " build                 - builds the web-client "
+  echo " local [branch]        - pull latest [branch] of api-server and web-client "
+  echo "                         starts the database, resets the database and "
+  echo "                         and builds the web-client "
+  echo " e2e [branch]          - pushes latest [branch] to e2e.edvisor.io "
   echo ""
   echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+="
 }
@@ -70,15 +71,15 @@ function resetdb () {
   woohoo
 }
 
-function pullwebclient () {
+function pullwebclient() {
   echo " ⚡️ jazzing up your web-client."
-  cd /Users/Beastie/development/edvisorio/web-client && git pull --rebase && npm install
+  cd /Users/Beastie/development/edvisorio/web-client && git checkout $1 && git pull --rebase && npm install && git checkout -
   woohoo
 }
 
-function pullapiserver () {
+function pullapiserver() {
   echo " ⚡️ jazzing up your api-server."
-  cd /Users/Beastie/development/edvisorio/api-server && git pull --rebase && npm install
+  cd /Users/Beastie/development/edvisorio/api-server && git checkout $1 && git pull --rebase && npm install && git checkout -
   woohoo
 }
 
@@ -120,28 +121,6 @@ then
       exit 1
     fi
     ;;
-  update)
-    if [ $2 ] ; then
-      case "$2" in
-      webclient)
-        pullwebclient
-        ;;
-      apiserver)
-        pullapiserver
-        ;;
-      both)
-        pullwebclient
-        pullapiserver
-        ;;
-      *)
-        woops
-        help
-        ;;
-      esac
-    else
-      help
-    fi
-    ;;
   resetdb)
     resetdb
     ;;
@@ -151,12 +130,17 @@ then
   buildclient)
     buildclient
     ;;
-  shiny)
-    pullwebclient
-    pullapiserver
-    ignitedb
-    resetdb
-    buildclient
+  local)
+    if [ $2 ] ; then
+      pullwebclient $2
+      pullapiserver $2
+      ignitedb
+      resetdb
+      buildclient
+    else
+      woops
+      help
+    fi
     ;;
   e2e)
     if [ $2 ] ; then
