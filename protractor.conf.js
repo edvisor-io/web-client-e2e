@@ -6,11 +6,10 @@ var howManyInstancesAtMost = 1
 
 if (process.env.CI === 'true') {
   environmentMultiplier = 3
-  if (process.env.CIRCLE_BRANCH === 'master') {
+  if (process.env.CIRCLE_BRANCH === 'staging' || process.env.CIRCLE_BRANCH === 'master') {
     url = 'https://staging.edvisor.io:3000'
   } else {
-    // url = 'https://e2e.edvisor.io:2999'
-    url = 'https://staging.edvisor.io:3000'
+    url = 'https://e2e.edvisor.io:2999'
   }
 }
 
