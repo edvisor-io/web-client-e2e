@@ -1,18 +1,21 @@
 #!/bin/sh
+#
+# Perform maintainance functionality for api-server and web-client to the e2e
+# test suite.
 
-function help () {
+function help() {
   echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+="
   echo ""
-  echo " jazz 🤖 "
+  echo " jazz       ((::.. 🤖  ..::)) "
   echo ""
   echo " jazz is your robot friend for e2e tests "
   echo ""
   echo "------------------------------------------------------------------------"
   echo ""
-  echo "TESTING"
+  echo "TESTING ✅"
   echo " test [option]      - run [all] tests or a specific suite, eg. 'courses'"
   echo ""
-  echo "MAINTENANCE"
+  echo "MAINTENANCE 🛠"
   echo " update [option]    - pull new code from [webclient/apiserver/both] "
   echo " ignitedb           - starts the db "
   echo " resetdb            - resets the db "
@@ -31,7 +34,7 @@ function update_e2e() {
 
 function run_all_tests() {
   echo ""
-  echo " 🔥 TESTING ALL THE THINGS 🔥      ((::.. 🤖  ..::))"
+  echo " ✅ TESTING ALL THE THINGS"
   echo ""
   cd /Users/Beastie/development/edvisorio/web-client-e2e && LM=true ./node_modules/protractor/bin/protractor protractor.conf.js
   woohoo
@@ -39,14 +42,14 @@ function run_all_tests() {
 
 function runtest () {
   echo ""
-  echo " 🔥 TESTING this one THING 🔥      ((::.. 🤖  ..::))"
+  echo " ✅ TESTING this one THING"
   echo ""
   cd /Users/Beastie/development/edvisorio/web-client-e2e && LM=true ./node_modules/protractor/bin/protractor protractor.conf.js --suite studentProfile
   woohoo
 }
 
 function ignitedb () {
-  echo " 🔥 db igniting --- 🤖"
+  echo " 🛠 db igniting --- 🤖"
   mysql.server start
   woohoo
 }
