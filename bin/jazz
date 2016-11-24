@@ -21,32 +21,34 @@ function help() {
   echo " resetdb            - resets the db "
   echo " build              - builds the web-client "
   echo " shiny              - all of the above "
-  echo " e2e [branch]       - pushes [branch] to e2e.edvisor.io "
+  echo " e2e [branch]       - pushes latest [branch] to e2e.edvisor.io "
   echo ""
   echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+="
 }
 
 function update_e2e() {
   echo ""
-  echo " 🚀 pushing the $2 branch to e2e.edvisor.io "
+  echo " 🚀 pushing the $1 branch to e2e.edvisor.io "
   echo ""
-  cd /Users/Beastie/development/edvisorio/web-client && git checkout $2 && git pull --rebase && git push origin origin/$2:e2e -f # && git checkout -
-  cd /Users/Beastie/development/edvisorio/api-server && git checkout $2 && git pull --rebase && git push origin origin/$2:e2e -f # && git checkout -
+  cd /Users/Beastie/development/edvisorio/web-client && git checkout $1 && git pull --rebase && git push origin origin/$1:e2e -f && git checkout -
+  cd /Users/Beastie/development/edvisorio/api-server && git checkout $1 && git pull --rebase && git push origin origin/$1:e2e -f && git checkout -
 }
 
 function run_all_suites() {
   echo ""
   echo " ✅ TESTING ALL THE THINGS"
   echo "                    --- 🤖"
+  echo ""
   cd /Users/Beastie/development/edvisorio/web-client-e2e && LM=true ./node_modules/protractor/bin/protractor protractor.conf.js
   woohoo
 }
 
-function run_suite () {
+function run_suite() {
   echo ""
-  echo " ✅ TESTING this one THING"
+  echo " ✅ TESTING with the $1 suite"
   echo "                    --- 🤖"
-  cd /Users/Beastie/development/edvisorio/web-client-e2e && LM=true ./node_modules/protractor/bin/protractor protractor.conf.js --suite studentProfile
+  echo ""
+  cd /Users/Beastie/development/edvisorio/web-client-e2e && LM=true ./node_modules/protractor/bin/protractor protractor.conf.js --suite $1
   woohoo
 }
 
@@ -84,13 +86,13 @@ function buildclient () {
 
 function woohoo () {
   echo ""
-  echo " ✨ ALL DONE!"
+  echo " ✨ ALL DONE! ✨ "
   echo ""
 }
 
 function woops () {
   echo ""
-  echo " 🚫 woops, can't do that"
+  echo " 🚫 woops, can't do that 🚫 "
   echo ""
 }
 
@@ -98,23 +100,23 @@ if [ $1 ]
 then
   case "$1" in
   test)
-    if [ $2 ]
-    then
+    if [ $2 ] ; then
       case "$2" in
       all)
         run_all_suites
         ;;
       *)
-        woops
+        run_suite $2
         ;;
       esac
     else
-      run_suite
+      woops
+      help
+      exit 1
     fi
     ;;
   update)
-    if [ $2 ]
-    then
+    if [ $2 ] ; then
       case "$2" in
       webclient)
         pullwebclient
@@ -128,6 +130,7 @@ then
         ;;
       *)
         woops
+        help
         ;;
       esac
     else
@@ -151,9 +154,8 @@ then
     buildclient
     ;;
   e2e)
-    if [ $2 ]
-    then
-      update_e2e
+    if [ $2 ] ; then
+      update_e2e $2
     else
       woops
       help
@@ -166,4 +168,5 @@ then
   esac
 else
   help
+  exit 0
 fi
