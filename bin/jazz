@@ -27,29 +27,33 @@ function help() {
 }
 
 function update_e2e() {
+  echo ""
   echo " 🚀 pushing the $2 branch to e2e.edvisor.io "
-  cd /Users/Beastie/development/edvisorio/web-client && git checkout $2 && git pull --rebase && git push origin origin/$2:e2e -f
-  cd /Users/Beastie/development/edvisorio/api-server && git checkout $2 && git pull --rebase && git push origin origin/$2:e2e -f
+  echo ""
+  cd /Users/Beastie/development/edvisorio/web-client && git checkout $2 && git pull --rebase && git push origin origin/$2:e2e -f # && git checkout -
+  cd /Users/Beastie/development/edvisorio/api-server && git checkout $2 && git pull --rebase && git push origin origin/$2:e2e -f # && git checkout -
 }
 
-function run_all_tests() {
+function run_all_suites() {
   echo ""
   echo " ✅ TESTING ALL THE THINGS"
-  echo ""
+  echo "                    --- 🤖"
   cd /Users/Beastie/development/edvisorio/web-client-e2e && LM=true ./node_modules/protractor/bin/protractor protractor.conf.js
   woohoo
 }
 
-function runtest () {
+function run_suite () {
   echo ""
   echo " ✅ TESTING this one THING"
-  echo ""
+  echo "                    --- 🤖"
   cd /Users/Beastie/development/edvisorio/web-client-e2e && LM=true ./node_modules/protractor/bin/protractor protractor.conf.js --suite studentProfile
   woohoo
 }
 
 function ignitedb () {
-  echo " 🛠 db igniting --- 🤖"
+  echo ""
+  echo " 🛠 database starting "
+  echo "         --- 🤖 "
   mysql.server start
   woohoo
 }
@@ -98,54 +102,54 @@ then
     then
       case "$2" in
       all)
-        run_all_tests
-      ;;
+        run_all_suites
+        ;;
       *)
         woops
-      ;;
+        ;;
       esac
     else
-      runtest
+      run_suite
     fi
-  ;;
+    ;;
   update)
     if [ $2 ]
     then
       case "$2" in
       webclient)
         pullwebclient
-      ;;
+        ;;
       apiserver)
         pullapiserver
-      ;;
+        ;;
       both)
         pullwebclient
         pullapiserver
-      ;;
+        ;;
       *)
         woops
-      ;;
+        ;;
       esac
     else
       help
     fi
-  ;;
+    ;;
   resetdb)
     resetdb
-  ;;
+    ;;
   ignitedb)
     ignitedb
-  ;;
+    ;;
   buildclient)
     buildclient
-  ;;
+    ;;
   shiny)
     pullwebclient
     pullapiserver
     ignitedb
     resetdb
     buildclient
-  ;;
+    ;;
   e2e)
     if [ $2 ]
     then
@@ -154,11 +158,11 @@ then
       woops
       help
     fi
-  ;;
+    ;;
   *)
     woops
     help
-  ;;
+    ;;
   esac
 else
   help
