@@ -51,7 +51,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('files (SPECIAL: will fail when run not from local)', () => { // because uploading path can't work from CircleCI
+  describe('files (SPECIAL: will fail when run not from local)', () => { // because uploading path can't work from CircleCI
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -194,7 +194,7 @@ describe('the student profile page', () => {
     })
 
     it('enters a school name in goals and studies tab area', () => {
-      const SCHOOL = 'Kaplan Santa Barbara City College'
+      const SCHOOL = 'Kaplan Santa Barbara City College' // this is dependent on test data
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
       const goalsTabArea = new studentProfile.GoalsTabArea()
@@ -236,16 +236,16 @@ describe('the student profile page', () => {
       expect(studentProfile.alertSuccessMessage.isPresent()).to.eventually.equal(true)
     })
 
-    // it('starts an invoice', () => { // failing because of ACL bug in BE
-    //   const studentListing = new StudentListingPage()
-    //   const studentProfile = new StudentProfilePage()
-    //
-    //   studentListing.clickSecondStudentInTable()
-    //   studentProfile.makeNewInvoice()
-    //
-    //   const invoicesPage = new InvoicesPage()
-    //   expect(invoicesPage.startApplicationButton.isPresent()).to.eventually.equal(true)
-    // })
+    it('starts an invoice', () => { // failing because of ACL bug in BE
+      const studentListing = new StudentListingPage()
+      const studentProfile = new StudentProfilePage()
+
+      studentListing.clickSecondStudentInTable()
+      studentProfile.makeNewInvoice()
+
+      const invoicesPage = new InvoicesPage()
+      expect(invoicesPage.startApplicationButton.isPresent()).to.eventually.equal(true)
+    })
   })
 
   describe('student information area, notes area', () => {
@@ -330,7 +330,7 @@ describe('the student profile page', () => {
       studentListing.clickFirstStudentInTable()
       studentProfile.addTask()
 
-      expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
+      expect(studentProfile.alertSuccessMessage.isDisplayed()).to.eventually.equal(true)
     })
   })
 
@@ -399,17 +399,22 @@ describe('the student profile page', () => {
       expect(pipelineArea.firstHeader.getText()).to.eventually.equal(EXPECTED_STATUS_THREE)
     })
 
-    it('unassigns a student to a pipeline status', () => {
+    it('unassigns a student from a pipeline status', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
       const pipelineArea = new studentProfile.PipelineArea()
 
       studentListing.clickFirstStudentInTable()
-      pipelineArea.clickChangePipelineFirstButton()
-      pipelineArea.clickRemoveFromPipelineOption()
-      pipelineArea.clickConfirmRemoveButton()
+      pipelineArea.allPipelineContainers.count()
+        .then((count) => {
+          var originalPipelineCount = count
 
-      expect(studentProfile.alertBoxMessage.isPresent()).to.eventually.equal(true)
+          pipelineArea.clickChangePipelineFirstButton()
+          pipelineArea.clickRemoveFromPipelineOption()
+          pipelineArea.clickConfirmRemoveButton()
+
+          expect(pipelineArea.allPipelineContainers.count()).to.eventually.equal(originalPipelineCount - 1)
+        })
     })
 
     it('should assign a student to more than one pipeline', () => {

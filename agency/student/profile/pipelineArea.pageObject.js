@@ -3,6 +3,7 @@ import constants from '../../../shared/constants'
 export default class PipelineArea {
   constructor() {
     this.container = element(by.tagName('student-sidebar-pipelines'))
+    this.allPipelineContainers = this.container.all(by.css('student-sidebar-pipeline-stage'))
 
     this.currentPipelines = this.container.all(by.css('h5:nth-child(1)'))
     this.firstHeader = this.currentPipelines.get(0)
