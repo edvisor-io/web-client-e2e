@@ -18,6 +18,7 @@ export default class StudentProfilePage {
     this.SecondaryContactsArea = SecondaryContactsArea
     this.AssignedToArea = AssignedToArea
     this.PipelineArea = PipelineArea
+    this.TasksArea = TasksArea
     this.NotesArea = NotesArea
     this.RecentActivitiesArea = RecentActivitiesArea
     this.FilesTabArea = FilesTabArea
@@ -41,9 +42,10 @@ export default class StudentProfilePage {
 
     this.customFieldLabelElements = this.container.all(by.css('custom-field label'))
 
-    this.alertBoxMessage = $('.alert-box-message') // deprecated, please replace with more specific options below
-    this.alertSuccessMessage = $('div.alert-success')
     this.confirmDeleteButton = $('div.sweet-alert button.confirm')
+
+    this.alertBoxMessage = $('.alert-box-message') // deprecated, verify presence of data on DOM
+    this.alertSuccessMessage = $('div.alert-success') // deprecated, verify presence of data on DOM
   }
 
   fillAndSaveANote(note) {

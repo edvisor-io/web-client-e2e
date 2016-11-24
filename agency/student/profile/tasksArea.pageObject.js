@@ -1,13 +1,13 @@
 export default class TasksArea {
   constructor() {
-    this.tasksContainer = $('.sidebar-tasks')
-    this.taskTitleField = this.tasksContainer
-      .element(by.model('addTask.data.details'))
-    this.taskDatePicker = this.tasksContainer
-      .element(by.model('data.date'))
-    this.taskTimeDropdown = this.tasksContainer.element(by.model('data.time'))
-    this.assignToField = this.tasksContainer.$('select + div')
-    this.submitTaskButton = this.tasksContainer.$('button[type="submit"]')
+    this.container = $('.sidebar-tasks')
+    this.allTaskElements = this.container.all(by.css('task-entry'))
+    
+    this.taskTitleField = this.container.element(by.model('addTask.data.details'))
+    this.taskDatePicker = this.container.element(by.model('data.date'))
+    this.taskTimeDropdown = this.container.element(by.model('data.time'))
+    this.assignToField = this.container.$('select + div')
+    this.submitTaskButton = this.container.$('button[type="submit"]')
   }
 
   fillAndSaveNewTaskForm(taskTitle, dueTime) {

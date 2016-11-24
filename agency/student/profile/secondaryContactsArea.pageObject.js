@@ -3,6 +3,8 @@ import {ChosenWidget} from '../../../shared/widgets'
 export default class SecondaryContactsArea {
   constructor() {
     this.container = element(by.id('ext02-secondary-contact-container'))
+    this.allContactElements = this.container.all(by.css('div.card'))
+    
     this.addContactButton = element(by.id('ext02-secondary-contact-toggle'))
     this.contactEditorContainer = element(by.id('ext02-secondary-contact-form'))
     this.nameField = this.contactEditorContainer.$('input[name="name"]')
