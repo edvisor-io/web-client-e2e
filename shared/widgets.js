@@ -63,6 +63,9 @@ export class ChosenWidget {
     return element.element(by.css('div.chosen-container'))
   }
 
+  static setValueOfTag(element, value) {}
+  static setValueOfDropdown(element, value) {}
+
   static setChosenValue(element, value) {
     let expected = protractor.ExpectedConditions
     let chosenContainer = ChosenWidget.getChosenContainer(element)
