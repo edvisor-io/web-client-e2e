@@ -59,6 +59,10 @@ export class ChosenWidget {
     return element.element(by.xpath('following-sibling::div[1]'))
   }
 
+  static getAutocompleteContainer(element) {
+    return element.element(by.css('div.chosen-container'))
+  }
+
   static setChosenValue(element, value) {
     let expected = protractor.ExpectedConditions
     let chosenContainer = ChosenWidget.getChosenContainer(element)
@@ -68,6 +72,21 @@ export class ChosenWidget {
     let chosenResultsElement = chosenContainer.$('.chosen-results')
 
     chosenContainer.click()
+    browser.wait(expected.visibilityOf(chosenResultsElement), constants.TIMEOUT_TIME)
+    chosenSearchElement.sendKeys(value)
+
+    chosenResultsElement.all(by.cssContainingText('li', value)).first().click()
+  }
+
+  static setValueOfAutocomplete(element, value) {
+    let expected = protractor.ExpectedConditions
+    let container = ChosenWidget.getAutocompleteContainer(element)
+    browser.wait(expected.visibilityOf(container), constants.TIMEOUT_TIME)
+
+    let chosenSearchElement = container.$('.chosen-search input')
+    let chosenResultsElement = container.$('.chosen-results')
+
+    container.click()
     browser.wait(expected.visibilityOf(chosenResultsElement), constants.TIMEOUT_TIME)
     chosenSearchElement.sendKeys(value)
 

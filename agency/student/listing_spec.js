@@ -34,7 +34,7 @@ describe('the student listing page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe('navigation', () => {
+  describe.skip('navigation', () => {
     it('works from login', () => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -45,7 +45,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('batch function', () => {
+  describe.skip('batch function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -107,14 +107,14 @@ describe('the student listing page', () => {
         .getCssValue('background-color')).to.eventually.equal(PALE_YELLOW)
     })
 
-    it('should download a file of exported students', () => {
+    it.skip('should download a file of exported students', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickSelectAllStudentsCheckbox()
       studentListing.clickExportButton()
       expect(studentListing.exportMessage.isPresent()).to.eventually.equal(true)
     })
 
-    it('should show a student profile from the students table', () => {
+    it.skip('should show a student profile from the students table', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
       const studentProfile = new StudentProfilePage()
@@ -123,7 +123,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('pipeline tabs', () => {
+  describe.skip('pipeline tabs', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -188,7 +188,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('add student modal', () => {
+  describe.skip('add student modal', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -227,7 +227,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('search function', () => {
+  describe.skip('search function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -274,7 +274,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('filters students', () => {
+  describe.skip('filters students', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()

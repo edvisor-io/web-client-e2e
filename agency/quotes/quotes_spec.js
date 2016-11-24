@@ -73,8 +73,7 @@ describe('the quotes page', () => {
       const quotesPage = new QuotesPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
       quotesEditPage.saveQuote()
-
-      expect(quotesEditPage.alertSuccessMessage.isDisplayed()).to.eventually.equal(true)
+      expect(quotesEditPage.alertSuccessMessage.isPresent()).to.eventually.equal(true)
     })
 
     it.skip('should add an insurance addon with start plus end dates to a quote', () => {

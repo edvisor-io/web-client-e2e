@@ -12,11 +12,11 @@ export default class AddStudentModal {
   }
 
   fillAndSubmitForm(assignedTo, firstname, lastname, email, nationality) {
-    ChosenWidget.setChosenValue(this.assignedToField, assignedTo)
+    ChosenWidget.setChosenValue(this.assignedToField, assignedTo) // this may also need Chosen.setAutocompleteValue
     this.firstNameField.sendKeys(firstname)
     this.lastNameField.sendKeys(lastname)
     this.emailField.sendKeys(email)
-    ChosenWidget.setChosenValue(this.nationalityField, nationality)
+    ChosenWidget.setAutocompleteValue(this.nationalityField, nationality)
     this.submitButton.click()
   }
 }
