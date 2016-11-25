@@ -79,9 +79,14 @@ describe('the student listing page', () => {
 
     it('reassigns multiple students to another office', () => {
       const studentListing = new StudentListingPage()
+      const listArea = new studentListing.ListArea()
       studentListing.selectViewingAllStudents()
-      studentListing.reassignTwoStudentsToAnOffice()
-      expect(studentListing.alertSuccessMessage.isPresent()).to.eventually.equal(true)
+      listArea.fourthStudentId.getText()
+        .then((text) => {
+          let originalIdText = text
+          studentListing.reassignTwoStudentsToAnOffice()
+          expect(listArea.fourthStudentId.getText()).to.eventually.not.equal(originalIdText)
+        })
     })
   })
 

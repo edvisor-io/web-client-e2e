@@ -9,6 +9,10 @@ export default class ListArea {
     this.fourthStudentCheckbox = this.checkboxElements.get(3)
     this.fifthStudentCheckbox = this.checkboxElements.get(4)
 
+    this.idElements = this.container.all(by.css('div.ag-cell div.table-student-id a'))
+    this.thirdStudentId = this.idElements.get(2)
+    this.fourthStudentId = this.idElements.get(3)
+
     this.studentsInTable = this.container.all(by.css('.table-student-name > a'))
     this.firstStudentInTable = this.studentsInTable.get(0)
     this.secondStudentInTable = this.studentsInTable.get(1)
