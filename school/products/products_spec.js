@@ -10,7 +10,7 @@ import uuid from 'node-uuid'
 chai.use(chaiAsPromised)
 const {expect} = chai
 
-describe('the products and addons page', () => {
+describe('the school products page', () => {
   after(() => {
     browser.driver.manage().deleteAllCookies()
   })

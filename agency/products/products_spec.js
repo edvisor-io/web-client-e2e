@@ -9,7 +9,7 @@ import chaiAsPromised from 'chai-as-promised'
 const {expect} = chai
 chai.use(chaiAsPromised)
 
-describe('the products and promotions page', () => {
+describe('the agency products page', () => {
   before(() => {
     browser.get('/')
     LoginPage.waitForLoader()

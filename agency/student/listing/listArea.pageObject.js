@@ -21,6 +21,6 @@ export default class ListArea {
     this.fifthStudentInTable = this.studentsInTable.get(4)
 
     this.firstStudentInTableCheckboxContainer = this.container
-    .all(by.css('div.ag-cell')).first()
+      .all(by.css('div.ag-cell')).first()
   }
 }
