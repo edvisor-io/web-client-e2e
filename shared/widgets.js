@@ -63,18 +63,21 @@ export class ChosenWidget {
     return element.element(by.css('div.chosen-container'))
   }
 
+  static getDropdownContainer(element) {
+    return element.element(by.css('div.chosen-container'))
+  }
+
   static setValueOfTag(element, value) {}
-  static setValueOfDropdown(element, value) {}
 
-  static setChosenValue(element, value) {
+  static setValueOfDropdown(element, value) {
     let expected = protractor.ExpectedConditions
-    let chosenContainer = ChosenWidget.getChosenContainer(element)
-    browser.wait(expected.visibilityOf(chosenContainer), constants.TIMEOUT_TIME)
+    let container = ChosenWidget.getDropdownContainer(element)
+    browser.wait(expected.visibilityOf(container), constants.TIMEOUT_TIME)
 
-    let chosenSearchElement = chosenContainer.$('.chosen-search input')
-    let chosenResultsElement = chosenContainer.$('.chosen-results')
+    let chosenSearchElement = container.$('.chosen-search input')
+    let chosenResultsElement = container.$('.chosen-results')
 
-    chosenContainer.click()
+    container.click()
     browser.wait(expected.visibilityOf(chosenResultsElement), constants.TIMEOUT_TIME)
     chosenSearchElement.sendKeys(value)
 
@@ -90,6 +93,21 @@ export class ChosenWidget {
     let chosenResultsElement = container.$('.chosen-results')
 
     container.click()
+    browser.wait(expected.visibilityOf(chosenResultsElement), constants.TIMEOUT_TIME)
+    chosenSearchElement.sendKeys(value)
+
+    chosenResultsElement.all(by.cssContainingText('li', value)).first().click()
+  }
+
+  static setChosenValue(element, value) {
+    let expected = protractor.ExpectedConditions
+    let chosenContainer = ChosenWidget.getChosenContainer(element)
+    browser.wait(expected.visibilityOf(chosenContainer), constants.TIMEOUT_TIME)
+
+    let chosenSearchElement = chosenContainer.$('.chosen-search input')
+    let chosenResultsElement = chosenContainer.$('.chosen-results')
+
+    chosenContainer.click()
     browser.wait(expected.visibilityOf(chosenResultsElement), constants.TIMEOUT_TIME)
     chosenSearchElement.sendKeys(value)
 

@@ -11,6 +11,8 @@ export default class AccommodationsPage {
     this.sharedRoomTypeButton = element(by
       .repeater('roomType in roomTypeOptions').row(0))
     this.mealTypeDropdown = element.all(by.model('select.selection')).get(0)
+    this.priceField = element.all(by.css('durational-pricing input')).first()
+    this.priceUnitDropdown = element(by.css('duration-type-select'))
     this.saveButton = $('div.save-right button[type="submit"]')
 
     this.alertBoxMessage = $('.alert-box-message')
@@ -40,6 +42,11 @@ export default class AccommodationsPage {
     ChosenWidget.setChosenValue(this.mealTypeDropdown, type)
   }
 
+  setPrice(price = '100') {
+    this.priceField.sendKeys(price)
+    ChosenWidget.setValueOfDropdown(this.priceUnitDropdown, 'Per Day')
+  }
+
   clickSaveButton() {
     this.saveButton.click()
   }
@@ -51,6 +58,8 @@ export default class AccommodationsPage {
     this.clickPrivateBathroomButton()
     this.clickSharedRoomTypeButton()
     this.selectMealType()
+    this.clickSaveButton()
+    this.setPrice()
     this.clickSaveButton()
   }
 }
