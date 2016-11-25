@@ -11,10 +11,11 @@ export class CurrentAndPastStudiesArea {
 export class GoalsTabArea {
   constructor() {
     this.CurrentAndPastStudiesArea = CurrentAndPastStudiesArea
-    
-    this.schoolsField = element.all(by.css('input.input')).get(1)
+
+    this.schoolsFieldContainer = element(by.name('schools'))
+    this.schoolsField = this.schoolsFieldContainer.element(by.css('input.input'))
     this.schoolsFieldAutocompleteMatches = element.all(by.css('ti-autocomplete-match'))
-    this.schoolsFieldLastSelectedElement = element.all(by.css('ti-tag-item span')).last()
+    this.schoolsFieldLastSelectedElement = this.schoolsFieldContainer.all(by.css('ti-tag-item span')).last()
     this.saveButton = $('button[type="submit"]')
     this.addRecordButton = $('#ext02-add-record-button')
 
@@ -25,20 +26,20 @@ export class GoalsTabArea {
     this.endDateField = $('input[name="endDate"]')
   }
 
-  inputSchoolName(school = 'kaplan santa') {
+  inputSchoolName(school = 'Kaplan') {
     const goalsTabArea = new GoalsTabArea()
     goalsTabArea.schoolsField.click()
     goalsTabArea.schoolsField.sendKeys(school)
     goalsTabArea.schoolsFieldAutocompleteMatches.first().click()
   }
 
-  clickSaveButton() {
-    this.saveButton.click()
-  }
+  // clickSaveButton() { // deprecated
+  //   this.saveButton.click()
+  // }
 
-  fillAndSaveStudentGoalForm() {
-    this.inputSchoolName()
-    this.clickSaveButton()
+  fillAndSaveStudentGoalForm(school) {
+    this.inputSchoolName(school)
+    this.saveButton.click()
   }
 
   selectStartDate() {

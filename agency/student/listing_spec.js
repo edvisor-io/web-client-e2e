@@ -34,7 +34,7 @@ describe('the student listing page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe('navigation', () => {
+  describe.skip('navigation', () => {
     it('works from login', () => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -51,7 +51,7 @@ describe('the student listing page', () => {
       LoginPage.waitForLoader()
     })
 
-    it('reassigns multiple students to another user and preserves profile data', () => {
+    it.skip('reassigns multiple students to another user and preserves profile data', () => {
       let notesArray = []
       var note = chance.sentence()
       const studentListing = new StudentListingPage()
@@ -85,7 +85,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('temporary grouping', () => {
+  describe.skip('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -123,7 +123,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('pipeline tabs', () => {
+  describe.skip('pipeline tabs', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -188,7 +188,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('add student modal', () => {
+  describe.skip('add student modal', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -227,7 +227,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('search function', () => {
+  describe.skip('search function', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -274,7 +274,7 @@ describe('the student listing page', () => {
     })
   })
 
-  describe('filters students', () => {
+  describe.skip('filters students', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
