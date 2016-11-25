@@ -29,7 +29,7 @@ describe('the student profile page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe.skip('navigation', () => {
+  describe('navigation', () => {
     it('works from login', () => { // necessary? this is testing in studentListing
       browser.get('/')
       LoginPage.waitForLoader()
@@ -51,7 +51,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('files (SPECIAL: will fail when run not from local)', () => { // because uploading path can't work from CircleCI
+  describe('files (SPECIAL: will fail when run not from local)', () => { // because uploading path can't work from CircleCI
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -104,7 +104,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('recent actitivies', () => {
+  describe('recent actitivies', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -187,13 +187,13 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('temporary grouping', () => {
+  describe('temporary grouping', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
     })
 
-    it.skip('enters a school name in goals and studies tab area', () => {
+    it('enters a school name in goals and studies tab area', () => {
       const SCHOOL = 'Kaplan Santa Barbara City College' // this is dependent on test data
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
@@ -205,7 +205,7 @@ describe('the student profile page', () => {
       expect(goalsTabArea.schoolsFieldLastSelectedElement.getText()).to.eventually.equal(SCHOOL)
     })
 
-    it.skip('starts a quote (v1)', () => {
+    it('starts a quote (v1)', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
 
@@ -216,7 +216,7 @@ describe('the student profile page', () => {
       expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\/en\/504\/quotes\/edit\//)
     })
 
-    it.skip('creates a study record', () => {
+    it('creates a study record', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
       const goalsTabArea = new studentProfile.GoalsTabArea()
@@ -245,7 +245,7 @@ describe('the student profile page', () => {
         })
     })
 
-    it.skip('(FAILING, MASTER, BUG FILED) starts an invoice', () => {
+    it('(FAILING, MASTER, BUG FILED) starts an invoice', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
 
@@ -257,7 +257,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('student information area, notes area', () => {
+  describe('student information area, notes area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -298,7 +298,7 @@ describe('the student profile page', () => {
       expect(notesArea.field.getAttribute('value')).to.eventually.equal(NOTE)
     })
 
-    it.skip('displays all custom fields', () => {
+    it('displays all custom fields', () => {
       const settingsPage = new SettingsPage()
       const settingsAgencyTab = new settingsPage.AgencyTab()
       const studentListing = new StudentListingPage()
@@ -346,7 +346,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('office and owner area', () => {
+  describe('office and owner area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
@@ -378,7 +378,7 @@ describe('the student profile page', () => {
     })
   })
 
-  describe.skip('pipeline area', () => {
+  describe('pipeline area', () => {
     beforeEach(() => {
       browser.get('/agency/en/504/student/listing/504')
       LoginPage.waitForLoader()
