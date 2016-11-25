@@ -12,24 +12,32 @@ const {expect} = chai
 
 describe('the school products page', () => {
   after(() => {
-    browser.driver.manage().deleteAllCookies()
-  })
-  it('should create a course', () => {
-    const COURSE_NAME = `${uuid.v4()}`
-
     browser.get('/')
     LoginPage.waitForLoader()
-    const loginPage = new LoginPage()
-    loginPage.login(constants.SCHOOL_EMAIL, constants.PASSWORD)
-    LoginPage.waitForLoader()
-
     const schoolNav = new SchoolNav()
     schoolNav.goToProductsAndAddons()
     const productsPage = new ProductsPage()
-    productsPage.createNewCourse(COURSE_NAME)
+    productsPage.sortByCourseName()
+    productsPage.deleteFirstCourse() // to make sure created course is always first after sorting
+    browser.driver.manage().deleteAllCookies()
+  })
 
+  it('creates a course', () => {
+    const COURSE_NAME = `0a-${uuid.v4()}`
+    const loginPage = new LoginPage()
+    const schoolNav = new SchoolNav()
+    const productsPage = new ProductsPage()
     const coursePage = new productsPage.CoursePage()
+
+    browser.get('/')
+    LoginPage.waitForLoader()
+    loginPage.login(constants.SCHOOL_EMAIL, constants.PASSWORD)
+    LoginPage.waitForLoader()
+
+    schoolNav.goToProductsAndAddons()
+    productsPage.createNewCourse(COURSE_NAME)
     coursePage.clickBackToCoursesButton()
-    expect(productsPage.lastCourseInList.getText()).to.eventually.equal(COURSE_NAME)
+    productsPage.sortByCourseName()
+    expect(productsPage.firstCourseInList.getText()).to.eventually.equal(COURSE_NAME)
   })
 })

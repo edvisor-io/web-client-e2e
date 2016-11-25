@@ -1,4 +1,9 @@
 import CoursePage from './productsCoursePage.pageObject'
+import constants from '../../shared/constants'
+
+class CourseTabArea {
+  constructor() {}
+}
 
 export class ProductsPage {
   constructor() {
@@ -7,7 +12,8 @@ export class ProductsPage {
     this.newProductsOrAddonsButton = element.all(by.css('div.btn-group > button')).get(0)
     this.courseOption = element.all(by.css('div.btn-menu_item')).get(0)
 
-    this.lastCourseInList = element.all(by.css('div.table-grid_name > a')).last()
+    this.courseNameColumnHeader = element.all(by.css('span.ag-header-cell-text')).get(0)
+    this.firstCourseInList = element.all(by.css('div.table-grid_name > a')).get(0)
   }
 
   openNewProductsOrAddonsDropdown() {
@@ -23,6 +29,17 @@ export class ProductsPage {
     this.clickCourseOption()
     const coursePage = new CoursePage()
     coursePage.fillAndSaveForm(name)
+  }
+
+  sortByCourseName() {
+    this.courseNameColumnHeader.click()
+    browser.sleep(constants.SLEEP_SHORT)
+  }
+
+  deleteFirstCourse() {
+    this.firstCourseInList.click()
+    const coursePage = new CoursePage()
+    coursePage.deleteCourse()
   }
 }
 
