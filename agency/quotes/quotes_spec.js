@@ -114,7 +114,7 @@ describe('the quotes page', () => {
       expect(quotesOptionEditPage.durationFields.isPresent()).to.eventually.equal(true)
     })
 
-    it('(FAILING, MASTER, BUG FILED) adds accommodation with start plus end dates to a quote', () => {
+    it('adds accommodation with start plus end dates to a quote', () => {
       const quotesPage = new QuotesPage()
       const quotesListingPage = new quotesPage.QuotesListingPage()
       quotesListingPage.clickNewButton()
