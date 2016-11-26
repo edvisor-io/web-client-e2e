@@ -61,7 +61,7 @@ export default class StudentInformationArea {
     this.homeAddressField.sendKeys(address)
   }
 
-  selectCityCountry(cityCountry = 'Greater London, United Kingdom') {
+  selectCityCountry(cityCountry = 'Antigua and Barbuda') {
     UISelectWidget.clickUISelect(this.cityCountryField, cityCountry)
   }
 

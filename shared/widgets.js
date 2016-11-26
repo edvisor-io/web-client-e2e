@@ -122,8 +122,9 @@ export class ChosenWidget {
     let chosenSearchElement = chosenContainer.$('.chosen-search input')
     let chosenResultsElement = chosenContainer.$('.chosen-results')
 
+    // chosenContainer.click() // additional click for one test that breaks otherwise
+    browser.executeScript('arguments[0].scrollIntoView()', chosenContainer)
     chosenContainer.click()
-    chosenContainer.click() // additional click for one test that breaks otherwise
     browser.wait(expected.visibilityOf(chosenResultsElement), constants.TIMEOUT_TIME)
     chosenSearchElement.sendKeys(value)
 

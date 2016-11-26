@@ -54,7 +54,7 @@ function run_suite() {
   echo " ✅ TESTING with the $1 suite"
   echo "                    --- 🤖"
   echo ""
-  cd /Users/Beastie/development/edvisorio/web-client-e2e && CI=true CIRCLE_BRANCH='master' LM=true ./node_modules/protractor/bin/protractor protractor.conf.js --suite $1
+  cd /Users/Beastie/development/edvisorio/web-client-e2e && LM=true ./node_modules/protractor/bin/protractor protractor.conf.js --suite $1
   woohoo
 }
 
