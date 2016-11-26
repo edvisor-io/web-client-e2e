@@ -12,27 +12,31 @@ chai.use(chaiAsPromised)
 
 describe('the configure page', () => {
   after(() => {
+    browser.get('/school/en/166/configure/fee/listing')
+    LoginPage.waitForLoader()
+    const configurePage = new ConfigurePage()
+    const feesPage = new configurePage.FeesPage()
+    feesPage.sortByFeeName()
+    feesPage.deleteFirstFee() // to make sure created fee is always first after sorting
     browser.driver.manage().deleteAllCookies()
   })
 
-  it('should create a fee', () => {
-    const FEE_NAME = `${uuid.v4()}`
+  it('creates a fee', () => {
+    const FEE_NAME = `0a-${uuid.v4()}`
+    const loginPage = new LoginPage()
+    const schoolNav = new SchoolNav()
+    const configurePage = new ConfigurePage()
+    const feesPage = new configurePage.FeesPage()
 
     browser.get('/')
     LoginPage.waitForLoader()
-    const loginPage = new LoginPage()
     loginPage.login(constants.SCHOOL_EMAIL, constants.PASSWORD)
 
-    const schoolNav = new SchoolNav()
     schoolNav.goToFees()
-
-    const configurePage = new ConfigurePage()
-    const feesPage = new configurePage.FeesPage()
     feesPage.createNewFee(FEE_NAME)
     feesPage.goToFeesListing()
-
-    const EXPECTED = protractor.ExpectedConditions
-    browser.wait(EXPECTED.visibilityOf(feesPage.lastFeeNameInList), constants.TIMEOUT_TIME)
-    expect(feesPage.lastFeeNameInList.getText()).to.eventually.equal(FEE_NAME)
+    feesPage.sortByFeeName()
+    browser.wait(protractor.ExpectedConditions.visibilityOf(feesPage.firstFeeNameInList), constants.TIMEOUT_TIME)
+    expect(feesPage.firstFeeNameInList.getText()).to.eventually.equal(FEE_NAME)
   })
 })

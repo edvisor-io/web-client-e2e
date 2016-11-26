@@ -1,10 +1,13 @@
+import constants from '../../shared/constants'
 import uuid from 'node-uuid'
 
-class NewFeePage {
+class FeePage {
   constructor() {
     this.feeNameField = $('input[name="name"]')
     this.saveButton = $('button[type="submit"]')
     this.backToFeesButton = $('#ext20-back')
+    this.deleteFeeButton = element(by.id('ext20-edit-delete'))
+    this.confirmDeleteYesButton = $('button.btn--danger')
   }
 
   clickBackToFeesButton() {
@@ -19,9 +22,12 @@ class NewFeePage {
 
 export class FeesPage {
   constructor() {
-    this.newFeePage = NewFeePage
+    this.feePage = FeePage
+
     this.newFeeButton = $('div.listing_actions button')
-    this.lastFeeNameInList = element.all(by.css('div.fee_name a')).last()
+
+    this.feeNameColumnHeader = element.all(by.css('span.ag-header-cell-text')).first()
+    this.firstFeeNameInList = element.all(by.css('div.fee_name a')).first()
   }
 
   clickNewFeeButton() {
@@ -29,14 +35,26 @@ export class FeesPage {
   }
 
   goToFeesListing() {
-    const newFeePage = new NewFeePage()
-    newFeePage.clickBackToFeesButton()
+    const feePage = new FeePage()
+    feePage.clickBackToFeesButton()
   }
 
   createNewFee(name) {
     this.clickNewFeeButton()
-    const newFeePage = new NewFeePage()
-    newFeePage.fillAndSaveForm(name)
+    const feePage = new FeePage()
+    feePage.fillAndSaveForm(name)
+  }
+
+  sortByFeeName() {
+    this.feeNameColumnHeader.click()
+    browser.sleep(constants.SLEEP_SHORT)
+  }
+
+  deleteFirstFee() {
+    this.firstFeeNameInList.click()
+    const feePage = new FeePage()
+    feePage.deleteFeeButton.click()
+    feePage.confirmDeleteYesButton.click()
   }
 }
 
