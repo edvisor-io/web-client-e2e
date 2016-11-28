@@ -225,6 +225,8 @@ Then, in both repos:
 
 5. Copy the sample env into the env with `cp .env.sample .env`
 
+6. You'll need to `brew install git-lfs`. Then `git lfs install`.
+
 #### To set up the client:
 
 1. Navigate to the web-client repo and run `./bin/edvisor build -s client`.
