@@ -231,7 +231,7 @@ Then, in both repos:
 
 #### To set up the server:
 
-1. Navigate to the api-server repo and run `npm install -g gulp`
+1. Run `npm install -g gulp`. Navigate to the api-server repo.
 
 2. Symlink client directory to the /client folder in api-server
 
@@ -239,7 +239,8 @@ Then, in both repos:
 
 4. Reset the database by running `./bin/edvisor full-reset`
 
-5. Run `gulp`
+5. Run `gulp` if you'd prefer `nodemon` running + want to see errors. Otherwise run
+`gulp start`
 
 Ok, setup is done!
 
