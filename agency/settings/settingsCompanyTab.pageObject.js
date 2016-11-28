@@ -15,6 +15,8 @@ class CurrencySettingsArea {
     this.fiftySeventhRateField = this.setRatesModalContainer.all(by
       .model('setRates.companyRates[fromCompanyCurrency.currencyId][toCompanyCurrency.currencyId]')).get(56)
     this.inModalSaveButton = this.setRatesModalContainer.$('button[type="submit"]')
+
+    this.intercomButton = element(by.id('intercom-container'))
   }
 
   clickAutomaticallySetRadio() {
@@ -66,6 +68,10 @@ class CurrencySettingsArea {
     const EXPECTED = protractor.ExpectedConditions
     browser.wait(EXPECTED.elementToBeClickable(this.saveButton), constants.TIMEOUT_TIME)
     this.saveButton.click()
+  }
+
+  removeIntercomButton() {
+    $('body').removeChild(this.intercomButton)
   }
 }
 

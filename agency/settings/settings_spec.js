@@ -242,7 +242,7 @@ describe('the agency app settings page', () => {
     })
   })
 
-  describe.skip('exchange rates (SPECIAL, fails when not run from local because of intercom button)', () => { // because it will click intercom button
+  describe('exchange rates (SPECIAL, fails when not run from local because of intercom button)', () => { // because it will click intercom button
     before(() => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -261,7 +261,7 @@ describe('the agency app settings page', () => {
       browser.driver.manage().deleteAllCookies()
     })
 
-    it('should manually add an exchange rate', () => {
+    it.only('should manually add an exchange rate', () => {
       const RATE = 1
 
       const settingsPage = new SettingsPage()
@@ -270,6 +270,8 @@ describe('the agency app settings page', () => {
       currencySettingsArea.clickManuallySetRadio()
       currencySettingsArea.clickSetRatesButton()
       currencySettingsArea.inputRateIntoFirstField(RATE)
+      currencySettingsArea.removeIntercomButton()
+      browser.sleep(5000)
       currencySettingsArea.clickInModalSaveButton()
 
       expect(settingsPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
