@@ -271,7 +271,6 @@ describe('the agency app settings page', () => {
       currencySettingsArea.clickSetRatesButton()
       currencySettingsArea.inputRateIntoFirstField(RATE)
       currencySettingsArea.removeIntercomButton()
-      browser.sleep(5000)
       currencySettingsArea.clickInModalSaveButton()
 
       expect(settingsPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
@@ -287,6 +286,7 @@ describe('the agency app settings page', () => {
       currencySettingsArea.clickManuallySetRadio()
       currencySettingsArea.clickSetRatesButton()
       currencySettingsArea.inputRateIntoFiftySeventhField(EXCHANGE_RATE)
+      currencySettingsArea.removeIntercomButton()
       currencySettingsArea.clickInModalSaveButton()
       currencySettingsArea.clickManuallySetRadio()
       currencySettingsArea.clickSaveButton()

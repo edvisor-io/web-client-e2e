@@ -16,6 +16,7 @@ class CurrencySettingsArea {
       .model('setRates.companyRates[fromCompanyCurrency.currencyId][toCompanyCurrency.currencyId]')).get(56)
     this.inModalSaveButton = this.setRatesModalContainer.$('button[type="submit"]')
 
+    this.intercomParent = $('body')
     this.intercomButton = element(by.id('intercom-container'))
   }
 
@@ -71,7 +72,7 @@ class CurrencySettingsArea {
   }
 
   removeIntercomButton() {
-    $('body').removeChild(this.intercomButton)
+    browser.executeScript('arguments[0].removeChild(arguments[1])', this.intercomParent, this.intercomButton)
   }
 }
 
