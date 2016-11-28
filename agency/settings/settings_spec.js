@@ -242,7 +242,7 @@ describe('the agency app settings page', () => {
     })
   })
 
-  describe('exchange rates (SPECIAL, fails when not run from local because of intercom button)', () => { // because it will click intercom button
+  describe('exchange rates', () => {
     before(() => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -261,7 +261,7 @@ describe('the agency app settings page', () => {
       browser.driver.manage().deleteAllCookies()
     })
 
-    it.only('should manually add an exchange rate', () => {
+    it('manually adds an exchange rate', () => {
       const RATE = 1
 
       const settingsPage = new SettingsPage()
@@ -276,7 +276,7 @@ describe('the agency app settings page', () => {
       expect(settingsPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
     })
 
-    it('should change the quoted amount according to manually set rates', () => {
+    it('changes the quoted amount according to manually set rates', () => {
       const EXCHANGE_RATE = 0.00001
       const EXPECTED_MAX = 10.01 // is sufficient unless multi million CAD quote
 
