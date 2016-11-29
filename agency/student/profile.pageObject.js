@@ -12,6 +12,8 @@ import ArchiveStudentModal from './profile/archiveStudentModal.pageObject'
 import InvoicesPage from '../invoices/invoices.pageObject'
 import constants from '../../shared/constants'
 
+import path from 'path'
+
 export default class StudentProfilePage {
   constructor() {
     this.StudentInformationArea = StudentInformationArea
@@ -190,7 +192,9 @@ export default class StudentProfilePage {
 
   uploadFile() {
     const filesTabArea = new FilesTabArea()
-    filesTabArea.fileUpload.sendKeys('/Users/Beastie/development/edvisorio/web-client-e2e/shared/images/angular.png')
+    let fileToUpload = '../../shared/images/angular.png'
+    let absolutePath = path.resolve(__dirname, fileToUpload)
+    filesTabArea.fileUpload.sendKeys(absolutePath)
   }
 
   deleteFile() {
