@@ -4,7 +4,7 @@ import QuotesOptionEditPage from './quotesOptionEditPage.pageObject'
 import QuotesExternal from './quotesExternal.pageObject'
 import constants from '../../shared/constants'
 
-export class QuotesPage {
+export default class QuotesPage {
   constructor() {
     this.QuotesListingPage = QuotesListingPage
     this.QuotesEditPage = QuotesEditPage
@@ -28,9 +28,16 @@ export class QuotesPage {
     }, constants.TIMEOUT_TIME)
   }
 
+  seeEmailPreview() {
+    const quotesEditPage = new QuotesEditPage()
+    quotesEditPage.emailToStudentButton.click()
+    const emailQuoteModal = new quotesEditPage.EmailQuoteModal()
+    emailQuoteModal.previewEmailButton.click()
+  }
+
   // clickSaveButton() { // element no longer exists
   //   this.saveButton.click()
   // }
 }
 
-export default QuotesPage
+// export default QuotesPage

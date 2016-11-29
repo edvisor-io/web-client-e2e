@@ -181,4 +181,33 @@ describe('the quotes page', () => {
       })
     })
   })
+
+  describe('email quote', () => {
+    it('displays a preview of the email', () => {
+      const quotesPage = new QuotesPage()
+      const quotesListingPage = new quotesPage.QuotesListingPage()
+      const quotesEditPage = new quotesPage.QuotesEditPage()
+      const emailQuoteModal = new quotesEditPage.EmailQuoteModal()
+
+      browser.get('/agency/en/504/student-quote/listing')
+      LoginPage.waitForLoader()
+      quotesListingPage.clickFirstQuote()
+      quotesEditPage.allOptionCards.count()
+        .then((count) => {
+          var originalHeadersArray = []
+          for (let i = 0; i < count; i++) {
+            originalHeadersArray.push(quotesEditPage.allCardHeaderElements.get(i).getText())
+          }
+          return Promise.all(originalHeadersArray)
+        }).then((originalHeadersArray) => {
+          quotesPage.seeEmailPreview()
+          emailQuoteModal.allOptionTitleElements.count()
+            .then((count) => {
+              for (let i = 0; i < count; i++) {
+                expect(emailQuoteModal.allOptionTitleElements.get(i).getText()).to.eventually.equal(originalHeadersArray[i])
+              }
+            })
+        })
+    })
+  })
 })

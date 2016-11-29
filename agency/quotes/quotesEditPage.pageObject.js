@@ -3,7 +3,12 @@ import {UISelectWidget, ChosenWidget} from '../../shared/widgets'
 class EmailQuoteModal {
   constructor() {
     this.container = $('student-quote-email')
+    this.previewEmailButton = this.container.all(by.css('button')).get(1)
     this.sendButton = this.container.$('button[type="submit"]')
+
+    this.previewEmailContainer = $('student-quote-preview-email')
+    this.allOptionTitleElements = this.previewEmailContainer
+      .all(by.css('td > div[style="font-weight:600; color: #575859;"]'))
   }
 
   clickSendButton() {
@@ -28,8 +33,10 @@ export default class QuotesEditPage {
     this.firstOptionEditButton = element.all(by.css('#ext06-edit-summary div.quote-option_flex button')).first()
     this.totalInCustomCurrency = $('div.quote-option_summary-total div.row div:nth-child(2) > div')
 
-    this.alertBoxMessage = $('.alert-box-message')
-    this.alertSuccessMessage = $('div.alert-success')
+    this.allOptionCards = element.all(by.css('student-quote-option'))
+    this.allCardHeaderElements = this.allOptionCards.all(by.css('h3'))
+    this.alertBoxMessage = $('.alert-box-message') // deprecated
+    this.alertSuccessMessage = $('div.alert-success') // deprecated
     this.confirmChangeContinueButton = element.all(by.css('div.e-alert_buttons button')).last()
   }
 
