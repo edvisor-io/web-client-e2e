@@ -6,6 +6,21 @@ general:
   branches:
     ignore:
       - /PROJ.*/
+
+dependencies:
+  post:
+    - git clone --depth=1 git@github.com:edvisor-io/api-server $HOME/api-server && cd $HOME/api-server/ && git submodule update --init
+    - >
+      cd $HOME/api-server &&
+      if [ "${CIRCLE_BRANCH}" == "master" ]; then
+        aws s3 cp s3://edvisor-configs/api.edvisor.io/.env.staging .env
+      else
+        aws s3 cp s3://edvisor-configs/api.edvisor.io/.env.e2e .env
+      fi
+    - cd $HOME/api-server && npm install && npm run build
+  cache_directories:
+    - "~/api-server/node_modules"
 test:
   pre:
+    - cd $HOME/api-server && NODE_ENV=staging ./bin/edvisor full-reset
     - npm run update
