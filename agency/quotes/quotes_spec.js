@@ -90,7 +90,7 @@ describe('the quotes page', () => {
         })
     })
 
-    it('(FAILING, MASTER, BUG FILED) adds an insurance addon with start plus end dates to a quote', () => {
+    it('adds an insurance addon with start plus end dates to a quote', () => {
       const quotesPage = new QuotesPage()
       const quotesListingPage = new quotesPage.QuotesListingPage()
       quotesListingPage.clickNewButton()
