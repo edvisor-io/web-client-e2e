@@ -138,12 +138,26 @@ describe('the quotes page', () => {
       quotesOptionEditPage.clickSaveChangesButton()
       expect(quotesEditPage.alertSuccessMessage.isDisplayed()).to.eventually.equal(true)
     })
+
+    it('adds a fee', () => {
+      const quotesPage = new QuotesPage()
+      const quotesListingPage = new quotesPage.QuotesListingPage()
+      const quotesEditPage = new quotesPage.QuotesEditPage()
+      const quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
+
+      quotesListingPage.clickFirstQuote()
+      quotesEditPage.clickFirstOptionEditButton()
+      quotesOptionEditPage.allFeeRows.count()
+        .then((count) => {
+          quotesOptionEditPage.addFee()
+          quotesEditPage.clickFirstOptionEditButton()
+          expect(quotesOptionEditPage.allFeeRows.count()).to.eventually.equal(count + 1)
+        })
+    })
   })
 
   describe('external quotes', () => {
     it('displays Price Summary', () => {
-      browser.get('/agency/en/504/student-quote/listing')
-      LoginPage.waitForLoader()
       const quotesPage = new QuotesPage()
       const quotesListingPage = new quotesPage.QuotesListingPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
