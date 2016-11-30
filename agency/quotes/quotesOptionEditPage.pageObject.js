@@ -3,6 +3,9 @@ import constants from '../../shared/constants'
 
 export default class QuotesOptionEditPage {
   constructor() {
+    this.bottomSaveChangesButton = element
+      .all(by.css('button[type="submit"]')).get(1)
+
     this.accommodationCheckbox = $('label.checkbox')
     this.accommondationButtons = element
       .all(by.css('div.btn-group-select button'))
@@ -10,8 +13,6 @@ export default class QuotesOptionEditPage {
     this.savedAccommodationButton = this.accommondationButtons.get(1)
     this.accommondationRadioButtons = element.all(by.css('label.radio'))
     this.firstAccommodationRadioButton = this.accommondationRadioButtons.get(0)
-    this.bottomSaveChangesButton = element
-      .all(by.css('button[type="submit"]')).get(1)
     this.accommodationStartDateField = element.all(by.css('offering-start-date-picker')).get(1)
 
     this.addonsArea = element.all(by.css('.table-basic')).get(0)
@@ -24,13 +25,23 @@ export default class QuotesOptionEditPage {
     this.saveButton = this.addAddonsModal.$('button[type="submit"]')
 
     this.feesAreaContainer = $('edit-option-fees')
-    this.allFeeRows = element.all(by.css('edit-option-fees-list-item'))
+    this.allFeeRows = this.feesAreaContainer.all(by.css('edit-option-fees-list-item'))
     this.addFeeButton = this.feesAreaContainer.all(by.css('button')).last()
     this.customFeeButton = this.feesAreaContainer.element(by.repeater('item in items').row(1))
-    this.nameField = element(by.name('name'))
-    this.costField = element(by.name('amount'))
-    this.currencyField = $('currency-select')
+    this.nameField = this.feesAreaContainer.element(by.name('name'))
+    this.costField = this.feesAreaContainer.element(by.name('amount'))
+    this.currencyField = this.feesAreaContainer.$('currency-select')
     this.feesAreaSaveButton = this.feesAreaContainer.$('button[type="submit"]')
+
+    this.promotionsAreaContainer = $('edit-option-promotions')
+    this.allPromotionRows = this.promotionsAreaContainer.all(by.css('edit-option-promotions-list-item'))
+    this.addPromotionButton = this.promotionsAreaContainer.all(by.css('button')).last()
+    this.customPromotionButton = this.promotionsAreaContainer.element(by.repeater('item in items').row(1))
+    this.promotionsNameField = this.promotionsAreaContainer.element(by.name('name'))
+    this.discountTypeField = this.promotionsAreaContainer.$('promotion-type-select')
+    this.priceField = this.promotionsAreaContainer.$('input[name="amount"]')
+    this.promotionsCurrencyField = this.promotionsAreaContainer.$('currency-select')
+    this.promotionsAreaSaveButton = this.promotionsAreaContainer.$('button[type="submit"]')
   }
 
   clickAccommodationCheckbox() {
@@ -74,9 +85,23 @@ export default class QuotesOptionEditPage {
 
   addFee() {
     this.addFeeButton.click()
-    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.customFeeButton), constants.TIMEOUT_TIME)
     this.customFeeButton.click()
     this.fillAndSaveCustomFeeForm()
+    this.bottomSaveChangesButton.click()
+  }
+
+  fillAndSaveCustomPromotionForm() {
+    this.promotionsNameField.sendKeys('Sure, take 10')
+    ChosenWidget.setValueOfAutocomplete(this.discountTypeField, 'Amount Off')
+    this.priceField.sendKeys(10)
+    ChosenWidget.setValueOfAutocomplete(this.promotionsCurrencyField, 'CAD')
+    this.promotionsAreaSaveButton.click()
+  }
+
+  addPromotion() {
+    this.addPromotionButton.click()
+    this.customPromotionButton.click()
+    this.fillAndSaveCustomPromotionForm()
     this.bottomSaveChangesButton.click()
   }
 }
