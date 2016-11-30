@@ -9,7 +9,10 @@ general:
 
 dependencies:
   post:
-    - git clone --depth=1 git@github.com:edvisor-io/api-server $HOME/api-server && cd $HOME/api-server/ && git submodule update --init
+    - >
+      git clone --depth=1 git@github.com:edvisor-io/api-server /tmp/api-server/ &&
+      mv /tmp/api-server/.[!.]* $HOME/api-server/
+    - cd $HOME/api-server/ && git submodule update --init
     - >
       cd $HOME/api-server &&
       if [ "${CIRCLE_BRANCH}" == "master" ]; then
