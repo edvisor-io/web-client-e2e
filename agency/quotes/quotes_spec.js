@@ -139,7 +139,7 @@ describe('the quotes page', () => {
       expect(quotesEditPage.alertSuccessMessage.isDisplayed()).to.eventually.equal(true)
     })
 
-    it.only('adds a fee', () => {
+    it('adds a fee', () => {
       const quotesPage = new QuotesPage()
       const quotesListingPage = new quotesPage.QuotesListingPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
