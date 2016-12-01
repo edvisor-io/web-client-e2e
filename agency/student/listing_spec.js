@@ -77,7 +77,7 @@ describe('the student listing page', () => {
       }
     })
 
-    it('reassigns multiple students to another office', () => {
+    it('(WEEDLE, FAILING, BUG filed about selectViewingAllStudents) reassigns multiple students to another office', () => {
       const studentListing = new StudentListingPage()
       const listArea = new studentListing.ListArea()
       studentListing.selectViewingAllStudents()
@@ -96,7 +96,7 @@ describe('the student listing page', () => {
       LoginPage.waitForLoader()
     })
 
-    it('lists new students in pale yellow', () => {
+    it('(WEEDLE, FAILING, BUG filed about selectViewingAllStudents) lists new students in pale yellow', () => {
       const email = uuid.v4() + AT_EMAIL_DOMAIN
       const PALE_YELLOW = 'rgba(252, 248, 240, 1)'
 
@@ -105,7 +105,6 @@ describe('the student listing page', () => {
 
       const studentProfile = new StudentProfilePage()
       studentProfile.clickBackToStudentsButton()
-      // browser.get(constants.LEGACY_URL_STUDENT_LISTING) // workaround for unexpected redirect to not studentListing page in weedle
       studentListing.selectViewingAllStudents()
       const listArea = new studentListing.ListArea()
       expect(listArea.firstStudentInTableCheckboxContainer
