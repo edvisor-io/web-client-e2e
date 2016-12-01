@@ -4,7 +4,7 @@ import constants from '../../shared/constants'
 export default class QuotesOptionEditPage {
   constructor() {
     this.bottomSaveChangesButton = element
-      .all(by.css('button[type="submit"]')).get(1)
+      .all(by.css('button[type="submit"]')).last()
 
     this.accommodationCheckbox = $('label.checkbox')
     this.accommondationButtons = element

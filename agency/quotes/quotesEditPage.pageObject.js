@@ -25,8 +25,7 @@ export default class QuotesEditPage {
     this.currencyDropdown = this.quoteInfoContainer
       .element(by.model('select.selection'))
 
-    this.firstOption = $('#ext06-edit-summary div.quote-option_flex')
-    this.firstOptionEditButton = this.firstOption.all(by.css('button')).get(0)
+    this.firstOptionEditButton = element.all(by.css('#ext06-edit-summary div.quote-option_flex button')).first()
     this.totalInCustomCurrency = $('div.quote-option_summary-total div.row div:nth-child(2) > div')
 
     this.alertBoxMessage = $('.alert-box-message')
