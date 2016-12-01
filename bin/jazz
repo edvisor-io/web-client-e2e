@@ -81,14 +81,18 @@ function resetdb () {
 }
 
 function pullwebclient() {
+  echo ""
   echo " ⚡️ jazzing up your web-client."
-  cd /Users/Beastie/development/edvisorio/web-client && git checkout $1 && git pull --rebase && npm install && git checkout -
+  echo ""
+  cd /Users/Beastie/development/edvisorio/web-client && git checkout $1 && git pull --rebase && npm install
   woohoo
 }
 
 function pullapiserver() {
+  echo ""
   echo " ⚡️ jazzing up your api-server."
-  cd /Users/Beastie/development/edvisorio/api-server && git checkout $1 && git pull --rebase && npm install && git checkout -
+  echo ""
+  cd /Users/Beastie/development/edvisorio/api-server && git checkout $1 && git pull --rebase && npm install
   woohoo
 }
 
