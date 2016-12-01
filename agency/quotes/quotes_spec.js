@@ -178,8 +178,10 @@ describe('the quotes page', () => {
       const quotesListingPage = new quotesPage.QuotesListingPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
       const coursesPage = new CoursesPage()
-      quotesListingPage.clickNewButton()
 
+      browser.get('/agency/en/504/student-quote/listing')
+      LoginPage.waitForLoader()
+      quotesListingPage.clickNewButton()
       coursesPage.startQuoteUsingBasicSearch()
       quotesEditPage.saveQuote()
       quotesEditPage.previewQuoteButton.getAttribute('href').then((url) => {
