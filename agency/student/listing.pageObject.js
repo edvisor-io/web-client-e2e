@@ -56,6 +56,8 @@ export default class StudentListingPage {
 
   clickFirstStudentInTable() {
     const listArea = new ListArea()
+    const pipelineTabs = new PipelineTabs()
+    pipelineTabs.firstPipelineTab.click()
     listArea.firstStudentInTable.click()
   }
 

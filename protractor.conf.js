@@ -71,7 +71,7 @@ exports.config = {
   specs: [
     './auth/**/*_spec.js',
     './school/**/*_spec.js',
-    './agency/**/*_spec.js',
+    './agency/**/*_spec.js'
   ],
 
   suites: {

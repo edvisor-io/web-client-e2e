@@ -246,7 +246,7 @@ describe('the student profile page', () => {
         })
     })
 
-    it('(FAILING, MASTER, BUG FILED) starts an invoice', () => {
+    it('starts an invoice', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
 
