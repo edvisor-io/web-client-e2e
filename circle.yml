@@ -10,10 +10,10 @@ general:
 dependencies:
   post:
     - >
-      git clone --depth=1 --no-checkout git@github.com:edvisor-io/api-server /tmp/api-server/ &&
+      git clone --depth=1 --no-checkout --branch $CIRCLE_BRANCH git@github.com:edvisor-io/api-server /tmp/api-server/ &&
       mv /tmp/api-server/.[!.]* $HOME/api-server/ &&
       cd $HOME/api-server/ &&
-      git checkout origin/$CIRCLE_BRANCH && git submodule update --init &&
+      git checkout $CIRCLE_BRANCH && git submodule update --init &&
       if [ "${CIRCLE_BRANCH}" == "master" ]; then
         aws s3 cp s3://edvisor-configs/api.edvisor.io/.env.staging .env
       else
