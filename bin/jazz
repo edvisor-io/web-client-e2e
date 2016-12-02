@@ -83,6 +83,15 @@ function resetdb () {
   woohoo
 }
 
+function build_server () {
+  echo ""
+  echo " 🛠 building the server"
+  echo "         --- 🤖 "
+  echo ""
+  cd /Users/Beastie/development/edvisorio/api-server && gulp build
+  woohoo
+}
+
 function pullwebclient() {
   echo ""
   echo " ⚡️ jazzing up your web-client."
@@ -159,6 +168,7 @@ then
       pullwebclient $2
       pullapiserver $2
       ignitedb
+      build_server
       resetdb
       buildclient
     else
