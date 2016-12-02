@@ -75,7 +75,10 @@ function ignitedb () {
 }
 
 function resetdb () {
-  echo " 🌪 turning back time --- 🤖"
+  echo ""
+  echo " 🛠 turning back time in the database"
+  echo "         --- 🤖 "
+  echo ""
   cd /Users/Beastie/development/edvisorio/api-server && ./bin/edvisor full-reset
   woohoo
 }
@@ -122,6 +125,7 @@ then
     if [ $2 ] ; then
       case "$2" in
       all)
+        resetdb
         run_all_suites
         ;;
       *)
