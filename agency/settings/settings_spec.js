@@ -327,7 +327,7 @@ describe('the agency app settings page', () => {
     })
 
     beforeEach(() => {
-      browser.get('/agency/en/1054/settings/personal')
+      browser.get(constants.PLATFORM_URL_SETTINGS_PERSONAL_TAB)
       LoginPage.waitForLoader()
     })
 
