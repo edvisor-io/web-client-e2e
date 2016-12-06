@@ -55,7 +55,7 @@ describe('the agency app settings page', () => {
     })
 
     beforeEach(() => {
-      browser.get('/agency/en/504/settings/personal')
+      browser.get(constants.LEGACY_URL_SETTINGS_PERSONAL_TAB)
       LoginPage.waitForLoader()
       SettingsPage.waitForGhostTab()
     })
@@ -252,7 +252,7 @@ describe('the agency app settings page', () => {
     })
 
     beforeEach(() => {
-      browser.get('/agency/en/504/settings/personal')
+      browser.get(constants.LEGACY_URL_SETTINGS_PERSONAL_TAB)
       const settingsPage = new SettingsPage()
       settingsPage.goToCompanyTab()
     })
@@ -309,7 +309,7 @@ describe('the agency app settings page', () => {
           let amountText = text.replace(/[^0-9\.]/g, '')
           expect(+amountText).to.be.at.most(EXPECTED_MAX)
 
-          browser.get('/agency/en/504/settings/company')
+          browser.get(constants.LEGACY_URL_SETTINGS_COMPANY_TAB)
           LoginPage.waitForLoader()
           currencySettingsArea.clickAutomaticallySetRadio()
           currencySettingsArea.clickSaveButton()

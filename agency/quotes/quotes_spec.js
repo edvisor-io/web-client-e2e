@@ -34,7 +34,7 @@ describe('the quotes page', () => {
 
   describe('temporary grouping', () => {
     it('should email a quote to a student', () => {
-      browser.get('/agency/en/504/student-quote/listing')
+      browser.get(constants.LEGACY_URL_QUOTE_LISTING)
       LoginPage.waitForLoader()
       const quotesPage = new QuotesPage()
       const quotesListingPage = new quotesPage.QuotesListingPage()
@@ -49,7 +49,7 @@ describe('the quotes page', () => {
 
   describe('new quotes', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student-quote/listing')
+      browser.get(constants.LEGACY_URL_QUOTE_LISTING)
       LoginPage.waitForLoader()
       // const quotesPage = new QuotesPage()
       // const quotesListingPage = new quotesPage.QuotesListingPage()
@@ -84,7 +84,7 @@ describe('the quotes page', () => {
           // const quotesListingPage = new quotesPage.QuotesListingPage()
           const quotesEditPage = new quotesPage.QuotesEditPage()
           quotesEditPage.saveQuote()
-          browser.get('/agency/en/504/student-quote/listing')
+          browser.get(constants.LEGACY_URL_QUOTE_LISTING)
           LoginPage.waitForLoader()
           expect(quotesListingPage.firstQuoteId.getText()).to.eventually.not.equal(originalFirstQuoteId)
         })
@@ -179,7 +179,7 @@ describe('the quotes page', () => {
       const quotesEditPage = new quotesPage.QuotesEditPage()
       const coursesPage = new CoursesPage()
 
-      browser.get('/agency/en/504/student-quote/listing')
+      browser.get(constants.LEGACY_URL_QUOTE_LISTING)
       LoginPage.waitForLoader()
       quotesListingPage.clickNewButton()
       coursesPage.startQuoteUsingBasicSearch()

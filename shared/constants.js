@@ -16,6 +16,7 @@ export default {
   BACKUP_ADMIN_PASSWORD: 'password',
   LEGACY_URL_STUDENT_LISTING: '/agency/en/504/student/listing/504',
   LEGACY_URL_SETTINGS_OFFICES_TAB: '/agency/en/504/settings/agency/504/information',
+  LEGACY_URL_SETTINGS_OFFICES_TAB_CUSTOM_FIELDS: '/agency/en/504/settings/agency/504/custom-fields',
   LEGACY_URL_QUOTE_LISTING: '/agency/en/504/student-quote/listing',
   LEGACY_URL_SETTINGS_PERSONAL_TAB: '/agency/en/504/settings/personal',
   LEGACY_URL_SETTINGS_COMPANY_TAB: '/agency/en/504/settings/company',

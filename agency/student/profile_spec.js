@@ -40,7 +40,7 @@ describe('the student profile page', () => {
     })
 
     it('displays a student profile when one in listing is clicked', () => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       const studentListing = new StudentListingPage()
       LoginPage.waitForLoader()
       studentListing.clickFirstStudentInTable()
@@ -53,7 +53,7 @@ describe('the student profile page', () => {
 
   describe('files', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       LoginPage.waitForLoader()
     })
 
@@ -106,7 +106,7 @@ describe('the student profile page', () => {
 
   describe('recent actitivies', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       LoginPage.waitForLoader()
     })
 
@@ -189,7 +189,7 @@ describe('the student profile page', () => {
 
   describe('temporary grouping', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       LoginPage.waitForLoader()
     })
 
@@ -260,7 +260,7 @@ describe('the student profile page', () => {
 
   describe('student information area, notes area', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       LoginPage.waitForLoader()
     })
 
@@ -305,7 +305,7 @@ describe('the student profile page', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
 
-      browser.get('/agency/en/504/settings/agency/504/custom-fields')
+      browser.get(constants.LEGACY_URL_SETTINGS_OFFICES_TAB_CUSTOM_FIELDS)
       LoginPage.waitForLoader()
       settingsAgencyTab.customFieldsRowsLabelIDElements.count().then(() => {
         let array = settingsAgencyTab.customFieldsRowsLabelIDElements.getText()
@@ -315,7 +315,7 @@ describe('the student profile page', () => {
           return index % 2 === 0
         })
       }).then((array) => {
-        browser.get('/agency/en/504/student/listing/504')
+        browser.get(constants.LEGACY_URL_STUDENT_LISTING)
         LoginPage.waitForLoader()
         studentListing.clickFirstStudentInTable()
         studentProfile.customFieldLabelElements.count().then((count) => {
@@ -329,7 +329,7 @@ describe('the student profile page', () => {
 
   describe('tasks area', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       LoginPage.waitForLoader()
     })
 
@@ -349,7 +349,7 @@ describe('the student profile page', () => {
 
   describe('office and owner area', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       LoginPage.waitForLoader()
     })
 
@@ -381,7 +381,7 @@ describe('the student profile page', () => {
 
   describe('pipeline area', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       LoginPage.waitForLoader()
     })
 
@@ -466,7 +466,7 @@ describe('the student profile page', () => {
     })
 
     it('statuses match those in settings > agency > pipeline', () => {
-      browser.get('/agency/en/504/settings/agency/504/information')
+      browser.get(constants.LEGACY_URL_SETTINGS_OFFICES_TAB)
       LoginPage.waitForLoader()
       SettingsPage.waitForGhostTab()
 

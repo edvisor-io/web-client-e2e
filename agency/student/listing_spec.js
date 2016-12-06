@@ -47,7 +47,7 @@ describe('the student listing page', () => {
 
   describe('batch function', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       LoginPage.waitForLoader()
     })
 
@@ -92,7 +92,7 @@ describe('the student listing page', () => {
 
   describe('temporary grouping', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       LoginPage.waitForLoader()
     })
 
@@ -105,7 +105,7 @@ describe('the student listing page', () => {
 
       const studentProfile = new StudentProfilePage()
       studentProfile.clickBackToStudentsButton()
-      // browser.get('/agency/en/504/student/listing/504') // workaround for unexpected redirect to not studentListing page in weedle
+      // browser.get(constants.LEGACY_URL_STUDENT_LISTING) // workaround for unexpected redirect to not studentListing page in weedle
       studentListing.selectViewingAllStudents()
       const listArea = new studentListing.ListArea()
       expect(listArea.firstStudentInTableCheckboxContainer
@@ -130,7 +130,7 @@ describe('the student listing page', () => {
 
   describe('pipeline tabs', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       LoginPage.waitForLoader()
     })
 
@@ -195,7 +195,7 @@ describe('the student listing page', () => {
 
   describe('add student modal', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       LoginPage.waitForLoader()
     })
 
@@ -205,7 +205,7 @@ describe('the student listing page', () => {
       const studentListing = new StudentListingPage()
       studentListing.addStudent(ASSIGNED_TO, FIRST_NAME, LAST_NAME, email, NATIONALITY)
 
-      // browser.get('/agency/en/504/student/listing/504') // workaround for unexpected redirect to not studentListing page in weedle
+      // browser.get(constants.LEGACY_URL_STUDENT_LISTING) // workaround for unexpected redirect to not studentListing page in weedle
       // studentListing.selectViewingAllStudents()
       // studentListing.clickFirstStudentInTable()
 
@@ -234,7 +234,7 @@ describe('the student listing page', () => {
 
   describe('search function', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       LoginPage.waitForLoader()
     })
 
@@ -281,7 +281,7 @@ describe('the student listing page', () => {
 
   describe('filters students', () => {
     beforeEach(() => {
-      browser.get('/agency/en/504/student/listing/504')
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       LoginPage.waitForLoader()
     })
 

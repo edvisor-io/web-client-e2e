@@ -56,7 +56,7 @@ class SettingsPage {
   }
 
   testNeedsDuplicatePipeline() {
-    browser.get('/agency/en/504/settings/agency/504/information')
+    browser.get(constants.LEGACY_URL_SETTINGS_OFFICES_TAB)
     LoginPage.waitForLoader()
     SettingsPage.waitForGhostTab()
 

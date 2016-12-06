@@ -66,7 +66,7 @@ describe('the find courses page', () => {
         agencyNav.goToFindCourses()
         coursesPage.startQuoteUsingBasicSearch()
         quotesEditPage.saveQuote()
-        browser.get('/agency/en/504/student-quote/listing')
+        browser.get(constants.LEGACY_URL_QUOTE_LISTING)
         LoginPage.waitForLoader()
         expect(quotesListingPage.firstQuoteId.getText()).to.eventually.not.equal(originalFirstQuoteId)
       })
