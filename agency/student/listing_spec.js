@@ -119,11 +119,12 @@ describe('the student listing page', () => {
       expect(studentListing.exportMessage.isPresent()).to.eventually.equal(true)
     })
 
-    it('should show a student profile from the students table', () => {
+    it.only('should show a student profile from the students table', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
       const studentProfile = new StudentProfilePage()
       const studentInformationArea = new studentProfile.StudentInformationArea()
+      browser.wait(protractor.ExpectedConditions.presenceOf(studentInformationArea.firstNameField), constants.TIMEOUT_TIME)
       expect(studentInformationArea.firstNameField.isPresent()).to.eventually.equal(true)
     })
   })
