@@ -29,6 +29,7 @@ describe('the quotes page', () => {
       LoginPage.waitForLoader()
       const agencyNav = new AgencyNav()
       agencyNav.goToQuotes()
+      expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\/en\/504\/student-quote\/listing/)
     })
   })
 
