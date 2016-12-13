@@ -24,43 +24,52 @@ describe('the find courses page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  beforeEach(() => {
-    browser.get('/')
-    LoginPage.waitForLoader()
-    const agencyNav = new AgencyNav()
-    agencyNav.goToFindCourses()
+  describe('navigation', () => {
+    it('goes from login', () => {
+      browser.get('/')
+      LoginPage.waitForLoader()
+      const agencyNav = new AgencyNav()
+      agencyNav.goToFindCourses()
+      expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\/en\/504\/browse\/search\?new=true/)
+    })
   })
 
-  it('should search by city', () => {
-    const coursesPage = new CoursesPage()
-    coursesPage.doBasicSearch()
+  describe('search function', () => {
+    beforeEach(() => {
+      browser.get(constants.LEGACY_URL_COURSES)
+      LoginPage.waitForLoader()
+    })
 
-    expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
-  })
+    it('searches by city', () => {
+      const coursesPage = new CoursesPage()
+      coursesPage.doBasicSearch()
 
-  it('should search by country', () => {
-    const coursesPage = new CoursesPage()
-    coursesPage.doBasicSearch('byCountry')
+      expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
+    })
 
-    expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
-  })
+    it('searches by country', () => {
+      const coursesPage = new CoursesPage()
+      coursesPage.doBasicSearch('byCountry')
 
-  it('should search by school', () => {
-    const coursesPage = new CoursesPage()
-    coursesPage.doBasicSearch('bySchool')
+      expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
+    })
 
-    expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
-  })
+    it('searches by school', () => {
+      const coursesPage = new CoursesPage()
+      coursesPage.doBasicSearch('bySchool')
 
-  it('creates a new quote from a search result', () => {
-    const quotesPage = new QuotesPage()
-    const quotesListingPage = new quotesPage.QuotesListingPage()
-    const agencyNav = new AgencyNav()
-    const coursesPage = new CoursesPage()
-    const quotesEditPage = new quotesPage.QuotesEditPage()
-    agencyNav.goToQuotes()
-    browser.wait(protractor.ExpectedConditions.presenceOf(quotesListingPage.firstQuoteId), constants.TIMEOUT_TIME)
-    quotesListingPage.firstQuoteId.getText()
+      expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
+    })
+
+    it('creates a new quote from a search result', () => {
+      const quotesPage = new QuotesPage()
+      const quotesListingPage = new quotesPage.QuotesListingPage()
+      const agencyNav = new AgencyNav()
+      const coursesPage = new CoursesPage()
+      const quotesEditPage = new quotesPage.QuotesEditPage()
+      agencyNav.goToQuotes()
+      browser.wait(protractor.ExpectedConditions.presenceOf(quotesListingPage.firstQuoteId), constants.TIMEOUT_TIME)
+      quotesListingPage.firstQuoteId.getText()
       .then((text) => {
         var originalFirstQuoteId = text
         agencyNav.goToFindCourses()
@@ -70,16 +79,17 @@ describe('the find courses page', () => {
         LoginPage.waitForLoader()
         expect(quotesListingPage.firstQuoteId.getText()).to.eventually.not.equal(originalFirstQuoteId)
       })
-  })
+    })
 
-  it('search result should have course name, school, intensity, duration, price', () => {
-    const coursesPage = new CoursesPage()
-    coursesPage.doBasicSearch()
+    it('search result should have course name, school, intensity, duration, price', () => {
+      const coursesPage = new CoursesPage()
+      coursesPage.doBasicSearch()
 
-    expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
-    expect(coursesPage.firstResultSchool.isPresent()).to.eventually.equal(true)
-    expect(coursesPage.firstResultIntensity.isPresent()).to.eventually.equal(true)
-    expect(coursesPage.firstResultDuration.isPresent()).to.eventually.equal(true)
-    expect(coursesPage.firstResultPrice.isPresent()).to.eventually.equal(true)
+      expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
+      expect(coursesPage.firstResultSchool.isPresent()).to.eventually.equal(true)
+      expect(coursesPage.firstResultIntensity.isPresent()).to.eventually.equal(true)
+      expect(coursesPage.firstResultDuration.isPresent()).to.eventually.equal(true)
+      expect(coursesPage.firstResultPrice.isPresent()).to.eventually.equal(true)
+    })
   })
 })
