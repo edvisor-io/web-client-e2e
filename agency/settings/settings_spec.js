@@ -297,8 +297,9 @@ describe('the agency app settings page', () => {
       currencySettingsArea.inputRateIntoFiftySeventhField(EXCHANGE_RATE)
       currencySettingsArea.removeIntercomButton()
       currencySettingsArea.clickInModalSaveButton()
+
       currencySettingsArea.clickManuallySetRadio()
-      currencySettingsArea.clickSaveButton()
+      currencySettingsArea.clickSaveButton() // because quirky design
 
       const agencyNav = new AgencyNav()
       agencyNav.goToQuotes()

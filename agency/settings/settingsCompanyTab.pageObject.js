@@ -66,8 +66,7 @@ class CurrencySettingsArea {
   }
 
   clickSaveButton() {
-    const EXPECTED = protractor.ExpectedConditions
-    browser.wait(EXPECTED.elementToBeClickable(this.saveButton), constants.TIMEOUT_TIME)
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.saveButton), constants.TIMEOUT_TIME)
     this.saveButton.click()
   }
 
