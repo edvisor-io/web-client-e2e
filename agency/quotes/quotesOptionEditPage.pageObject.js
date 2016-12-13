@@ -83,9 +83,14 @@ export default class QuotesOptionEditPage {
     this.feesAreaSaveButton.click()
   }
 
+  clickCustomFeeButton() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.customFeeButton), constants.TIMEOUT_TIME)
+    this.customFeeButton.click()
+  }
+
   addFee() {
     this.addFeeButton.click()
-    this.customFeeButton.click()
+    this.clickCustomFeeButton()
     this.fillAndSaveCustomFeeForm()
     this.bottomSaveChangesButton.click()
   }
@@ -98,9 +103,14 @@ export default class QuotesOptionEditPage {
     this.promotionsAreaSaveButton.click()
   }
 
+  clickCustomPromotionButton() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.customPromotionButton), constants.TIMEOUT_TIME)
+    this.customPromotionButton.click()
+  }
+
   addPromotion() {
     this.addPromotionButton.click()
-    this.customPromotionButton.click()
+    this.clickCustomPromotionButton()
     this.fillAndSaveCustomPromotionForm()
     this.bottomSaveChangesButton.click()
   }

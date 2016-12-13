@@ -33,6 +33,7 @@ export class CoursesPage {
   }
 
   clickByLocationButton() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.byLocationButton), constants.TIMEOUT_TIME)
     this.byLocationButton.click()
   }
   clickBySchoolButton() {

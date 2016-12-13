@@ -57,11 +57,12 @@ describe('the quotes page', () => {
     it('should create a new quote', () => {
       const quotesPage = new QuotesPage()
       const quotesListingPage = new quotesPage.QuotesListingPage()
-      quotesListingPage.clickNewButton()
       const coursesPage = new CoursesPage()
-      coursesPage.startQuoteUsingBasicSearch()
       const quotesEditPage = new quotesPage.QuotesEditPage()
 
+      quotesListingPage.clickNewButton()
+      coursesPage.startQuoteUsingBasicSearch()
+      browser.wait(protractor.ExpectedConditions.elementToBeClickable(quotesEditPage.nameSearch), constants.TIMEOUT_TIME)
       expect(quotesEditPage.nameSearch.isPresent()).to.eventually.equal(true)
     })
 

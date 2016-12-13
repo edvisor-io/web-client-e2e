@@ -1,4 +1,5 @@
 import {UISelectWidget, ChosenWidget} from '../../shared/widgets'
+import constants from '../../shared/constants'
 
 class EmailQuoteModal {
   constructor() {
@@ -59,10 +60,12 @@ export default class QuotesEditPage {
   }
 
   clickFirstOptionEditButton() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.firstOptionEditButton), constants.TIMEOUT_TIME)
     this.firstOptionEditButton.click()
   }
 
   clickEmailToStudentButton() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.emailToStudentButton), constants.TIMEOUT_TIME)
     this.emailToStudentButton.click()
   }
 }
