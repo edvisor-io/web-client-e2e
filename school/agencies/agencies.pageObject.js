@@ -1,3 +1,5 @@
+import constants from '../../shared/constants'
+
 class AgenciesPage {
   constructor() {
     this.addAgencyButton = $('div.listing_actions > button')
@@ -13,6 +15,7 @@ class AgenciesPage {
   }
 
   clickAddAgencyButton() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.addAgencyButton), constants.TIMEOUT_TIME)
     this.addAgencyButton.click()
   }
 
