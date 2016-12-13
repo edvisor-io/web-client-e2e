@@ -2,20 +2,23 @@
 // import SchoolTab from './settingsSchoolTab.pageObject'
 // import TeamTab from './settingsTeamTab.pageObject'
 import CampusTab from './campus/campusTab.pageObject'
+import constants from '../../shared/constants'
 
 class SettingsPage {
   constructor() {
     // this.PersonalTab = PersonalTab
     // this.SchoolTab = SchoolTab
     // this.TeamTab = TeamTab
-    this.CampusTab = CampusTab
+    this.CampusTabArea = CampusTab
 
     this.tabsContainer = $('.tab-selection')
     this.tabs = this.tabsContainer.all(by.css('li'))
+    this.campusTab = this.tabs.get(3)
   }
 
   goToCampusTab() {
-    this.tabs.get(3).click()
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.campusTab), constants.TIMEOUT_TIME)
+    this.campusTab.click()
   }
 }
 

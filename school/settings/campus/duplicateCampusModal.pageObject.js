@@ -6,14 +6,18 @@ export default class DuplicateCampusModal {
     this.takeMeToTheNewCampusButton = $('button[type="submit"]')
   }
 
+  waitTillClickable(element) {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(element), constants.TIMEOUT_TIME)
+  }
+
   inputNewCampusName(name = 'Hogwarts') {
+    this.waitTillClickable(this.newCampusNameField)
     this.newCampusNameField.clear()
     this.newCampusNameField.sendKeys(name)
   }
 
   clickTakeMeToTheNewCampusButton() {
-    const EXPECTED = protractor.ExpectedConditions
-    browser.wait(EXPECTED.elementToBeClickable(this.takeMeToTheNewCampusButton), constants.TIMEOUT_TIME)
+    this.waitTillClickable(this.takeMeToTheNewCampusButton)
     this.takeMeToTheNewCampusButton.click()
   }
 }

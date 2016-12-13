@@ -38,22 +38,22 @@ describe('the school app settings page', () => {
       const CAMPUS_NAME = `${uuid.v4()}`
 
       const settingsPage = new SettingsPage()
-      const campusTab = new settingsPage.CampusTab()
-      campusTab.duplicateCampus(CAMPUS_NAME)
+      const campusTabArea = new settingsPage.CampusTabArea()
+      campusTabArea.duplicateCampus(CAMPUS_NAME)
 
-      campusTab.clickSelectCampusDropdown()
-      expect(campusTab.lastItemInDropdown.getText()).to.eventually.equal(CAMPUS_NAME)
+      campusTabArea.clickSelectCampusDropdown()
+      expect(campusTabArea.lastItemInDropdown.getText()).to.eventually.equal(CAMPUS_NAME)
     })
 
     it('should create a campus profile', () => {
       const CAMPUS_NAME = `${uuid.v4()}`
 
       const settingsPage = new SettingsPage()
-      const campusTab = new settingsPage.CampusTab()
-      campusTab.createANewCampus(CAMPUS_NAME)
+      const campusTabArea = new settingsPage.CampusTabArea()
+      campusTabArea.createANewCampus(CAMPUS_NAME)
 
-      campusTab.clickSelectCampusDropdown()
-      expect(campusTab.lastItemInDropdown.getText()).to.eventually.equal(CAMPUS_NAME)
+      campusTabArea.clickSelectCampusDropdown()
+      expect(campusTabArea.lastItemInDropdown.getText()).to.eventually.equal(CAMPUS_NAME)
     })
   })
 })
