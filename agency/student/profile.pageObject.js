@@ -25,6 +25,7 @@ export default class StudentProfilePage {
     this.RecentActivitiesArea = RecentActivitiesArea
     this.FilesTabArea = FilesTabArea
     this.GoalsTabArea = GoalsTabArea
+    this.QuotesInvoicesTabArea = QuotesInvoicesTabArea
     this.container = $('section.student-profile')
 
     this.backToStudentsButton = element(by.id('ext02-back'))
