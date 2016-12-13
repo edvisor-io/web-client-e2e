@@ -50,6 +50,10 @@ export default class StudentProfilePage {
     this.alertSuccessMessage = $('div.alert-success') // deprecated, verify presence of data on DOM
   }
 
+  waitTillClickable(element) {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(element), constants.TIMEOUT_TIME)
+  }
+
   fillAndSaveANote(note) {
     const notesArea = new NotesArea()
     notesArea.inputTextIntoField(note)
@@ -102,14 +106,17 @@ export default class StudentProfilePage {
   }
 
   goToGoalsTab() {
+    this.waitTillClickable(this.goalsTabElement)
     this.goalsTabElement.click()
   }
 
   goToQuotesInvoicesTab() {
+    this.waitTillClickable(this.quotesInvoicesTabElement)
     this.quotesInvoicesTabElement.click()
   }
 
   goToFilesTab() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.filesTabElement), constants.TIMEOUT_TIME)
     this.filesTabElement.click()
   }
 

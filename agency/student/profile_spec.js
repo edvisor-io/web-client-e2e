@@ -40,13 +40,14 @@ describe('the student profile page', () => {
     })
 
     it('displays a student profile when one in listing is clicked', () => {
-      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
       const studentListing = new StudentListingPage()
-      LoginPage.waitForLoader()
-      studentListing.clickFirstStudentInTable()
-
       const studentProfile = new StudentProfilePage()
       const studentInformationArea = new studentProfile.StudentInformationArea()
+
+      browser.get(constants.LEGACY_URL_STUDENT_LISTING)
+      LoginPage.waitForLoader()
+      studentListing.clickFirstStudentInTable()
+      browser.wait(protractor.ExpectedConditions.presenceOf(studentInformationArea.firstNameField), constants.TIMEOUT_TIME)
       expect(studentInformationArea.firstNameField.isPresent()).to.eventually.equal(true)
     })
   })

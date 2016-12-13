@@ -1,3 +1,5 @@
+import constants from '../../../shared/constants'
+
 export default class RecentActivitiesArea {
   constructor() {
     this.container = $('student-sidebar-recent')
@@ -7,6 +9,7 @@ export default class RecentActivitiesArea {
   }
 
   checkForAndClickShowAllActivityButton() {
+    browser.sleep(constants.SLEEP_SHORT) // implicit wait is unreliable for element that may not appear
     this.activityToggleButton.isPresent().then((isIt) => {
       if (isIt) {
         this.activityToggleButton.getText().then((text) => {
