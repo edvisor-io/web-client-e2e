@@ -1,3 +1,5 @@
+import constants from '../../../shared/constants'
+
 export default class NotesArea {
   constructor() {
     this.container = element(by.id('ext02-notes'))
@@ -6,6 +8,7 @@ export default class NotesArea {
   }
 
   inputTextIntoField(text = 'Mind the gap') {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.field), constants.TIMEOUT_TIME)
     this.field.clear()
     this.field.sendKeys(text)
   }
