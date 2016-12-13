@@ -19,7 +19,7 @@ function help() {
   echo " checkout [branch]    - checkout [branch] on api-server and web-client "
   echo " ignitedb             - starts the db "
   echo " resetdb              - resets the db "
-  echo " build                - builds the web-client "
+  echo " build[client/server] - builds the web-client or api-server (no space)"
   echo " local [branch]       - pull latest [branch] of api-server and web-client "
   echo "                        starts the database, resets the database and "
   echo "                        and builds the web-client "
@@ -162,6 +162,9 @@ then
     ;;
   buildclient)
     buildclient
+    ;;
+  buildserver)
+    build_server
     ;;
   local)
     if [ $2 ] ; then
