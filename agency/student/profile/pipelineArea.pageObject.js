@@ -41,7 +41,12 @@ export default class PipelineArea {
     this.confirmRemoveButton = $('button.btn--danger')
   }
 
+  waitTillClickable(element) {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(element), constants.TIMEOUT_TIME)
+  }
+
   clickChangePipelineFirstButton() {
+    this.waitTillClickable(this.changePipelineFirstButton)
     this.changePipelineFirstButton.click()
   }
 
@@ -54,6 +59,7 @@ export default class PipelineArea {
   }
 
   clickAddToAnotherPipelineButton() {
+    this.waitTillClickable(this.addToAnotherPipelineButton)
     this.addToAnotherPipelineButton.click()
   }
 

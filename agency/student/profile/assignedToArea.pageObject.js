@@ -1,4 +1,5 @@
 import {ChosenWidget} from '../../../shared/widgets'
+import constants from '../../../shared/constants'
 
 export default class AssignedToArea {
   constructor() {
@@ -16,6 +17,7 @@ export default class AssignedToArea {
   }
 
   clickChangeOwnerButton() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.changeOwnerButton), constants.TIMEOUT_TIME)
     this.changeOwnerButton.click()
   }
 

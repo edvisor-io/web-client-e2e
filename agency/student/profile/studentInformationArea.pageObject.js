@@ -1,4 +1,5 @@
 import {ChosenWidget, UISelectWidget, DatePickerWidget} from '../../../shared/widgets'
+import constants from '../../../shared/constants'
 
 import uuid from 'node-uuid'
 import moment from 'moment'
@@ -26,6 +27,7 @@ export default class StudentInformationArea {
   }
 
   inputFirstName(firstName = 'Zaphod') {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.firstNameField), constants.TIMEOUT_TIME)
     this.firstNameField.clear()
     this.firstNameField.sendKeys(firstName)
   }

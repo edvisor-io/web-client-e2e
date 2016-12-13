@@ -245,6 +245,8 @@ describe('the student profile page', () => {
       const studentProfile = new StudentProfilePage()
       const secondaryContactsArea = new studentProfile.SecondaryContactsArea()
       studentListing.clickFirstStudentInTable()
+      // browser.wait(protractor.ExpectedConditions.visibilityOf(secondaryContactsArea.allContactElements), constants.TIMEOUT_TIME)
+      browser.sleep(constants.SLEEP_SHORT)
       secondaryContactsArea.allContactElements.count()
         .then((count) => {
           let originalContactCount = count
@@ -325,6 +327,7 @@ describe('the student profile page', () => {
         browser.get(constants.LEGACY_URL_STUDENT_LISTING)
         LoginPage.waitForLoader()
         studentListing.clickFirstStudentInTable()
+        browser.sleep(constants.SLEEP_SHORT) // implicit wait for the elements gives 'cannot read property "bind" of undefined'
         studentProfile.customFieldLabelElements.count().then((count) => {
           for (let i = 0; i < count; i++) {
             expect(studentProfile.customFieldLabelElements.get(i).getText()).to.eventually.equal(array[i])
@@ -345,6 +348,7 @@ describe('the student profile page', () => {
       const studentProfile = new StudentProfilePage()
       const tasksArea = new studentProfile.TasksArea()
       studentListing.clickFirstStudentInTable()
+      browser.sleep(constants.SLEEP_SHORT)
       tasksArea.allTaskElements.count()
         .then((count) => {
           let originalTaskCount = count
@@ -425,9 +429,10 @@ describe('the student profile page', () => {
       const pipelineArea = new studentProfile.PipelineArea()
 
       studentListing.clickFirstStudentInTable()
+      browser.sleep(constants.SLEEP_SHORT)
       pipelineArea.allPipelineContainers.count()
         .then((count) => {
-          var originalPipelineCount = count
+          let originalPipelineCount = count
 
           pipelineArea.clickChangePipelineFirstButton()
           pipelineArea.clickRemoveFromPipelineOption()
@@ -520,6 +525,7 @@ describe('the student profile page', () => {
       var originalArray
 
       studentListing.clickFirstStudentInTable()
+      browser.sleep(constants.SLEEP_SHORT)
       pipelineArea.currentPipelines.count().then((count) => {
         let pipelinesAndStatusesArray = []
         for (let i = 0; i < count; i++) {
