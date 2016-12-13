@@ -210,12 +210,18 @@ describe('the student profile page', () => {
     it('starts a quote (v1)', () => {
       const studentListing = new StudentListingPage()
       const studentProfile = new StudentProfilePage()
+      const quotesInvoicesTabArea = new studentProfile.QuotesInvoicesTabArea()
 
       studentListing.clickFirstStudentInTable()
       studentProfile.goToQuotesInvoicesTab()
-      studentProfile.startNewQuoteV1()
+      // expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\/en\/504\/quotes\/edit\//)
+      quotesInvoicesTabArea.quotesV1ListRows.count()
+        .then((count) => {
+          let originalCount = count
 
-      expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\/en\/504\/quotes\/edit\//)
+          studentProfile.startNewQuoteV1()
+          expect(quotesInvoicesTabArea.quotesV1ListRows.count()).to.eventually.equal(originalCount + 1)
+        })
     })
 
     it('creates a study record', () => {
