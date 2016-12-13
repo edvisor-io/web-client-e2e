@@ -52,11 +52,6 @@ describe('the quotes page', () => {
     beforeEach(() => {
       browser.get(constants.LEGACY_URL_QUOTE_LISTING)
       LoginPage.waitForLoader()
-      // const quotesPage = new QuotesPage()
-      // const quotesListingPage = new quotesPage.QuotesListingPage()
-      // quotesListingPage.clickNewButton()
-      // const coursesPage = new CoursesPage()
-      // coursesPage.startQuoteUsingBasicSearch()
     })
 
     it('should create a new quote', () => {
@@ -65,7 +60,6 @@ describe('the quotes page', () => {
       quotesListingPage.clickNewButton()
       const coursesPage = new CoursesPage()
       coursesPage.startQuoteUsingBasicSearch()
-      // const quotesPage = new QuotesPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
 
       expect(quotesEditPage.nameSearch.isPresent()).to.eventually.equal(true)
@@ -81,8 +75,6 @@ describe('the quotes page', () => {
           quotesListingPage.clickNewButton()
           const coursesPage = new CoursesPage()
           coursesPage.startQuoteUsingBasicSearch()
-          // const quotesPage = new QuotesPage()
-          // const quotesListingPage = new quotesPage.QuotesListingPage()
           const quotesEditPage = new quotesPage.QuotesEditPage()
           quotesEditPage.saveQuote()
           browser.get(constants.LEGACY_URL_QUOTE_LISTING)
@@ -97,14 +89,12 @@ describe('the quotes page', () => {
       quotesListingPage.clickNewButton()
       const coursesPage = new CoursesPage()
       coursesPage.startQuoteUsingBasicSearch()
-      // const quotesPage = new QuotesPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
       quotesEditPage.saveQuote()
 
       const agencyNav = new AgencyNav() // replace when 'back' bug is fixed
       agencyNav.goToQuotes()
 
-      // const quotesListingPage = new quotesPage.QuotesListingPage()
       quotesListingPage.clickFirstQuote()
       quotesEditPage.clickFirstOptionEditButton()
       const quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
@@ -121,14 +111,12 @@ describe('the quotes page', () => {
       quotesListingPage.clickNewButton()
       const coursesPage = new CoursesPage()
       coursesPage.startQuoteUsingBasicSearch()
-      // const quotesPage = new QuotesPage()
       const quotesEditPage = new quotesPage.QuotesEditPage()
       quotesEditPage.saveQuote()
 
       const agencyNav = new AgencyNav() // replace when 'back' bug is fixed
       agencyNav.goToQuotes()
 
-      // const quotesListingPage = new quotesPage.QuotesListingPage()
       quotesListingPage.clickFirstQuote()
       quotesEditPage.clickFirstOptionEditButton()
       const quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
