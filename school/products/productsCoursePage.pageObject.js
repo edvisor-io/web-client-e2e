@@ -1,3 +1,5 @@
+import constants from '../../shared/constants'
+
 import uuid from 'node-uuid'
 
 export default class CoursePage {
@@ -10,7 +12,12 @@ export default class CoursePage {
     this.confirmDeleteYesButton = element(by.css('button.btn--danger'))
   }
 
+  waitTillClickable(element) {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(element), constants.TIMEOUT_TIME)
+  }
+
   inputName(name = `${uuid.v4()}`) {
+    this.waitTillClickable(this.nameField)
     this.nameField.sendKeys(name)
   }
 
@@ -28,6 +35,7 @@ export default class CoursePage {
   }
 
   deleteCourse() {
+    this.waitTillClickable(this.deleteButton)
     this.deleteButton.click()
     this.confirmDeleteYesButton.click()
   }
