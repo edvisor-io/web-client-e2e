@@ -119,7 +119,7 @@ describe('the student listing page', () => {
       expect(studentListing.exportMessage.isPresent()).to.eventually.equal(true)
     })
 
-    it.only('should show a student profile from the students table', () => {
+    it('should show a student profile from the students table', () => {
       const studentListing = new StudentListingPage()
       studentListing.clickFirstStudentInTable()
       const studentProfile = new StudentProfilePage()

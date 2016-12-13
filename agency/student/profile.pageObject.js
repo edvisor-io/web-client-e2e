@@ -67,10 +67,11 @@ export default class StudentProfilePage {
   }
 
   makeNewInvoice() {
-    this.quotesInvoicesTabElement.click()
     const quotesInvoicesTabArea = new QuotesInvoicesTabArea()
-    quotesInvoicesTabArea.newInvoiceButton.click()
     const invoicesPage = new InvoicesPage()
+    
+    this.goToQuotesInvoicesTab()
+    quotesInvoicesTabArea.newInvoiceButton.click()
     invoicesPage.clickNextThroughNewInvoiceSteps()
     invoicesPage.saveButton.click()
   }

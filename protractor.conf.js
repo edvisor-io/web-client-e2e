@@ -53,7 +53,7 @@ exports.config = {
   onPrepare() {
     require('babel-register')
 
-    // Disable animations so e2e tests run more quickly // disabling animations disabled because it affects Protractor's control flow for certain button clicks
+    // Disable animations so e2e tests run more quickly // disabling animations disabled because it now affects Protractor's control flow for certain button clicks
     // const disableNgAnimate = () => {
     //   angular.module('disableNgAnimate', [])
     //     .run(['$animate', ($animate) => $animate.enabled(false)])
