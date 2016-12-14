@@ -34,19 +34,21 @@ export class UISelectWidget {
 export class DatePickerWidget {
   static setPikaDate(inputElement, month, day, year) {
     let expected = protractor.ExpectedConditions
-    browser.wait(expected.elementToBeClickable(inputElement), constants.TIMEOUT_TIME)
-
-    inputElement.click()
     let datePicker = $('.pika-single.is-bound:not(.is-hidden)')
+
+    browser.wait(expected.elementToBeClickable(inputElement), constants.TIMEOUT_TIME)
+    inputElement.click()
     browser.wait(expected.visibilityOf(datePicker), constants.TIMEOUT_TIME)
     let monthContainer = datePicker.$('.pika-select-month')
     monthContainer.element(by.cssContainingText('option', month)).click()
 
+    browser.wait(expected.elementToBeClickable(inputElement), constants.TIMEOUT_TIME)
     inputElement.click()
     browser.wait(expected.visibilityOf(datePicker), constants.TIMEOUT_TIME)
     let yearContainer = datePicker.$('.pika-select-year')
     yearContainer.element(by.cssContainingText('option', year)).click()
 
+    browser.wait(expected.elementToBeClickable(inputElement), constants.TIMEOUT_TIME)
     inputElement.click()
     inputElement.click() // next line possibly times out
     browser.wait(expected.visibilityOf(datePicker), constants.TIMEOUT_TIME)
