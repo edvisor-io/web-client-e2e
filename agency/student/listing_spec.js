@@ -77,7 +77,7 @@ describe('the student listing page', () => {
       }
     })
 
-    it('(WEEDLE, FAILING, BUG filed about selectViewingAllStudents) reassigns multiple students to another office', () => {
+    it('reassigns multiple students to another office', () => {
       const studentListing = new StudentListingPage()
       const listArea = new studentListing.ListArea()
       studentListing.selectViewingAllStudents()
@@ -96,7 +96,7 @@ describe('the student listing page', () => {
       LoginPage.waitForLoader()
     })
 
-    it('(WEEDLE, FAILING, BUG filed about selectViewingAllStudents) lists new students in pale yellow', () => {
+    it('lists new students in pale yellow', () => {
       const email = uuid.v4() + AT_EMAIL_DOMAIN
       const PALE_YELLOW = 'rgba(252, 248, 240, 1)'
 
