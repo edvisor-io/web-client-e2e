@@ -31,6 +31,7 @@ describe('the configure page', () => {
     browser.get('/')
     LoginPage.waitForLoader()
     loginPage.login(constants.SCHOOL_EMAIL, constants.PASSWORD)
+    LoginPage.waitForLoader()
 
     schoolNav.goToFees()
     feesPage.createNewFee(FEE_NAME)
