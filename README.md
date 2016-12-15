@@ -68,6 +68,7 @@ An overview of how things are structured
 * Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
 * Limit the first line to 72 characters or less
 * Consider starting the commit message with an applicable emoji:
+    * :sparkles: `:sparkles:` when adding a new feature
     * :art: `:art:` when improving the format/structure of the code
     * :rocket: `:rocket:` when improving performance
     * :memo: `:memo:` when writing docs

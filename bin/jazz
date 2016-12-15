@@ -16,6 +16,7 @@ function help() {
   echo " test [opt]           - run [all] tests or a suite, eg. 'courses' "
   echo ""
   echo "MAINTENANCE 🛠"
+  echo " serverup             - start the api-server "
   echo " checkout [branch]    - checkout [branch] on api-server and web-client "
   echo " ignitedb             - starts the db "
   echo " resetdb              - resets the db "
@@ -30,6 +31,13 @@ function help() {
 
 function err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
+}
+
+function start_server() {
+  echo ""
+  echo " 🚀 spinning up the server "
+  echo ""
+  cd /Users/Beastie/development/edvisorio/api-server && gulp
 }
 
 function update_e2e() {
@@ -183,6 +191,9 @@ then
       woops
       help
     fi
+    ;;
+  serverup)
+    start_server
     ;;
   *)
     help
