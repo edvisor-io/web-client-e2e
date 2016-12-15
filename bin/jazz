@@ -3,7 +3,7 @@
 # Perform maintainance functionality for api-server and web-client to the e2e
 # test suite.
 
-function help() {
+help() {
   echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+="
   echo ""
   echo " jazz       ((::.. 🤖  ..::)) "
@@ -29,11 +29,11 @@ function help() {
   echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+="
 }
 
-function err() {
+err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
 }
 
-function start_server() {
+start_server() {
   echo ""
   echo " 🚀 spinning up the server "
   echo ""
@@ -66,9 +66,10 @@ function run_suite() {
   woohoo
 }
 
-function checkout() {
+checkout() {
   echo ""
   echo " ➡️ switching to the $1 branch on web-client and api-server "
+  echo "                    --- 🤖"
   echo ""
   cd /Users/Beastie/development/edvisorio/web-client && git checkout $1
   cd /Users/Beastie/development/edvisorio/api-server && git checkout $1
@@ -77,7 +78,7 @@ function checkout() {
 function ignitedb () {
   echo ""
   echo " 🛠 database starting "
-  echo "         --- 🤖 "
+  echo "                    --- 🤖 "
   mysql.server start
   woohoo
 }
@@ -85,7 +86,7 @@ function ignitedb () {
 function resetdb () {
   echo ""
   echo " 🛠 turning back time in the database"
-  echo "         --- 🤖 "
+  echo "                    --- 🤖 "
   echo ""
   cd /Users/Beastie/development/edvisorio/api-server && ./bin/edvisor full-reset
   woohoo
@@ -94,7 +95,7 @@ function resetdb () {
 function build_server () {
   echo ""
   echo " 🛠 building the server"
-  echo "         --- 🤖 "
+  echo "                    --- 🤖 "
   echo ""
   cd /Users/Beastie/development/edvisorio/api-server && gulp build
   woohoo
@@ -103,6 +104,7 @@ function build_server () {
 function pullwebclient() {
   echo ""
   echo " ⚡️ jazzing up your web-client."
+  echo "                    --- 🤖"
   echo ""
   cd /Users/Beastie/development/edvisorio/web-client && git checkout $1 && git pull --rebase && npm install
   woohoo
@@ -111,13 +113,17 @@ function pullwebclient() {
 function pullapiserver() {
   echo ""
   echo " ⚡️ jazzing up your api-server."
+  echo "                    --- 🤖"
   echo ""
   cd /Users/Beastie/development/edvisorio/api-server && git checkout $1 && git pull --rebase && npm install
   woohoo
 }
 
 function buildclient () {
+  echo ""
   echo " 🛠 building client."
+  echo "                    --- 🤖"
+  echo ""
   cd /Users/Beastie/development/edvisorio/api-server && ./bin/edvisor build -s client
   woohoo
 }
