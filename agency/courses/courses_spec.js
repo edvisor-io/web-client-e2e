@@ -30,6 +30,7 @@ describe('the find courses page', () => {
       LoginPage.waitForLoader()
       const agencyNav = new AgencyNav()
       agencyNav.goToFindCourses()
+      browser.sleep(constants.SLEEP_SHORT)
       expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\/en\/504\/browse\/search/)
     })
   })
