@@ -1,3 +1,5 @@
+import constants from '../../shared/constants'
+
 class SchoolsListingPage {
   constructor() {
     this.addSchoolButton = element(by.id('ext08-new-company-btn'))
@@ -17,7 +19,12 @@ class SchoolsListingPage {
     this.requestsAlert = $('#ext08-requests')
   }
 
+  waitTillClickable(element) {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(element), constants.TIMEOUT_TIME)
+  }
+
   clickAddSchoolButton() {
+    this.waitTillClickable(this.addSchoolButton)
     this.addSchoolButton.click()
   }
 
@@ -49,6 +56,7 @@ class SchoolsListingPage {
   }
 
   clickFirstIncomingRequestAcceptButton() {
+    this.waitTillClickable(this.firstIncomingRequestAcceptButton)
     this.firstIncomingRequestAcceptButton.click()
   }
 }
