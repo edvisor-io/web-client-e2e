@@ -69,7 +69,7 @@ export default class StudentProfilePage {
   makeNewInvoice() {
     const quotesInvoicesTabArea = new QuotesInvoicesTabArea()
     const invoicesPage = new InvoicesPage()
-    
+
     this.goToQuotesInvoicesTab()
     quotesInvoicesTabArea.newInvoiceButton.click()
     invoicesPage.clickNextThroughNewInvoiceSteps()
@@ -196,6 +196,7 @@ export default class StudentProfilePage {
   }
 
   unarchiveStudent() {
+    this.waitTillClickable(this.restoreStudentButton)
     this.restoreStudentButton.click()
   }
 
