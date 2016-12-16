@@ -219,8 +219,14 @@ describe('the student profile page', () => {
         .then((count) => {
           let originalCount = count
 
-          studentProfile.startNewQuoteV1()
-          expect(quotesInvoicesTabArea.quotesV1ListRows.count()).to.eventually.equal(originalCount + 1)
+          browser.getCurrentUrl()
+            .then((url) => {
+              studentProfile.startNewQuoteV1()
+              browser.get(url)
+              LoginPage.waitForLoader()
+              studentProfile.goToQuotesInvoicesTab()
+              expect(quotesInvoicesTabArea.quotesV1ListRows.count()).to.eventually.equal(originalCount + 1)
+            })
         })
     })
 
