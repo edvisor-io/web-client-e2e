@@ -23,7 +23,8 @@ describe('the agencies page', () => {
     LoginPage.waitForLoader()
     const loginPage = new LoginPage()
     loginPage.login(constants.SCHOOL_EMAIL, constants.PASSWORD)
-
+    LoginPage.waitForLoader()
+    
     const schoolNav = new SchoolNav()
     schoolNav.goToManageAgencies()
     const agenciesPage = new AgenciesPage()
