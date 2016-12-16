@@ -544,6 +544,7 @@ describe('the student profile page', () => {
         browser.refresh()
         studentProfile.unarchiveStudent()
         browser.refresh()
+        browser.sleep(constants.SLEEP_SHORT)
         pipelineArea.currentPipelines.count().then((count) => {
           let newArray = []
           for (let i = 0; i < count; i++) {
