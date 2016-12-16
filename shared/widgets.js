@@ -48,8 +48,9 @@ export class DatePickerWidget {
     yearContainer.element(by.cssContainingText('option', year)).click()
 
     inputElement.click()
+    inputElement.click() // next line possibly times out
     browser.wait(expected.visibilityOf(datePicker), constants.TIMEOUT_TIME)
-    let dayContainer = datePicker.$(`[data-pika-day="${day}"]`)
+    let dayContainer = datePicker.$(`[data-day="${day}"]`)
     dayContainer.click()
   }
 }
