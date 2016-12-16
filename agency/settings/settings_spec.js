@@ -253,6 +253,7 @@ describe('the agency app settings page', () => {
 
     beforeEach(() => {
       browser.get(constants.LEGACY_URL_SETTINGS_PERSONAL_TAB)
+      LoginPage.waitForLoader()
       const settingsPage = new SettingsPage()
       settingsPage.goToCompanyTab()
     })
