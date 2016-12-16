@@ -15,9 +15,9 @@ describe('the configure page', () => {
     browser.get('/school/en/166/configure/fee/listing')
     LoginPage.waitForLoader()
     const configurePage = new ConfigurePage()
-    const feesPage = new configurePage.FeesPage()
-    feesPage.sortByFeeName()
-    feesPage.deleteFirstFee() // to make sure created fee is always first after sorting
+    const configureFeesPage = new configurePage.ConfigureFeesPage()
+    configureFeesPage.sortByFeeName()
+    configureFeesPage.deleteFirstFee() // to make sure created fee is always first after sorting
     browser.driver.manage().deleteAllCookies()
   })
 
@@ -26,17 +26,17 @@ describe('the configure page', () => {
     const loginPage = new LoginPage()
     const schoolNav = new SchoolNav()
     const configurePage = new ConfigurePage()
-    const feesPage = new configurePage.FeesPage()
+    const configureFeesPage = new configurePage.ConfigureFeesPage()
 
     browser.get('/')
     LoginPage.waitForLoader()
     loginPage.login(constants.SCHOOL_EMAIL, constants.PASSWORD)
 
     schoolNav.goToFees()
-    feesPage.createNewFee(FEE_NAME)
-    feesPage.goToFeesListing()
-    feesPage.sortByFeeName()
-    browser.wait(protractor.ExpectedConditions.visibilityOf(feesPage.firstFeeNameInList), constants.TIMEOUT_TIME)
-    expect(feesPage.firstFeeNameInList.getText()).to.eventually.equal(FEE_NAME)
+    configureFeesPage.createNewFee(FEE_NAME)
+    configureFeesPage.goToFeesListing()
+    configureFeesPage.sortByFeeName()
+    browser.wait(protractor.ExpectedConditions.visibilityOf(configureFeesPage.firstFeeNameInList), constants.TIMEOUT_TIME)
+    expect(configureFeesPage.firstFeeNameInList.getText()).to.eventually.equal(FEE_NAME)
   })
 })

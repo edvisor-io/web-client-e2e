@@ -20,7 +20,7 @@ class FeePage {
   }
 }
 
-export class FeesPage {
+export class ConfigureFeesPage {
   constructor() {
     this.feePage = FeePage
 
@@ -51,11 +51,12 @@ export class FeesPage {
   }
 
   deleteFirstFee() {
-    this.firstFeeNameInList.click()
     const feePage = new FeePage()
+    this.firstFeeNameInList.click()
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(feePage.deleteFeeButton), constants.TIMEOUT_TIME)
     feePage.deleteFeeButton.click()
     feePage.confirmDeleteYesButton.click()
   }
 }
 
-export default FeesPage
+export default ConfigureFeesPage

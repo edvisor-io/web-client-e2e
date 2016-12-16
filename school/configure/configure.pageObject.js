@@ -1,7 +1,7 @@
-import FeesPage from './configureFees.pageObject'
+import ConfigureFeesPage from './configureFees.pageObject'
 
 export default class ConfigurePage {
   constructor() {
-    this.FeesPage = FeesPage
+    this.ConfigureFeesPage = ConfigureFeesPage
   }
 }
