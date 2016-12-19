@@ -65,8 +65,7 @@ describe('the agencies page', () => {
       agenciesPage.clickAddAgencyButton()
       agenciesPage.inputIntoAddByIDField(ID)
       agenciesPage.clickAddButton()
-      browser.sleep(constants.SLEEP_MEDIUM)
-      // expect(agenciesPage.alertBoxMessage.isPresent()).to.eventually.equal(true)
+      browser.sleep(constants.SLEEP_SHORT)
 
       browser.driver.manage().deleteAllCookies()
       browser.get('/')
@@ -75,6 +74,7 @@ describe('the agencies page', () => {
       LoginPage.waitForLoader()
 
       agencyNav.goToManageSchools()
+      browser.sleep(constants.SLEEP_SHORT)
       expect(schoolsListingPage.requestsAlert.isPresent()).to.eventually.equal(true)
     })
 
