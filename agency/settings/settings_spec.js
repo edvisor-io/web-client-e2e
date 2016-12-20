@@ -45,7 +45,7 @@ describe('the agency app settings page', () => {
     })
   })
 
-  describe.skip('admins', () => { // being changed, don't fix
+  describe('admins', () => { // being changed, don't fix
     before(() => {
       browser.get('/')
       LoginPage.waitForLoader()
@@ -73,28 +73,26 @@ describe('the agency app settings page', () => {
     })
 
     it('can invite a new team member', () => {
-      const FIRST_NAME = 'Arthur'
-      const LAST_NAME = 'Dent'
-      const EMAIL = `${uuid.v4()}@earth.io`
-      const ROLE = 'Manager'
-
       const settingsPage = new SettingsPage()
-      settingsPage.goToPaymentTab()
-      const paymentTab = new settingsPage.PaymentTab()
-      paymentTab.clickChangeUsersAndSubscriptionButton()
-      paymentTab.clickIncrementButton()
-      paymentTab.clickChangeSubscriptionButton()
-      paymentTab.clickOkButton()
-
-      settingsPage.goToTeamTab()
       const teamTab = new settingsPage.TeamTab()
-      const inviteArea = new teamTab.InviteArea()
-      inviteArea.invite(FIRST_NAME, LAST_NAME, EMAIL, ROLE)
-
       const manageMembersArea = new teamTab.ManageMembersArea()
 
-      const teamMemberCard = new manageMembersArea.TeamMember(manageMembersArea.managers.last())
-      expect(teamMemberCard.name.getText()).to.eventually.equal(`${FIRST_NAME} ${LAST_NAME}`)
+      const FIRST_NAME = 'Aaathur'
+      const LAST_NAME = 'Dent'
+      const EMAIL = `${uuid.v4()}@earth.io`
+      const ROLE = 'Admin'
+
+      // increment slots
+      // const paymentTab = new settingsPage.PaymentTab()
+      // settingsPage.goToPaymentTab()
+      // paymentTab.clickChangeUsersAndSubscriptionButton()
+      // paymentTab.clickIncrementButton()
+      // paymentTab.clickChangeSubscriptionButton()
+      // paymentTab.clickOkButton()
+
+      settingsPage.goToTeamTab()
+      teamTab.inviteNewTeamMember(FIRST_NAME, LAST_NAME, EMAIL, ROLE)
+      expect(manageMembersArea.firstMemberNameElement.getText()).to.eventually.equal(`${FIRST_NAME} ${LAST_NAME}`)
     })
   })
 

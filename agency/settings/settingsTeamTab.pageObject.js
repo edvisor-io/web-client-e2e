@@ -1,7 +1,7 @@
 import {ChosenWidget, SweetAlertWidget} from '../../shared/widgets'
 import constants from '../../shared/constants'
 
-class TeamMemberCard {
+class TeamMemberCard { // deprecated after weedle
   constructor(cardElement) {
     this.cardElement = cardElement
     this.name = cardElement.$('.card_title')
@@ -20,7 +20,7 @@ class TeamMemberCard {
 
 class ManageMembersArea {
   constructor() {
-    this.TeamMember = TeamMemberCard
+    this.TeamMember = TeamMemberCard // deprecated
     this.admins = element.all(by.css('#ext01-team-admins > div'))
     this.managers = element.all(by.css('#ext01-team-managers > div'))
 
@@ -33,7 +33,9 @@ class ManageMembersArea {
     this.lastManagerEditButton = this.lastManagerCard.$('.card_edit')
     this.lastManagerDeleteButton = this.lastManagerCard.$('#ext01-team-member-form-delete')
 
-    // post-Oct2016 layout past this line
+    // post-weedle layout past this line
+    this.firstMemberRow = element(by.repeater('user in $ctrl.users track by user.userId').row(0))
+    this.firstMemberNameElement = this.firstMemberRow.$('span')
     this.newTeamMemberButton = element.all(by.css('team-manage button')).last()
   }
 
@@ -65,18 +67,19 @@ class InviteArea { // replace with NewTeamMemberModal
     this.slotsElement = element.all(by.css('div.subtext')).first()
     this.noSlotsAlert = $('.alert-danger')
   }
+}
 
-  invite(firstName, lastName, email, role) { // made to work with layout post-Oct2016
-    const manageMembersArea = new ManageMembersArea()
-    manageMembersArea.newTeamMemberButton.click()
-    let expected = protractor.ExpectedConditions
-    browser.wait(expected.elementToBeClickable(this.firstNameField), constants.TIMEOUT_TIME)
-    this.firstNameField.sendKeys(firstName)
-    this.lastNameField.sendKeys(lastName)
-    this.emailField.sendKeys(email)
-    this.setRole(role)
-    this.inviteButton.click()
-    SweetAlertWidget.ok()
+class NewTeamMemberModal {
+  constructor() {
+    this.inviteForm = element(by.id('ext01-team-form'))
+    this.firstNameField = this.inviteForm.element(by.name('firstname'))
+    this.lastNameField = this.inviteForm.element(by.name('lastname'))
+    this.emailField = this.inviteForm.element(by.name('email'))
+    this.roleField = this.inviteForm.element(by.name('role'))
+    this.officeField = this.inviteForm.element(by.name('office'))
+    this.inviteButton = this.inviteForm.$('button[type="submit"]')
+
+    this.noSlotsAlert = $('.alert-danger')
   }
 
   setRole(roleName) {
@@ -84,41 +87,23 @@ class InviteArea { // replace with NewTeamMemberModal
   }
 }
 
-// class NewTeamMemberModal {
-//   constructor() {
-//     this.inviteForm = element(by.id('ext01-team-invite'))
-//     this.firstNameField = this.inviteForm.element(by.name('firstname'))
-//     this.lastNameField = this.inviteForm.element(by.name('lastname'))
-//     this.emailField = this.inviteForm.element(by.name('email'))
-//     this.roleField = this.inviteForm.element(by.name('role'))
-//     this.officeField = this.inviteForm.element(by.name('office'))
-//     this.inviteButton = this.inviteForm.$('button[type="submit"]')
-//     this.slotsElement = element.all(by.css('div.subtext')).first()
-//     this.noSlotsAlert = $('.alert-danger')
-//   }
-//
-//   setRole(roleName) {
-//     ChosenWidget.setChosenValue(this.roleField, roleName)
-//   }
-// }
-
 export default class TeamTab {
   constructor() {
-    this.InviteArea = InviteArea
     this.ManageMembersArea = ManageMembersArea
+    this.NewTeamMemberModal = NewTeamMemberModal
+    this.InviteArea = InviteArea // deprecated
   }
 
-  // invite(firstName, lastName, email, role) { // made to work with layout post-Oct2016
-  //   const manageMembersArea = new ManageMembersArea()
-  //   manageMembersArea.newTeamMemberButton.click()
-  //   const newTeamMemberModal = new NewTeamMemberModal()
-  //   let expected = protractor.ExpectedConditions
-  //   browser.wait(expected.elementToBeClickable(this.firstNameField), constants.TIMEOUT_TIME)
-  //   newTeamMemberModal.firstNameField.sendKeys(firstName)
-  //   newTeamMemberModal.lastNameField.sendKeys(lastName)
-  //   newTeamMemberModal.emailField.sendKeys(email)
-  //   newTeamMemberModal.setRole(role)
-  //   newTeamMemberModal.inviteButton.click()
-  //   SweetAlertWidget.ok()
-  // }
+  inviteNewTeamMember(firstName, lastName, email, role) {
+    const manageMembersArea = new ManageMembersArea()
+    const newTeamMemberModal = new NewTeamMemberModal()
+
+    manageMembersArea.newTeamMemberButton.click()
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(newTeamMemberModal.firstNameField), constants.TIMEOUT_TIME)
+    newTeamMemberModal.firstNameField.sendKeys(firstName)
+    newTeamMemberModal.lastNameField.sendKeys(lastName)
+    newTeamMemberModal.emailField.sendKeys(email)
+    newTeamMemberModal.setRole(role)
+    newTeamMemberModal.inviteButton.click()
+  }
 }
