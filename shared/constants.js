@@ -3,7 +3,10 @@ export default {
   PLATFORM_CRM_ADMIN_EMAIL: 'platformcrm-admin@edvisor.io',
   PLATFORM_CRM_MANAGER_EMAIL: 'platformcrm-manager@edvisor.io',
   PLATFORM_CRM_SALES_REP_EMAIL: 'platformcrm-salesrep@edvisor.io',
+
   SCHOOL_EMAIL: 'school20@edvisor.io',
+  SCHOOL_URL_SETTINGS_CAMPUS_TAB: '/school/en/166/settings/campus',
+  SCHOOL_URL_REGEX_SETTINGS_CAMPUS_TAB: new RegExp(/\/school\/en\/166\/settings\/campus/),
 
   PLATFORM_ADMIN_EMAIL: 'platform-admin@edvisor.io',
   PLATFORM_MANAGER_EMAIL: 'platform-manager@edvisor.io',

@@ -23,8 +23,8 @@ describe('the school app settings page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  describe('campus tab', () => {
-    beforeEach(() => {
+  describe('navigation', () => {
+    it('goes to campus tab', () => {
       browser.get('/')
       LoginPage.waitForLoader()
 
@@ -32,6 +32,14 @@ describe('the school app settings page', () => {
       schoolNav.goToSettings()
       const settingsPage = new SettingsPage()
       settingsPage.goToCampusTab()
+      expect(browser.getCurrentUrl()).to.eventually.match(constants.SCHOOL_URL_REGEX_SETTINGS_CAMPUS_TAB)
+    })
+  })
+
+  describe('campus tab', () => {
+    beforeEach(() => {
+      browser.get(constants.SCHOOL_URL_SETTINGS_CAMPUS_TAB)
+      LoginPage.waitForLoader()
     })
 
     it('should duplicate a campus', () => {
