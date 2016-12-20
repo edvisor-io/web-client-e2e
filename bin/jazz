@@ -3,6 +3,9 @@
 # Perform maintainance functionality for api-server and web-client to the e2e
 # test suite.
 
+# make bash script exit immediately when any command returns a non-zero exit code
+set -e
+
 help() {
   echo "+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+="
   echo ""
@@ -119,7 +122,7 @@ function pullapiserver() {
   woohoo
 }
 
-function buildclient () {
+function build_client () {
   echo ""
   echo " 🛠 building client."
   echo "                    --- 🤖"
@@ -175,7 +178,10 @@ then
     ignitedb
     ;;
   buildclient)
-    buildclient
+    build_client
+    ;;
+  buildserver)
+    build_server
     ;;
   local)
     if [ $2 ] ; then
@@ -184,7 +190,7 @@ then
       ignitedb
       build_server
       resetdb
-      buildclient
+      build_client
     else
       help
       woops
