@@ -18,17 +18,24 @@ describe('the agency app settings page', () => {
     browser.driver.manage().deleteAllCookies()
   })
 
-  // being changed, don't fix
-  describe.skip('sales reps', () => {
-    beforeEach(() => {
+  describe('navigation', () => {})
+
+  describe('sales reps', () => {
+    before(() => {
+      browser.get('/')
+      LoginPage.waitForLoader()
       const loginPage = new LoginPage()
       loginPage.login(constants.SALES_REP_EMAIL, constants.SALES_REP_PASS)
       LoginPage.waitForLoader()
     })
 
-    it('should only see one "Personal" tab under settings', () => {
+    after(() => {
+      browser.driver.manage().deleteAllCookies()
+    })
+
+    it('in test default permissions, can see 4 tabs in settings', () => {
       const TAB_TITLE = 'Personal'
-      const EXPECTED_TAB_COUNT = 1
+      const EXPECTED_TAB_COUNT = 4
 
       const agencyNav = new AgencyNav()
       agencyNav.goToSettings()
@@ -39,9 +46,13 @@ describe('the agency app settings page', () => {
       expect(settingsPage.firstTabTitleElement.getText()).to.eventually.equal(TAB_TITLE)
     })
 
-    it('should not see the "Commissions" box on the home page', () => {
+    it('cannot see the "Commissions" box on the home page', () => {
       const homePage = new HomePage()
-      expect(homePage.totalCommissionBoxContent.isPresent()).to.eventually.equal(false)
+      const UNWANTED_TITLE = 'TOTAL COMMISSION'
+
+      browser.get('/agency/en/504/')
+      LoginPage.waitForLoader()
+      expect(homePage.secondBoxTitleElement.getText()).to.eventually.not.equal(UNWANTED_TITLE)
     })
   })
 
