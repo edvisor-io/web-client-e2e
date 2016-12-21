@@ -5,6 +5,6 @@ export default class FilesTabArea {
     this.deleteButtons = this.fileRows.all(by.css('td.files_control a'))
     this.lastRowFileName = this.fileRows.last().$('td.files_name a')
     this.lastRowDeleteButton = this.deleteButtons.last()
-    this.fileUpload = element.all(by.css('input[type="file"]')).first() // changed for pre-weedle master. weedle may differ.
+    this.fileUpload = element.all(by.css('input[type="file"]')).last() // changed for pre-weedle master. weedle may differ.
   }
 }
