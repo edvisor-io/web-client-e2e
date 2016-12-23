@@ -43,6 +43,14 @@ start_server() {
   cd /Users/Beastie/development/edvisorio/api-server && gulp
 }
 
+update_submodules () {
+  echo ""
+  echo " 🛠 updating submodules for client and server "
+  echo ""
+  cd /Users/Beastie/development/edvisorio/web-client && git submodule update
+  cd /Users/Beastie/development/edvisorio/api-server && git submodule update
+}
+
 function update_e2e() {
   echo ""
   echo " 🚀 pushing the $1 branch to e2e.edvisor.io "
@@ -187,6 +195,7 @@ then
     if [ $2 ] ; then
       pullwebclient $2
       pullapiserver $2
+      update_submodules
       ignitedb
       build_server
       resetdb
