@@ -20,6 +20,7 @@ help() {
   echo ""
   echo "MAINTENANCE 🛠"
   echo " serverup             - start the api-server "
+  echo " clientup             - start the web-client "
   echo " checkout [branch]    - checkout [branch] on api-server and web-client "
   echo " ignitedb             - starts the db "
   echo " resetdb              - resets the db "
@@ -41,6 +42,13 @@ start_server() {
   echo " 🚀 spinning up the server "
   echo ""
   cd /Users/Beastie/development/edvisorio/api-server && gulp
+}
+
+start_client () {
+  echo ""
+  echo " 🚀 painting the client "
+  echo ""
+  cd /Users/Beastie/development/edvisorio/web-client && ./bin/edvisor start client
 }
 
 update_submodules () {
@@ -218,6 +226,9 @@ then
     ;;
   serverup)
     start_server
+    ;;
+  clientup)
+    start_client
     ;;
   *)
     help
