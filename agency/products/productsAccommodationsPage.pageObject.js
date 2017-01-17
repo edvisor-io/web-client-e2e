@@ -1,4 +1,5 @@
 import {ChosenWidget} from '../../shared/widgets'
+import constants from '../../shared/constants'
 
 export default class AccommodationsPage {
   constructor() {
@@ -19,6 +20,7 @@ export default class AccommodationsPage {
   }
 
   clickNewAccommodationButton() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.newAccommodationButton), constants.TIMEOUT_TIME)
     this.newAccommodationButton.click()
   }
 

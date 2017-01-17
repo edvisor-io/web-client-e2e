@@ -41,6 +41,7 @@ describe('the agency app settings page', () => {
       agencyNav.goToSettings()
       SettingsPage.waitForGhostTab()
 
+      browser.sleep(constants.SLEEP_SHORT)
       const settingsPage = new SettingsPage()
       expect(settingsPage.tabs.count()).to.eventually.equal(EXPECTED_TAB_COUNT)
       expect(settingsPage.firstTabTitleElement.getText()).to.eventually.equal(TAB_TITLE)

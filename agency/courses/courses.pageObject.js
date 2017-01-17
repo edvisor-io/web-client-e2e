@@ -44,7 +44,7 @@ export class CoursesPage {
     ChosenWidget.searchAndSetChosenValue(this.locationField, location)
   }
 
-  inputSchool(school = 'Camber') {
+  inputSchool(school = 'Greenwich') {
     ChosenWidget.searchAndSetChosenValue(this.schoolField, school)
   }
 

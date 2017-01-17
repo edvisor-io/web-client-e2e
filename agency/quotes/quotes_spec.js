@@ -29,6 +29,8 @@ describe('the quotes page', () => {
       LoginPage.waitForLoader()
       const agencyNav = new AgencyNav()
       agencyNav.goToQuotes()
+
+      browser.sleep(constants.TIMEOUT_TIME)
       expect(browser.getCurrentUrl()).to.eventually.match(/\/agency\/en\/504\/student-quote\/listing/)
     })
   })
@@ -100,7 +102,7 @@ describe('the quotes page', () => {
       quotesEditPage.clickFirstOptionEditButton()
       const quotesOptionEditPage = new quotesPage.QuotesOptionEditPage()
       quotesOptionEditPage.clickAddAddonsButton()
-      quotesOptionEditPage.clickSecondCheckbox()
+      quotesOptionEditPage.clickThirdCheckbox()
       expect(quotesOptionEditPage.addonsStartDateField.isPresent()).to.eventually.equal(true)
       quotesOptionEditPage.clickSaveButton()
       expect(quotesOptionEditPage.durationFields.isPresent()).to.eventually.equal(true)

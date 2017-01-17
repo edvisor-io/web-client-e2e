@@ -15,6 +15,7 @@ class FeePage {
   }
 
   fillAndSaveForm(name = `${uuid.v4()}`) {
+    browser.sleep(constants.SLEEP_SHORT)
     this.feeNameField.sendKeys(name)
     this.saveButton.click()
   }
@@ -31,6 +32,7 @@ export class ConfigureFeesPage {
   }
 
   clickNewFeeButton() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.newFeeButton), constants.TIMEOUT_TIME)
     this.newFeeButton.click()
   }
 

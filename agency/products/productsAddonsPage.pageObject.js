@@ -1,3 +1,5 @@
+import constants from '../../shared/constants'
+
 export default class AddonsPage {
   constructor() {
     this.newAddonsButton = element(by.id('ext32-new-btn'))
@@ -8,6 +10,7 @@ export default class AddonsPage {
   }
 
   clickNewAddonsButton() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.newAddonsButton), constants.TIMEOUT_TIME)
     this.newAddonsButton.click()
   }
 

@@ -1,5 +1,9 @@
 import constants from '../../shared/constants'
 
+function waitTillVisible(element) {
+  browser.wait(protractor.ExpectedConditions.visibilityOf(element), constants.TIMEOUT_TIME)
+}
+
 export default class LoginPage {
   constructor() {
     this.emailField = $('input[name="email"]')
@@ -8,6 +12,7 @@ export default class LoginPage {
   }
 
   login(login, pass) {
+    waitTillVisible(this.emailField)
     this.emailField.sendKeys(login)
     this.passwordField.sendKeys(pass)
     this.submitBtn.click()

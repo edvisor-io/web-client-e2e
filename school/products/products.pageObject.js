@@ -21,6 +21,7 @@ export class ProductsPage {
   }
 
   clickCourseOption() {
+    browser.sleep(constants.SLEEP_SHORT)
     this.courseOption.click()
   }
 
@@ -32,6 +33,7 @@ export class ProductsPage {
   }
 
   sortByCourseName() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.courseNameColumnHeader), constants.TIMEOUT_TIME)
     this.courseNameColumnHeader.click()
     browser.sleep(constants.SLEEP_SHORT)
   }

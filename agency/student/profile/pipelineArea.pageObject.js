@@ -46,7 +46,7 @@ export default class PipelineArea {
   }
 
   clickChangePipelineFirstButton() {
-    this.waitTillClickable(this.changePipelineFirstButton)
+    browser.sleep(constants.SLEEP_SHORT)
     this.changePipelineFirstButton.click()
   }
 

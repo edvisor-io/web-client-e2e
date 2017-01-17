@@ -21,6 +21,7 @@ export default class QuotesOptionEditPage {
     this.addAddonsModal = $('.e-modal-container')
     this.modalCheckboxes = this.addAddonsModal.all(by.css('label.checkbox'))
     this.secondCheckbox = this.modalCheckboxes.get(1)
+    this.thirdCheckbox = this.modalCheckboxes.get(2)
     this.addonsStartDateField = this.addAddonsModal.$('offering-start-date-picker')
     this.saveButton = this.addAddonsModal.$('button[type="submit"]')
 
@@ -57,6 +58,7 @@ export default class QuotesOptionEditPage {
   }
 
   clickFirstAccommodationRadioButton() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.firstAccommodationRadioButton), constants.TIMEOUT_TIME)
     this.firstAccommodationRadioButton.click()
   }
 
@@ -66,6 +68,10 @@ export default class QuotesOptionEditPage {
 
   clickSecondCheckbox() {
     this.secondCheckbox.click()
+  }
+
+  clickThirdCheckbox() {
+    this.thirdCheckbox.click()
   }
 
   clickSaveChangesButton() {

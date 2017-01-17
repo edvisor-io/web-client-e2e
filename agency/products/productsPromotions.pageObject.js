@@ -1,4 +1,5 @@
 import {DatePickerWidget} from '../../shared/widgets'
+import constants from '../../shared/constants'
 
 import moment from 'moment'
 import uuid from 'node-uuid'
@@ -15,6 +16,7 @@ export default class PromotionsPage {
   }
 
   clickNewPromotionButton() {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(this.newPromotionButton), constants.TIMEOUT_TIME)
     this.newPromotionButton.click()
   }
 

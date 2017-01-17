@@ -58,7 +58,7 @@ describe('the find courses page', () => {
     it('searches by school', () => {
       const coursesPage = new CoursesPage()
       coursesPage.doBasicSearch('bySchool')
-
+      browser.sleep(constants.SLEEP_SHORT)
       expect(coursesPage.firstResultName.isPresent()).to.eventually.equal(true)
     })
 
