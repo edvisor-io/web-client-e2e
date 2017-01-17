@@ -1,0 +1,23 @@
+sudo: false
+dist: trusty
+
+language: node_js
+node_js:
+  - "6"
+
+branches:
+  except:
+  - /PROJ.*/
+
+before_install:
+- pip install --user awscli
+
+cache:
+  pip: true
+  directories:
+    - node_modules
+    - $HOME/api-server/node_modules
+
+before_script:
+  - bash setup-server.sh
+  - npm run update
