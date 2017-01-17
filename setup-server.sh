@@ -19,5 +19,5 @@ else
 fi
 
 npm install
-npm run build
+npm run build >/dev/null 2>&1
 NODE_ENV=staging ./bin/edvisor full-reset
